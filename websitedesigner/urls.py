@@ -15,10 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from app.views import home
+from django.urls import path
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticSitemap  # Import your StaticSitemap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  # Add this line to redirect to the home view.
+    path('sitemap.xml', sitemap, {'sitemaps': {'static': StaticSitemap}}),
 ]
