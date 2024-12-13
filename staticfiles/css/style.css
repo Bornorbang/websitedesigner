@@ -858,6 +858,8 @@ a:focus {
 
 .portfolio .portfolio-item {
     position: relative;
+    width: 100%;
+    margin-bottom: 30px; /* Add margin between items */
 }
 
 .portfolio .portfolio-wrap {
@@ -872,15 +874,15 @@ a:focus {
 
 .portfolio .portfolio-img img {
     position: relative;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transform: scale(1.1);
-    transition: .5s;
+    transition: transform 0.5s ease;
 }
 
 .portfolio .portfolio-item:hover img {
-    margin-left: 15px;
+    transform: scale(1.05); /* Slight zoom on hover */
 }
 
 .portfolio .portfolio-text {
@@ -920,6 +922,21 @@ a:focus {
     box-shadow: inset 0 0 0 0 #EF233C;
     border-color: #EF233C;
 }
+
+/* Ensuring the row has proper layout using flexbox */
+.portfolio .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between items */
+}
+
+/* Make portfolio items adjust properly on smaller screens */
+@media (max-width: 768px) {
+    .portfolio .portfolio-item {
+        width: 100%; /* Full width for small screens */
+    }
+}
+
 
 
 /*******************************/
@@ -1626,7 +1643,7 @@ a:focus {
     z-index: 9999;
     border-radius: 50%;
     background-color: #25d366; /* WhatsApp Green */
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
 }
@@ -1636,7 +1653,7 @@ a:focus {
 }
 
 .whatsapp-icon {
-    font-size: 55px;
+    font-size: 47px;
     color: white;
 }
 
