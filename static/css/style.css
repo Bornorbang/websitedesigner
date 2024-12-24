@@ -1668,3 +1668,9 @@ a:focus {
         color: white;
     }
 }
+
+@media (max-width: 968px) {
+    .accredited img{
+        width: 92%;
+    }
+}
