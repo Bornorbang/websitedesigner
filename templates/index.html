@@ -17,15 +17,25 @@
         <!-- Open Graph Meta Tags (For Social Media Sharing) -->
         <meta property="og:title" content="Website Designer Nigeria - Best Web Designers in Nigeria">
         <meta property="og:description" content="Website Designer Nigeria offers professional web development services to businesses in Nigeria. We are the best web designers in Nigeria.">
-        <meta property="og:image" content="{% static 'img/favicon.png' %}"> <!-- Replace with an actual image URL -->
+        <meta property="og:image" content="{% static 'img/favicon.png' %}"> 
         <meta property="og:url" content="https://websitedesigner.ng">
         <meta property="og:type" content="website">
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Website Designer Nigeria",
+            "url": "https://www.websitedesigner.ng/",
+            "logo": "https://www.websitedesigner.ng/static/img/favicon.png"
+        }
+        </script>
 
         <!-- Twitter Card Meta Tags (For Twitter Sharing) -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Website Designer Nigeria - Best Web Designers in Nigeria">
         <meta name="twitter:description" content="Website Designer Nigeria offers professional web development services to businesses in Nigeria. We are the best web designers in Nigeria.">
-        <meta name="twitter:image" content="{% static 'img/favicon.png' %}"> <!-- Replace with an actual image URL -->
+        <meta name="twitter:image" content="{% static 'img/favicon.png' %}">
 
         <!-- Favicon -->
         <link href="{% static 'img/favicon.png' %}" rel="icon">
