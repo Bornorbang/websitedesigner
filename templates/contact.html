@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Contact Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Contact Website Designer Nigeria for professional web design, custom development, e-commerce solutions, and SEO services. Let’s create a responsive, user-friendly website that elevates your business. {% endblock %}
+
+{% block og_title %}About Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Contact Website Designer Nigeria for professional web design, custom development, e-commerce solutions, and SEO services. Let’s create a responsive, user-friendly website that elevates your business. {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+{% endblock %}
+
+{% block maincontent %}
+<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Contact Website Designer Nigeria</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="contact-section">
+    <div class="container">
+        <h2 class="contact-heading wow fadeInUp" data-wow-delay="0.2s">Get in Touch</h2>
+        <p class="contact-text wow fadeInUp" data-wow-delay="0.3s">Contact Website Designer Nigeria for professional web design, custom development, e-commerce solutions, and SEO services. Let’s create a responsive, user-friendly website that elevates your business. </p>
+        
+        <div class="row">
+            <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.4s">
+                <div class="contact-form">
+                    <form id="contactForm" method="post" action="{% url 'contact' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Send Message</button>
+                    </form>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInRight" data-wow-delay="0.4s">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jabi, Gwarinpa 900108, F.C.T Abuja</p>
+                    <p><i class="fas fa-phone"></i> 08148882303</p>
+                    <p><i class="fas fa-envelope"></i> contact@websitedesigner.ng</p>
+                </div>
+                <div id="map" class="wow fadeIn" data-wow-delay="0.6s"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script>
+    // Initialize WOW
+    new WOW().init();
+
+    // Initialize map
+    var map = L.map('map').setView([9.0765, 7.3986], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.marker([9.0765, 7.3986]).addTo(map)
+        .bindPopup('Website Designer Nigeria<br>Jabi, Gwarinpa 900108, F.C.T Abuja')
+        .openPopup();
+  
+</script>
+{% endblock %}

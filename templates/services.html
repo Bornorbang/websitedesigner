@@ -1,167 +1,226 @@
 {% extends 'main.html' %}
 {% load static %}
+
+{% block title %}Website Development Services - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Discover our professional website development services, offering custom web design, e-commerce solutions, mobile app development, and SEO optimization with Website Designer Nigeria.{% endblock %}
+
+{% block og_title %}Website Development Services - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Discover our professional website development services, offering custom web design, e-commerce solutions, mobile app development, and SEO optimization with Website Designer Nigeria.{% endblock %}
+
+{% block extra_css %}
+    <style>
+        /* Page Header */
+        .page-header {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/services-bg.jpg') center center no-repeat;
+            background-size: cover;
+        }
+
+        /* Service Cards */
+        .service-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #EF233C;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            background-color: #EF233C;
+        }
+
+        .testimonial-section h2{
+            color: #fff;
+        }
+
+        .testimonial-item {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-item h5 {
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+
+        .testimonial-item span {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Animations */
+        .wow {
+            visibility: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+        .instagram-video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 120%; /* Adjust this value to control aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .instagram-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }.instagram-video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 120%; /* Adjust this value to control aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .instagram-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+    </style>
+{% endblock%}
+
 {% block maincontent %}
 
-<!-- Hero Start -->
-<div class="hero" id="home">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-sm-12 col-md-8">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <p>WELCOME TO</p>
-                        <h1>WEBSITE DESIGNER NIGERIA</h1>
-                        <h2>Need to create a website?</h2>
-                        <div class="typed-text">, We have got you covered, Here are our Website Development Services:, Ecommerce Website Design, Custom Web Development, WordPress Development, Shopify Store Setup, Search Engine Optimization (SEO), Mobile App Development</div>
-                    </div>
-                    <div class="hero-btn">
-                        <a class="btn" href="tel:+2348148882303">CALL US</a>
-                        <a class="btn" href="https://wa.link/f2kd41" target=_blank>WHATSAPP</a>
-                    </div>
-                    <div class="accredited mt-5 mb-2">
-                        <img src="{% static 'img/websitedesigner1.png' %}" alt="website designer nigeria">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 d-none d-md-block">
-                <div class="">
-                    <img src="{% static 'img/Website Designer Nigeria.png' %}" alt="Website Designer Nigeria">
+<!-- Page Title Banner -->
+    <div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Website Development Services</h1>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Hero End -->
 
-<div class="container mb-5 d-none d-lg-block">
-    <div class="row wow slideInLeft" data-wow-delay="0.1s">
-    <div>
-        <img src="{% static 'img/websitedesignernigeria.png' %}" alt="Website Designer Nigeria"> 
-    </div>
-    </div>
-</div>
-
-<!-- About Start -->
-
-<div id="about">
-    <div class="container">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>ABOUT US</p>
-            <h2>Website Designer Nigeria</h2>
-        </div>
-        <div class="wow fadeInUp" data-wow-delay="0.0s">
-            <p><strong>Website Designer Nigeria</strong> are the <strong>best web designers in Nigeria</strong>. We’re passionate about helping businesses in the retail and corporate industries fully leverage the latest <a href="https://www.sciencedirect.com/topics/computer-science/software-technology">software technologies</a>. Our tech team is dedicated to create websites that meet your exact needs because we pride ourselves on being the <strong>best web designers in Nigeria</strong>.</p>
-
-            <h3>Our Key Services</h3>
-            <ul>
-                <li><strong>Custom Website Design</strong>: As a top-rated website design company in nigeria, we provide <b>website development services</b> that reflect your brand and meet your specific business goals. Our designs are responsive, user-friendly, and SEO-optimized to ensure your website stands out in search engines.</li>
-                <li><strong>E-Commerce Website Design</strong>: We are expert <strong>website design company in nigeria</strong> that build e-commerce solutions that enable your business to accept payments directly to your bank account. Our e-commerce sites are fully optimized for a seamless shopping experience for your customers.</li>
-                <li><strong>Search Engine Optimization</strong>: We help you grow your brand’s online presence through effective SEO strategies that build your organic presence and drive traffic to your website.</li>
-            </ul>
-
-            <p>Additionally, we help you integrate the latest <a href ="https://www.globalaccelerex.com/news/top-9-online-payment-gateways-in-nigeria">payment gateways</a>, enabling you to accept payments from debit and credit cards both locally and internationally. This integration ensures smooth transactions for your customers no matter where they are located.</p>
-
-            <h3>Our Mission</h3>
-            <ul>
-                <li>To help businesses build their brand through professional websites that drive in sales.</li>
-                <li>To <strong>create websites</strong> and software solutions that perfectly align with each client’s specific needs and goals.</li>
-            </ul>
-
-            <h3>Our Vision</h3>
-            <p>To become the <strong>best web designers in Nigeria</strong> known for delivering exceptional, results-driven web app solutions.</p>
+<!-- Services Description -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 text-center">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Professional Web Development Services</h2>
+            </div>
+            <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">At Website Designer Nigeria, we offer a comprehensive suite of <b>website development services</b> customized to meet your business requirements. Our team of skilled web designers specialize in creating business websites that are both professional and functionally powerful. Whether you're looking to build an engaging online presence, launch an e-commerce store, or optimize your website for search engines, we work closely with you to deliver solutions that truly reflect your brand and drive real results. We believe that every website should be a tool for growth, designed to meet your unique business needs and engage your audience effectively.</p>
+            <p>In addition to web development services, we offer a full range of services to ensure your digital success. From search engine optimization (SEO) that boosts your visibility to mobile app development that extends your reach, we’re here to support your business every step of the way. Our goal is to provide you with the tools and strategies needed to succeed online, whether you’re just starting out or looking to expand. We’re not just building websites—we’re building lasting partnerships that help your business grow and succeed.</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary py-3 px-5 mt-5 mb-3 wow fadeInUp" data-wow-delay="0.3s">Contact Us Today</a>
         </div>
     </div>
 </div>
 
-<!-- Service Start -->
-<div class="service" id="service">
-    <div class="container">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>WHAT WE DO</p>
-            <h2>Website Development Services</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fa fa-laptop"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3>Ecommerce Web Design</h3>
-                        <p>
-                            <a href="https://www.websitedesigner.ng/">Website Designer Nigeria</a> builds ecommerce websites that will appeal to your audiences, showcase your products and drive in sales. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fa fa-laptop-code"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3>Website Development</h3>
-                        <p>
-                            Website development services for all types of sites according to your custom needs; investment, socials, corporate, shipping, educational, e.t.c
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fa fa-globe"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3>SEO</h3>
-                        <p>
-                            Driving your business to Google's first pages is what we do best. Our rich SEO technique will shoot your websites to the top in few weeks!
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fab fa-apple"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3>Mobile App Development</h3>
-                        <p>
-                            We offer app development services that build powerful, user-friendly iOS and Android mobile apps for your business needs.
-                        </p>
-                    </div>
-                </div>
+<!-- Video Section -->
+    <div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 text-center">
+            <div class="instagram-video-container wow fadeInUp" data-wow-delay="0.3s">
+                <iframe src="https://www.instagram.com/reel/DEdDozZOh06/embed" 
+                        width="600" 
+                        height="400" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        allowtransparency="true">
+                </iframe>
             </div>
         </div>
     </div>
 </div>
-<!-- Service End -->
 
-<!-- Banner Start -->
-<div class="banner wow zoomIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="section-header text-center">
-            <p style="color: #000;">New Year Discount</p>
-            <h2>Get <span style="color: #000;">20%</span> Discount</h2>
+<!-- Our Services Section -->
+<div class="container py-5">
+    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+        <h2>Website Designer Nigeria Services</h2>
+    </div>
+    <div class="row g-4 mb-md-4">
+        <div class="col-md-6 mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Custom Website Design</h3>
+                <p>We create websites that are as unique as your business. Our custom <b>web design services</b> focus on building secure, scalable, and user-friendly sites that not only look great but also work seamlessly to meet your requirements.</p>
+                
+            </div>
         </div>
-        <div class="container banner-text">
-            <p>
-                'Tis a new year, welcome to 2025! To spread some great cheer, we're offering an exclusive 20% discount on all our Website Development services. Whether you're looking to create a website, launch new ecommerce platform for your business, or build a mobile app, now is the perfect time to get started and save big. Take advantage of this 
-                limited-time offer to elevate your online presence and set your business up for success in the new year. Don't miss out—this benevolent offer won’t last long!
-            </p>
-            <a class="btn" href="https://wa.link/f2kd41" target=_blank>Order Now</a>
+        <div class="col-md-6 mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>E-Commerce Solutions</h3>
+                <p>Starting an online store or upgrading an existing one? No worries, we design <b>e-commerce websites</b> that make shopping easy and enjoyable for your customers. From simple navigation to secure checkout systems, we focus on helping you grow your sales and build customer loyalty.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-6 mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Search Engine Optimization (SEO)</h3>
+                <p>Website Designer Nigeria helps your business get found online. With our <b>SEO services</b>, we optimize your site to rank higher on search engines, attract more visitors, and connect with the right audience. It’s all about boosting your visibility and driving real results.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile App Development</h3>
+                <p>We bring your ideas to life with mobile apps that are engaging, user-friendly, and built to perform. On both Android and iOS, our mobile apps are built to help your business connect with customers and achieve your goals.</p>
+            </div>
         </div>
     </div>
 </div>
-<!-- Banner End -->
+
 
 <!-- Portfolio Start -->
 <div class="portfolio mt-3 mb-3" id="portfolio">
     <div class="container">
         <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>Our Past projects</p>
-            <h2>Portfolio</h2>
+            <h2>Our Portfolio</h2>
         </div>
         <div class="row">
             <div class="col-12">
@@ -449,25 +508,37 @@
 </div>
 <!-- Testimonial End -->
 
+{% endblock %}
+{% block extra_js %}
+<script>
+    $(document).ready(function(){
+        $(".testimonial-carousel").owlCarousel({
+            autoplay: true,
+            smartSpeed: 1000,
+            margin: 25,
+            loop: true,
+            center: true,
+            dots: false,
+            nav: true,
+            navText : [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ],
+            responsive: {
+                0:{
+                    items:1
+                },
+                768:{
+                    items:2
+                },
+                992:{
+                    items:3
+                }
+            }
+        });
+    });
 
-<!-- Contact Start -->
-<div id="contact">
-    <div class="container">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>REACH OUT NOW</p>
-            <h2>CONTACT US</h2>
-        </div>
-        <p>
-            Looking to create a website? We are delighted to work with you, call our below, chat us on whatsapp
-            or send an email and a member of our team will reach out to you immediately. We can’t wait to work with you!
-        </p>
-        <p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4685.226267937333!2d7.4115556622823515!3d9.082888759834516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7517a4d485d5%3A0x549694aea9d3d3a3!2s32%20Rd%2C%20Jabi%2C%20Gwarinpa%20900108%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1733309686413!5m2!1sen!2sng" 
-                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </p>
-    </div>
-</div>
-<!-- Contact End -->
+</script>
+
+
 {% endblock %}

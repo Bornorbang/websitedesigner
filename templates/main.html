@@ -1,0 +1,179 @@
+{% load static %}
+
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+
+        <!-- Meta Description -->
+        <meta name="description" content="{% block meta_description %}Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.{% endblock %}">
+
+        <!-- Meta Keywords (SEO optimized) -->
+        <meta name="keywords" content="website design, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, create a website, web design services in nigeria, best web design company in nigeria">
+
+        <!-- Open Graph Meta Tags (For Social Media Sharing) -->
+        <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.{% endblock %}">
+        <meta property="og:image" content="{% static 'img/favicon.png' %}"> 
+        <meta property="og:url" content="https://websitedesigner.ng">
+        <meta property="og:type" content="website">
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Website Designer Nigeria",
+            "url": "https://www.websitedesigner.ng/",
+            "logo": "https://www.websitedesigner.ng/static/img/website-designer-nigeria-logo.png"
+        }
+        </script>
+
+        <!-- Twitter Card Meta Tags (For Twitter Sharing) -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Website Designer Nigeria - Best Web Designers in Nigeria">
+        <meta name="twitter:description" content="Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.">
+        <meta name="twitter:image" content="{% static 'img/favicon.png' %}">
+
+        <!-- Favicon -->
+        <link href="{% static 'img/favicon.png' %}" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/owlcarousel/assets/owl.theme.default.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{%static 'css/style.css' %}" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/955d8bdaab.js" crossorigin="anonymous"></script>
+
+        <!-- Google tag (gtag.js) --> 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-657ZXEZN1X"></script> 
+        <script> 
+            window.dataLayer = window.dataLayer || []; 
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('js', new Date()); 
+            
+            gtag('config', 'G-657ZXEZN1X'); 
+        </script>
+
+        {% block extra_css %}
+        {% endblock%}
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href = "/">
+                    <img src="{% static 'img/website designer nigeria - logo.png' %}" class = "desktop d-none d-md-block" alt="Website Designer Nigeria">
+                </a>
+                <a href = "/">
+                    <img src="{% static 'img/website designer nigeria logo.png' %}" class = "mobile d-block d-md-none" alt="Website Designer Nigeria">
+                </a>
+                
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'about-website-designer-nigeria' %}" class="nav-item nav-link">About Us</a>
+                        <a href="{% url 'services' %}" class="nav-item nav-link">Our Services</a>
+                        <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
+                        <a href="#reviews" class="nav-item nav-link">Reviews</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        {% block maincontent %}
+        {% endblock %}
+
+    <!-- Whatsapp Widget Start-->
+
+        <div class="whatsapp-widget wow fadeInUp" data-wow-duration="2s">
+            <a href="https://wa.link/f2kd41"  target="_blank">
+                <i class="fab fa-whatsapp whatsapp-icon"></i>
+            </a>
+        </div>
+
+        <!-- Whatsapp Widget End-->
+
+
+
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <div class="footer-logo">
+                            <a href="/">
+                                <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Website Designer Nigeria" class="img-fluid">
+                            </a>
+                        </div>
+                        <p class="text-white">Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.</p>
+                        <h3>Jabi, Gwarinpa 900108, F.C.T Abuja</h3>
+                        <div class="footer-menu">
+                            <p>08148882303</p>
+                            <p>contact@websitedesigner.ng</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://x.com/webdesignerng"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.tiktok.com/@websitedesigner.ng"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://www.instagram.com/websitedesigner.ng"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="/">Website Designer Nigeria</a>, All Right Reserved | Designed by us with 🤍</p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/typed/typed.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+        
+        <!-- Contact Javascript File -->
+        <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
+        {% block extra_js %}
+        {% endblock %}
+    </body>
+</html>
