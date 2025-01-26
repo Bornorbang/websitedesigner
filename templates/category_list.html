@@ -1,0 +1,212 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    /* Category Banner */
+    .category-banner {
+        background-color: #f4f4f4;
+        padding: 40px 0;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-banner h1 {
+        font-size: 36px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    /* Blog Item */
+    .blog-item {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-item img {
+        max-width: 70%;
+        border-radius: 10px;
+    }
+
+    .blog-item h2 {
+        font-size: 24px;
+        margin-top: 15px;
+    }
+
+    .blog-item p {
+        font-size: 16px;
+        color: #666;
+        word-wrap: break-word;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a,
+    .pagination span {
+        margin: 0 5px;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .pagination .active {
+        background-color: #EF233C;
+        color: #fff;
+        border-color: #EF233C;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .sidebar-item {
+        margin-bottom: 30px; /* Increased bottom margin */
+        padding-bottom: 20px; /* Added padding for spacing */
+        border-bottom: 1px solid #ddd; /* Added border-bottom */
+    }
+
+    .sidebar-item h4 {
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-item ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-item ul li {
+        margin-bottom: 10px;
+    }
+
+    /* Custom '>' symbol for list items */
+    .sidebar-item ul li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .sidebar-item ul li a::before {
+        content: '>';
+        position: absolute;
+        left: 0;
+        color: #EF233C;
+        font-weight: bold;
+    }
+
+    .sidebar-img img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-img a {
+        display: block;
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %}
+
+
+{% block maincontent %}
+<!-- Page Title Banner -->
+<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">{{category.name}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mx-2 mx-lg-5">
+    <div class="row">
+        <!-- Blog Content -->
+        <div class="col-lg-9">
+            {% for post in page_obj %}
+            <div class="blog-item">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                <h2><a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}">{{ post.title }}</a></h2>
+                <p>{{ post.content|truncatewords:30|safe }}</p>
+                <p><small>By {{ post.author }} on {{ post.date }}</small></p>
+            </div>
+            {% empty %}
+            <p>No posts found in this category.</p>
+            {% endfor %}
+
+            <!-- Pagination -->
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="active">{{ page_obj.number }}</span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="sidebar">
+                <!-- Categories -->
+                <div class="sidebar-item">
+                    <h4>Categories</h4>
+                    <ul>
+                        {% for cat in categories %}
+                        <li><a href="{% url 'category_posts' category_slug=cat.slug %}">{{ cat.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Recent Posts -->
+                <div class="sidebar-item">
+                    <h4>Recent Posts</h4>
+                    <ul>
+                        {% for recent in recent_posts %}
+                        <li><a href="{% url 'blog_detail' category_slug=recent.category.slug slug=recent.slug %}">{{ recent.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Image Banners -->
+                <div class="sidebar-item">
+                    <h4>Advertisement</h4>
+                    <div class="sidebar-img">
+                        {% for banner in banners %}
+                        <a href="{{ banner.link|default:'https://example.com' }}" target="_blank">
+                            <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

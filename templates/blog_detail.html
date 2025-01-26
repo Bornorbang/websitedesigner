@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block meta_description %}{{ blog.meta_description}}{% endblock %}
+
+{% block og_title %}{{ blog.title }} | Website Designer Nigeria{% endblock %}
+
+{% block og_description %}{{ blog.meta_description}}{% endblock %}
+
+{% block extra_meta %}
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="{{ blog.date|date:"c" }}">
+    <meta property="article:author" content="{{ blog.author }}">
+    <meta property="article:section" content="{{ blog.category.name }}">
+    {% if blog.image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ blog.image.url }}">
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .blog-detail {
+        padding: 20px;
+    }
+
+    .blog-detail-item {
+        background-color: #fff; /* Ensure a clear background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add border shadow */
+        padding: 20px; /* Add internal spacing */
+        overflow: hidden; /* Prevent content overflow */
+    }
+
+    .blog-detail-img img {
+        width: 100%; /* Ensure the image is responsive */
+        height: auto;
+        max-width: 700px; /* Limit the maximum width of the image */
+        border-radius: 10px;
+        display: block;
+    }
+
+    .blog-detail-text h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .blog-meta {
+        margin: 10px 0;
+        font-size: 14px;
+        color: #999;
+    }
+
+    .blog-meta p {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .blog-meta p i {
+        margin-right: 5px;
+    }
+
+    .blog-content {
+        font-size: 16px;
+        line-height: 1.6;
+        word-wrap: break-word;
+    }
+
+    .sidebar {
+        margin-top: 20px;
+    }
+
+    .sidebar-item {
+        margin-bottom: 30px;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-item h4 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-item ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-item ul li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar-item ul li::before {
+        content: "›";
+        margin-right: 10px;
+        font-size: 18px;
+        color: #EF233C;
+    }
+
+    .sidebar-item ul li a {
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .sidebar-item ul li a:hover {
+        color: #EF233C;
+    }
+
+    .sidebar-img img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+     .blog-content img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 20px auto;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .blog-content img {
+            width: 100%;
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 991px) {
+        .blog-detail {
+            padding: 0px;
+        }
+
+        .blog-detail-img img {
+            max-width: 600px; /* Reduce image size on smaller screens */
+        }
+
+        .blog-detail-text h2 {
+            font-size: 20px;
+        }
+
+        .blog-meta {
+            font-size: 12px;
+        }
+
+        .blog-content {
+            font-size: 14px;
+        }
+
+        .sidebar {
+            margin-top: 20px;
+        }
+
+        .blog-detail-item {
+        background-color: #fff; /* Ensure a clear background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add border shadow */
+        padding: 7px; /* Add internal spacing */
+        overflow: hidden; /* Prevent content overflow */
+    }
+    }
+
+    @media (max-width: 576px) {
+        .blog-detail-img img {
+            max-width: 450px; /* Further reduce image size for very small screens */
+        }
+
+        .blog-detail-text h2 {
+            font-size: 18px;
+        }
+
+        .blog-meta {
+            font-size: 12px;
+        }
+
+        .blog-content {
+            font-size: 13px;
+        }
+
+        .sidebar {
+            margin-top: 15px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block maincontent %}
+<!-- Page Title Banner -->
+<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">{{blog.title}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Detail Start -->
+<div class="blog-detail">
+    <div class="mx-2 mx-lg-5">
+        <div class="row">
+            <!-- Blog Content -->
+            <div class="col-lg-9">
+                <div class="blog-detail-item wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="blog-detail-img">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="image-fluid">
+                    </div>
+                    <div class="blog-detail-text">
+                        <h2>{{ blog.title }}</h2>
+                        <div class="blog-meta">
+                            <p><i class="far fa-user"></i>{{ blog.author }}</p>
+                            <p><i class="far fa-list-alt"></i>{{ blog.category }}</p>
+                            <p><i class="far fa-calendar-alt"></i>{{ blog.date }}</p>
+                            <p><i class="far fa-comments"></i>{{ blog.comments_count }}</p>
+                        </div>
+                        <div class="blog-content">
+                            <p>{{ blog.content | safe}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="sidebar">
+                    <!-- Categories -->
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.3s">
+                        <h4>Categories</h4>
+                        <ul>
+                            {% for category in categories %}
+                                <li><a href="{% url 'category_posts' category_slug=category.slug %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.5s">
+                        <h4>Recent Posts</h4>
+                        <ul>
+                            {% for post in recent_posts %}
+                                <li><a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}">{{ post.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Image Banner -->
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.7s">
+                        <h4>Advertisement</h4>
+                        <div class="sidebar-img">
+                            {% for banner in banners %}
+                                <a href="{{ banner.link|default:'https://websitedesigner.ng' }}" target="_blank">
+                                    <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Detail End -->
+{% endblock %}

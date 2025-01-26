@@ -1,0 +1,463 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Website Designer in Lagos -  Web Developers in Lagos Nigeria{% endblock %}
+
+{% block meta_description %}
+Website Designer Nigeria: Best website designer in Lagos providing top web development services to businesses seeking to create websites.
+{% endblock %}
+
+{% block og_title %}Website Designer in Lagos -  Web Developers in Lagos Nigeria{% endblock %}
+{% block og_description %}
+Website Designer Nigeria: Best website designer in Lagos providing top web development services to businesses seeking to create websites.
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f9f9f9;
+    font-size: 3rem;
+    }
+    .card-title {
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    .card-text {
+        font-size: 0.95rem;
+        color: #6c757d;
+    }
+    .faq-section {
+            padding: 50px 20px;
+        }
+    .faq-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .faq-header h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .faq-card {
+        border: none;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+    .faq-card:hover {
+        transform: translateY(-5px);
+    }
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color:  #EF233C;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .faq-icon {
+        font-size: 1.5rem;
+        color:  #EF233C;
+        transition: transform 0.3s ease;
+    }
+    .faq-answer {
+        display: none;
+        padding: 20px;
+        font-size: 1rem;
+        color: #555;
+    }
+    .faq-answer.open {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+  /* Ensure no extra margin or padding causes breakage */
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.portfolio-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 0; /* Remove extra padding if any */
+    margin: 0;  /* Remove extra margin if any */
+}
+
+/* Columns should have consistent spacing */
+.col-lg-4,
+.col-md-6 {
+    padding: 15px; /* Adjust this value if needed */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Image Container */
+.image-container {
+    position: relative;
+    height: 500px; /* Adjust height as needed */
+    overflow: hidden;
+}
+
+/* Scrolling Image */
+.scrolling-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    animation: none; /* Default: no animation */
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Hover Effect */
+.image-container:hover .scrolling-images {
+    animation: scrollPartial 8s linear forwards;
+}
+
+/* Scrolling Animation */
+@keyframes scrollPartial {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-70%); /* Stops just before the end of the image */
+    }
+}
+
+/* Portfolio Title */
+.portfolio-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 15px;
+    text-align: center; /* Center align the title */
+}
+
+
+
+
+</style>
+{% endblock %}
+
+
+{% block maincontent %}
+    <!-- Page Title Banner -->
+    <div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Website Designer in Lagos</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Start -->
+
+    <div id="about" class="py-5">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>ABOUT US</p>
+                <h2>Website Designer in Lagos</h2>
+            </div>
+            <div class="wow fadeInUp" data-wow-delay="0.0s">
+                <p>At Website Designer Nigeria, we understand that your business is more than just a name—it’s a story, a dream, and a vision. 
+                That’s why we’re passionate about creating  websites that go beyond aesthetics to truly represent who you are. As a <i>website designer in Lagos</i>, we’re here to create a digital presence that connects with your audience, tells your story, and drives your business forward.</p><br>
+
+                <p>We know the challenges businesses face in today’s fast-paced digital world, especially in a bustling market like Nigeria. 
+                That’s why we take the time to listen to your needs, understand your goals, and bring your ideas to life. As the best web developers in Lagos, we combine creativity, innovation, and <a href="https://www.nairaland.com/programming">technical expertise</a> to create websites that are not only visually appealing but also functional and user-friendly.</p><br>
+
+                <p>For us, it’s not just about building websites—it’s about building relationships. We’re committed to walking this journey with you, 
+                providing personalized support every step of the way. Whether you’re launching a new business or looking to revamp your existing site, we’re here to help you succeed. At <a href="/">Website Designer Nigeria</a>, your success is our success, and together, we’ll create something extraordinary.</p><br>
+            </div>
+        </div>
+    </div>
+
+    <!--Why us -->
+
+    <div class="container py-5">
+        <div class="text-center mb-4 section-header">
+            <p>What you should expect</p>
+            <h2>Why Choose Us</h2>
+        </div>
+        <p class="text-center">Discover the benefits of working with the <b>best website designer in Lagos</b></p>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-pencil-square fs-4 text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Custom Designs</h5>
+                        <p class="card-text">We create websites specially customized to your brand and audience, ensuring a unique online presence.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-phone fs-4 text-success"></i>
+                        </div>
+                        <h5 class="card-title">Mobile-Responsive</h5>
+                        <p class="card-text">Our websites provide seamless experiences on any device, from desktops to smartphones.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-speedometer2 fs-4 text-danger"></i>
+                        </div>
+                        <h5 class="card-title">Fast Loading Times</h5>
+                        <p class="card-text">We ensure your website loads quickly to keep users engaged and reduce bounce rates.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-shield-lock fs-4 text-warning"></i>
+                        </div>
+                        <h5 class="card-title">Secure & Reliable</h5>
+                        <p class="card-text">Our websites are built with top-notch security to protect your business and customer data.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-search fs-4 text-info"></i>
+                        </div>
+                        <h5 class="card-title">SEO-Optimized</h5>
+                        <p class="card-text">Rank higher on search engines and attract more customers with our SEO-friendly designs.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body">
+                        <div class="icon mb-3">
+                            <i class="bi bi-people fs-4 text-secondary"></i>
+                        </div>
+                        <h5 class="card-title">Ongoing Support</h5>
+                        <p class="card-text">We provide continuous support and maintenance to keep your website running smoothly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tech we use -->
+    <div class="container py-5">
+        <div class="section-header text-center">
+            <p>Technologies We Use</p>
+            <h2>Our Tech Stack</h2>
+        </div>
+        <p>We use these and other industry best technologies to create you, the best web app you've ever imagined. The website of your dreams!</p>
+        <div class="scrolling-container">
+            <div class="scrolling-image">
+                <img src="{% static 'img/websitedesignernigeria.png' %}" alt="Website Designer in Lagos">
+            </div>
+        </div>
+    </div>
+
+    <!--FAQ Section -->
+    <div class="container faq-section mb-5">
+        <div class="faq-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Web Developers in Lagos have put together your top questions and provided answers to them. Please feel free to contact us if you've got more questions. Thanks!</p>
+        </div>
+        <div id="faq-container">
+            <!-- FAQ Item -->
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>1. What services do Website Designer in Lagos offer?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">We offer web design, development, mobile optimization, and SEO services to help businesses establish a strong online presence.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>2. How long does it take to create a website?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">The timeline depends on the complexity of the project. Typically, it takes 2-6 weeks for most websites.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>3. Are your websites mobile-friendly?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Yes, all our websites are fully responsive and optimized for mobile devices.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>4. Do you provide ongoing support?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Yes, we offer maintenance and support packages to ensure your website stays updated and secure.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>5. Can you redesign my existing website?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Absolutely! We can revamp your existing website to improve its design, functionality, and user experience.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>6. Do you offer SEO services?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Yes, we provide SEO services to help your website rank higher on search engines and attract more traffic.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>7. How much does a website cost?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">The cost varies depending on the project requirements. Please <a href="{% url 'contact' %}">contact us</a> for a customized quote.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>8. Can you integrate e-commerce functionality?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Yes, we can integrate e-commerce features like shopping carts, payment gateways, and inventory management.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>9. What technologies do you use?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer"><b>Web developers in Lagos</b> use top industry-standard technologies like HTML, CSS, JavaScript, React, Python, and more to build high-quality websites.</div>
+            </div>
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span>10. How do I get started?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">Simply contact us through our whatsapp or call us directly. We'll discuss your needs and start planning your project immediately.</div>
+            </div>
+        </div>
+    </div>
+
+    <!--Portfolio-->
+    <section class="py-5">
+        <div class="container">
+            <div class="section-header text-center mb-4">
+                <p>Check out our latest projects</p>
+                <h2>Our Portfolio</h2>
+            </div>
+            <p>Explore some of our best website development projects showcasing our professional expertise. We've have completed over a hundred projects for clients in Nigeria and internationally</p>
+            <div class="row">
+                <!-- Portfolio Item 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/klockwize.com_real_estate_web_development-scaled.jpg' %}" alt="Website designer in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Real Estate</h3>
+                    </div>
+                </div>
+                <!-- Portfolio Item 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/applegreen.ng_Agriculture-web-design.jpg' %}" alt="Website designer in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Agricultural Products</h3>
+                    </div>
+                </div>
+                <!-- Portfolio Item 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/avanakitchen.com_.ng-food-ecommerce-scaled.jpg' %}" alt="Website designer in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Food Sale</h3>
+                    </div>
+                </div>
+                <!-- Portfolio Item 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/modebooks.org-book-website-ecommerce-development-scaled-1.jpg' %}" alt="web developers in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Bookstore</h3>
+                    </div>
+                </div>
+                <!-- Portfolio Item 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/The-Home-of-African-Fashion-ecommerce-web-design.jpg' %}" alt="web developers in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Fashion Design</h3>
+                    </div>
+                </div>
+                <!-- Portfolio Item 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="{% static 'img/wellbornfabrics.com_.ng_Fabric-and-apparel-ecommerce-website-in-Lagos.jpg' %}" alt="web developers in Lagos" class="scrolling-images">
+                        </div>
+                        <h3 class="portfolio-title text-center mt-3">Fabric and Apparel</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}
+
+{% block extra_js%}
+    <script>
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.faq-icon');
+                answer.classList.toggle('open');
+                icon.textContent = icon.textContent === '+' ? '-' : '+';
+            });
+        });
+
+    </script>
+{% endblock %}

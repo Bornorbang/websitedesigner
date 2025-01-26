@@ -33,11 +33,11 @@
 </div>
 <!-- Hero End -->
 
-<div class="container mb-5 d-none d-lg-block">
-    <div class="row wow slideInLeft" data-wow-delay="0.1s">
-    <div>
-        <img src="{% static 'img/websitedesignernigeria.png' %}" alt="Website Designer Nigeria"> 
-    </div>
+<div class="container mb-5">
+        <div class="scrolling-container">
+            <div class="scrolling-image">
+                <img src="{% static 'img/websitedesignernigeria.png' %}" alt="Website Designer Nigeria">
+            </div>
     </div>
 </div>
 
@@ -470,4 +470,43 @@
     </div>
 </div>
 <!-- Contact End -->
+
+<!-- Blog Start -->
+<div class="blog" id="blog">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>From Blog</p>
+            <h2>Latest Articles</h2>
+        </div>
+        <div class="row">
+            {% for blog in recent_blogs %}
+            <div class="col-lg-6">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="{{ blog.image.url }}" alt="Blog">
+                    </div>
+                    <div class="blog-text">
+                        <h2>{{ blog.title }}</h2>
+                        <div class="blog-meta">
+                            <p><i class="far fa-user"></i>{{ blog.author }}</p>
+                            <p><i class="far fa-list-alt"></i>{{ blog.category }}</p>
+                            <p><i class="far fa-calendar-alt"></i>{{ blog.date }}</p>
+                            <p><i class="far fa-comments"></i>{{ blog.comments_count }}</p>
+                        </div>
+                        <div style="word-wrap: break-word;">
+                            <p>
+                                {{ blog.content|truncatewords:30|safe }}
+                            </p>
+                        </div>
+                        <a class="btn" href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+
 {% endblock %}

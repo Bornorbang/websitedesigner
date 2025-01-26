@@ -1842,3 +1842,97 @@ a:focus {
     border-radius: 10px;
     margin-top: 30px;
 }
+
+.sidebar {
+    margin-top: 30px;
+}
+
+.sidebar h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.sidebar-banner img {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.sidebar-banner img:hover {
+    transform: scale(1.05);
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+.pagination a:hover {
+    background: #0056b3;
+}
+
+.pagination span {
+    margin: 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.index-content{
+    word-wrap: break-word;
+}
+
+/*** footer item for blogs **/
+
+.footer-item {
+    position: relative;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+.footer-item i {
+    margin-right: 8px;
+    color: #f8f9fa;
+}
+
+.scrolling-container {
+    overflow: hidden; /* Hide overflowing parts */
+    position: relative; /* For child positioning */
+    width: 100%; /* Full container width */
+    height: 150px; /* Adjust to the height of your image */
+}
+
+.scrolling-image {
+    display: inline-block;
+    white-space: nowrap; /* Prevent wrapping */
+    animation: scroll-slow-fast-return 15s linear infinite; /* Adjust timing */
+}
+
+.scrolling-image img {
+    height: 100%; /* Adjust to fit the container height */
+    display: inline-block;
+}
+
+/* Keyframes for scrolling */
+@keyframes scroll-slow-fast-return {
+    0% {
+        transform: translateX(100%); /* Start off-screen to the right */
+    }
+    70% {
+        transform: translateX(-100%); /* Move off-screen to the left slowly */
+    }
+    100% {
+        transform: translateX(100%); /* Return to the start quickly */
+    }
+}
+
