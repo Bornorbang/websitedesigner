@@ -28,7 +28,7 @@
     }
 
     .blog-item img {
-        max-width: 70%;
+        max-width: 90%;
         border-radius: 10px;
     }
 
@@ -148,8 +148,8 @@
             <div class="blog-item">
                 <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 <h2><a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}">{{ post.title }}</a></h2>
-                <p>{{ post.content|truncatewords:30|safe }}</p>
-                <p><small>By {{ post.author }} on {{ post.date }}</small></p>
+                <p>{{ post.content|truncatewords:30|safe|striptags }}</p>
+                <p><small>By {{ post.author }} on {{ post.date|date:"F d, Y" }}</small></p>
             </div>
             {% empty %}
             <p>No posts found in this category.</p>

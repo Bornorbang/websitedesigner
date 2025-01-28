@@ -29,6 +29,16 @@ a {
     transition: .3s;
 }
 
+p{
+    font-size: 22px;
+    line-height: 2.4rem;
+}
+
+@media(max-width: 991px){
+    p{
+        font-size: 20px;
+    }
+}
 a:hover,
 a:active,
 a:focus {
@@ -1491,8 +1501,8 @@ a:focus {
 }
 
 .blog .blog-meta p {
-    margin: 0 10px 0 0;
-    font-size: 13px;
+    margin: 0 8px 0 0;
+    font-size: 12px;
 }
 
 .blog .blog-meta i {
@@ -1935,4 +1945,6 @@ a:focus {
         transform: translateX(100%); /* Return to the start quickly */
     }
 }
+
+
 

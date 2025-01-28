@@ -201,8 +201,8 @@
                         <h2><a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">{{ blog.title }}</a></h2>
                         <div class="blog-meta-info">
                             <p><i class="far fa-user"></i>{{ blog.author }}</p>
-                            <p><i class="far fa-list-alt"></i>{{ blog.category }}</p>
-                            <p><i class="far fa-calendar-alt"></i>{{ blog.date }}</p>
+                            <p><a href="{% url 'category_posts' category_slug=blog.category.slug %}"><i class="far fa-list-alt"></i>{{ blog.category }}</a></p>
+                            <p><i class="far fa-calendar-alt"></i>{{ blog.date|date:"F d, Y" }}</p>
                             <p><i class="far fa-comments"></i>{{ blog.comments_count }}</p>
                         </div>
                         <p>{{ blog.content|truncatewords:30|striptags|safe}}</p>
