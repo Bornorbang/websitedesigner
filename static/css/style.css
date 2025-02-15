@@ -1947,5 +1947,45 @@ a:focus {
     }
 }
 
+.related-posts {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
 
+.related-post-item {
+    transition: transform 0.3s ease;
+}
+
+.related-post-item:hover {
+    transform: translateY(-5px);
+}
+
+.related-post-item img {
+    border-radius: 5px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.related-post-item h5 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.related-post-item a {
+    text-decoration: none;
+}
+
+.related-post-item p {
+    font-size: 14px;
+}
+
+/* Responsive adjustments for related posts */
+@media (max-width: 768px) {
+    .related-post-item {
+        margin-bottom: 20px;
+    }
+}
 

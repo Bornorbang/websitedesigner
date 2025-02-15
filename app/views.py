@@ -6,6 +6,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 import logging
+from django.db.models import Q
 # Create your views here.
 
 def home(request):
@@ -50,6 +51,11 @@ def blog_detail(request, category_slug, slug):
     # Fetch the 5 most recent posts
     recent_posts = Blog.objects.all()[:5]  # The ordering is now handled by the model
 
+    # Get related posts
+    related_posts = Blog.objects.filter(
+        Q(category=blog.category) & ~Q(id=blog.id)
+    ).order_by('-date')[:3]  # Get 3 related posts
+
     # Get all categories
     categories = Category.objects.all()
 
@@ -61,11 +67,12 @@ def blog_detail(request, category_slug, slug):
         'categories': categories,
         'category': category,
         'banners': banners,
+        'related_posts': related_posts,
     })
 
 def blog_list(request):
     blogs = Blog.objects.all()
-    paginator = Paginator(blogs, 10)  # Show 10 blogs per page
+    paginator = Paginator(blogs, 5)  # Show 10 blogs per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     banners = BlogslistSidebarBanner.objects.all()[:3] 
@@ -97,3 +104,5 @@ def website_lagos(request):
 
 def seo_services(request):
     return render(request, 'seo_services.html')
+
+

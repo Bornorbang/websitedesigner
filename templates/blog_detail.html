@@ -210,7 +210,7 @@
         <div class="row">
             <!-- Blog Content -->
             <div class="col-lg-9">
-                <div class="blog-detail-item wow fadeInUp" data-wow-delay="0.1s">
+                <div class="blog-detail-item mb-5 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="blog-detail-img">
                         <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="image-fluid">
                     </div>
@@ -225,6 +225,29 @@
                         <div class="blog-content">
                             <p>{{ blog.content | safe}}</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Related Posts Section -->
+                <div class="related-posts mt-5 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="section-header wow zoomIn" data-wow-delay="0.1s">
+                        <h2>Related Posts</h2>
+                    </div>
+                    <div class="row">
+                        {% for related_post in related_posts %}
+                            <div class="col-md-4 mb-4">
+                                <div class="related-post-item">
+                                    <a href="{% url 'blog_detail' category_slug=related_post.category.slug slug=related_post.slug %}">
+                                        <img src="{{ related_post.image.url }}" alt="{{ related_post.title }}" class="img-fluid mb-3">
+                                        <h5>{{ related_post.title }}</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p>No related posts found.</p>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
