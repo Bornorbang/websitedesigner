@@ -34,6 +34,10 @@ p{
     line-height: 2.4rem;
 }
 
+li{
+    font-size: 22px;
+}
+
 @media(max-width: 991px){
     p{
         font-size: 19px;
@@ -163,6 +167,28 @@ a:focus {
     width: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
 }
+
+
+.sticky-logo {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 10px; /* Adjust as needed */
+    left: 300px; /* Adjust position */
+
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sticky-logo img{
+    max-width: 300px;
+}
+/* Ensure it remains hidden on smaller screens */
+@media (max-width: 991px) {
+    .sticky-logo {
+        display: none !important;
+    }
+}
+
 
 .navbar .desktop {
     max-width: 300px;
@@ -810,14 +836,18 @@ a:focus {
 .service .service-text {
     position: relative;
     width: calc(100% - 120px);
-    padding: 0 30px;
+    padding: 30px 30px;
 }
 
 .service .service-text h3 {
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     transition: 1s;
+}
+
+.section-margin{
+    margin-top: 105px;
 }
 
 .service .service-text p {
@@ -846,123 +876,65 @@ a:focus {
 /*******************************/
 /******** Portfolio CSS ********/
 /*******************************/
-.portfolio {
+
+.portfolio-card {
     position: relative;
-    padding: 45px 0 15px 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 0; /* Remove extra padding if any */
+    margin: 0;  /* Remove extra margin if any */
 }
 
-.portfolio #portfolio-filter {
-    padding: 0;
-    margin: -15px 0 25px 0;
-    list-style: none;
-    font-size: 0;
-    text-align: center;
+/* Columns should have consistent spacing */
+.col-lg-4,
+.col-md-6 {
+    padding: 15px; /* Adjust this value if needed */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
-.portfolio #portfolio-filter li {
-    cursor: pointer;
-    display: inline-block;
-    margin: 5px;
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    background: #EF233C;
-    border: 2px solid transparent;
-    border-radius: 0;
-    box-shadow: inset 0 0 0 50px #EF233C;
-    transition: ease-out 0.3s;
-    -webkit-transition: ease-out 0.3s;
-    -moz-transition: ease-out 0.3s;
-}
-
-.portfolio #portfolio-filter li:hover,
-.portfolio #portfolio-filter li.filter-active {
-    color: #EF233C;
-    background: transparent;
-    box-shadow: inset 0 0 0 0 #EF233C;
-    border-color: #EF233C;
-}
-
-.portfolio .portfolio-item {
+/* Image Container */
+.image-container {
     position: relative;
-    width: 100%;
-    margin-bottom: 30px; /* Add margin between items */
-}
-
-.portfolio .portfolio-wrap {
-    position: relative;
-    width: 100%;
-}
-
-.portfolio .portfolio-img {
-    position: relative;
+    height: 500px; /* Adjust height as needed */
     overflow: hidden;
 }
 
-.portfolio .portfolio-img img {
-    position: relative;
+/* Scrolling Image */
+.scrolling-images {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.1);
-    transition: transform 0.5s ease;
+    height: auto;
+    animation: none; /* Default: no animation */
+    transition: transform 0.5s ease-in-out;
 }
 
-.portfolio .portfolio-item:hover img {
-    transform: scale(1.05); /* Slight zoom on hover */
+/* Hover Effect */
+.image-container:hover .scrolling-images {
+    animation: scrollPartial 8s linear forwards;
 }
 
-.portfolio .portfolio-text {
-    position: relative;
-    height: 60px;
-    width: calc(100% - 30px);
-    margin: -30px 15px 30px 15px;
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .12);
-}
-
-.portfolio .portfolio-text h3 {
-    width: calc(100% - 70px);
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 0 15px;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.portfolio .portfolio-text a.btn {
-    width: 50px;
-    height: 50px;
-    padding: 0 0 2px 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: 100;
-}
-
-.portfolio .portfolio-item:hover a.btn {
-    color: #EF233C;
-    background: transparent;
-    box-shadow: inset 0 0 0 0 #EF233C;
-    border-color: #EF233C;
-}
-
-/* Ensuring the row has proper layout using flexbox */
-.portfolio .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Space between items */
-}
-
-/* Make portfolio items adjust properly on smaller screens */
-@media (max-width: 768px) {
-    .portfolio .portfolio-item {
-        width: 100%; /* Full width for small screens */
+/* Scrolling Animation */
+@keyframes scrollPartial {
+    0% {
+        transform: translateY(0);
     }
+    100% {
+        transform: translateY(-70%); /* Stops just before the end of the image */
+    }
+}
+
+
+/* Portfolio Title */
+.portfolio-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 15px;
+    text-align: center; /* Center align the title */
 }
 
 
@@ -1883,7 +1855,7 @@ a:focus {
 .pagination a {
     margin: 0 5px;
     padding: 5px 10px;
-    background: #007bff;
+    background: #EF233C;
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
@@ -1989,3 +1961,39 @@ a:focus {
     }
 }
 
+
+.cta-banner {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-banner h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.cta-banner p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+.cta-banner .btn-primary {
+    background-color: #EF233C;
+    border-color: #EF233C;
+    padding: 10px 25px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.cta-banner .btn-primary:hover {
+    background-color: #EF233C;
+    border-color: #EF233C;
+}
+
+@media (max-width: 991px) {
+    .cta-banner .col-lg-4 {
+        margin-top: 20px;
+    }
+}

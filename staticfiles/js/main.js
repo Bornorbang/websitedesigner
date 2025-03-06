@@ -30,12 +30,28 @@
     });
     
     
-    // Sticky Navbar
+   // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 0) {
             $('.navbar').addClass('nav-sticky');
+            $('.sticky-logo').fadeIn(200);
+            $('.navbar-brand .desktop').hide();
         } else {
             $('.navbar').removeClass('nav-sticky');
+            $('.sticky-logo').fadeOut(200);
+            $('.navbar-brand .desktop').show();
+        }
+    });
+
+    // Initialize sticky logo state on page load
+    $(document).ready(function() {
+        if ($(window).scrollTop() > 0) {
+            $('.navbar').addClass('nav-sticky');
+            $('.sticky-logo').show();
+            $('.navbar-brand .desktop').hide();
+        } else {
+            $('.sticky-logo').hide();
+            $('.navbar-brand .desktop').show();
         }
     });
     
