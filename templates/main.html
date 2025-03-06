@@ -10,14 +10,14 @@
         <meta name="robots" content="index, follow">
 
         <!-- Meta Description -->
-        <meta name="description" content="{% block meta_description %}Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.{% endblock %}">
+        <meta name="description" content="{% block meta_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
 
         <!-- Meta Keywords (SEO optimized) -->
-        <meta name="keywords" content="website design, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, create a website, web design services in nigeria, best web design company in nigeria">
+        <meta name="keywords" content="web designer in Lagos, web design company, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, web developers in nigeria, seo company in nigeria, website design agency, best web design company in nigeria">
 
         <!-- Open Graph Meta Tags (For Social Media Sharing) -->
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
-        <meta property="og:description" content="{% block og_description %}Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
         <meta property="og:image" content="{% static 'img/favicon.png' %}"> 
         <meta property="og:url" content="https://websitedesigner.ng">
         <meta property="og:type" content="website">
@@ -38,7 +38,7 @@
         <!-- Twitter Card Meta Tags (For Twitter Sharing) -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Website Designer Nigeria - Best Web Designers in Nigeria">
-        <meta name="twitter:description" content="Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.">
+        <meta name="twitter:description" content="Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.">
         <meta name="twitter:image" content="{% static 'img/favicon.png' %}">
 
         <!-- Favicon -->
@@ -79,15 +79,22 @@
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
         <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-light navbar-light">
+       <div class="navbar navbar-expand-lg bg-light navbar-light">
             <div class="container-fluid">
-                <a href = "/">
-                    <img src="{% static 'img/website designer nigeria - logo.png' %}" class = "desktop d-none d-md-block" alt="Website Designer Nigeria">
+                <a href="/">
+                    <img src="{% static 'img/website designer nigeria - logo.png' %}" class="desktop d-none d-md-block" alt="Website Designer Nigeria">
                 </a>
-                <a href = "/">
-                    <img src="{% static 'img/website designer nigeria logo.png' %}" class = "mobile d-block d-md-none" alt="Website Designer Nigeria">
+                <a href="/">
+                    <img src="{% static 'img/website designer nigeria logo.png' %}" class="mobile d-block d-md-none" alt="Website Designer Nigeria">
                 </a>
-                
+
+                <!-- Sticky Logo (Hidden by Default) -->
+                <div class="sticky-logo">
+                    <a href="/">
+                        <img src="{% static 'img/website designer nigeria logo.png' %}" alt="Web Design Company in Nigeria">
+                    </a>
+                </div>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -102,6 +109,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
         <!-- Nav Bar End -->
 
@@ -118,20 +127,37 @@
 
         <!-- Whatsapp Widget End-->
 
-
+        <!-- Call to Action Banner Start -->
+        <div class="cta-banner section-margin wow fadeIn" data-wow-delay="0.1s">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-md-12">
+                        <h2>Ready to Create Your Dream Website?</h2>
+                        <p>Contact us! Let's bring your vision to life with our expert web development services.</p>
+                    </div>
+                    <div class="col-lg-4 col-md-12 text-center">
+                         <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Call to Action Banner End -->
 
         <!-- Footer Start -->
         <div class="footer wow fadeIn" data-wow-delay="0.3s">
             <div class="container-fluid">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="footer-info">
                         <div class="footer-logo">
                             <a href="/">
                                 <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Website Designer Nigeria" class="img-fluid">
                             </a>
                         </div>
-                        <p class="text-white">Website Designer Nigeria offers professional website development services to business looking to create a website. We are the best web designers in Nigeria.</p>
-                        <h3>Jabi, Gwarinpa 900108, F.C.T Abuja</h3>
+                        <p class="text-white">Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.</p>
+                       
+                        <p class="text-white">Lagos Office: 6, Otta road, Ijora Olopa, Lagos</p>
+                        <p class="text-white">Abuja Office: Jabi, Gwarinpa 900108, F.C.T Abuja</p>
+                        
                         <div class="footer-menu">
                             <p>08148882303</p>
                             <p>contact@websitedesigner.ng</p>
@@ -180,5 +206,19 @@
         <script src="{% static 'js/main.js' %}"></script>
         {% block extra_js %}
         {% endblock %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let stickyLogo = document.querySelector(".sticky-logo");
+
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 100 && window.innerWidth > 991) { 
+                    stickyLogo.style.display = "block";
+                } else {
+                    stickyLogo.style.display = "none";
+                }
+            });
+        });
+    </script>
+
     </body>
 </html>

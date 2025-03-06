@@ -40,7 +40,7 @@ urlpatterns = [
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
     path('blog/', blog_list, name='blogs'),
     path('website-designer-in-lagos/', website_lagos, name="website_lagos"),
-    path('seo-services-nigeria/', seo_services, name="seo_services"),
+    path('seo-company-in-nigeria', seo_company, name="seo_services"),
 
 ]
 

@@ -6,17 +6,18 @@
 {% block meta_description %}{{ blog.meta_description}}{% endblock %}
 
 {% block og_title %}{{ blog.title }} | Website Designer Nigeria{% endblock %}
+{% block og_description %}{{ blog.meta_description|default:blog.content|truncatewords:30 }}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ blog.image.url }}{% endblock %}
 
-{% block og_description %}{{ blog.meta_description}}{% endblock %}
+{% block twitter_title %}{{ blog.title }}{% endblock %}
+{% block twitter_description %}{{ blog.meta_description|default:blog.content|truncatewords:30 }}{% endblock %}
+{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{{ blog.image.url }}{% endblock %}
 
 {% block extra_meta %}
-    <meta property="og:type" content="article">
     <meta property="article:published_time" content="{{ blog.date|date:"c" }}">
     <meta property="article:author" content="{{ blog.author }}">
     <meta property="article:section" content="{{ blog.category.name }}">
-    {% if blog.image %}
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ blog.image.url }}">
-    {% endif %}
 {% endblock %}
 
 {% block extra_css %}
@@ -292,4 +293,20 @@
     </div>
 </div>
 <!-- Blog Detail End -->
+
+<!-- Call to Action Banner Start -->
+<div class="cta-banner section-margin wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-8 col-md-12">
+                <h2>Need a Website?</h2>
+                <p>Contact <a href="/">Website Designer Nigeria</a>! Let's bring your vision to life with our expert web development services.</p>
+            </div>
+            <div class="col-lg-4 col-md-12 text-center">
+                    <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Call to Action Banner End -->
 {% endblock %}

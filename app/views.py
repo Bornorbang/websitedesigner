@@ -102,7 +102,5 @@ def website_lagos(request):
     return render(request, 'website_lagos.html')
 
 
-def seo_services(request):
-    return render(request, 'seo_services.html')
-
-
+def seo_company(request):
+    return render(request, 'seo_company.html')
