@@ -104,3 +104,36 @@ def website_lagos(request):
 
 def seo_company(request):
     return render(request, 'seo_company.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

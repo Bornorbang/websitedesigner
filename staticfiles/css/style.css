@@ -1979,19 +1979,6 @@ a:focus {
     margin-bottom: 0;
 }
 
-.cta-banner .btn-primary {
-    background-color: #EF233C;
-    border-color: #EF233C;
-    padding: 10px 25px;
-    font-size: 18px;
-    transition: all 0.3s ease;
-}
-
-.cta-banner .btn-primary:hover {
-    background-color: #EF233C;
-    border-color: #EF233C;
-}
-
 @media (max-width: 991px) {
     .cta-banner .col-lg-4 {
         margin-top: 20px;
