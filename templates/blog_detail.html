@@ -190,6 +190,9 @@
         }
     }
 
+    .social-share {
+        text-align: center;
+    }
     .social-share h4 {
         font-size: 20px;
         margin-bottom: 10px;
@@ -198,6 +201,7 @@
     .share-buttons {
         display: flex;
         gap: 10px;
+        justify-content: center;
     }
 
     .share-buttons i{
@@ -261,6 +265,45 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Leave a Reply Section -->
+                <div class="leave-reply mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <h3>Leave a Reply</h3>
+                    <form action="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}" method="post" class="comment-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment *</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <h3 class="text-center mt-5 mb-2 text-">Comments</h3>
+                    <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="comment mb-4">
+                                <h5>{{ comment.name }}</h5>
+                                <small class="text-muted">{{ comment.created_at|date:"F d, Y " }}</small>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No comments yet. Be the first to comment!</p>
+                    {% endif %}
+                </div>
+                <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
 
                 <!-- Related Posts Section -->
                 <div class="related-posts mt-5 wow fadeInUp" data-wow-delay="0.3s">

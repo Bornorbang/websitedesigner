@@ -20,3 +20,10 @@ class BlogSidebarBannerAdmin(admin.ModelAdmin):
 class BlogslistSidebarBannerAdmin(admin.ModelAdmin):
     list_display = ('title', 'order')
     list_editable = ('order',)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'blog', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'content')

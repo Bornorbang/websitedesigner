@@ -65,3 +65,17 @@ class BlogslistSidebarBanner(models.Model):
 
     def __str__(self):
         return self.title if self.title else f"Banner {self.id}"
+    
+
+class Comment(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'Comment by {self.name} on {self.blog.title}'

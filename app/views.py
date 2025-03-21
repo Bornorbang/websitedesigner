@@ -42,24 +42,27 @@ def contact(request):
     return render(request, 'contact.html')
 
 def blog_detail(request, category_slug, slug):
-    # Get the category object using the category slug
     category = get_object_or_404(Category, slug=category_slug)
-
-    # Get the blog post using the category and blog slug
     blog = get_object_or_404(Blog, category=category, slug=slug)
-
-    # Fetch the 5 most recent posts
-    recent_posts = Blog.objects.all()[:5]  # The ordering is now handled by the model
-
-    # Get related posts
-    related_posts = Blog.objects.filter(
-        Q(category=blog.category) & ~Q(id=blog.id)
-    ).order_by('-date')[:3]  # Get 3 related posts
-
-    # Get all categories
+    recent_posts = Blog.objects.all()[:5]
+    related_posts = Blog.objects.filter(Q(category=blog.category) & ~Q(id=blog.id)).order_by('-date')[:3]
     categories = Category.objects.all()
+    banners = BlogSidebarBanner.objects.all()[:3]
+    
+    # Comment handling
+    comments = blog.comments.all()
 
-    banners = BlogSidebarBanner.objects.all()[:3] 
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        content = request.POST.get('comment')
+        
+        if name and email and content:
+            Comment.objects.create(blog=blog, name=name, email=email, content=content)
+            messages.success(request, 'Your comment has been posted successfully.')
+            return redirect('blog_detail', category_slug=category_slug, slug=slug)
+        else:
+            messages.error(request, 'Please fill in all fields.')
 
     return render(request, 'blog_detail.html', {
         'blog': blog,
@@ -68,6 +71,7 @@ def blog_detail(request, category_slug, slug):
         'category': category,
         'banners': banners,
         'related_posts': related_posts,
+        'comments': comments,
     })
 
 def blog_list(request):
