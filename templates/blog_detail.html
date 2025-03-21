@@ -189,6 +189,20 @@
             margin-top: 15px;
         }
     }
+
+    .social-share h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .share-buttons i{
+        font-size: 26px;
+    }
 </style>
 
 {% endblock %}
@@ -226,6 +240,25 @@
                         <div class="blog-content">
                             <p>{{ blog.content | safe}}</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Share Icons -->
+                <div class="social-share mt-5 mb-5">
+                    <h4>Share this post:</h4>
+                    <div class="share-buttons">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <!-- Twitter -->
+                        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ blog.title }}" target="_blank" class="btn btn-info">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/?text={{ blog.title }}%20{{ request.build_absolute_uri|urlencode }}" target="_blank" class="btn btn-success">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
 
