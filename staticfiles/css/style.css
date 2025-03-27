@@ -2012,8 +2012,10 @@ a:focus {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    animation: marquee 15s linear infinite;
+    width: max-content; /* Ensure the content is wide enough */
+    animation: marquee 25s linear infinite;
 }
+
 
 .announcement-text {
     color: #fff;
@@ -2030,10 +2032,25 @@ a:focus {
 
 @keyframes marquee {
     0% {
-        transform: translateX(100%);
+        transform: translateX(100vw);
     }
     100% {
         transform: translateX(-100%);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .announcement-marquee {
+        animation-duration: 25s; /* Slightly slower for readability */
+    }
+
+    .announcement-text {
+        font-size: 14px;
+    }
+
+    .fas.fa-bullhorn {
+        font-size: 16px;
     }
 }
 
