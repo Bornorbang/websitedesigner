@@ -20,7 +20,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='blogs')
-    date = models.DateTimeField(default=timezone.now)  # Change this line
+    date = models.DateTimeField(default=timezone.now)
     meta_description = models.TextField(blank=True, null=True) 
     content = RichTextField()
     image = models.ImageField(upload_to='blog_images/')

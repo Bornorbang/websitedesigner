@@ -263,6 +263,10 @@
                         <a href="https://wa.me/?text={{ blog.title }}%20{{ request.build_absolute_uri|urlencode }}" target="_blank" class="btn btn-success">
                             <i class="fab fa-whatsapp"></i>
                         </a>
+                        <!-- Telegram -->
+                        <a href="https://t.me/share/url?url={{ request.build_absolute_uri|urlencode }}&text={{ blog.title }}" target="_blank" class="btn btn-telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
                     </div>
                 </div>
 

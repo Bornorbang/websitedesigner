@@ -25,11 +25,10 @@ def contact(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        # Send email
         subject = f"New contact form submission from {name}"
         email_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
         from_email = "contact@websitedesigner.ng"
-        recipient_list = [settings.CONTACT_EMAIL]  # You need to define this in settings.py
+        recipient_list = [settings.CONTACT_EMAIL]
 
         try:
             send_mail(subject, email_message, from_email, recipient_list)
@@ -49,7 +48,6 @@ def blog_detail(request, category_slug, slug):
     categories = Category.objects.all()
     banners = BlogSidebarBanner.objects.all()[:3]
     
-    # Comment handling
     comments = blog.comments.all()
 
     if request.method == 'POST':
@@ -76,7 +74,7 @@ def blog_detail(request, category_slug, slug):
 
 def blog_list(request):
     blogs = Blog.objects.all()
-    paginator = Paginator(blogs, 5)  # Show 10 blogs per page
+    paginator = Paginator(blogs, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     banners = BlogslistSidebarBanner.objects.all()[:3] 
@@ -84,14 +82,14 @@ def blog_list(request):
 
 def category_posts(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    posts = category.blogs.all()  # The ordering is now handled by the model
-    paginator = Paginator(posts, 5)  # Paginate with 5 posts per page
+    posts = category.blogs.all() 
+    paginator = Paginator(posts, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     # Dynamic sidebar data
     categories = Category.objects.all()
-    recent_posts = Blog.objects.all()[:5]  # The ordering is now handled by the model
+    recent_posts = Blog.objects.all()[:5] 
     banners = BlogSidebarBanner.objects.all()
 
     return render(request, 'category_list.html', {

@@ -13,7 +13,7 @@
         <meta name="description" content="{% block meta_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
 
         <!-- Meta Keywords (SEO optimized) -->
-        <meta name="keywords" content="web designer in Lagos, web design company, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, web developers in nigeria, seo company in nigeria, website design agency, best web design company in nigeria">
+        <meta name="keywords" content="web designer in Lagos, web design company, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, web developers in nigeria, seo company in nigeria, website design agency, best web design company in nigeria, web developer in Nigeria">
 
         <!-- Open Graph Meta Tags (For Social Media Sharing) -->
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
@@ -169,7 +169,7 @@
                         <div class="footer-social">
                             <a href="https://x.com/webdesignerng"><i class="fab fa-twitter"></i></a>
                             <a href="https://www.tiktok.com/@websitedesigner.ng"><i class="fab fa-tiktok"></i></a>
-                            <a href="https://www.websitedesigner.ng"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/websitedesigner_ng"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -220,6 +220,19 @@
                 } else {
                     stickyLogo.style.display = "none";
                 }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('open');
+                });
             });
         });
     </script>
