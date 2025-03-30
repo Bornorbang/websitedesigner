@@ -41,6 +41,7 @@ urlpatterns = [
     path('blog/', blog_list, name='blogs'),
     path('website-designer-in-lagos/', website_lagos, name="website_lagos"),
     path('seo-company-in-nigeria', seo_company, name="seo_services"),
+    path('hire-graphic-designer-nigeria/', graphic_design, name="graphic_design"),
 
 ]
 

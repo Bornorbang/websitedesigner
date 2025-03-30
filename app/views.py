@@ -108,6 +108,10 @@ def seo_company(request):
     return render(request, 'seo_company.html')
 
 
+def graphic_design(request):
+    return render(request, 'graphic_design.html')
+
+
 
 
 

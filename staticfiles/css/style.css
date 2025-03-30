@@ -2003,7 +2003,6 @@ a:focus {
 }
 
 .announcement-container {
-    background-color: #EF233C;
     overflow: hidden;
     padding: 10px 0;
 }
@@ -2013,19 +2012,19 @@ a:focus {
     align-items: center;
     white-space: nowrap;
     width: max-content; /* Ensure the content is wide enough */
-    animation: marquee 25s linear infinite;
+    animation: marquee 35s linear infinite;
 }
 
 
 .announcement-text {
-    color: #fff;
+    color: #000;
     font-size: 18px;
     font-weight: bold;
     margin: 0 20px;
 }
 
 .announcement-marquee i {
-    color: #fff;
+    color: #F02E46;
     font-size: 24px;
     margin: 0 10px;
 }
@@ -2042,11 +2041,11 @@ a:focus {
 
 @media screen and (max-width: 768px) {
     .announcement-marquee {
-        animation-duration: 25s; /* Slightly slower for readability */
+        animation-duration: 35s; /* Slightly slower for readability */
     }
 
     .announcement-text {
-        font-size: 14px;
+        font-size: 18px;
     }
 
     .fas.fa-bullhorn {
@@ -2108,4 +2107,8 @@ a:focus {
 
 .faq-item.open .faq-answer {
     max-height: 1000px;
+}
+
+.gd-portfolio-section {
+    background-color: #f8f9fa;
 }
