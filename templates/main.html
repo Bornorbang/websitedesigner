@@ -58,6 +58,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
+        <!-- SwiperJS CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+
         <!-- Template Stylesheet -->
         <link href="{%static 'css/style.css' %}" rel="stylesheet">
 
@@ -201,6 +205,7 @@
         <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
         <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
         <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+
         
         <!-- Contact Javascript File -->
         <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
@@ -236,6 +241,23 @@
             });
         });
     </script>
+
+    <!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+   var swiper = new Swiper('.mySwiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+});
+</script>
+
 
     </body>
 </html>

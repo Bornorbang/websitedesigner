@@ -16,31 +16,27 @@ h6 {
     color: #414141;
 }
 
-b{
-    color: #EF233C;
-}
-
-strong{
-    color: #EF233C;
-}
-
 a {
     color: #313131;
     transition: .3s;
 }
 
 p{
-    font-size: 22px;
-    line-height: 2.4rem;
+    font-size: 20px;
+    line-height: 2.0rem;
 }
 
 li{
-    font-size: 22px;
+    font-size: 20px;
 }
 
 @media(max-width: 991px){
     p{
-        font-size: 19px;
+        font-size: 18px;
+    }
+
+    li{
+        font-size: 18px;
     }
 }
 a:hover,
@@ -312,7 +308,7 @@ a:focus {
     padding: 0;
 }
 
-.hero .hero-image {
+.hero .hero-image { 
     position: relative;
     text-align: right;
     padding-right: 75px;
@@ -841,18 +837,18 @@ a:focus {
 
 .service .service-text h3 {
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     transition: 1s;
 }
 
 .section-margin{
-    margin-top: 105px;
+    margin-top: 50px;
 }
 
 .service .service-text p {
     margin: 0;
-    font-size: 16px;
+    font-size: 20px;
     transition: 1s;
 }
 
@@ -863,12 +859,12 @@ a:focus {
 
 @media (max-width: 575.98px) {
     .service .service-text h3 {
-        font-size: 16px;
+        font-size: 20px;
         margin-bottom: 5px;
     }
     
     .service .service-text p {
-        font-size: 14px;
+        font-size: 20px;
     }
 }
 
@@ -1468,14 +1464,22 @@ a:focus {
 }
 
 .blog .blog-meta {
-    position: relative;
     display: flex;
-    margin-bottom: 15px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.blog .blog-meta::-webkit-scrollbar { 
+    display: none;  /* WebKit */
 }
 
 .blog .blog-meta p {
-    margin: 0 8px 0 0;
-    font-size: 12px;
+    margin: 0 8px 8px 0;
+    font-size: 15px;
+    white-space: nowrap;
 }
 
 .blog .blog-meta i {
@@ -2019,7 +2023,6 @@ a:focus {
 .announcement-text {
     color: #000;
     font-size: 18px;
-    font-weight: bold;
     margin: 0 20px;
 }
 
@@ -2111,4 +2114,24 @@ a:focus {
 
 .gd-portfolio-section {
     background-color: #f8f9fa;
+}
+
+.swiper {
+    width: 100%;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    margin: 0 10px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
 }
