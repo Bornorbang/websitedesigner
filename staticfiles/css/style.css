@@ -169,7 +169,7 @@ a:focus {
     display: none; /* Initially hidden */
     position: fixed;
     top: 10px; /* Adjust as needed */
-    left: 300px; /* Adjust position */
+    left: 80px; /* Adjust position */
 
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
@@ -1077,8 +1077,29 @@ a:focus {
     list-style: none;
 }
 
-.price .price-description ul li {
-    padding: 0 0 20px 0;
+.price-description ul li {
+    position: relative;
+    padding-left: 40px; /* Add space for the tick icon */
+    margin-bottom: 20px; /* Add spacing between items */
+    text-align: left; /* Ensure left alignment */
+    font-size: 16px; /* Optional: Adjust font size */
+}
+
+.price-description ul li::before {
+    content: '\2713'; /* Unicode for a tick/checkmark */
+    position: absolute;
+    left: 10px;
+    top: 0;
+    color: #ffffff; /* Tick icon text color */
+    font-size: 18px; /* Adjust size of the tick icon */
+    line-height: 1; /* Align icon vertically */
+    background-color: #EF233C; /* Background color for the tick */
+    border-radius: 50%; /* Make the background circular */
+    width: 20px; /* Set width for the background */
+    height: 20px; /* Set height for the background */
+    display: flex; /* Center the tick inside the circle */
+    align-items: center;
+    justify-content: center;
 }
 
 .price .price-item .price-action {
@@ -2134,4 +2155,58 @@ a:focus {
     height: 100%;
     object-fit: contain;
     background: transparent;
+}
+
+/* Style for Resources Dropdown */
+.resources-dropdown {
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #ddd; /* Border for dropdown */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.resources-dropdown .dropdown-item {
+    color: #333; /* Text color */
+    padding: 10px 15px; /* Spacing */
+    transition: background-color 0.3s ease;
+}
+
+.resources-dropdown .dropdown-item:hover {
+    background-color: #EF233C; /* Highlight on hover */
+    color: #fff; /* White text on hover */
+}
+
+/* Style for "new" label */
+.new-label {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-size: 10px; /* Smaller font size */
+    padding: 2px 5px; /* Padding for the label */
+    background-color: green; /* Green background */
+    color: white; /* White text */
+    border-radius: 3px; /* Rounded corners */
+    text-transform: uppercase; /* Uppercase text */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 575.98px) { /* Target mobile devices */
+    .card {
+        margin-bottom: 20px; /* Add margin below each card */
+    }
 }

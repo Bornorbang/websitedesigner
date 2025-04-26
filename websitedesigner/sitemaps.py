@@ -4,7 +4,7 @@ from app.models import Blog, Category  # Import your Blog and Category models
 
 class StaticSitemap(Sitemap):
     def items(self):
-        return ['home', 'about-website-designer-nigeria', 'services', 'contact', 'website_lagos', 'seo_services', 'blogs']
+        return ['home', 'about-website-designer-nigeria', 'services', 'contact', 'website_lagos', 'seo_services', 'blogs', 'tech_tips', 'tech_reviews', 'courses', 'advertise', 'consultation', 'pricing']
 
     def location(self, item):
         return reverse(item)

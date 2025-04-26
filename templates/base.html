@@ -123,7 +123,25 @@
                         <a href="/" class="nav-item nav-link">Home</a>
                         <a href="{% url 'about-website-designer-nigeria' %}" class="nav-item nav-link">About Us</a>
                         <a href="{% url 'services' %}" class="nav-item nav-link">Our Services</a>
-                        <a href="{% url 'blogs' %}" class="nav-item nav-link">Blog</a>
+                
+                        <!-- Resources Dropdown -->
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources</a>
+                            <div class="dropdown-menu resources-dropdown">
+                                <a href="{% url 'blogs' %}" class="dropdown-item">Blog</a>
+                                <a href="{% url 'tech_tips' %}" class="dropdown-item">Tech Tips</a>
+                                <a href="{% url 'tech_reviews' %}" class="dropdown-item">Teh Reviews</a>
+                                <a href="https://consultation.websitedesigner.ng" class="dropdown-item">Consultation</a>
+                                <a href="{% url 'pricing' %}" class="dropdown-item">Pricing</a>
+                                <a href="{% url 'advertise' %}" class="dropdown-item">Advertise</a>
+                            </div>
+                        </div>
+                
+                        <!-- Courses Menu Item -->
+                        <a href="{% url 'courses' %}" class="nav-item nav-link position-relative">
+                            Courses
+                            <span class="badge badge-success new-label">new</span>
+                        </a>
                         <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ from django.db.models import Q
 # Create your views here.
 
 def home(request):
-    recent_blogs = Blog.objects.order_by('-date')[:2]
+    recent_blogs = Blog.objects.exclude(category__slug__in=['tech-reviews', 'tech-tips']).order_by('-date')[:2]
     return render(request, 'index.html', {'recent_blogs': recent_blogs})
 
 def about(request):
@@ -73,12 +73,31 @@ def blog_detail(request, category_slug, slug):
     })
 
 def blog_list(request):
-    blogs = Blog.objects.all()
+    # Exclude "Reviews" and "Tech Tips" categories from the main blog list
+    blogs = Blog.objects.exclude(category__slug__in=['tech-reviews', 'tech-tips'])
     paginator = Paginator(blogs, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    banners = BlogslistSidebarBanner.objects.all()[:3] 
+    banners = BlogslistSidebarBanner.objects.all()[:3]
     return render(request, 'blogs.html', {'page_obj': page_obj, 'banners': banners})
+
+def reviews(request):
+    # Fetch only posts in the "Reviews" category
+    reviews_category = get_object_or_404(Category, slug='tech-reviews')
+    reviews_posts = Blog.objects.filter(category=reviews_category)
+    paginator = Paginator(reviews_posts, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'reviews.html', {'page_obj': page_obj, 'category': reviews_category})
+
+def tech_tips(request):
+    # Fetch only posts in the "Tech Tips" category
+    tech_tips_category = get_object_or_404(Category, slug='tech-tips')
+    tech_tips_posts = Blog.objects.filter(category=tech_tips_category)
+    paginator = Paginator(tech_tips_posts, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'tech_tips.html', {'page_obj': page_obj, 'category': tech_tips_category})
 
 def category_posts(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
@@ -110,6 +129,18 @@ def seo_company(request):
 
 def graphic_design(request):
     return render(request, 'graphic_design.html')
+
+def consultation(request):
+    return render(request, 'consultation.html')
+
+def pricing(request):
+    return render(request, 'pricing.html')
+
+def advertise(request):
+    return render(request, 'advertise.html')
+
+def courses(request):
+    return render(request, 'courses.html')
 
 
 

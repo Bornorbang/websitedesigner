@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css%}
+<style>
+    /* Container for the entire blog page */
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    /* Row holding both blog and sidebar */
+    .blog-row {
+        display: flex;
+        flex-wrap: wrap; /* Ensures proper wrapping on smaller screens */
+        gap: 20px;
+        width: 100%;
+    }
+
+    /* Main blog section */
+    .blog-main {
+        flex: 0 0 70%;
+        max-width: 70%;
+    }
+
+    /* Blog post styles */
+    .blog-post {
+        margin-bottom: 30px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    /* Blog post thumbnail */
+    .blog-thumbnail img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Blog content section */
+    .blog-content {
+        padding: 15px;
+        word-wrap: break-word;
+    }
+
+    /* Blog title */
+    .blog-content h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Pagination styles */
+    .blog-pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .blog-pagination a {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background: #EF233C;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: background 0.3s;
+    }
+
+    .blog-pagination a:hover {
+        background: #F05A6F;
+    }
+
+    .blog-pagination span {
+        margin: 0 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+        .blog-main {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .blog-sidebar {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .blog-container {
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-content h2 {
+            font-size: 20px;
+        }
+
+        .blog-meta-info p {
+            font-size: 12px;
+        }
+
+        .btn {
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .blog-thumbnail img {
+            height: auto;
+        }
+
+        .blog-meta-info p {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block maincontent %}
+
+<!-- Page Title Banner -->
+<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Tech Tips</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4">
+        {% for blog in page_obj %}
+        <div class="col-lg-4 col-md-6">
+            <div class="blog-post wow fadeInUp h-100" data-wow-delay="0.1s">
+                <div class="blog-thumbnail">
+                    <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid"></a>
+                </div>
+                <div class="blog-content">
+                    <h2 class="h5 mt-3">
+                        <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">{{ blog.title }}</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="blog-pagination wow fadeInUp mt-5 text-center" data-wow-delay="0.3s">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -150,10 +150,34 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
 CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
 
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'full',
+#         'height': 300,
+#         'width': 'auto',
+#         'extraPlugins': ','.join([
+#             'htmlSupport'
+#         ]),
+#         'htmlSupport': {
+#             'allow': [
+#                 {
+#                     'name': 'iframe',
+#                     'attributes': True,
+#                     'classes': True,
+#                     'styles': True
+#                 }
+#             ]
+#         },
+#     },
+# }
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': 300,
         'width': 'auto',
+        'extraAllowedContent': 'iframe[*]',
+        'allowedContent': True,
     },
 }
+

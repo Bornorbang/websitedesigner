@@ -42,7 +42,12 @@ urlpatterns = [
     path('website-designer-in-lagos/', website_lagos, name="website_lagos"),
     path('seo-company-in-nigeria', seo_company, name="seo_services"),
     path('hire-graphic-designer-nigeria/', graphic_design, name="graphic_design"),
-
+    path('tech-tips/', tech_tips, name="tech_tips"),
+    path('tech-reviews/', reviews, name="tech_reviews"),
+    path('advertise-with-us/', advertise, name="advertise"),
+    path('consultation/', consultation, name="consultation"),
+    path('web-development-pricing/', pricing, name="pricing"),
+    path('tech-courses/', courses, name="courses"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
