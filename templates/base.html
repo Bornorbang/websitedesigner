@@ -87,6 +87,16 @@
             gtag('config', 'G-657ZXEZN1X'); 
         </script>
 
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+            appId: "b4c2411e-d809-489b-8020-750c7535ef79",
+            });
+        });
+        </script>
+
         <!--Google Adsense-->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4756517876694191"
         crossorigin="anonymous"></script>

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -41,6 +42,12 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('blog_detail', kwargs={
+            'category_slug': self.category.slug,
+            'slug': self.slug
+        })
 
 class BlogSidebarBanner(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)  # Optional title for the banner

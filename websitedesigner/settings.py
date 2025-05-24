@@ -150,6 +150,9 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
 CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
 
+ONESIGNAL_APP_ID = os.environ.get('ONESIGNAL_APP_ID')
+ONESIGNAL_API_KEY = os.environ.get('ONESIGNAL_API_KEY')
+
 # CKEDITOR_CONFIGS = {
 #     'default': {
 #         'toolbar': 'full',
