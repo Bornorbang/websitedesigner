@@ -23,10 +23,10 @@ class BlogAdmin(admin.ModelAdmin):
         return custom_urls + urls
 
     def send_notification_button(self, obj):
-        return format_html(
-            '<a class="button" href="{}">Send Notification</a>',
-            reverse('admin:send_notification', args=[obj.pk])
-        )
+        if not obj.pk:
+            return "-"
+        url = reverse('admin:send_notification', args=[obj.pk])
+        return format_html('<a class="button" href="{}">Send Notification</a>', url)
     send_notification_button.short_description = 'Push Notification'
 
     def send_notification(self, request, post_id, *args, **kwargs):
