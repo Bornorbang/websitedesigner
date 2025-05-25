@@ -126,6 +126,28 @@
         margin: 20px auto;
     }
 
+    .social-icons {
+        display: flex;
+        gap: 10px; /* Space between icons */
+        justify-content: center; /* Center the icons */
+    }
+
+    .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: #fff; /* Icon color */
+        font-size: 20px;
+    }
+
+    .social-icons a:hover {
+        opacity: 0.8; /* Slight transparency on hover */
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .blog-content img {
@@ -302,23 +324,28 @@
                     </form>
                 </div>
 
-                <!-- Comments Section -->
-                <div class="comments-section mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
-                    <h3 class="text-center mt-5 mb-2 text-">Comments</h3>
-                    <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
-                    {% if comments %}
-                        {% for comment in comments %}
-                            <div class="comment mb-4">
-                                <h5>{{ comment.name }}</h5>
-                                <small class="text-muted">{{ comment.created_at|date:"F d, Y " }}</small>
-                                <p>{{ comment.content }}</p>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No comments yet. Be the first to comment!</p>
-                    {% endif %}
+                <div class="wow zoomIn" data-wow-delay="0.2s">
+                    <a href="https://www.websitedesigner.ng/web-development-pricing/" target="_blank">
+                        <img src="{% static 'img/business deserves.png' %}" alt="{{ blog.title }}" class="img-fluid" style="max-width: 100%; height: auto; display: block; margin: 20px auto;">
+                    </a>
                 </div>
-                <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
+
+                <!-- Comments Section -->
+                {% if comments %}
+                    <div class="comments-section mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="text-center mt-5 mb-2 text-">Comments</h3>
+                        <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
+                        
+                            {% for comment in comments %}
+                                <div class="comment mb-4">
+                                    <h5>{{ comment.name }}</h5>
+                                    <small class="text-muted">{{ comment.created_at|date:"F d, Y " }}</small>
+                                    <p>{{ comment.content }}</p>
+                                </div>
+                            {% endfor %}
+                    </div>
+                    <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
+                {% endif %}
 
                 <!-- Related Posts Section -->
                 <div class="related-posts mt-5 wow fadeInUp" data-wow-delay="0.3s">
@@ -330,7 +357,7 @@
                             <div class="col-md-4 mb-4">
                                 <div class="related-post-item">
                                     <a href="{% url 'blog_detail' category_slug=related_post.category.slug slug=related_post.slug %}">
-                                        <img src="{{ related_post.image.url }}" alt="{{ related_post.title }}" class="img-fluid mb-3">
+                                        <img src="{{ related_post.image.url }}" alt="{{ blog.title }}" class="img-fluid mb-3">
                                         <h5>{{ related_post.title }}</h5>
                                     </a>
                                 </div>
@@ -347,6 +374,22 @@
             <!-- Sidebar -->
             <div class="col-lg-3">
                 <div class="sidebar">
+                    <!-- Socials Bar -->
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.9s">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="https://twitter.com/webdesignerng" target="_blank" class="btn btn-info">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://instagram.com/websitedesigner_ng" target="_blank" class="btn btn-danger">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://tiktok.com/@websitedesigner.ng" target="_blank" class="btn btn-dark">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- Categories -->
                     <div class="sidebar-item wow fadeInUp" data-wow-delay="0.3s">
                         <h4>Categories</h4>
@@ -373,7 +416,7 @@
                         <div class="sidebar-img">
                             {% for banner in banners %}
                                 <a href="{{ banner.link|default:'https://www.websitedesigner.ng/contact-website-designer-nigeria' }}" target="_blank">
-                                    <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
+                                    <img src="{{ banner.image.url }}" alt="{{ blog.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
                                 </a>
                             {% endfor %}
                         </div>
