@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Tech Reviews in Nigeria - Latest Gadgets & Devices Comparisons{% endblock %}
+
+{% block meta_description %}Read the latest tech reviews, gadget comparisons, buying guides and device insights on Website Designer Nigeria.{% endblock %}
+
+{% block og_title %}Tech Reviews in Nigeria - Latest Gadgets & Devices Comparisons{% endblock %}
+
+{% block og_description %}Read the latest tech reviews, gadget comparisons, buying guides and device insights on Website Designer Nigeria.{% endblock %}
+
+
 {% block extra_css%}
 <style>
     /* Container for the entire blog page */
@@ -145,11 +154,12 @@
 
 <div class="container py-5">
     <div class="row g-4">
+        <p class="text-center mb-4">Read the latest tech reviews, gadget comparisons, buying guides and device insights on Website Designer Nigeria.</p>
         {% for blog in page_obj %}
         <div class="col-lg-4 col-md-6">
             <div class="blog-post wow fadeInUp h-100" data-wow-delay="0.1s">
                 <div class="blog-thumbnail">
-                    <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid"></a>
+                    <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="Tech Reviews in Nigeria" class="img-fluid"></a>
                 </div>
                 <div class="blog-content">
                     <h2 class="h5 mt-3">

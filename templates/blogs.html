@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Top Tech Blog in Nigeria - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Read latest tech trends, innovation stories, how-tos, industry watch, insights and information on the top tech blog in Nigeria.{% endblock %}
+
+{% block og_title %}Top Tech Blog in Nigeria - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Read latest tech trends, innovation stories, how-tos, industry watch, insights and information on the top tech blog in Nigeria.{% endblock %}
+
+
 {% block extra_css%}
 <style>
     /* Container for the entire blog page */
@@ -182,7 +191,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Blogs</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Tech Blogs</h1>
                 </div>
             </div>
         </div>
@@ -190,12 +199,14 @@
 
     <div class="blog-container">
         <div class="blog-row">
+            <p class="text-center mb-4">Read the latest tech trends, innovation stories, how-tos, industry watch, insights and information on the top tech blog in Nigeria.</p>
             <!-- Blog Posts -->
             <div class="blog-main">
+                
                 {% for blog in page_obj %}
                 <div class="blog-post wow fadeInUp" data-wow-delay="0.1s">
                     <div class="blog-thumbnail">
-                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                        <img src="{{ blog.image.url }}" alt="Top Tech Blog in Nigeria">
                     </div>
                     <div class="blog-content">
                         <h2><a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">{{ blog.title }}</a></h2>
@@ -232,7 +243,7 @@
                 <div class="sidebar-img">
                     {% for banner in banners %}
                         <a href="{{ banner.link|default:'https://websitedesigner.ng' }}" target="_blank">
-                            <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
+                            <img src="{{ banner.image.url }}" alt="Top Tech Blog in Nigeria" class="img-fluid mb-3" style="border-radius: 10px;">
                         </a>
                     {% endfor %}
                 </div>
