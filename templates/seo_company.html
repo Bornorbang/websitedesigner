@@ -1,465 +1,504 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SEO Company in Nigeria - Best Search Engine Optimization Agency{% endblock %}
+{% block title %}SEO Company in Nigeria - SEO Experts in Lagos{% endblock %}
 
 {% block meta_description %}
 SEO Company in Nigeria providing top SEO services to increase website ranking. We are the best Search Engine Optimization Agency in Nigeria.
 {% endblock %}
 
-{% block og_title %}SEO Company in Nigeria - Best Search Engine Optimization Agency{% endblock %}
+{% block og_title %}SEO Company in Nigeria - SEO Experts in Lagos{% endblock %}
 {% block og_description %}
 SEO Company in Nigeria providing top SEO services to increase website ranking. We are the best Search Engine Optimization Agency in Nigeria.
 {% endblock %}
 
 {% block extra_css %}
-    <style>
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        .faq-section {
-            padding: 50px 20px;
-        }
-    .faq-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .faq-header h2 {
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
-    .faq-card {
-        border: none;
-        border-radius: 10px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 15px;
-        transition: transform 0.3s ease;
-    }
-    .faq-card:hover {
-        transform: translateY(-5px);
-    }
-    .faq-question {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        cursor: pointer;
-        font-size: 1.2rem;
-        font-weight: bold;
-        color:  #EF233C;
-        border-bottom: 1px solid #f1f1f1;
-    }
-    .faq-icon {
-        font-size: 1.5rem;
-        color:  #EF233C;
-        transition: transform 0.3s ease;
-    }
-    .faq-answer {
-        display: none;
-        padding: 20px;
-        font-size: 1rem;
-        color: #555;
-    }
-    .faq-answer.open {
-        display: block;
-        animation: fadeIn 0.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    /* Card layout for SEO photos */
-    .seo-photo-card {
+<style>
+/* Hero Banner */
+.seo-hero {
+    background: linear-gradient(rgba(239,35,60,0.92),rgba(239,35,60,0.92)), url('{% static "img/seo-hero-bg.jpg" %}') center/cover no-repeat;
+    padding: 190px 0 80px 0;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+h1{
+    color: #fff;
+}
+
+h2{
+    color: #000;
+}
+.seo-hero .hero-title {
+    font-size: 3.2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s;
+}
+.seo-hero .hero-sub {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+    animation: fadeInUp 1.2s;
+}
+.seo-hero .hero-btn {
+    font-size: 1.1rem;
+    padding: 14px 38px;
+    border-radius: 30px;
+    background: #fff;
+    color: #EF233C;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    animation: fadeInUp 1.5s;
+}
+.seo-hero .hero-btn:hover {
+    background: #EF233C;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+/* Section Header */
+.section-header {
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* SEO Services Cards */
+.seo-services-section {
+    background: #f8f9fa;
+    padding: 60px 0 40px 0;
+}
+.seo-service-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(239,35,60,0.07);
+    padding: 35px 22px 22px 22px;
+    text-align: center;
+    margin-bottom: 0px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 280px;
+}
+.seo-service-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(239,35,60,0.13);
+}
+.seo-service-card i {
+    font-size: 2.5rem;
+    color: #EF233C;
+    margin-bottom: 18px;
+    animation: bounceIn 1s;
+}
+.seo-service-card h4 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.seo-service-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Results Gallery */
+.seo-photo-card {
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    }
-
-    .seo-photo-card img {
+    transition: transform 0.3s;
+    background: #fff;
+    margin-bottom: 30px;
+}
+.seo-photo-card:hover {
+    transform: scale(1.04);
+}
+.seo-photo-card img {
     width: 100%;
-    height: 250px; /* Increased height */
+    height: 300px;
     object-fit: cover;
-    }
-
-    .seo-photo-card-1 {
-    border: 3px solid #007bff;
-    }
-
-    .seo-photo-card-2 {
-    border: 3px solid #28a745;
-    }
-
-    .seo-photo-card-3 {
-    border: 3px solid #ffc107;
-    }
-
-    .seo-photo-card-4 {
-    border: 3px solid #dc3545;
-    }
-
-    /* Hover effect to zoom image */
-    .seo-photo-card:hover {
-    transform: scale(1.05);
-    }
-
-    /* Card body styling */
-    .card-body {
+}
+.seo-photo-card .card-body {
     padding: 15px;
-    background-color: #fff;
-    }
-
-    .card-title {
-    font-size: 1.2rem;
-    color: #333;
+    background: #fff;
+}
+.seo-photo-card .card-title {
+    font-size: 1.1rem;
+    color: #EF233C;
     text-align: center;
     margin-top: 10px;
-    }
+    font-weight: 600;
+}
 
-    /* Hover effect for card title */
-    .seo-photo-card:hover .card-title {
-    color: #007bff;
-    }
-    /* List styling */
-    .seo-list {
-    list-style: none;
-    padding: 0;
-    }
-
-
-    /* Image styling */
-    .seo-image {
-    max-width: 100%;
-    height: auto;
+/* Process Section */
+.seo-process-img {
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    display: block;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+    box-shadow: 0 4px 16px rgba(239,35,60,0.07);
+}
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-    .row {
-        flex-direction: column-reverse;
-    }
+/* FAQ Section */
+.faq-section {
+    padding: 50px 20px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 24px rgba(239,35,60,0.09);
+    margin-bottom: 40px;
+}
+.faq-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.faq-header h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.faq-card {
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+.faq-card:hover {
+    transform: translateY(-5px);
+}
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color:  #EF233C;
+    border-bottom: 1px solid #f1f1f1;
+}
+.faq-icon {
+    font-size: 1.5rem;
+    color:  #EF233C;
+    transition: transform 0.3s;
+}
+.faq-answer {
+    display: none;
+    padding: 18px 22px;
+    font-size: 1rem;
+    color: #555;
+}
+.faq-answer.open {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+@keyframes bounceIn {
+    0% { transform: scale(0.7);}
+    60% { transform: scale(1.2);}
+    100% { transform: scale(1);}
+}
 
-    }
-   
-    </style>
+/* CTA Banner */
+.cta-banner {
+    background-color: #EF233C;
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+    border-radius: 15px;
+    margin: 60px 0 0 0;
+    box-shadow: 0 4px 24px rgba(239,35,60,0.09);
+}
+.cta-banner h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #fff;
+}
+.cta-banner p {
+    font-size: 1.1rem;
+    margin-bottom: 28px;
+    color: #fff;
+}
+.cta-banner .btn {
+    font-size: 1.1rem;
+    padding: 14px 38px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    background: #EF233C;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+    .seo-service-card, .seo-photo-card { min-height: 220px; }
+    .section-header h2 { font-size: 1.5rem; }
+}
+@media (max-width: 767px) {
+    .seo-service-card, .seo-photo-card { min-height: 180px; }
+    .cta-banner { padding: 35px 0; }
+    .seo-hero .hero-title { font-size: 2rem; }
+    .seo-hero .hero-sub { font-size: 1.1rem; }
+}
+
+@media (max-width: 991px) {
+  .seo-hero { padding: 60px 0 80px 0; }
+}
+
+.faq-answer {
+    display: none;
+    padding: 18px 22px;
+    font-size: 1rem;
+    color: #555;
+    /* Remove any overflow or height restrictions */
+    overflow: visible;
+    max-height: none;
+    transition: all 0.4s;
+}
+.faq-answer.open {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+</style>
 {% endblock %}
 
 {% block maincontent %}
-    <!-- Page Title Banner -->
-    <div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">SEO Company in Nigeria</h1>
-                </div>
-            </div>
-        </div>
+
+<!-- Hero Section -->
+<section class="seo-hero">
+    <div class="container">
+        <h1 class="hero-title wow fadeInDown">SEO Company in Nigeria</h1>
+        <p class="hero-sub wow fadeInUp" data-wow-delay="0.2s">
+            Boost your website ranking and grow your business with the best SEO Experts in Lagos.
+        </p>
+        <a href="{% url 'contact' %}" class="hero-btn wow fadeInUp" data-wow-delay="0.4s">Get a Free SEO Audit</a>
     </div>
+</section>
 
-    <div class="announcement-container">
-        <div class="announcement-wrapper">
-            <div class="announcement-marquee">
-                <i class="fas fa-bullhorn"></i>
-                <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be informed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-                <i class="fas fa-bullhorn"></i>
-                <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be informed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-            </div>
-        </div>
+<!-- About Section -->
+<section class="container-fluid py-5">
+    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+        <p>SEO Experts in Lagos</p>
+        <h2>SEO Company in Nigeria</h2>
     </div>
-
-    <!-- About Section -->
-    <div class="container-fluid py-5">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>Search Engine Optimization Agency in Nigeria</p>
-            <h2>SEO Company in Nigeria</h2>
+    <div class="row align-items-center flex-column-reverse flex-lg-row">
+        <div class="col-lg-6 text-center mb-4">
+            <img src="{% static 'img/seo-service-WDN.webp' %}" alt="SEO Company in Nigeria" class="img-fluid rounded shadow-lg">
         </div>
-        <div class="wow fadeInUp" data-wow-delay="0.2s">
-            <div class="row align-items-center flex-column-reverse flex-lg-row">
-                <!-- Image Section -->
-                <div class="col-lg-12 text-center mb-4">
-                    <img src="{% static 'img/seo-service-WDN.webp' %}" alt="SEO Company in Nigeria" class="img-fluid rounded shadow-lg">
-                </div>
-                <!-- Text Section -->
-                <div class="col-lg-12 mb-2">
-                    <p>Are you trying to increase website ranking? Do you need to grow your organic traffic? Then you are at the right place - SEO Company in Nigeria.  
-                   We are top <b>Search Engine Optimization Agency in Nigeria</b> in providing best <b>SEO services</b> to help your business thrive on the internet. With offices in Lagos & Abuja, our team of experts ensures an increment in your website ranking, driving organic traffic and boosting your online presence.</p><br>
-
-                    <p>Here, we understand the competitive nature of the African market. Our strategies focus on on-page and off-page search engine optimization, 
-                    keyword research, and content creation to give your site the visibility it deserves. We don’t just aim for organic rankings; we aim for conversions that drive <a href="https://m.economictimes.com">real growth</a>.</p><br>
-
-                    <p>Hire <a href="/">Website Designer Nigeria</a> today and experience the transformative power of search engine optimization. Let us help you dominate your niche and reach your 
-                    target audience effectively. Our proven track record speaks for itself, making us the <b>top SEO company in Nigeria</b>.</p><br>
-                </div>
-            </div>
-            <!-- Centered Button -->
-            <div class="text-center mb-2">
+        <div class="col-lg-6 mb-2">
+            <p>Are you trying to increase website ranking? Do you need to grow your organic traffic? Then you are at the right place - SEO Company in Nigeria.  
+            We are best SEO experts in Lagos in providing premium search engine optimization services to help your business thrive on the internet. With offices in Lagos & Abuja, our team of professionals ensures an increment in your website ranking, driving organic traffic and boosting your online presence.</p>
+            <p>Here, we understand the competitive nature of the African market. Our strategies focus on on-page and off-page search engine optimization, 
+            keyword research, and content creation to give your site the visibility it deserves. We don’t just aim for organic rankings; we aim for conversions that drive <a href="https://m.economictimes.com">real growth</a>.</p>
+            <p>Hire <a href="/">Website Designer Nigeria</a> today and experience the transformative power of search engine optimization. Let us help you dominate your niche and reach your 
+            target audience effectively. Our proven track record speaks for itself, making us the <b>top SEO company in Nigeria</b>.</p>
+            <div class="text-center mt-4">
                 <a href="{% url 'contact' %}" class="btn px-4 py-2">Contact Us</a>
             </div>
         </div>
     </div>
+</section>
 
-
-    <!-- Our SEO Services Section -->
-    <section class="py-5 bg-light">
-        <div class="container-fluid">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>Strategies that work</p>
-                <h2>Our SEO Services</h2>
-            </div>
-            <div class="wow fadeInDown" data-wow-delay="0.2s">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-search" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">Keyword Research</h5>
-                                <p class="card-text">Discover the most effective keywords in your niche to target your audience and increase visibility.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-bar-chart" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">On-Page Optimization</h5>
-                                <p class="card-text">We optimize your website’s content and structure for better organic rankings.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-link-45deg" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">Link Building</h5>
-                                <p class="card-text">Build high-quality backlinks in your niche to establish site authority and drive traffic.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-graph-up" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">Analytics & Reporting</h5>
-                                <p class="card-text">Track your site's performance with detailed weekly analytics and reports.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-pencil-square" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">Content Marketing</h5>
-                                <p class="card-text">We create compelling and quality content that engages users and improves website rankings.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-gear" style="font-size: 2rem; color: #EF233C;"></i>
-                                <h5 class="card-title mt-3">Technical SEO</h5>
-                                <p class="card-text">Enhance your technical side for smooth search engine crawling and prompt indexing.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--FAQ Section -->
-    <div class="container-fluid faq-section mb-5 wow zoomIn" data-wow-delay="0.1s">
-        <div class="faq-header">
-            <h2>Frequently Asked Questions</h2>
-            <p>Here are the most frequently asked questions about our SEO services. Please feel free to <a href="{% url 'contact' %}">contact us</a> if you've got more questions for SEO Company in Nigeria. Thanks!</p>
-        </div>
-
-        <div>
-            <h3>1. What does SEO stand for?</h3>
-            <p>SEO stands for Search Engine Optimization. It's the process of optimizing your website or webpage to improve its visibility on search engine results pages (SERPs). Our goal is to help your site attract high-quality, organic traffic without relying on paid advertisements. This involves a combination of technical optimizations, content improvements, and strategic link-building to boost your site's authority and relevance in the eyes of search engines like Google. By implementing effective SEO strategies, we aim to increase your online visibility, drive more targeted traffic to your site, and ultimately help you achieve your business goals in the digital landscape.</p>
-
-            <h3>2. What company is the best?</h3>
-            <p>The best SEO company in Nigeria is <a href="/">Website Designer Nigeria</a> - we understand your unique business needs and deliver measurable results in a considerable amount of time. We pride ourselves on providing top SEO services that drive traffic, improve rankings, and ultimately grow your business. With a proven track record and satisfied clients, we strive to be the go-to choice for businesses looking to triumph online. Our team of experienced SEO professionals stays up-to-date with the latest industry trends and algorithm changes to ensure that your website always stays ahead of the competition. We combine data-driven strategies with creative solutions to deliver tailored SEO campaigns that align with your specific business objectives and target audience.</p>
-
-            <h3>3. How much does SEO cost in Nigeria?</h3>
-            <p>The cost of SEO in Nigeria typically starts at ₦200,000, but it depends on the scope of work involved. Factors such as the number of pages being optimized, the complexity of the project, and number of related services involved are needed often influence the pricing. With us, you are assured of discounts that would save you lots of money in the long run. We believe in transparency and value for money, so we provide detailed breakdowns of our pricing structure and the services included. Our goal is to offer competitive rates while ensuring that you receive high-quality SEO services that deliver tangible results for your business. We also offer flexible payment plans to accommodate different budget constraints, making professional SEO services accessible to businesses of all sizes.</p>
-
-            <h3>4. How do SEO agencies charge for SEO?</h3>
-            <p>At Website Designer Nigeria, our charge is based on the scope of work and the specific services you need. This could include monthly subscription packages, one-off projects, or hourly rates, depending on what works best for you. We always provide a clear breakdown of costs and ensure that our services align with your budget and goals. Our pricing model is designed to be flexible and transparent, allowing you to choose the option that best suits your business needs and financial situation. We believe in building long-term partnerships with our clients, so we focus on delivering value that justifies the investment in SEO. Regular reporting and performance reviews are included in our services to keep you informed about the progress and ROI of your SEO campaign.</p>
-
-            <h3>5. Can You Guarantee First Page Ranking?</h3>
-            <p>Yes, you are guaranteed a first-page ranking on search engines. We always achieve first-page ranking for various keywords across different niches. Our keyword research and optimization is the finest in Nigeria and it always works. However, it's important to note that SEO is an ongoing process, and results can vary depending on factors such as competition, industry, and search engine algorithm updates. We employ a combination of on-page and off-page optimization techniques, content strategy, and technical SEO to maximize your chances of achieving and maintaining top rankings. Our team continuously monitors your website's performance and makes necessary adjustments to ensure sustained success in search engine results pages.</p>
-
-            <h3>6. How Long Does It Take to See Results?</h3>
-            <p>Results typically take two to six months to become noticeable, depending on factors like keyword competition and the current state of your website. The first step in our SEO strategy is to audit your site and provide you with an instant report on your website's current state and timeline of expected results. We work with you to implement a long-term strategy that delivers measurable and lasting results. It's important to understand that SEO is not a one-time fix but an ongoing process of optimization and improvement. While some changes may show quick improvements, the full impact of a comprehensive SEO strategy often takes time to materialize. We keep you informed throughout the process with regular updates and reports, so you can see the progress being made and understand the long-term value of your SEO investment.</p>
-
-            <h3>7. Does Website Designer Nigeria Buy Backlinks?</h3>
-            <p>No, we do not buy backlinks, as we believe in adhering to ethical SEO practices. All the backlinks we create are organically sourced and align with Google's guidelines. Our focus is on building high-quality links that naturally build your site authority. We employ white-hat link-building strategies such as content marketing, guest posting on reputable sites, and building relationships with industry influencers. This approach not only improves your search engine rankings but also enhances your brand's credibility and online presence. By focusing on earning quality backlinks rather than buying them, we ensure that your website's link profile remains strong and sustainable in the long run, reducing the risk of penalties from search engines.</p>
-
-            <h3>8. Can I Combine PPC with SEO?</h3>
-            <p>Yes, you can, combining <a href="https://searchengineland.com/guide/what-is-paid-search">PPC (Pay-Per-Click)</a> with SEO is highly recommended if your budget allows it. PPC provides immediate visibility and traffic, while SEO builds long-term organic growth. Combining the power of both will give you swift results. This integrated approach allows you to dominate search engine results pages, with your website appearing in both paid and organic listings. PPC can provide valuable data and insights that can inform and improve your SEO strategy, while strong SEO can help reduce your PPC costs over time by improving your Quality Score. We can help you develop a comprehensive digital marketing strategy that leverages both PPC and SEO to maximize your online visibility and ROI.</p>
-
-            <h3>9. Why Should We Hire You?</h3>
-            <p>As a <b>top SEO company in Nigeria</b>, we have numerously provided successful SEO results for large & small businesses in Nigeria and internationally. Replicating the same improved search ranking that drives traffic to your website at very affordable rates will definitely not be a challenge for us. We provide the best SEO services in Nigeria. Our team of experts combines years of experience with cutting-edge techniques to deliver customized SEO solutions that align with your specific business goals. We pride ourselves on our transparent communication, regular reporting, and commitment to staying ahead of industry trends. By choosing us, you're not just getting an SEO service provider; you're gaining a partner dedicated to your online success. Our track record of satisfied clients and measurable results speaks for itself, and we're confident in our ability to help your business achieve and exceed its digital marketing objectives.</p>
-        </div>
-    </div>
-
-    <div class="bg-light py-2">
-        <section class="container-fluid my-5">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <h2>Search Engine Optimization services</h2>
-            </div>
-            <div class ="wow zoomIn" data-wow-delay="0.1s">
-                <p>Best SEO Company in Nigeria offers comprehensive <b>Search Engine Optimization services</b> to help your business grow organically. Our professional team is ever dedicated to providing the best strategies to improve your search engine rankings and drive more traffic to your site.</p>
-                <div class="row">
-                    <!-- Left Column: Heading, Paragraph, and Image -->
-                    <div class="col-md-7">
-                    <img src="{% static 'img/SEO-results-from-google-search-console.webp' %}" alt="SEO Company in Nigeria" class="img-fluid">
-                    </div>
-                    
-                    <!-- Right Column: List Items with Tick Icon -->
-                    <div class="col-md-5 ms-lg-5">
-                        <ul class="list-unstyled">
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Keyword Research</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> SEO Audit</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Content Strategy</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> On-Page/Off-Page Optimisation</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Technical SEO</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Local SEO</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Quality Link Building</li>
-                            <li class="mb-3"><i class="bi bi-check-circle" style="font-size: 1.5rem; color:  #EF233C; margin-left: 10px;"></i> Google My Business</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            </section>
-        </div>
-
-    <section class="container-fluid my-5">
+<!-- SEO Services Section -->
+<section class="seo-services-section">
+    <div class="container-fluid">
         <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <h2>Our SEO Results</h2>
+            <p>SEO Company in Nigeria</p>
+            <h2>Our SEO Services</h2>
         </div>
-        <div class ="wow zoomIn" data-wow-delay="0.1s">"
-            <div class="row">
-                <!-- Photo 1 -->
-                <div class="col-md-6 mb-4">
-                <div class="seo-photo-card seo-photo-card-1">
-                    <img src="{% static 'img/seo-results-website-designer-nigeria.jpg' %}" alt="SEO Company in Nigeria" class="img-fluid seo-photo-img">
-                    <div class="card-body">
-                    <h5 class="card-title">Google Search Console</h5>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Photo 2 -->
-                <div class="col-md-6 mb-4">
-                <div class="seo-photo-card seo-photo-card-2">
-                    <img src="{% static 'img/seo-results-website-designer-nigeria-2.jpg' %}" alt="SEO Company in Nigeria" class="img-fluid seo-photo-img">
-                    <div class="card-body">
-                    <h5 class="card-title">Search Result Reports</h5>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Photo 3 -->
-                <div class="col-md-6 mb-4">
-                <div class="seo-photo-card seo-photo-card-3">
-                    <img src="{% static 'img/seo-results-website-designer-nigeria-3.PNG' %}" alt="SEO Company in Nigeria" class="img-fluid seo-photo-img">
-                    <div class="card-body">
-                    <h5 class="card-title">Google Page Ranking</h5>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Photo 4 -->
-                <div class="col-md-6 mb-4">
-                <div class="seo-photo-card seo-photo-card-4">
-                    <img src="{% static 'img/seo-results-website-designer-nigeria-4.PNG' %}" alt="SEO Company in Nigeria" class="img-fluid seo-photo-img">
-                    <div class="card-body">
-                    <h5 class="card-title">#1 Organic Position</h5>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-lg-4">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.1s">
+                    <i class="fas fa-search"></i>
+                    <h4>Keyword Research</h4>
+                    <p>Discover the most effective keywords in your niche to target your audience and increase visibility.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="container-fluid my-5">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>search engine optimization agency</p>
-            <h2>Our SEO Implementation Process</h2>
-        </div>
-        <div class ="wow zoomIn" data-wow-delay="0.1s">"
-            <div class="row align-items-center">
-                <!-- Right Column: Image -->
-                <div class="col-lg-12 mb-3 text-center">
-                    <img src="https://static.wixstatic.com/media/679f14_cd01168e90604ab4b209c10ad98a1ef4~mv2.png/v1/fill/w_691,h_736,al_c,lg_1,q_90,enc_avif,quality_auto/SEO%20Rankings.png" alt="SEO Company in Nigeria" class="img-fluid seo-image">
-                </div>
-                <div class="col-lg-12">
-                    <h3>Phase 1: Getting to know your business</h3>
-                    <p>We kick things off by sitting down with you to deeply understand your business, goals, and vision. 
-                        This helps us craft an campaign that aligns perfectly with what you want to achieve.</p>
-                    <h3 class="pt-3">Phase 2: Analyzing your website</h3>
-                    <p>Next, we dive into your website to uncover what’s working and what needs improvement. 
-                        This thorough audit lays the foundation for boosting your search rankings.</p>
-                    <h3 class="pt-3">Phase 3: Research & Strategy Building:</h3>
-                    <p>With the audit done, we research your industry and competitors to create a winning strategy. 
-                        This includes finding the right keywords to drive traffic and turning visitors into customers. This strategy makes us the best seo company in Nigeria.</p>
-                    <h3 class="pt-3">Phase 4: Setting up the tools</h3>
-                    <p>We set up tracking tools, dashboards, and business info to monitor progress. 
-                        This ensures we’re keeping an eye on every aspect of your organic growth journey.</p>
-                    <h3 class="pt-3">Phase 5: Search Engine Optimization Execution</h3>
-                    <p>Finally, we implement the SEO strategies we've laid out in the strategy. 
-                        This includes optimizing your website, creating backlinks, and improving your content.</p>
-                    <h3 class="pt-3">Phase 6: Keeping the momentum</h3>
-                    <p>SEO isn’t a one-time thing. We provide ongoing optimization, including fresh content, link building, and consultations, 
-                        to keep your business growing and thriving online.</p>
+            <div class="col-lg-4 col-md-6 mb-lg-4">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.2s">
+                    <i class="fas fa-edit"></i>
+                    <h4>On-Page Optimization</h4>
+                    <p>We optimize your website’s content and structure for better organic rankings.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Banner Start -->
-    <div class="cta-banner section-margin wow fadeIn" data-wow-delay="0.1s">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-lg-8 col-md-12">
-                    <h2>Need SEO for Your Website?</h2>
-                    <p>Contact our Search Engine Optimization Agency. Let's get started on increasing your website ranking.</p>
+            <div class="col-lg-4 col-md-6 mb-lg-4">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.3s">
+                    <i class="fas fa-link"></i>
+                    <h4>Link Building</h4>
+                    <p>Build high-quality backlinks in your niche to establish site authority and drive traffic.</p>
                 </div>
-                <div class="col-lg-4 col-md-12 text-center">
-                        <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.4s">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Analytics & Reporting</h4>
+                    <p>Track your site's performance with detailed weekly analytics and reports.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.5s">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h4>Content Marketing</h4>
+                    <p>We create compelling and quality content that engages users and improves website rankings.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="seo-service-card wow fadeInUp" data-wow-delay="0.6s">
+                    <i class="fas fa-cogs"></i>
+                    <h4>Technical SEO</h4>
+                    <p>Enhance your technical side for smooth search engine crawling and prompt indexing.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Call to Action Banner End -->
+</section>
+
+<!-- SEO Results Gallery -->
+<section class="container-fluid my-5">
+    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+        <p>Our SEO Results</p>
+        <h2>SEO Experts in Lagos</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="seo-photo-card seo-photo-card-1 wow fadeInUp" data-wow-delay="0.1s">
+                <img src="{% static 'img/seo-results-website-designer-nigeria.jpg' %}" alt="SEO Company in Nigeria" class="img-fluid">
+                <div class="card-body">
+                    <div class="card-title">Google Search Console</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="seo-photo-card seo-photo-card-2 wow fadeInUp" data-wow-delay="0.2s">
+                <img src="{% static 'img/seo-results-website-designer-nigeria-2.jpg' %}" alt="SEO Company in Nigeria" class="img-fluid">
+                <div class="card-body">
+                    <div class="card-title">Search Result Reports</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="seo-photo-card seo-photo-card-3 wow fadeInUp" data-wow-delay="0.3s">
+                <img src="{% static 'img/seo-results-website-designer-nigeria-3.PNG' %}" alt="SEO Company in Nigeria" class="img-fluid">
+                <div class="card-body">
+                    <div class="card-title">Google Page Ranking</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="seo-photo-card seo-photo-card-4 wow fadeInUp" data-wow-delay="0.4s">
+                <img src="{% static 'img/seo-results-website-designer-nigeria-4.PNG' %}" alt="SEO Experts in Lagos class="img-fluid">
+                <div class="card-body">
+                    <div class="card-title">#1 Organic Position</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FAQ Section -->
+<div class="container faq-section wow zoomIn" data-wow-delay="0.1s">
+    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>FREQUENTLY ASKED QUESTIONS</p>
+            <h2>SEO Services FAQ</h2>
+        </div>
+    <div>
+        <div class="faq-card">
+            <div class="faq-question">What does SEO stand for? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                SEO stands for Search Engine Optimization. It's the process of optimizing your website or webpage to improve its visibility on search engine results pages (SERPs). Our goal is to help your site attract high-quality, organic traffic without relying on paid advertisements.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">What company is the best? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                The best SEO company in Nigeria is <a href="/">Website Designer Nigeria</a> - we understand your unique business needs and deliver measurable results in a considerable amount of time.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">How much does SEO cost in Nigeria? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                The cost of SEO in Nigeria typically starts at ₦200,000, but it depends on the scope of work involved. With us, you are assured of discounts that would save you lots of money in the long run.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">How do SEO agencies charge for SEO? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                At Website Designer Nigeria, our charge is based on the scope of work and the specific services you need. This could include monthly subscription packages, one-off projects, or hourly rates, depending on what works best for you.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">Can You Guarantee First Page Ranking? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                Yes, you are guaranteed a first-page ranking on search engines. We always achieve first-page ranking for various keywords across different niches.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">How Long Does It Take to See Results? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                Results typically take two to six months to become noticeable, depending on factors like keyword competition and the current state of your website.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">Does Website Designer Nigeria Buy Backlinks? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                No, we do not buy backlinks, as we believe in adhering to ethical SEO practices. All the backlinks we create are organically sourced and align with Google's guidelines.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">Can I Combine PPC with SEO? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                Yes, you can, combining PPC (Pay-Per-Click) with SEO is highly recommended if your budget allows it. PPC provides immediate visibility and traffic, while SEO builds long-term organic growth.
+            </div>
+        </div>
+        <div class="faq-card">
+            <div class="faq-question">Why Should We Hire You? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">
+                As top SEO experts in Lagos, we have numerously provided successful SEO results for large & small businesses in Nigeria and internationally. Replicating the same improved search ranking that drives traffic to your website at very affordable rates will definitely not be a challenge for us.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Banner -->
+<div class="cta-banner section-margin wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h2>Need SEO for Your Website?</h2>
+        <p>Contact the leading SEO experts in Lagos. Let's get started on increasing your website ranking.</p>
+        <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>
+    </div>
+</div>
+
 {% endblock %}
 
-{% block extra_js%}
-    <script>
-        const faqQuestions = document.querySelectorAll('.faq-question');
-
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('.faq-icon');
-                answer.classList.toggle('open');
-                icon.textContent = icon.textContent === '+' ? '-' : '+';
-            });
-        });
-
-    </script>
+{% block extra_js %}
+<script>
+document.querySelectorAll('.faq-question').forEach(function(q) {
+    q.addEventListener('click', function() {
+        var answer = q.nextElementSibling;
+        var icon = q.querySelector('.faq-icon');
+        answer.classList.toggle('open');
+        icon.textContent = icon.textContent === '+' ? '-' : '+';
+    });
+});
+</script>
 {% endblock %}

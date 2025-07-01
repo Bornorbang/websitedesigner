@@ -1,0 +1,420 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Ecommerce Website Design in Nigeria - Web Design Company in Lagos {% endblock %}
+
+{% block meta_description %}Get custom ecommerce website design in Nigeria for your business. We’re a top web design company in Lagos, helping brands sell online seamlessly.{% endblock %}
+
+{% block og_title %}Ecommerce Website Design in Nigeria - Web Design Company in Lagos{% endblock %}
+
+{% block og_description %}Get custom ecommerce website design in Nigeria for your business. We’re a top web design company in Lagos, helping brands sell online seamlessly.{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hero Section */
+.ecom-hero {
+    background: linear-gradient(rgba(239,35,60,0.92),rgba(239,35,60,0.92)), url('{% static "img/ecommerce-hero.jpg" %}') center/cover no-repeat;
+    padding: 190px 0 80px 0;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+h1{
+    color: #fff;
+}
+.ecom-hero .hero-title {
+    font-size: 3.2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s;
+}
+.ecom-hero .hero-sub {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+    animation: fadeInUp 1.2s;
+}
+.ecom-hero .hero-btn {
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    border-radius: 30px;
+    background: #fff;
+    color: #EF233C;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    animation: fadeInUp 1.5s;
+}
+.ecom-hero .hero-btn:hover {
+    background: #EF233C;
+    color: #fff;
+    border: 2px solid #fff;
+}
+@media (max-width: 767px) {
+    .ecom-hero { padding: 70px 0 40px 0; }
+    .ecom-hero .hero-title { font-size: 2rem; }
+    .ecom-hero .hero-sub { font-size: 1.1rem; }
+}
+
+/* Features Section */
+.ecom-features {
+    background: #fff;
+    padding: 60px 0 30px 0;
+}
+.ecom-feature-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 24px rgba(239,35,60,0.07);
+    padding: 40px 25px;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 320px;
+}
+.ecom-feature-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(239,35,60,0.13);
+    background: #fff;
+}
+.ecom-feature-card i {
+    font-size: 2.5rem;
+    color: #EF233C;
+    margin-bottom: 18px;
+    animation: bounceIn 1s;
+}
+.ecom-feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+.ecom-feature-card p {
+    font-size: 1.05rem;
+    color: #000
+}
+
+/* Animated Product Showcase */
+.ecom-products-section {
+    background: #f8f9fa;
+    padding: 60px 0 40px 0;
+}
+.ecom-products-title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+.ecom-product-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(239,35,60,0.07);
+    padding: 25px 18px 18px 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+}
+.ecom-product-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(239,35,60,0.13);
+}
+.ecom-product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    transition: transform 0.4s;
+}
+.ecom-product-card:hover img {
+    transform: scale(1.08) rotate(-2deg);
+}
+.ecom-product-card h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.ecom-product-card p {
+    font-size: 0.98rem;
+    color: #000;
+    margin-bottom: 10px;
+}
+.ecom-product-card .btn {
+    font-size: 0.95rem;
+    padding: 8px 22px;
+    border-radius: 20px;
+    background: #EF233C;
+    color: #fff;
+    border: none;
+    transition: background 0.3s;
+}
+.ecom-product-card .btn:hover {
+    background: #c71d2b;
+}
+
+.ecom-product-card .scrolling-img {
+    height: 160px;
+    width: 100%;
+    max-width: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 0 auto 18px auto;
+    position: relative;
+}
+.ecom-product-card .scrolling-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 6s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Start at top */
+    transform: translateY(0);
+}
+.ecom-product-card:hover .scrolling-img img {
+    /* Scroll image fully to the bottom on hover */
+    transform: translateY(calc(-100% + 160px));
+}
+
+/* Animated Section Titles */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+@keyframes bounceIn {
+    0% { transform: scale(0.7);}
+    60% { transform: scale(1.2);}
+    100% { transform: scale(1);}
+}
+
+/* CTA Banner */
+.ecom-cta {
+    background-color: #EF233C;
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+    border-radius: 15px;
+    margin: 60px 0 0 0;
+    box-shadow: 0 4px 24px rgba(239,35,60,0.09);
+}
+.ecom-cta h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: #fff;
+}
+.ecom-cta p {
+    font-size: 1.15rem;
+    margin-bottom: 28px;
+}
+.ecom-cta .btn {
+    font-size: 1.1rem;
+    padding: 14px 38px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    background: #EF233C;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+    .ecom-feature-card, .ecom-product-card { min-height: 280px; }
+    .ecom-products-title { font-size: 1.5rem; }
+}
+@media (max-width: 767px) {
+    .ecom-feature-card, .ecom-product-card { min-height: 220px; }
+    .ecom-cta { padding: 35px 0; }
+}
+</style>
+{% endblock %}
+
+{% block maincontent %}
+
+<!-- Hero Section -->
+<section class="ecom-hero">
+    <div class="container">
+        <h1 class="hero-title wow fadeInDown">Ecommerce Website Design in Nigeria</h1>
+        <p class="hero-sub wow fadeInUp" data-wow-delay="0.2s">
+            Launch a beautiful, secure, and high-converting online store for your business.<br>
+            We are a top web design company in Lagos that builds ecommerce websites that help you sell more.
+        </p>
+        <a href="{% url 'contact' %}" class="hero-btn wow fadeInUp" data-wow-delay="0.4s">Get Started Now</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="ecom-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Modern Storefront</h3>
+                    <p>Stunning ecommerce website design in Nigeria that make your brand stand out.</p>
+                </div>
+            </div>
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Payments</h3>
+                    <p>Integrated with Paystack, Flutterwave, Stripe, and more for safe, seamless transactions.</p>
+                </div>
+            </div>
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Sales & Analytics</h3>
+                    <p>Track orders, manage inventory, and view sales reports with an easy-to-use dashboard.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Optimized</h3>
+                    <p>Your ecommerce site looks and works perfectly on all devices, from phones to desktops.</p>
+                </div>
+            </div>
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-search"></i>
+                    <h3>SEO & Marketing</h3>
+                    <p>Rank higher on Google and attract more buyers with built-in SEO and marketing tools.</p>
+                </div>
+            </div>
+            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="ecom-feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Ongoing Support</h3>
+                    <p>Enjoy reliable support and maintenance from top ecommerce web design company in Lagos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Animated Product Showcase -->
+<section class="ecom-products-section">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>WEB DESIGN COMPANY IN LAGOS</p>
+            <h2>Ecommerce Website Design Projects</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4 wow zoomIn" data-wow-delay="0.1s">
+                <div class="ecom-product-card">
+                    <div class="scrolling-img">
+                        <img src="{% static 'img/azafricanstore.png' %}" alt="Ecommerce Website Design in Nigeria">
+                    </div>
+                    <h4>AZ African Store</h4>
+                    <p>Multi-vendor grocery ecommerce platform with real-time inventory and secure checkout.</p>
+                    <a href="{% url 'services' %}" class="btn">View Project</a>
+                </div>
+            </div>
+            <div class="col-md-4 wow zoomIn" data-wow-delay="0.2s">
+                <div class="ecom-product-card">
+                    <div class="scrolling-img">
+                        <img src="{% static 'img/ladyflora.png' %}" alt="Ecommerce Website Design in Nigeria">
+                    </div>
+                    <h4>Lady Flora</h4>
+                    <p>Fashion and beauty ecommerce site with Instagram integration and automated order emails.</p>
+                    <a href="{% url 'services' %}" class="btn">View Project</a>
+                </div>
+            </div>
+            <div class="col-md-4 wow zoomIn" data-wow-delay="0.3s">
+                <div class="ecom-product-card">
+                    <div class="scrolling-img">
+                        <img src="{% static 'img/kofoshi.png' %}" alt="Ecommerce Website Design in Nigeria">
+                    </div>
+                    <h4>Kofoshi Foods</h4>
+                    <p>Food delivery ecommerce with location-based shipping and mobile-first design.</p>
+                    <a href="{% url 'services' %}" class="btn">View Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="ecom-cta wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h2>Ready to Launch Your Online Store?</h2>
+        <p>Let’s build you a powerful ecommerce website design that grows your business and delights your customers.</p>
+        <a href="{% url 'contact' %}" class="btn">Request a Free Quote</a>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<div class="faq section-margin" id="faq">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>FREQUENTLY ASKED QUESTIONS</p>
+            <h2>Ecommerce Website Design FAQ</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="faq-list">
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
+                        <h3 class="faq-question">How long does it take to build an ecommerce website?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Most of our ecommerce website design in Nigeria are completed in 2 to 6 weeks, depending on features and content. We deliver fast without sacrificing quality.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">Can I accept payments in Naira and USD?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Yes! We integrate Paystack, Flutterwave, Stripe, and more so you can accept payments in multiple currencies.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.3s">
+                        <h3 class="faq-question">Will my ecommerce website work on mobile?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Absolutely. Every ecommerce site we build is fully responsive and optimized for all devices.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.4s">
+                        <h3 class="faq-question">Do you provide training and support?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Yes, as a top Web Design Company in Lagos, we provide admin training and ongoing support so you can manage your store with confidence.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.5s">
+                        <h3 class="faq-question">Can you migrate my existing store?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>We handle migrations from Shopify, WooCommerce, Wix, and more. Your products and customers are safe with us.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.6s">
+                        <h3 class="faq-question">How do I get started?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Click “Get Started Now” above or <a href="{% url 'contact' %}">contact us</a> for a free consultation and quote.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

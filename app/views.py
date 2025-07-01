@@ -142,8 +142,8 @@ def advertise(request):
 def courses(request):
     return render(request, 'courses.html')
 
-
-
+def ecommerce(request):
+    return render(request, 'ecommerce.html')
 
 
 

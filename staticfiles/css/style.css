@@ -2,7 +2,7 @@
 /********* General CSS *********/
 /*******************************/
 body {
-    color: #797979;
+    color: #000000;
     background: #ffffff;
     font-family: 'Montserrat', sans-serif;
 }
@@ -13,12 +13,16 @@ h3,
 h4,
 h5, 
 h6 {
-    color: #414141;
+    color: #000000;
 }
 
 a {
-    color: #313131;
+    color: #000000;
     transition: .3s;
+}
+
+p a {
+    text-decoration: underline;
 }
 
 p{
@@ -1723,14 +1727,14 @@ a:focus {
 .about-banner {
     position: relative;
     width: 100%;
-    margin-bottom: 45px;
-    padding: 190px 0;
+    margin-bottom: 4px;
+    padding: 160px 0;
     background: #EF233C;
     text-align: center;
 }
 
 .about-banner h1 {
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 2px;
 }
 
@@ -2102,7 +2106,7 @@ a:focus {
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2122,7 +2126,7 @@ a:focus {
 
 .faq-answer p {
     padding: 0 20px 20px;
-    color: #666;
+    color: #000;
 }
 
 .faq-item.open .faq-icon {

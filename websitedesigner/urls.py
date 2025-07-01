@@ -48,6 +48,7 @@ urlpatterns = [
     path('consultation/', consultation, name="consultation"),
     path('web-development-pricing/', pricing, name="pricing"),
     path('tech-courses/', courses, name="courses"),
+    path('ecommerce-website-design-in-nigeria/', ecommerce, name="ecommerce"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
