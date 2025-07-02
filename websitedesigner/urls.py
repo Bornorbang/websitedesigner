@@ -48,6 +48,7 @@ urlpatterns = [
     path('consultation/', consultation, name="consultation"),
     path('web-development-pricing/', pricing, name="pricing"),
     path('tech-courses/', courses, name="courses"),
+    path('seo-pricing/', seo_pricing, name="seo_pricing"),
     path('ecommerce-website-design-in-nigeria/', ecommerce, name="ecommerce"),
 ]
 

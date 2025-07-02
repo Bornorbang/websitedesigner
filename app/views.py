@@ -145,6 +145,9 @@ def courses(request):
 def ecommerce(request):
     return render(request, 'ecommerce.html')
 
+def seo_pricing(request):
+    return render(request, 'seo_pricing.html')
+
 
 
 
