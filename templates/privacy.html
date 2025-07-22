@@ -6,6 +6,26 @@
 
 {% block extra_css %}
 <style>
+body, html {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+.container, .row, .section, .content, .footer, .header, .hero-section {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+@media (max-width: 767px) {
+  body, html {
+    width: 100vw;
+    overflow-x: hidden !important;
+  }
+  .container, .row, .section, .content, .footer, .header, .hero-section {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+  }
+}
+
 .legal-section {
     background: #fff;
     padding: 60px 0 40px 0;
