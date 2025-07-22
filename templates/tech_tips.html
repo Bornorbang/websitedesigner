@@ -140,20 +140,28 @@
 
 {% block maincontent %}
 
-<!-- Page Title Banner -->
-<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Tech Tips</h1>
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">TECH TIPS</h1>
+                            <p class="mb-2 mt-lg-3">Find the latest tech tips, tricks, and how-tos in Nigeria. Explore expert guides to programming, coding, business and technology.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
 <div class="container py-5">
     <div class="row g-4">
-        <p class="text-center mb-4 px-2">Find the latest tech tips, tricks, and how-tos in Nigeria. Explore expert guides to programming, coding, business and technology.</p>
         {% for blog in page_obj %}
         <div class="col-lg-4 col-md-6">
             <div class="blog-post wow fadeInUp h-100" data-wow-delay="0.1s">

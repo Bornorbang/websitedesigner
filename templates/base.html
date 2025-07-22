@@ -72,6 +72,579 @@
             .footer-logo {
                 max-width: 350px; /* Keep the size limit */
                 margin: 0 0 20px; /* Remove auto centering */
+                text-align: left !important;
+            }
+
+            .footer-logo img {
+                max-height: 60px !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+
+            /* Clean Professional Navbar */
+            .navbar {
+                background: #ffffff !important;
+                border-bottom: 2px solid #EF233C;
+                padding: 0;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1030;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            }
+
+            .navbar.scrolled {
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+                border-bottom: 2px solid #d63031;
+            }
+
+            /* Navbar Container */
+            .navbar .container-fluid {
+                padding: 15px 30px;
+            }
+
+            /* Logo Styling */
+            .navbar-brand {
+                padding: 0;
+                margin-right: 50px;
+            }
+
+            .navbar .desktop, .navbar .mobile {
+                max-height: 55px;
+                transition: all 0.3s ease;
+            }
+
+            .navbar.scrolled .desktop, .navbar.scrolled .mobile {
+                max-height: 50px;
+            }
+
+            /* Desktop only logo enhancement */
+            @media (min-width: 992px) {
+                .navbar .desktop {
+                    max-height: 65px;
+                }
+
+                .navbar.scrolled .desktop {
+                    max-height: 55px;
+                }
+            }
+
+            /* Navigation Links - Clean Minimal Design */
+            .navbar-nav {
+                align-items: center;
+                gap: 10px;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 0;
+            }
+
+            .navbar-nav .nav-link {
+                color: #2d3436 !important;
+                font-weight: 600;
+                font-size: 14px;
+                padding: 10px 18px !important;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                text-transform: capitalize;
+                letter-spacing: 0.3px;
+                white-space: nowrap;
+                border: 2px solid transparent;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #EF233C !important;
+                background-color: rgba(239, 35, 60, 0.05);
+                border-color: rgba(239, 35, 60, 0.2);
+                transform: translateY(-1px);
+            }
+
+            .navbar-nav .nav-link.active {
+                color: #ffffff !important;
+                background-color: #EF233C;
+                border-color: #EF233C;
+            }
+
+            /* Dropdown Menu - Clean Design */
+            .dropdown-menu {
+                background: #ffffff;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                padding: 10px 0;
+                margin-top: 5px;
+                min-width: 200px;
+            }
+
+            .dropdown-item {
+                color: #2d3436;
+                font-weight: 500;
+                padding: 8px 20px;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                border-left: 3px solid transparent;
+            }
+
+            .dropdown-item:hover {
+                background-color: rgba(239, 35, 60, 0.05);
+                color: #EF233C;
+                border-left-color: #EF233C;
+                padding-left: 25px;
+            }
+
+            .dropdown-item i {
+                width: 16px;
+                color: #6c757d;
+                transition: color 0.2s ease;
+            }
+
+            .dropdown-item:hover i {
+                color: #EF233C;
+            }
+
+            /* Mobile Navbar Toggler - Simple Design */
+            .navbar-toggler {
+                border: 2px solid #EF233C;
+                padding: 6px 10px;
+                border-radius: 6px;
+                background: transparent;
+                transition: all 0.3s ease;
+            }
+
+            .navbar-toggler:hover {
+                background-color: #EF233C;
+            }
+
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+            }
+
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2839, 52, 54, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                transition: all 0.3s ease;
+            }
+
+            .navbar-toggler:hover .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            }
+
+            /* Mobile Menu */
+            .navbar-collapse {
+                background: #ffffff;
+                border-radius: 8px;
+                margin-top: 15px;
+                padding: 20px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e9ecef;
+            }
+
+            @media (max-width: 991px) {
+                .navbar .container-fluid {
+                    padding: 12px 20px;
+                }
+
+                .navbar-nav {
+                    gap: 8px;
+                    text-align: center;
+                }
+
+                .navbar-nav .nav-link {
+                    margin: 4px 0;
+                    padding: 12px 20px !important;
+                    border-radius: 6px;
+                    background: #f8f9fa;
+                    border: 1px solid #e9ecef;
+                }
+
+                .navbar-nav .nav-link:hover {
+                    background-color: rgba(239, 35, 60, 0.1);
+                    border-color: #EF233C;
+                }
+
+                .dropdown-menu {
+                    background: transparent;
+                    border: none;
+                    box-shadow: none;
+                    padding: 0;
+                    margin: 8px 0;
+                }
+
+                .dropdown-item {
+                    background: #f1f3f4;
+                    margin: 4px 0;
+                    border-radius: 6px;
+                    border: 1px solid #e9ecef;
+                    padding: 10px 15px;
+                }
+
+                .dropdown-item:hover {
+                    background-color: rgba(239, 35, 60, 0.1);
+                    border-color: #EF233C;
+                    padding-left: 15px;
+                }
+            }
+
+            /* Add top padding to body */
+            body {
+                padding-top: 75px;
+            }
+
+            /* Smooth animations */
+            .navbar-collapse.show {
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Responsive font sizes */
+            @media (max-width: 1200px) {
+                .navbar-nav .nav-link {
+                    font-size: 13px;
+                    padding: 8px 14px !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding-top: 70px;
+                }
+            }
+
+            /* Modern Footer Styling for Base.html */
+            .footer {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                color: #ffffff;
+                margin-top: 50px;
+                border-top: 3px solid #EF233C;
+            }
+
+            .footer .mx-2.mx-lg-5 {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-logo img {
+                max-height: 60px;
+                margin-bottom: 20px;
+                transition: transform 0.3s ease;
+            }
+
+            .footer-logo img:hover {
+                transform: scale(1.05);
+            }
+
+            .footer p {
+                color: #b8b8b8;
+                line-height: 1.6;
+                margin-bottom: 15px;
+                font-size: 14px;
+                text-align: left !important;
+            }
+
+            .footer h5 {
+                color: #EF233C;
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 25px !important;
+                position: relative;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .footer h5::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -8px;
+                width: 40px;
+                height: 2px;
+                background: #EF233C;
+            }
+
+            .footer ul {
+                padding: 0;
+                margin: 0;
+            }
+
+            .footer-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px !important;
+                transition: all 0.3s ease;
+            }
+
+            .footer-item i {
+                color: #EF233C;
+                margin-right: 10px;
+                font-size: 12px;
+                width: 16px;
+                flex-shrink: 0;
+            }
+
+            .footer-item a {
+                color: #b8b8b8;
+                text-decoration: none;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                line-height: 1.5;
+            }
+
+            .footer-item a:hover {
+                color: #EF233C;
+                text-decoration: none;
+                padding-left: 5px;
+            }
+
+            .footer-item:hover {
+                transform: translateX(3px);
+            }
+
+            /* Footer Social Links */
+            .footer-social-links {
+                display: flex !important;
+                gap: 15px !important;
+                margin-top: 25px;
+            }
+
+            .footer-social-links a {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 36px !important;
+                height: 36px !important;
+                background: rgba(239, 35, 60, 0.1) !important;
+                color: #EF233C !important;
+                border-radius: 6px !important;
+                font-size: 16px !important;
+                transition: all 0.3s ease !important;
+                text-decoration: none !important;
+                line-height: 1 !important;
+            }
+
+            .footer-social-links a:hover {
+                background: #EF233C !important;
+                color: #ffffff !important;
+                transform: translateY(-2px) !important;
+                text-decoration: none !important;
+            }
+
+            .footer-social-links a i {
+                margin: 0 !important;
+                padding: 0 !important;
+                vertical-align: middle !important;
+            }
+
+            /* Footer Legal Section - Complete Override */
+            .footer .footer-legal {
+                background: rgba(0, 0, 0, 0.3) !important;
+                padding: 0 !important;
+                border-top: 1px solid #404040 !important;
+                margin: 0 !important;
+                position: relative !important;
+                text-align: center !important;
+            }
+
+            .footer .footer-legal .container-fluid {
+                padding: 5px 0 !important;
+                margin: 0 !important;
+            }
+
+            .footer .footer-legal .legal-links {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 15px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .footer .footer-legal .legal-links a {
+                color: #b8b8b8 !important;
+                text-decoration: none !important;
+                font-size: 14px !important;
+                transition: color 0.3s ease !important;
+                margin: 0 10px !important;
+                padding: 0 !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                transform: none !important;
+                position: static !important;
+            }
+
+            .footer .footer-legal .legal-links a:hover {
+                color: #EF233C !important;
+                text-decoration: none !important;
+                background-color: transparent !important;
+                transform: none !important;
+            }
+
+            .footer .footer-legal .legal-links .separator {
+                color: #666 !important;
+                margin: 0 10px !important;
+                font-weight: 300 !important;
+                user-select: none !important;
+            }
+
+            .legal-links {
+                text-align: center !important;
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+            }
+
+            .legal-links a {
+                color: #b8b8b8;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.3s ease;
+                margin: 0 10px;
+            }
+
+            .legal-links a:hover {
+                color: #EF233C;
+                text-decoration: none;
+            }
+
+            .separator {
+                color: #666;
+                margin: 0 10px;
+            }
+
+            /* Copyright Section */
+            .footer .border-top {
+                border-top: 1px solid #404040 !important;
+                background: rgba(0, 0, 0, 0.5);
+                margin-top: 0;
+            }
+
+            .footer .border-top p {
+                margin: 0;
+                color: #888;
+                font-size: 14px;
+                text-align: center !important;
+            }
+
+            .footer .border-top a {
+                color: #EF233C;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .footer .border-top a:hover {
+                color: #ff4757;
+                text-decoration: none;
+            }
+
+            /* Responsive Footer */
+            @media (max-width: 991px) {
+                .footer .mx-2.mx-lg-5 {
+                    padding: 25px 15px 15px;
+                }
+
+                .footer h5 {
+                    margin-top: 30px !important;
+                    text-align: left !important;
+                }
+
+                .footer h5::after {
+                    left: 0 !important;
+                    transform: none !important;
+                }
+
+                .footer-logo {
+                    text-align: left !important;
+                }
+
+                .footer-social-links {
+                    justify-content: flex-start !important;
+                }
+
+                .footer ul {
+                    text-align: left !important;
+                }
+
+                .footer-item {
+                    justify-content: flex-start !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .footer .mx-2.mx-lg-5 {
+                    padding: 20px 10px 15px;
+                }
+
+                .footer h5 {
+                    font-size: 16px;
+                    margin-bottom: 20px !important;
+                    margin-top: 25px !important;
+                }
+
+                .footer p {
+                    font-size: 13px;
+                    text-align: left !important;
+                }
+
+                .footer-social-links a {
+                    width: 36px;
+                    height: 36px;
+                    font-size: 14px;
+                }
+
+                .legal-links a {
+                    font-size: 13px;
+                    margin: 0 8px;
+                }
+
+                .footer .border-top p {
+                    font-size: 13px;
+                    text-align: center !important;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .footer .mx-2.mx-lg-5 {
+                    padding: 15px 5px 10px;
+                }
+
+                .footer h5 {
+                    font-size: 15px;
+                }
+
+                .footer p {
+                    font-size: 12px;
+                }
+
+                .footer-item a {
+                    font-size: 13px;
+                }
+
+                /* Override style.css conflicting rules for mobile */
+                .footer .footer-legal .legal-links {
+                    display: inline-flex !important;
+                    flex-direction: row !important;
+                    text-align: center !important;
+                    gap: 15px !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                .footer .footer-legal .legal-links a {
+                    color: #b8b8b8 !important;
+                    font-size: 13px !important;
+                    padding: 0 !important;
+                    margin: 0 8px !important;
+                    border-radius: 0 !important;
+                    background: transparent !important;
+                    transform: none !important;
+                }
+
+                .footer .footer-legal .legal-links .separator {
+                    display: inline !important;
+                    color: #666 !important;
+                    margin: 0 8px !important;
+                }
             }
         </style>
 
@@ -108,54 +681,68 @@
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
         <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-light navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNavbar">
             <div class="container-fluid">
-                <a href = "/">
-                    <img src="{% static 'img/website designer nigeria - logo.png' %}" class = "desktop d-none d-lg-block" alt="Website Designer Nigeria">
-                </a>
-                <a href = "/">
-                    <img src="{% static 'img/website designer nigeria logo.png' %}" class = "mobile d-block d-lg-none" alt="Website Designer Nigeria">
-                </a>
-                
-                <!-- Sticky Logo (Hidden by Default) -->
-                <div class="sticky-logo">
-                    <a href="/">
-                        <img src="{% static 'img/website designer nigeria logo.png' %}" alt="Web Design Company in Nigeria">
+                <div class="navbar-brand-wrapper">
+                    <a href="/" class="navbar-brand">
+                        <img src="{% static 'img/website designer nigeria logo.png' %}" class="desktop d-none d-lg-block" alt="Web Design Company in Lagos">
+                        <img src="{% static 'img/website designer nigeria logo.png' %}" class="mobile d-block d-lg-none" alt="Web Design Company in Lagos">
                     </a>
                 </div>
 
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto">
-                        <a href="/" class="nav-item nav-link">Home</a>
-                        <a href="{% url 'about-website-designer-nigeria' %}" class="nav-item nav-link">About Us</a>
-                        <a href="{% url 'services' %}" class="nav-item nav-link">Our Services</a>
-                
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'about-website-designer-nigeria' %}" class="nav-link">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'services' %}" class="nav-link">Our Services</a>
+                        </li>
+                        
                         <!-- Resources Dropdown -->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources</a>
-                            <div class="dropdown-menu resources-dropdown">
-                                <a href="{% url 'blogs' %}" class="dropdown-item">Blog</a>
-                                <a href="{% url 'tech_tips' %}" class="dropdown-item">Tech Tips</a>
-                                <a href="{% url 'tech_reviews' %}" class="dropdown-item">Tech Reviews</a>
-                                <a href="{% url 'pricing' %}" class="dropdown-item">Pricing</a>
-                                <a href="{% url 'advertise' %}" class="dropdown-item">Advertise</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Resources
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                                <a class="dropdown-item" href="{% url 'blogs' %}">
+                                    <i class="fas fa-blog mr-2"></i>Blog
+                                </a>
+                                <a class="dropdown-item" href="{% url 'tech_tips' %}">
+                                    <i class="fas fa-lightbulb mr-2"></i>Tech Tips
+                                </a>
+                                <a class="dropdown-item" href="{% url 'tech_reviews' %}">
+                                    <i class="fas fa-star mr-2"></i>Tech Reviews
+                                </a>
+                                <a class="dropdown-item" href="{% url 'pricing' %}">
+                                    <i class="fas fa-tags mr-2"></i>Pricing
+                                </a>
+                                <a class="dropdown-item" href="{% url 'advertise' %}">
+                                    <i class="fas fa-bullhorn mr-2"></i>Advertise
+                                </a>
                             </div>
-                        </div>
-                
+                        </li>
+                        
                         <!-- Courses Menu Item -->
-                        <a href="{% url 'courses' %}" class="nav-item nav-link position-relative">
-                            Courses
-                            <span class="badge badge-success new-label">new</span>
-                        </a>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-                    </div>
+                        <li class="nav-item">
+                            <a href="{% url 'courses' %}" class="nav-link">
+                                Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </nav>
         <!-- Nav Bar End -->
 
         {% block maincontent %}
@@ -181,16 +768,16 @@
                         <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
                             <div class="footer-logo text-start mb-3">
                                 <a href="/">
-                                    <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Website Designer Nigeria" class="img-fluid">
+                                    <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Web Design Company in Lagos" class="img-fluid">
                                 </a>
                             </div>
-                            <p>Web Design Lagos - We are the best website designer in Lagos Nigeria providing top web development services to businesses seeking to create websites.</p>
+                            <p>Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.</p>
                             
-                            <p>Lagos Office: 6, Otta road, Ijora Olopa, Lagos</p>
+                            <p>Lagos Office: Otta road, Ijora Olopa, Lagos</p>
                             <p>Abuja Office: Jabi, Gwarinpa 900108, F.C.T Abuja</p>
                             <p>08148882303</p>
                             <p>contact@websitedesigner.ng</p>
-                            <div class="footer-social mt-3">
+                            <div class="footer-social-links mt-3">
                                 <a href="https://x.com/webdesignerng" class="text-light me-3"><i class="fab fa-twitter"></i></a>
                                 <a href="https://www.tiktok.com/@websitedesigner.ng" class="text-light me-3"><i class="fab fa-tiktok"></i></a>
                                 <a href="https://www.instagram.com/websitedesigner_ng" class="text-light"><i class="fab fa-instagram"></i></a>
@@ -221,10 +808,19 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Terms & Privacy Links -->
+            <div class="footer-legal">
+                <div class="container-fluid">
+                    <div class="legal-links">
+                        <a href="{% url 'privacy' %}">Privacy Policy</a>
+                        <span class="separator">|</span>
+                        <a href="{% url 'terms' %}">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
             <!-- Copyright Section -->
             <div class="container-fluid text-center py-3 border-top">
-                <p class="mb-0 text-light">&copy; 2025 WDN Agency Ltd | <a href="/" class="text-light">Website Designer Nigeria</a>. All Rights Reserved.</p>
+                <p class="mb-0 text-light">&copy; 2025 <a href="/" class="text-light">Website Designer Nigeria</a>. All Rights Reserved.</p>
             </div>
         </div>
         <!-- Footer End -->
@@ -234,12 +830,6 @@
         <!-- Back to top button -->
         <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
         
-        
-        <!-- Pre Loader -->
-        <div id="loader" class="show">
-            <div class="loader"></div>
-        </div>
-
         
         <!-- JavaScript Libraries -->
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -260,6 +850,87 @@
 
         <!-- Template Javascript -->
         <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Modern Navbar JavaScript -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const navbar = document.getElementById('mainNavbar');
+                const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+                
+                // Navbar scroll effect
+                function handleScroll() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+
+                // Active link highlighting
+                function setActiveLink() {
+                    const currentPath = window.location.pathname;
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === currentPath || 
+                            (currentPath === '/' && link.getAttribute('href') === '/')) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+
+                // Mobile menu auto-close on link click (but not for dropdown toggles)
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // Don't close navbar if this is a dropdown toggle
+                        if (this.classList.contains('dropdown-toggle')) {
+                            return; // Let the dropdown work normally
+                        }
+                        
+                        if (window.innerWidth <= 991) {
+                            const navbarCollapse = document.getElementById('navbarCollapse');
+                            if (navbarCollapse.classList.contains('show')) {
+                                $('.navbar-collapse').collapse('hide');
+                            }
+                        }
+                    });
+                });
+
+                // Close mobile navbar when dropdown items are clicked
+                const dropdownItems = document.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        if (window.innerWidth <= 991) {
+                            const navbarCollapse = document.getElementById('navbarCollapse');
+                            if (navbarCollapse.classList.contains('show')) {
+                                $('.navbar-collapse').collapse('hide');
+                            }
+                        }
+                    });
+                });
+
+                // Smooth scrolling for anchor links
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute('href').substring(1);
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Initialize
+                window.addEventListener('scroll', handleScroll);
+                setActiveLink();
+                handleScroll();
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {

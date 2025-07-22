@@ -67,6 +67,1117 @@
 
         <script src="https://kit.fontawesome.com/955d8bdaab.js" crossorigin="anonymous"></script>
 
+        <style>
+            /* Clean Professional Navbar */
+            .navbar {
+                background: #ffffff !important;
+                border-bottom: 2px solid #EF233C;
+                padding: 0;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1030;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            }
+
+            .navbar.scrolled {
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+                border-bottom: 2px solid #d63031;
+            }
+
+            /* Navbar Container */
+            .navbar .container-fluid {
+                padding: 15px 30px;
+            }
+
+            /* Logo Styling */
+            .navbar-brand {
+                padding: 0;
+                margin-right: 50px;
+            }
+
+            .navbar .desktop, .navbar .mobile {
+                max-height: 55px;
+                transition: all 0.3s ease;
+            }
+
+            .navbar.scrolled .desktop, .navbar.scrolled .mobile {
+                max-height: 50px;
+            }
+
+            /* Desktop only logo enhancement */
+            @media (min-width: 992px) {
+                .navbar .desktop {
+                    max-height: 65px;
+                }
+
+                .navbar.scrolled .desktop {
+                    max-height: 55px;
+                }
+            }
+
+            /* Navigation Links - Clean Minimal Design */
+            .navbar-nav {
+                align-items: center;
+                gap: 10px;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 0;
+            }
+
+            .navbar-nav .nav-link {
+                color: #2d3436 !important;
+                font-weight: 600;
+                font-size: 14px;
+                padding: 10px 18px !important;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                text-transform: capitalize;
+                letter-spacing: 0.3px;
+                white-space: nowrap;
+                border: 2px solid transparent;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #EF233C !important;
+                background-color: rgba(239, 35, 60, 0.05);
+                border-color: rgba(239, 35, 60, 0.2);
+                transform: translateY(-1px);
+            }
+
+            .navbar-nav .nav-link.active {
+                color: #ffffff !important;
+                background-color: #EF233C;
+                border-color: #EF233C;
+            }
+
+            /* Dropdown Menu - Clean Design */
+            .dropdown-menu {
+                background: #ffffff;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                padding: 10px 0;
+                margin-top: 5px;
+                min-width: 200px;
+            }
+
+            .dropdown-item {
+                color: #2d3436;
+                font-weight: 500;
+                padding: 8px 20px;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                border-left: 3px solid transparent;
+            }
+
+            .dropdown-item:hover {
+                background-color: rgba(239, 35, 60, 0.05);
+                color: #EF233C;
+                border-left-color: #EF233C;
+                padding-left: 25px;
+            }
+
+            .dropdown-item i {
+                width: 16px;
+                color: #6c757d;
+                transition: color 0.2s ease;
+            }
+
+            .dropdown-item:hover i {
+                color: #EF233C;
+            }
+
+            /* Mobile Navbar Toggler - Simple Design */
+            .navbar-toggler {
+                border: 2px solid #EF233C;
+                padding: 6px 10px;
+                border-radius: 6px;
+                background: transparent;
+                transition: all 0.3s ease;
+            }
+
+            .navbar-toggler:hover {
+                background-color: #EF233C;
+            }
+
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+            }
+
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2839, 52, 54, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                transition: all 0.3s ease;
+            }
+
+            .navbar-toggler:hover .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            }
+
+            /* Mobile Menu */
+            .navbar-collapse {
+                background: #ffffff;
+                border-radius: 8px;
+                margin-top: 15px;
+                padding: 20px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e9ecef;
+            }
+
+            @media (max-width: 991px) {
+                .navbar .container-fluid {
+                    padding: 12px 20px;
+                }
+
+                .navbar-nav {
+                    gap: 8px;
+                    text-align: center;
+                }
+
+                .navbar-nav .nav-link {
+                    margin: 4px 0;
+                    padding: 12px 20px !important;
+                    border-radius: 6px;
+                    background: #f8f9fa;
+                    border: 1px solid #e9ecef;
+                }
+
+                .navbar-nav .nav-link:hover {
+                    background-color: rgba(239, 35, 60, 0.1);
+                    border-color: #EF233C;
+                }
+
+                .dropdown-menu {
+                    background: transparent;
+                    border: none;
+                    box-shadow: none;
+                    padding: 0;
+                    margin: 8px 0;
+                }
+
+                .dropdown-item {
+                    background: #f1f3f4;
+                    margin: 4px 0;
+                    border-radius: 6px;
+                    border: 1px solid #e9ecef;
+                    padding: 10px 15px;
+                }
+
+                .dropdown-item:hover {
+                    background-color: rgba(239, 35, 60, 0.1);
+                    border-color: #EF233C;
+                    padding-left: 15px;
+                }
+            }
+
+            /* Add top padding to body */
+            body {
+                padding-top: 75px;
+            }
+
+            /* Smooth animations */
+            .navbar-collapse.show {
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Responsive font sizes */
+            @media (max-width: 1200px) {
+                .navbar-nav .nav-link {
+                    font-size: 13px;
+                    padding: 8px 14px !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding-top: 70px;
+                }
+            }
+
+            /* Modern Blog Section Styling for Index.html */
+            .blog.section-margin {
+                background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+                padding: 80px 0;
+                position: relative;
+            }
+
+            /* Blog Section Header */
+            .blog .section-header {
+                margin-bottom: 60px;
+            }
+
+            .blog .section-header h2 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #2d3436;
+                margin-bottom: 15px;
+                position: relative;
+            }
+
+            .blog .section-header h2::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, #EF233C, #ff6b6b);
+                border-radius: 2px;
+            }
+
+            .blog .section-header p {
+                font-size: 1.1rem;
+                color: #636e72;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+            }
+
+            /* Modern Blog Item Cards */
+            .blog-item {
+                margin-bottom: 40px;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                background: #fff;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(239, 35, 60, 0.1);
+                height: 100%;
+            }
+
+            .blog-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+                border-color: #EF233C;
+            }
+
+            /* Blog Image */
+            .blog-img {
+                position: relative;
+                overflow: hidden;
+                height: 280px;
+            }
+
+            .blog-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .blog-item:hover .blog-img img {
+                transform: scale(1.05);
+            }
+
+            /* Blog Content */
+            .blog-text {
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                height: calc(100% - 280px);
+            }
+
+            .blog-text h2 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+                color: #2d3436;
+                font-weight: 700;
+                line-height: 1.4;
+                flex-grow: 0;
+            }
+
+            .blog-text h2 a {
+                color: inherit;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .blog-text h2 a:hover {
+                color: #EF233C;
+            }
+
+            /* Blog Meta Info */
+            .blog-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eee;
+                flex-grow: 0;
+            }
+
+            .blog-meta p {
+                margin: 0;
+                color: #636e72;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .blog-meta p i {
+                color: #EF233C;
+                width: 16px;
+            }
+
+            .blog-meta a {
+                color: #636e72;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .blog-meta a:hover {
+                color: #EF233C;
+            }
+
+            /* Blog Excerpt */
+            .blog-text > div p {
+                color: #636e72;
+                line-height: 1.7;
+                margin-bottom: 20px;
+                flex-grow: 1;
+            }
+
+            /* Modern Read More Button */
+            .blog-text .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 25px;
+                background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+                color: #fff;
+                text-decoration: none;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
+                align-self: flex-start;
+                margin-top: auto;
+            }
+
+            .blog-text .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(239, 35, 60, 0.4);
+                color: #fff;
+                text-decoration: none;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 991px) {
+                .blog .section-header h2 {
+                    font-size: 2rem;
+                }
+
+                .blog-img {
+                    height: 220px;
+                }
+
+                .blog-text {
+                    padding: 25px;
+                    height: calc(100% - 220px);
+                }
+
+                .blog-text h2 {
+                    font-size: 1.3rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .blog.section-margin {
+                    padding: 60px 0;
+                }
+
+                .blog .section-header h2 {
+                    font-size: 1.8rem;
+                }
+
+                .blog-img {
+                    height: 200px;
+                }
+
+                .blog-text {
+                    padding: 20px;
+                    height: calc(100% - 200px);
+                }
+
+                .blog-meta {
+                    gap: 15px;
+                }
+
+                .blog-meta p {
+                    font-size: 0.8rem;
+                }
+            }
+
+            /* Clean & Modern Footer Redesign */
+            .footer {
+                background: #000000;
+                color: #ffffff;
+                padding: 60px 0 0;
+                border-top: 3px solid #EF233C;
+            }
+
+            .footer-content {
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            /* Footer Brand Section */
+            .footer-brand {
+                padding-right: 40px;
+            }
+
+            .footer-logo img {
+                max-height: 50px;
+                margin-bottom: 25px;
+            }
+
+            .footer-tagline {
+                color: #b8b8b8;
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 30px;
+            }
+
+            /* Simple Social Links */
+            .footer-social {
+                display: flex;
+                gap: 15px;
+            }
+
+            .social-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: transparent;
+                border: 2px solid #333;
+                color: #ffffff;
+                border-radius: 50%;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                font-size: 1rem;
+            }
+
+            .social-btn:hover {
+                background: #EF233C;
+                border-color: #EF233C;
+                color: #ffffff;
+                text-decoration: none;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(239, 35, 60, 0.3);
+            }
+
+            /* Footer Info Section */
+            .footer-info {
+                padding-left: 40px;
+            }
+
+            .info-block {
+                margin-bottom: 30px;
+            }
+
+            .info-block h6 {
+                color: #EF233C;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+                color: #b8b8b8;
+                transition: all 0.3s ease;
+            }
+
+            .info-item:hover {
+                transform: translateX(3px);
+            }
+
+            .info-item i {
+                color: #EF233C;
+                width: 20px;
+                margin-right: 12px;
+                margin-top: 2px;
+                flex-shrink: 0;
+            }
+
+            .info-item span {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                transition: all 0.3s ease;
+            }
+
+            .info-item:hover span {
+                padding-left: 5px;
+            }
+
+            /* Footer Bottom */
+            .footer-bottom {
+                padding: 25px 0;
+                background: rgba(0, 0, 0, 0.5);
+            }
+
+            /* Copyright Section - Match base.html exactly with higher specificity */
+            .footer .border-top,
+            .modern-footer-main .border-top {
+                border-top: 1px solid #404040 !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+                margin-top: 0 !important;
+                padding: 0 !important;
+                width: 100vw !important;
+                margin-left: calc(-50vw + 50%) !important;
+                position: relative !important;
+            }
+
+            .footer .border-top .container-fluid,
+            .modern-footer-main .border-top .container-fluid {
+                padding: 15px 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .footer .border-top p,
+            .modern-footer-main .border-top p {
+                margin: 0 !important;
+                color: #888 !important;
+                font-size: 14px !important;
+                text-align: center !important;
+                padding: 0 !important;
+            }
+
+            .footer .border-top a,
+            .modern-footer-main .border-top a {
+                color: #EF233C !important;
+                text-decoration: none !important;
+                font-weight: 600 !important;
+            }
+
+            .footer .border-top a:hover,
+            .modern-footer-main .border-top a:hover {
+                color: #ff4757 !important;
+                text-decoration: none !important;
+            }
+
+            .footer-links {
+                display: flex;
+                justify-content: flex-end;
+                gap: 25px;
+            }
+
+            .footer-links a {
+                color: #888;
+                text-decoration: none;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: #EF233C;
+                text-decoration: none;
+                transform: translateY(-2px);
+                padding-left: 3px;
+            }
+
+            /* Responsive Footer */
+            @media (max-width: 991px) {
+                .footer-brand {
+                    padding-right: 0;
+                    margin-bottom: 40px;
+                    text-align: center;
+                }
+
+                .footer-info {
+                    padding-left: 0;
+                }
+
+                .footer-social {
+                    justify-content: center;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .footer {
+                    padding: 40px 0 0;
+                }
+
+                .footer-content {
+                    padding-bottom: 30px;
+                }
+
+                .footer-brand {
+                    margin-bottom: 30px;
+                }
+
+                .footer-bottom {
+                    text-align: center;
+                    padding: 20px 0;
+                }
+
+                .footer-links {
+                    justify-content: center;
+                    margin-top: 15px;
+                    gap: 20px;
+                }
+
+                .info-block {
+                    margin-bottom: 25px;
+                }
+
+                .info-block h6 {
+                    text-align: center;
+                    margin-bottom: 15px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .footer {
+                    padding: 30px 0 0;
+                }
+
+                .footer-tagline {
+                    font-size: 0.9rem;
+                }
+
+                .social-btn {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 0.9rem;
+                }
+
+                .footer-links {
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: center;
+                }
+
+                .info-item span {
+                    font-size: 0.9rem;
+                }
+            }
+
+            /* Modern Footer Styles - Using unique class names to avoid conflicts */
+            .modern-footer-main {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+                color: #ffffff !important;
+                padding: 60px 0 0 !important;
+                margin-top: 50px !important;
+                position: relative;
+                z-index: 1;
+                border-top: 3px solid #EF233C !important;
+            }
+
+            .modern-footer-main * {
+                box-sizing: border-box;
+            }
+
+            .modern-footer-wrapper {
+                max-width: 1200px !important;
+                margin: 0 auto !important;
+                padding: 0 15px !important;
+            }
+
+            .footer-top-section {
+                padding-bottom: 40px !important;
+                border-bottom: 1px solid #404040 !important;
+            }
+
+            .footer-widget {
+                height: 100% !important;
+                text-align: left !important;
+            }
+
+            .widget-logo img {
+                max-height: 60px !important;
+                margin-bottom: 20px !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+
+            .widget-text {
+                color: #b8b8b8 !important;
+                line-height: 1.6 !important;
+                margin-bottom: 0 !important;
+                font-size: 14px !important;
+                text-align: left !important;
+            }
+
+            .widget-title {
+                color: #EF233C !important;
+                font-size: 18px !important;
+                font-weight: 600 !important;
+                margin-bottom: 25px !important;
+                position: relative;
+                text-align: left !important;
+            }
+
+            .widget-title::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -8px;
+                width: 40px;
+                height: 2px;
+                background: #EF233C;
+            }
+
+            .widget-links {
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .widget-links li {
+                margin-bottom: 12px !important;
+                text-align: left !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .widget-links li:hover {
+                transform: translateX(3px);
+            }
+
+            .widget-links a {
+                color: #b8b8b8 !important;
+                text-decoration: none !important;
+                font-size: 14px !important;
+                transition: all 0.3s ease !important;
+                display: block !important;
+            }
+
+            .widget-links a:hover {
+                color: #EF233C;
+                text-decoration: none;
+                padding-left: 5px;
+            }
+
+            .contact-details {
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .contact-detail {
+                display: flex !important;
+                align-items: center !important;
+                margin-bottom: 15px !important;
+                color: #b8b8b8 !important;
+                font-size: 14px !important;
+                text-align: left !important;
+                transition: all 0.3s ease !important;
+                cursor: pointer;
+            }
+
+            .contact-detail:hover {
+                transform: translateX(3px);
+                color: #EF233C !important;
+            }
+
+            .contact-detail i {
+                color: #EF233C !important;
+                width: 18px !important;
+                margin-right: 12px !important;
+            }
+
+            .office-locations {
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .office-location {
+                margin-bottom: 20px !important;
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+                text-align: left !important;
+                transition: all 0.3s ease !important;
+                cursor: pointer;
+                color: #b8b8b8 !important;
+            }
+
+            .office-location:hover {
+                transform: translateX(3px);
+                color: #EF233C !important;
+            }
+
+            .office-location strong {
+                color: #EF233C !important;
+                display: block !important;
+                margin-bottom: 5px !important;
+            }
+
+            .office-location span {
+                color: #b8b8b8 !important;
+                display: block !important;
+            }
+
+            .footer-bottom-section {
+                padding: 30px 0 !important;
+                text-align: left !important;
+            }
+
+            .footer .border-top {
+                margin: 0;
+                text-align: center;
+            }
+
+            .footer .border-top p {
+                margin: 0;
+                color: #888;
+                font-size: 13px;
+                text-align: center !important;
+            }
+
+            .footer .border-top a {
+                color: #EF233C;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .footer .border-top a:hover {
+                color: #ff4757;
+                text-decoration: none;
+            }
+
+            .footer-social-legal {
+                display: flex !important;
+                justify-content: flex-end !important;
+                align-items: center !important;
+                gap: 30px !important;
+            }
+
+            .footer-social-links {
+                display: flex !important;
+                gap: 15px !important;
+            }
+
+            .footer-social-links a {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 36px !important;
+                height: 36px !important;
+                background: rgba(239, 35, 60, 0.1) !important;
+                color: #EF233C !important;
+                border-radius: 6px !important;
+                font-size: 16px !important;
+                transition: all 0.3s ease !important;
+                text-decoration: none !important;
+                line-height: 1 !important;
+            }
+
+            .footer-social-links a:hover {
+                background: #EF233C !important;
+                color: #ffffff !important;
+                transform: translateY(-2px) !important;
+                text-decoration: none !important;
+            }
+
+            .footer-social-links a i {
+                margin: 0 !important;
+                padding: 0 !important;
+                vertical-align: middle !important;
+            }
+
+             /* Footer Legal Section - Complete Override with Higher Specificity */
+            .modern-footer-main .footer-legal {
+                background: rgba(0, 0, 0, 0.3) !important;
+                padding: 0 !important;
+                border-top: 1px solid #404040 !important;
+                margin: 0 !important;
+                position: relative !important;
+                text-align: center !important;
+                width: 100vw !important;
+                margin-left: calc(-50vw + 50%) !important;
+            }
+
+            .footer .footer-legal {
+                background: rgba(0, 0, 0, 0.3) !important;
+                padding: 0 !important;
+                border-top: 1px solid #404040 !important;
+                margin: 0 !important;
+                position: relative !important;
+                text-align: center !important;
+                width: 100vw !important;
+                margin-left: calc(-50vw + 50%) !important;
+            }
+
+            .footer .footer-legal .container-fluid {
+                padding: 5px 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Override the main style.css .footer .container-fluid padding */
+            .footer .footer-legal .container-fluid,
+            .footer.modern-footer-main .container-fluid {
+                padding: 5px 0 !important;
+            }
+
+            .footer .footer-legal .legal-links {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 15px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .footer .footer-legal .legal-links a {
+                color: #b8b8b8 !important;
+                text-decoration: none !important;
+                font-size: 14px !important;
+                transition: color 0.3s ease !important;
+                margin: 0 10px !important;
+                padding: 0 !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                transform: none !important;
+                position: static !important;
+            }
+
+            .footer .footer-legal .legal-links a:hover {
+                color: #EF233C !important;
+                text-decoration: none !important;
+                background-color: transparent !important;
+                transform: none !important;
+            }
+
+            .footer .footer-legal .legal-links .separator {
+                color: #666 !important;
+                margin: 0 10px !important;
+                font-weight: 300 !important;
+                user-select: none !important;
+            }
+
+            .legal-links {
+                text-align: center !important;
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+            }
+
+            .legal-links a {
+                color: #b8b8b8;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.3s ease;
+                margin: 0 10px;
+            }
+
+            .legal-links a:hover {
+                color: #EF233C;
+                text-decoration: none;
+            }
+
+            .separator {
+                color: #666;
+                margin: 0 10px;
+            }
+
+            /* Copyright Section */
+            .footer .border-top {
+                border-top: 1px solid #404040 !important;
+                background: rgba(0, 0, 0, 0.5);
+                margin-top: 0;
+            }
+
+            .footer .border-top p {
+                margin: 0;
+                color: #888;
+                font-size: 14px;
+                text-align: center !important;
+            }
+
+            .footer .border-top a {
+                color: #EF233C;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .footer .border-top a:hover {
+                color: #ff4757;
+                text-decoration: none;
+            }
+
+
+            /* Modern Footer Mobile Responsive */
+            @media (max-width: 768px) {
+                .modern-footer-main {
+                    padding: 40px 0 0;
+                }
+
+                .footer-widget {
+                    margin-bottom: 30px;
+                }
+
+                .footer-social-legal {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 20px;
+                }
+
+                .footer-social-links {
+                    order: 2;
+                }
+
+                .footer .footer-legal .legal-links {
+                    display: inline-flex !important;
+                    flex-direction: row !important;
+                    text-align: center !important;
+                    gap: 15px !important;
+                    margin: 0 !important;
+                    padding: 5px 0 !important;
+                }
+
+                .footer .footer-legal .legal-links a {
+                    color: #b8b8b8 !important;
+                    font-size: 13px !important;
+                    padding: 0 !important;
+                    margin: 0 8px !important;
+                    border-radius: 0 !important;
+                    background: transparent !important;
+                    transform: none !important;
+                }
+
+                .footer .footer-legal .legal-links .separator {
+                    display: inline !important;
+                    color: #666 !important;
+                    margin: 0 8px !important;
+                }
+
+                /* Additional mobile styles for legal links */
+                .legal-links a {
+                    font-size: 13px !important;
+                    margin: 0 8px !important;
+                }
+
+                .separator {
+                    margin: 0 8px !important;
+                }
+
+                .footer .border-top p {
+                    font-size: 13px;
+                    text-align: center !important;
+                }
+            }
+        </style>
+
         <!-- Google tag (gtag.js) --> 
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-657ZXEZN1X"></script> 
         <script> 
@@ -87,56 +1198,68 @@
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
         <!-- Nav Bar Start -->
-       <div class="navbar navbar-expand-lg bg-light navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNavbar">
             <div class="container-fluid">
-                <a href="/">
-                    <img src="{% static 'img/website designer nigeria - logo.png' %}" class="desktop d-none d-lg-block" alt="Website Designer Nigeria">
-                </a>
-                <a href="/">
-                    <img src="{% static 'img/website designer nigeria logo.png' %}" class="mobile d-block d-lg-none" alt="Website Designer Nigeria">
-                </a>
-
-                <!-- Sticky Logo (Hidden by Default) -->
-                <div class="sticky-logo">
-                    <a href="/">
-                        <img src="{% static 'img/website designer nigeria logo.png' %}" alt="Web Design Company in Nigeria">
+                <div class="navbar-brand-wrapper">
+                    <a href="/" class="navbar-brand">
+                        <img src="{% static 'img/website designer nigeria logo.png' %}" class="desktop d-none d-lg-block" alt="Web Design Company in Lagos">
+                        <img src="{% static 'img/website designer nigeria logo.png' %}" class="mobile d-block d-lg-none" alt="Web Design Company in Lagos">
                     </a>
                 </div>
 
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto">
-                        <a href="/" class="nav-item nav-link">Home</a>
-                        <a href="{% url 'about-website-designer-nigeria' %}" class="nav-item nav-link">About Us</a>
-                        <a href="{% url 'services' %}" class="nav-item nav-link">Our Services</a>
-                
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'about-website-designer-nigeria' %}" class="nav-link">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'services' %}" class="nav-link">Our Services</a>
+                        </li>
+                        
                         <!-- Resources Dropdown -->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources</a>
-                            <div class="dropdown-menu resources-dropdown">
-                                <a href="{% url 'blogs' %}" class="dropdown-item">Blog</a>
-                                <a href="{% url 'tech_tips' %}" class="dropdown-item">Tech Tips</a>
-                                <a href="{% url 'tech_reviews' %}" class="dropdown-item">Tech Reviews</a>
-                                <a href="{% url 'pricing' %}" class="dropdown-item">Pricing</a>
-                                <a href="{% url 'advertise' %}" class="dropdown-item">Advertise</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Resources
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                                <a class="dropdown-item" href="{% url 'blogs' %}">
+                                    <i class="fas fa-blog mr-2"></i>Blog
+                                </a>
+                                <a class="dropdown-item" href="{% url 'tech_tips' %}">
+                                    <i class="fas fa-lightbulb mr-2"></i>Tech Tips
+                                </a>
+                                <a class="dropdown-item" href="{% url 'tech_reviews' %}">
+                                    <i class="fas fa-star mr-2"></i>Tech Reviews
+                                </a>
+                                <a class="dropdown-item" href="{% url 'pricing' %}">
+                                    <i class="fas fa-tags mr-2"></i>Pricing
+                                </a>
+                                <a class="dropdown-item" href="{% url 'advertise' %}">
+                                    <i class="fas fa-bullhorn mr-2"></i>Advertise
+                                </a>
                             </div>
-                        </div>
-                
+                        </li>
+                        
                         <!-- Courses Menu Item -->
-                        <a href="{% url 'courses' %}" class="nav-item nav-link position-relative">
-                            Courses
-                            <span class="badge badge-success new-label">new</span>
-                        </a>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-                    </div>
+                        <li class="nav-item">
+                            <a href="{% url 'courses' %}" class="nav-link">
+                                Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        </div>
+        </nav>
         <!-- Nav Bar End -->
 
         {% block maincontent %}
@@ -144,9 +1267,12 @@
 
     <!-- Whatsapp Widget Start-->
 
-        <div class="whatsapp-widget wow fadeInUp" data-wow-duration="2s">
-            <a href="https://wa.link/f2kd41"  target="_blank">
+        <div class="whatsapp-widget wow fadeInUp" data-wow-duration="2s" title="Chat with us on WhatsApp">
+            <a href="https://wa.link/f2kd41" target="_blank">
                 <i class="fab fa-whatsapp whatsapp-icon"></i>
+                <div class="whatsapp-notification">
+                    <span class="notification-dot"></span>
+                </div>
             </a>
         </div>
 
@@ -157,8 +1283,8 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-12">
-                        <h2>Ready to Create Your Dream Website?</h2>
-                        <p>Contact us! Let's bring your vision to life with our expert web development services.</p>
+                        <h2>Looking to Create a Website?</h2>
+                        <p>Contact Website Designer Nigeria - Top Web Design Company in Lagos. We develop the best web apps!</p>
                     </div>
                     <div class="col-lg-4 col-md-12 text-center">
                          <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>
@@ -169,34 +1295,85 @@
         <!-- Call to Action Banner End -->
 
         <!-- Footer Start -->
-        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+        <div class="modern-footer-main wow fadeIn" data-wow-delay="0.3s">
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="footer-info">
-                        <div class="footer-logo">
-                            <a href="/">
-                                <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Website Designer Nigeria" class="img-fluid">
-                            </a>
-                        </div>
-                        <p class="text-white">Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.</p>
-                       
-                        <p class="text-white">Lagos Office: 6, Otta road, Ijora Olopa, Lagos</p>
-                        <p class="text-white">Abuja Office: Jabi, Gwarinpa 900108, F.C.T Abuja</p>
-                        
-                        <div class="footer-menu">
-                            <p>08148882303</p>
-                            <p>contact@websitedesigner.ng</p>
-                        </div>
-                        <div class="footer-social">
-                            <a href="https://x.com/webdesignerng"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.tiktok.com/@websitedesigner.ng"><i class="fab fa-tiktok"></i></a>
-                            <a href="https://www.instagram.com/websitedesigner_ng"><i class="fab fa-instagram"></i></a>
-                        </div>
+                <div class="modern-footer-wrapper">
+                    <!-- Top Section -->
+                    <div class="footer-top-section">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="footer-widget">
+                                    <div class="widget-logo">
+                                        <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Web Design Company in Lagos" class="img-fluid">
+                                    </div>
+                                    <p class="widget-text">Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.</p>
+                                    <div class="footer-social-links mt-2">
+                                        <a href="https://x.com/webdesignerng" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://www.tiktok.com/@websitedesigner.ng" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                                        <a href="https://www.instagram.com/websitedesigner_ng" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-2 col-md-6 mb-4">
+                                <div class="footer-widget">
+                                    <h5 class="widget-title">Quick Links</h5>
+                                    <ul class="widget-links">
+                                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                                        <li><a href="{% url 'about-website-designer-nigeria' %}">About Us</a></li>
+                                        <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3 col-md-6 mb-4">
+                                <div class="footer-widget">
+                                    <h5 class="widget-title">Contact Info</h5>
+                                    <div class="contact-details">
+                                        <div class="contact-detail">
+                                            <i class="fas fa-phone"></i>
+                                            <span>08148882303</span>
+                                        </div>
+                                        <div class="contact-detail">
+                                            <i class="fas fa-envelope"></i>
+                                            <span>contact@websitedesigner.ng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3 col-md-6 mb-4">
+                                <div class="footer-widget">
+                                    <h5 class="widget-title">Our Offices</h5>
+                                    <div class="office-locations">
+                                        <div class="office-location">
+
+                                            <span>Otta road, Ijora Olopa, Lagos</span>
+                                        </div>
+                                        <div class="office-location">
+
+                                            <span>Jabi, Gwarinpa 900108, F.C.T Abuja</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
-                <div class="container copyright">
-                     <p class="mb-0 text-light">&copy; 2025 WDN Agency Ltd | <a href="/" class="text-light">Website Designer Nigeria</a>. All Rights Reserved.</p>
+            </div>
+            <!-- Terms & Privacy Links -->
+            <div class="footer-legal">
+                <div class="container-fluid">
+                    <div class="legal-links">
+                        <a href="{% url 'privacy' %}">Privacy Policy</a>
+                        <span class="separator">|</span>
+                        <a href="{% url 'terms' %}">Terms of Service</a>
+                    </div>
                 </div>
+            </div>
+            <!-- Copyright Section -->
+            <div class="container-fluid text-center py-3 border-top">
+                <p class="mb-0 text-light">&copy; 2025 <a href="/" class="text-light">Website Designer Nigeria</a>. All Rights Reserved.</p>
             </div>
         </div>
         <!-- Footer End -->
@@ -205,12 +1382,6 @@
         <!-- Back to top button -->
         <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
         
-        
-        <!-- Pre Loader -->
-        <div id="loader" class="show">
-            <div class="loader"></div>
-        </div>
-
         
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -230,21 +1401,90 @@
 
         <!-- Template Javascript -->
         <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Modern Navbar JavaScript -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const navbar = document.getElementById('mainNavbar');
+                const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+                
+                // Navbar scroll effect
+                function handleScroll() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+
+                // Active link highlighting
+                function setActiveLink() {
+                    const currentPath = window.location.pathname;
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === currentPath || 
+                            (currentPath === '/' && link.getAttribute('href') === '/')) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+
+                // Mobile menu auto-close on link click (but not for dropdown toggles)
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // Don't close navbar if this is a dropdown toggle
+                        if (this.classList.contains('dropdown-toggle')) {
+                            return; // Let the dropdown work normally
+                        }
+                        
+                        if (window.innerWidth <= 991) {
+                            const navbarCollapse = document.getElementById('navbarCollapse');
+                            if (navbarCollapse.classList.contains('show')) {
+                                $('.navbar-collapse').collapse('hide');
+                            }
+                        }
+                    });
+                });
+
+                // Close mobile navbar when dropdown items are clicked
+                const dropdownItems = document.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        if (window.innerWidth <= 991) {
+                            const navbarCollapse = document.getElementById('navbarCollapse');
+                            if (navbarCollapse.classList.contains('show')) {
+                                $('.navbar-collapse').collapse('hide');
+                            }
+                        }
+                    });
+                });
+
+                // Smooth scrolling for anchor links
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute('href').substring(1);
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Initialize
+                window.addEventListener('scroll', handleScroll);
+                setActiveLink();
+                handleScroll();
+            });
+        </script>
+
         {% block extra_js %}
         {% endblock %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let stickyLogo = document.querySelector(".sticky-logo");
-
-            window.addEventListener("scroll", function () {
-                if (window.scrollY > 100 && window.innerWidth > 991) { 
-                    stickyLogo.style.display = "block";
-                } else {
-                    stickyLogo.style.display = "none";
-                }
-            });
-        });
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -252,8 +1492,32 @@
             
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                // Store the natural height
+                const content = answer.querySelector('p');
+                const naturalHeight = content.scrollHeight + 40; // Add padding
+                
                 question.addEventListener('click', () => {
-                    item.classList.toggle('open');
+                    const isOpen = item.classList.contains('open');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('open');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            otherAnswer.style.maxHeight = '0px';
+                        }
+                    });
+                    
+                    // Toggle current item
+                    if (isOpen) {
+                        item.classList.remove('open');
+                        answer.style.maxHeight = '0px';
+                    } else {
+                        item.classList.add('open');
+                        answer.style.maxHeight = naturalHeight + 'px';
+                    }
                 });
             });
         });

@@ -10,73 +10,605 @@
 {% block og_description %}Advertise your business, brand, products and services on Website Designer Nigeria. Connect with your audience through a variety of Advert placement options{% endblock %}
 
 {% block extra_css %}
+<style>
+/* Modern Advertise Section Styling */
+.advertise-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 80px 0;
+    position: relative;
+}
+
+.advertise-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(239, 35, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(239, 35, 60, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.advertise-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section Headers */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #EF233C;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #636e72;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    line-height: 1.7;
+}
+
+/* Introduction Card */
+.intro-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.intro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border-color: rgba(239, 35, 60, 0.2);
+}
+
+.intro-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2d3436;
+    margin-bottom: 20px;
+}
+
+.intro-card p:last-child {
+    margin-bottom: 0;
+}
+
+.intro-card a {
+    color: #EF233C;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.intro-card a:hover {
+    color: #d63031;
+    text-decoration: underline;
+}
+
+/* Promotion Options Cards */
+.promotion-options {
+    margin: 80px 0;
+}
+
+.option-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    text-align: center;
+    height: 100%;
+}
+
+.option-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: #EF233C;
+}
+
+.option-card .icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.option-card:hover .icon {
+    transform: scale(1.1);
+}
+
+.option-card .icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.option-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 15px;
+}
+
+.option-card p {
+    color: #636e72;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Stats Section */
+.stats-section {
+    color: white;
+    padding: 60px 0;
+    margin: 80px 0;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(239, 35, 60, 0.1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.stats-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #EF233C;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Contact CTA Section */
+.contact-cta {
+    background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+    color: white;
+    padding: 60px 0;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.contact-cta .container {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-cta h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.contact-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-cta {
+    background: white;
+    color: #EF233C;
+    border: 2px solid white;
+    padding: 15px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-cta:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-cta-outline:hover {
+    background: white;
+    color: #EF233C;
+}
+
+/* Benefits Section */
+.benefits-section {
+    margin: 80px 0;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    background: #EF233C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.benefit-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.benefit-content h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 5px;
+}
+
+.benefit-content p {
+    color: #636e72;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .advertise-section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .intro-card {
+        padding: 40px 30px;
+    }
+
+    .option-card {
+        padding: 25px 20px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .contact-cta h3 {
+        font-size: 1.8rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .advertise-section {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .intro-card {
+        padding: 30px 20px;
+    }
+
+    .option-card {
+        padding: 20px 15px;
+    }
+
+    .option-card .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .option-card .icon i {
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .contact-cta {
+        padding: 40px 0;
+    }
+
+    .contact-cta h3 {
+        font-size: 1.6rem;
+    }
+
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .benefit-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+/* Animation Enhancement */
+.intro-card,
+.option-card,
+.benefit-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 {% endblock%}
 
 {% block maincontent %}
 
-<!-- Page Title Banner -->
-    <div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Advertise With Us</h1>
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">ADVERTISE WITH US</h1>
+                            <p class="mb-2 mt-lg-3">Promote Your Business to Thousands of Nigerians.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+<section class="advertise-section">
+    <div class="container">
+        <!-- Introduction Section -->
+        <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Advertise With Us</h2>
+        <p class="section-subtitle wow fadeInUp" data-wow-delay="0.3s">Promote your business to thousands of engaged Nigerians every day</p>
+        
+        <div class="intro-card wow fadeInUp" data-wow-delay="0.4s">
+            <p>Looking for a way to get your brand in front of thousands of Nigerians every day? You're in the right place. You found us, and so did thousands of Nigerians all over the country. Take advantage of our mass social and organic traffic to showcase your products and services to a highly engaged audience.</p>
+            
+            <p><a href="https://www.websitedesigner.ng/">Website Designer Nigeria</a> attracts a diverse range of readers and visitors across Nigeria — from young professionals and entrepreneurs to students and tech-savvy shoppers — all actively looking for the latest products, services, and solutions.</p>
+            
+            <p>When you advertise with us, you're not just placing an ad — you're connecting directly with real people who trust and engage with our content daily.</p>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section wow fadeIn" data-wow-delay="0.5s">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Monthly Visitors</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">30K+</span>
+                            <span class="stat-label">Social Followers</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotion Options -->
+        <div class="promotion-options">
+            <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Our Promotion Options</h2>
+            <p class="section-subtitle wow fadeInUp" data-wow-delay="0.3s">Choose from our variety of advertising solutions to maximize your reach</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-rectangle-ad"></i>
+                        </div>
+                        <h4>Banner Ads</h4>
+                        <p>Eye-catching banner advertisements on our homepage and internal pages to maximize visibility and engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <h4>Sponsored Blog Posts</h4>
+                        <p>High-quality, SEO-optimized content that naturally promotes your brand while providing value to our readers.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h4>Social Media Campaigns</h4>
+                        <p>Amplify your reach through our social media channels with targeted campaigns and strategic content promotion.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <h4>Text Ads</h4>
+                        <p>Subtle yet effective text-based advertisements seamlessly integrated into our content for better user experience.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-window-restore"></i>
+                        </div>
+                        <h4>Popup Campaigns</h4>
+                        <p>Strategic popup advertisements designed to capture attention without disrupting the user experience.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
+                    <div class="option-card">
+                        <div class="icon">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h4>Newsletter Inclusion</h4>
+                        <p>Feature your brand in our regular newsletters sent to thousands of subscribers across Nigeria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta wow fadeInUp" data-wow-delay="0.5s">
+            <div class="container">
+                <h3 class="text-white">Ready to Get Started?</h3>
+                <p>Contact us today to discuss advertising opportunities and grow your business with us.</p>
+                <div class="cta-buttons">
+                    <a href="mailto:business@websitedesigner.ng" class="btn-cta">
+                        <i class="fas fa-envelope"></i> Email Us
+                    </a>
+                    <a href="https://wa.me/+2349058991274" target="_blank" class="btn-cta btn-cta-outline">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn-cta btn-cta-outline">
+                        <i class="fas fa-phone"></i> Contact Form
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-
-<!-- Page Title Banner End -->
-
-<!-- Services Description -->
-<div class="container-fluid py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-12 text-center">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>Promote your Business</p>
-                <h2>Advertise With Us</h2>
-            </div>
-            <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">Looking for a way to get your brand in front of thousands of Nigerians every day? You’re in the right place. You found us, and so did thousands of Nigerians all over the country. Take advantage of our mass social and organic traffic to showcase your products and services to a highly engaged audience.</p>
-            <p class="mb-4 wow fadeInUp" data-wow-delay="0.3s"><a href="https://www.websitedesigner.ng/">Website Designer Nigeria</a> attracts a diverse range of readers and visitors across Nigeria — from young professionals and entrepreneurs to students and tech-savvy shoppers — all actively looking for the latest products, services, and solutions.</p>
-            <p class="mb-4 wow fadeInUp" data-wow-delay="0.4s">When you advertise with us, you’re not just placing an ad — you’re connecting directly with real people who trust and engage with our content daily.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Our Promotion Options -->
-<div class="container-fluid py-5">
-    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-        <p>Attract More Customers</p>
-        <h2>Our Promotion Options</h2>
-    </div>
-    <div class ="wow zoomIn" data-wow-delay="0.2s">
-        <p>Our Advertising Options Include:</p>
-        <ul>
-            <li>Banner Ads (Homepage and/or Internal Pages)</li>
-            <li>Sponsored Blog Posts</li>
-            <li>Social Media Campaigns</li>
-            <li>Text Ads</li>
-            <li>Popup Campaigns</li>
-        </ul>
-    </div>
-</div>
-
-<!-- contact us -->
-<div class="portfolio section-margin" id="portfolio">
-    <div class="container-fluid">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>Ready to get started?</p>
-            <h2>Contact Us</h2>
-        </div>
-        <p class ="wow zoomIn" data-wow-delay="0.2s">Get in touch with us today to discuss advertising opportunities. Email us at <a href="mailto:business@websitedesigner.ng"><u>business@websitedesigner.ng</u></a>.</p>
-    
-    </div>
-</div>
-<!-- Portfolio End -->
-
-
+</section>
 
 {% endblock %}
+
 {% block extra_js %}
-
-
+<script src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script>
+    // Initialize WOW
+    new WOW().init();
+</script>
 {% endblock %}

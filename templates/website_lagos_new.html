@@ -1,0 +1,358 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Website Designer in Lagos - Web Design Lagos{% endblock %}
+
+{% block meta_description %}
+Web Design Lagos - We are the best website designer in Lagos Nigeria providing top web development services to businesses seeking to create websites.
+{% endblock %}
+
+{% block og_title %}Website Designer in Lagos - Web Design Lagos{% endblock %}
+{% block og_description %}
+Web Design Lagos - We are the best website designer in Lagos Nigeria providing top web development services to businesses seeking to create websites.
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Minimal Clean Styling */
+.clean-section {
+    padding: 60px 0;
+}
+
+.clean-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.clean-section p {
+    color: #636e72;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.clean-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f3f4;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.clean-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.clean-card i {
+    font-size: 2.5rem;
+    color: #EF233C;
+    margin-bottom: 20px;
+}
+
+.clean-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 15px;
+}
+
+.clean-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #EF233C;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.clean-btn:hover {
+    background: #d63031;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f3f4;
+    color: #636e72;
+}
+
+.feature-list li:before {
+    content: '✓';
+    color: #EF233C;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.clean-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 20px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    background: #EF233C;
+    color: #fff;
+}
+
+.faq-answer {
+    padding: 20px;
+    color: #636e72;
+    line-height: 1.6;
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .clean-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block maincontent %}
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">WEBSITE DESIGNER IN LAGOS</h1>
+                            <p class="mb-2 mt-lg-3">PROFESSIONAL WEB DESIGN SERVICES IN LAGOS, NIGERIA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="clean-section">
+        <div class="container">
+            <h2>Best Website Designer in Lagos</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="text-center">Website Designer Nigeria is the leading <a href="https://en.wikipedia.org/wiki/Web_design" target="_blank">web design</a> company in Lagos, providing comprehensive website development services to businesses across Nigeria.</p>
+                    <p class="text-center">Based in Lagos, we specialize in creating modern, responsive websites that help businesses establish a strong online presence and reach their target audience effectively.</p>
+                    <p class="text-center">Our expert team of designers and developers has successfully delivered over 500 websites for Lagos-based businesses, ranging from small startups to large corporations.</p>
+                    <div class="text-center mt-4">
+                        <a href="#services" class="clean-btn">Our Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="clean-section" style="background: #f8f9fa;">
+        <div class="container">
+            <h2>Web Design Services in Lagos</h2>
+            <div class="clean-grid">
+                <div class="clean-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h4>Custom Web Design</h4>
+                    <p>Unique website designs tailored to your brand identity and business objectives in Lagos market.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Responsive Design</h4>
+                    <p>Mobile-friendly websites that work perfectly on all devices used by Lagos consumers.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4>E-commerce Development</h4>
+                    <p>Online stores with Nigerian payment integration for Lagos-based retail businesses.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-search"></i>
+                    <h4>SEO Optimization</h4>
+                    <p>Search engine optimization to help Lagos businesses rank higher in Google search results.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-tools"></i>
+                    <h4>Website Maintenance</h4>
+                    <p>Ongoing support and maintenance services for Lagos business websites.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h4>Speed Optimization</h4>
+                    <p>Fast-loading websites optimized for Nigeria's internet infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="clean-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 style="text-align: left;">Why Choose Us for Web Design in Lagos?</h2>
+                    <ul class="feature-list">
+                        <li>Local expertise in Lagos market trends</li>
+                        <li>Professional team based in Lagos</li>
+                        <li>Fast turnaround times for urgent projects</li>
+                        <li>Affordable pricing for Lagos businesses</li>
+                        <li>Free consultations and project estimates</li>
+                        <li>Post-launch support and training</li>
+                        <li>Integration with Nigerian payment systems</li>
+                        <li>SEO optimization for Lagos searches</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="clean-card" style="margin-top: 0;">
+                        <h4>Get Your Website Today</h4>
+                        <p>Ready to establish your online presence in Lagos? Contact us for a free consultation and quote for your website project.</p>
+                        <a href="/contact/" class="clean-btn">Get Free Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="clean-section" style="background: #f8f9fa;">
+        <div class="container">
+            <h2>Our Web Design Process</h2>
+            <div class="clean-grid">
+                <div class="clean-card">
+                    <i class="fas fa-comments"></i>
+                    <h4>1. Consultation</h4>
+                    <p>We meet with you to understand your business goals and website requirements.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <h4>2. Design</h4>
+                    <p>Our designers create custom mockups and wireframes for your approval.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-code"></i>
+                    <h4>3. Development</h4>
+                    <p>We build your website using modern technologies and best practices.</p>
+                </div>
+                <div class="clean-card">
+                    <i class="fas fa-rocket"></i>
+                    <h4>4. Launch</h4>
+                    <p>We deploy your website and provide training on how to manage it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="clean-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much does a website cost in Lagos?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Website costs in Lagos vary depending on complexity and features. Basic websites start from ₦150,000, while e-commerce sites start from ₦500,000. Contact us for a custom quote.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does it take to build a website?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Typical websites take 2-4 weeks to complete, depending on the scope and complexity. E-commerce sites may take 4-8 weeks. We provide detailed timelines during consultation.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you provide hosting services?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer reliable web hosting services optimized for Nigerian websites, including SSL certificates, daily backups, and 24/7 support.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can you update my existing website?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! We can redesign, update, or add new features to your existing website. We also provide ongoing maintenance and support services.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer SEO services?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we provide comprehensive SEO services to help your Lagos business rank higher in search results and attract more customers online.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="clean-section" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="text-center">
+                <h2>Ready to Build Your Website?</h2>
+                <p>Join hundreds of successful Lagos businesses with professional websites that drive results.</p>
+                <a href="/contact/" class="clean-btn">Start Your Project</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

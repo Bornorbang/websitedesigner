@@ -1,8 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
-{% block maincontent %}
 
-<!-- Hero Section -->
+{% block maincontent %}
 <section class="hero" id="home" style="position:relative;">
     <div class="hero-overlay"></div>
     <div class="container-fluid">
@@ -10,68 +9,125 @@
             <div class="col-md-8 col-12">
                 <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
                     <div class="hero-text">
-                        <p class="mb-2 mt-lg-3">WELCOME TO</p>
-                        <h1 class="mb-2">WEBSITE DESIGNER NIGERIA</h1>
-                        <h2 class="mb-3">Need to create a website?</h2>
-                        <div class="typed-text mb-3">, Our Website Development Services:, Ecommerce Website Design, Custom Web Development, WordPress Development, Shopify Store Setup, Search Engine Optimization (SEO), Mobile App Development</div>
+                        <h1 class="mb-2 mt-lg-2">WEBSITE DESIGNER NIGERIA</h1>
+                        <p class="mb-2 mt-lg-3">Best Web Designers in Nigeria || Top Web Design Company in Lagos</p>
+
                     </div>
-                    <div class="hero-btn mt-4">
-                        <a class="btn" href="mailto:contact@websitedesigner.ng">EMAIL</a>
-                        <a class="btn" href="https://wa.link/f2kd41" target="_blank">WHATSAPP</a>
-                    </div>
-                    <div class="accredited mt-5 mb-2">
-                        <img src="{% static 'img/websitedesigner1.png' %}" alt="website designer nigeria">
+                    <div class="hero-btn mt-lg-4">
+                        <a class="btn" href="mailto:contact@websitedesigner.ng">
+                            <i class="fas fa-envelope"></i> EMAIL
+                        </a>
+                        <a class="btn" href="https://wa.link/f2kd41" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WHATSAPP
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-none d-md-flex justify-content-center align-items-center">
-                <img src="{% static 'img/Website Designer Nigeria.png' %}" alt="Website Designer Nigeria" class="img-fluid wow fadeInRight" data-wow-delay="0.3s" style="max-width:90%;">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Announcement Marquee -->
-<div class="announcement-container">
-    <div class="announcement-wrapper">
-        <div class="announcement-marquee">
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be informed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be informed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-        </div>
-    </div>
-</div>
-
 <!-- About Section -->
-<section id="about" class="section-margin">
+<section id="about" class="about-section">
     <div class="container-fluid">
         <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
             <p>ABOUT US</p>
             <h2>Website Designer Nigeria</h2>
         </div>
-        <div class="row align-items-center">
-            <div class="col-lg-12 wow fadeInLeft" data-wow-delay="0.2s">
-                <div>
-                    <p><strong>Website Designer Nigeria</strong> are the <strong>best web designers in Nigeria</strong>. We are a subsidiary of WDN Agency Ltd, passionate about helping businesses in the retail and corporate industries fully leverage the latest <a href="https://www.sciencedirect.com/topics/computer-science/software-technology">software technologies</a>. With offices in Lagos and Abuja, our tech team is dedicated to create websites that meet your exact needs because we pride ourselves on being the <strong>best web designers in Nigeria</strong>.</p>
-                    <h3 class="mt-4">Our Key Services</h3>
-                    <ul>
-                        <li><strong>Custom Website Design</strong>: As a top-rated website design company in nigeria, we provide <b>website development services</b> that reflect your brand and meet your specific business goals. Our designs are responsive, user-friendly, and SEO-optimized to ensure your website stands out in search engines.</li>
-                        <li><strong>E-Commerce Website Design</strong>: We are expert <strong>website design company in nigeria</strong> that build e-commerce solutions that enable your business to accept payments directly to your bank account. Our e-commerce sites are fully optimized for a seamless shopping experience for your customers.</li>
-                        <li><strong>Search Engine Optimization</strong>: We help you grow your brand’s online presence through effective SEO strategies that build your organic presence and drive traffic to your website.</li>
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="about-content-card">
+                    <div class="about-intro">
+                        <p>Website Designer Nigeria are the best web designers in Nigeria. We are passionate about helping businesses in the retail, finance, health and corporate industries fully leverage the latest <a href="https://www.sciencedirect.com/topics/computer-science/software-technology">software technologies</a>. As a top web design company in Lagos and Abuja, our tech team is dedicated to create websites that meet your exact needs because we pride ourselves on being the best web designers in Nigeria.</p>
+                        <p class="mt-4">Additionally, we help you integrate the latest <a href ="https://www.globalaccelerex.com/news/top-9-online-payment-gateways-in-nigeria">payment gateways</a>, enabling you to accept payments from debit and credit cards both locally and internationally. This integration ensures smooth transactions for your customers no matter where they are located.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
+                <div class="about-stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Award Winning</h4>
+                            <p>Best Web Designers in Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>500+ Clients</h4>
+                            <p>Satisfied customers nationwide</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Lagos & Abuja</h4>
+                            <p>Offices in major cities</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>24/7 Support</h4>
+                            <p>Always here to help you</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services, Mission & Vision Cards -->
+        <div class="row">
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Our Key Services</h3>
+                    <ul class="feature-list">
+                        <li><strong>Web Development</strong>: We create custom websites developed to your business needs and goals.</li>
+                        <li><strong>E-commerce Development</strong>: Our <a href="{% url 'ecommerce' %}">ecommerce web design</a> provides you online stores that drive sales.</li>
+                        <li><strong>SEO</strong>: We help you grow your brand's organic traffic via our world's leading <a href="{% url 'seo_services' %}">SEO services</a>.</li>
                     </ul>
                 </div>
-                <div class="about-image-container mb-4">
-            <p>Additionally, we help you integrate the latest <a href ="https://www.globalaccelerex.com/news/top-9-online-payment-gateways-in-nigeria">payment gateways</a>, enabling you to accept payments from debit and credit cards both locally and internationally. This integration ensures smooth transactions for your customers no matter where they are located.</p>
-            <br>
-            <h3>Our Mission</h3>
-            <ul>
-                <li>To help businesses build their brand through professional websites that drive in sales.</li>
-                <li>To <strong>create websites</strong> and software solutions that perfectly align with each client’s specific needs and goals.</li>
-            </ul>
-            <br>
-            <h3>Our Vision</h3>
-            <p>To become the <strong>best web designers in Nigeria</strong> known for delivering exceptional, results-driven web app solutions under the trusted leadership of WDN Agency Ltd.</p>
+            </div>
+            
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <ul class="feature-list">
+                        <li>To help businesses build their brand through professional websites that drive in sales.</li>
+                        <li>To create websites and software solutions that perfectly align with each client's specific needs and goals.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <ul class="feature-list">
+                        <li>To become the best web designers in Nigeria known for delivering exceptional, results-driven web app solutions.</li>
+                        <li>To empower businesses & individuals across Africa with premium <a href="https://crosstechcom.com/the-6-forms-of-digital-solution/">digital solutions</a> that drive growth and success.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </section>
@@ -82,7 +138,11 @@
         <p>Technologies We Use</p>
         <h2>Our Tech Stack</h2>
     </div>
-    <p>We are highly proficient in HTML, CSS, Javascript, Python, Django, Bootstrap, MySQL, React JS, Woocommerce, Wordpress, Shopify and many other tools.</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+            <p class="text-center">We are highly proficient in HTML, CSS, Javascript, Python, Django, Bootstrap, MySQL, React JS, Woocommerce, Wordpress, Shopify and many other tools.</p>
+        </div>
+    </div>
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <!-- Slides -->
@@ -202,7 +262,7 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="service-text">
-                        <h3>SM Management</h3>
+                        <h3>Social Media Management</h3>
                         <p>
                             We manage your social media, creating engaging content and growing your online presence. Let us help you connect with and build your audience.
                         </p>
@@ -214,32 +274,14 @@
 </div>
 <!-- Service End -->
 
-<!-- Banner Start -->
-<div class="banner section-margin wow zoomIn" data-wow-delay="0.1s">
-    <div class="container-fluid">
-        <div class="section-header text-center">
-            <p style="color: #000;">This Month Discount</p>
-            <h2>Get <span style="color: #000;">20%</span> Discount</h2>
-        </div>
-        <div class="container-fluid banner-text text-center">
-            <p>
-                Hello, welcome to our page! To spread some great cheer, we're offering an exclusive 20% discount on all our Website Development services. Whether you're looking to create a website, launch new ecommerce platform for your business, or build a mobile app, now is the perfect time to get started and save big. Take advantage of this 
-                limited-time offer to elevate your online presence and set your business up for success in the new year. Don't miss out—this benevolent offer won’t last long!
-            </p>
-            <a class="btn" href="https://wa.link/f2kd41" target=_blank>Order Now</a>
-        </div>
-    </div>
-</div>
-<!-- Banner End -->
-
 <!-- Portfolio Start -->
 <div class="portfolio section-margin" id="portfolio">
     <div class="container-fluid">
         <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>Sample Designs</p>
-            <h2>Portfolio</h2>
+            <p>Some Examples of Our Works</p>
+            <h2>Our Portfolio</h2>
         </div>
-        <p>As the top web designer in Lagos and a leading web design company in Nigeria, we've poured our hearts into hundreds of projects.Our portfolio is available for your viewing pleasure only on request!</p>
+        <p>As the top web designer in Nigeria and a leading web design company in Lagos, we've poured our hearts into hundreds of projects. Below are some of our works:</p>
         <div class="row">
             <!-- Portfolio Item 1 -->
             <div class="col-lg-4 col-md-6">
@@ -263,7 +305,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
                     <div class="image-container">
-                        <img src="{% static 'img/kofoshi.png' %}" alt="WDN Agency Ltd" class="scrolling-images">
+                        <img src="{% static 'img/kofoshi.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
                     </div>
                     <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Food Web Design</h3></a>
                 </div>
@@ -299,7 +341,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
                     <div class="image-container">
-                        <img src="{% static 'img/owodex.png' %}" alt="WDN Agency Ltd" class="scrolling-images">
+                        <img src="{% static 'img/owodex.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
                     </div>
                     <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Fintech Web Design</h3></a>
                 </div>
@@ -308,7 +350,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
                     <div class="image-container">
-                        <img src="{% static 'img/empowering.png' %}" alt="WDN Agency Ltd" class="scrolling-images">
+                        <img src="{% static 'img/empowering.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
                     </div>
                     <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Church Web Design</h3></a>
                 </div>
@@ -317,7 +359,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
                     <div class="image-container">
-                        <img src="{% static 'img/graceempoweredearlyyears.png' %}" alt="WDN Agency Ltd" class="scrolling-images">
+                        <img src="{% static 'img/graceempoweredearlyyears.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
                     </div>
                     <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">NGO Web Design</h3></a>
                 </div>
@@ -327,171 +369,17 @@
 </div>
 <!-- Portfolio End -->
 
-
-<!-- Testimonial Start -->
-<div class="section-margin">
-    <div class="testimonial wow fadeInUp" data-wow-delay="0.1s" id="reviews">
-        <div class="container">
-            <div class="testimonial-icon">
-                <i class="fa fa-quote-left"></i>
-            </div>
-            <div class="owl-carousel testimonials-carousel">
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQEr1pd1OjcYwQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713774180174?e=2147483647&v=beta&t=SzNOpROm_Ya-3icVggZvFIfkPRi3X6oac5ux1E5sEtU" alt="web designer in Lagos">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            "These guys did an amazing job on my website. Not only does it look professional and modern, but they also ensured it’s optimized for search engines. 
-                            Thanks to these best web designers in nigeria, I’ve noticed my site ranking higher, and it’s helping bring in more business."
-                        </p>
-                        <h3>Tunde Adeyanju</h3>
-                        <h4>Director of Infrastructure</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/C4D03AQFGBj-oYRuqMQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1595430338649?e=2147483647&v=beta&t=m1I2c2NFuRIxbRuhGjwS1cSJM116Cfurh83zXzZZsRg" alt="Website Designer Nigeria">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            I had high hopes for my website, and Website Designer Nigeria delivered beyond expectations. They designed a responsive website that’s easy to use and 
-                            visually appealing. My search engine rankings have gone up, and I’ve seen a steady increase in visitors.
-                        </p>
-                        <h3>Umar Babaginda</h3>
-                        <h4>Regional Chairman</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGUn7U6vzY_lg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1697792557444?e=2147483647&v=beta&t=7m_OMSi6GQDUpCEJcNxjRH1XX-_-yGaZQFQXRPu5TiM" alt="web designer in Lagos">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            I am beyond impressed with the web design services I was offered. These people created a beautiful website for 
-                            my business and gave me more than what I asked for. I still run to them when I need help and they answer promptly.
-                        </p>
-                        <h3>Cyril Humble</h3>
-                        <h4>Entrepreneur</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFm8vGZyczuCQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1726560286835?e=2147483647&v=beta&t=7X9IRQRx24Z7-i5j1KkypMfIjdQ_s1HUupNtiAHgroM" alt="best web designers in nigeria">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            I have been working with this website design company in nigeria 
-                            for a few months now, and the experience has been amazing. Their services are affordable, sites are beautiful and above all they are highly professional.
-                        </p>
-                        <h3>Osagie Rejoice</h3>
-                        <h4>Product Manager</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHCeS1boG9szA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1687902489902?e=2147483647&v=beta&t=IYvvN72LH4FXpWzQ_u90NVKmd-3VC83qlwP9WmzsDaw" alt="web designer in Lagos">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            I needed to build a website for my business and I stumbled upon these guys and it has been wonderful ever since. My business has since grown tremendously and
-                            I get a huge number of organic customers too. 
-                        </p>
-                        <h3>Funmilayo Ojo</h3>
-                        <h4>Online Retailer</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGQgL9M0bMEoA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1710448563495?e=2147483647&v=beta&t=l2oBulX-bZIFSMVPEMnoKTJcZTBFqR804fVtuZu77rk" alt="WDN Agency Ltd">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            When I wanted to create a website for my blog, I was worried about finding a team that understood my vision. 
-                            Website Designer Nigeria not only understood it but made it even better. The process was smooth, and the results are stunning!
-                        </p>
-                        <h3>Sholadele Akanmu</h3>
-                        <h4>Blogger</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/C4D03AQEXy8VhXxxhbA/profile-displayphoto-shrink_200_200/0/1644495647653?e=2147483647&v=beta&t=mhCF7GP-1fwLaeNhkw92TxTgkaKQW6oo3Dxlxby-nxk" alt="website designer nigeria">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            Website Designer Nigeria made my dream of launching an e-commerce site a reality. They didn’t just develop a website; they designed 
-                            a seamless shopping experience for my customers. I’m already seeing the impact on my sales. Highly recommend them!"
-                        </p>
-                        <h3>Toechi Johnson</h3>
-                        <h4>Entrepreneur</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGqsHzOG2Hgbw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718296633504?e=2147483647&v=beta&t=jFZKfJFuxG8HDumjyvgi-yBZfTVsCovesHOggEn0KHA" alt="website designer nigeria">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            I couldn’t have asked for a better experience. Best website designers in Nigeria brought my vision to life, building a website that perfectly reflects my brand. 
-                            The user-friendly design and attention to detail are just incredible. I’m beyond happy with the results."
-                        </p>
-                        <h3>Emeka Nwaeze</h3>
-                        <h4>Forex Tutor</h4>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-img">
-                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQF_xqh2QLavDg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1586253447777?e=2147483647&v=beta&t=1KlWmVqP7w1siz0scnHdySqdxPg1iX-NAKU5ryX7uyw" alt="web designer in Lagos">
-                    </div>
-                    <div class="testimonial-text">
-                        <p>
-                            As a small business owner, finding a website design company in nigeria was so important to me. They didn’t just create a website; 
-                            they built a platform that attracts new customers daily. Their services are top-notch and affordable. I’m so grateful!"
-                        </p>
-                        <h3>Paul Elijah</h3>
-                        <h4>Dropshipper</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial End -->
-
-
-<!-- Contact Start -->
-<div id="contact" class="section-margin">
-    <div class="container-fluid">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>REACH OUT NOW</p>
-            <h2>CONTACT US</h2>
-        </div>
-        <p>
-            Looking to create a website? We are delighted to work with you, call our below, chat us on whatsapp
-            or send an email and a member of our team will reach out to you immediately. We can’t wait to work with you!
-        </p>
-        <p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4685.226267937333!2d7.4115556622823515!3d9.082888759834516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7517a4d485d5%3A0x549694aea9d3d3a3!2s32%20Rd%2C%20Jabi%2C%20Gwarinpa%20900108%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1733309686413!5m2!1sen!2sng" 
-                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </p>
-    </div>
-</div>
-<!-- Contact End -->
-
 <!-- Blog Start -->
 <div class="blog section-margin" id="blog">
     <div class="container-fluid">
-        <div class="section-header text-center">
+        <div class="section-header text-center wow fadeInUp" data-wow-delay="0.1s">
             <p>From Blog</p>
             <h2>Latest Articles</h2>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             {% for blog in recent_blogs %}
-            <div class="col-lg-6">
-                <div class="blog-item">
+            <div class="col-lg-6 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.{{ forloop.counter }}s">
+                <div class="blog-item h-100">
                     <div class="blog-img">
                         <img src="{{ blog.image.url }}" alt="Web Design Company in Lagos">
                     </div>
@@ -502,16 +390,27 @@
                             <p><a href="{% url 'category_posts' category_slug=blog.category.slug %}"><i class="far fa-list-alt"></i>{{ blog.category }}</a></p>
                             <p><i class="far fa-calendar-alt"></i>{{ blog.date|date:"F d, Y" }}</p>
                         </div>
-                        <div style="word-wrap: break-word;">
+                        <div>
                             <p>
-                                {{ blog.content|truncatewords:30|safe|striptags }}
+                                {{ blog.content|truncatewords:25|safe|striptags }}
                             </p>
                         </div>
-                        <a class="btn" href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">Read More <i class="fa fa-angle-right"></i></a>
+                        <a class="btn" href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">
+                            Read More <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             {% endfor %}
+        </div>
+        
+        <!-- View All Blogs Button -->
+        <div class="row">
+            <div class="col-12 text-center mt-4 wow fadeInUp" data-wow-delay="0.5s">
+                <a href="{% url 'blogs' %}" class="btn btn-lg">
+                    View All Articles <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -556,7 +455,7 @@
                             <span class="faq-icon">+</span>
                         </h3>
                         <div class="faq-answer">
-                            <p>As Nigeria's number 1 Website Developer, we also offer other digital services: SEO, Graphics Design, Mobile App Development, SM Management, Content Management, e.t.c </p>
+                            <p>As the number 1 web design company in Lagos, we also offer other digital services: SEO, Graphics Design, Mobile App Development, SM Management, Content Management, e.t.c </p>
                         </div>
                     </div>
                     <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
@@ -582,5 +481,98 @@
 </div>
 <!-- FAQ End -->
 
+<script>
+// Modern scroll reveal animation
+function reveal() {
+    const reveals = document.querySelectorAll('.section-margin, .service-item, .portfolio-card, .blog-item, .faq-item');
+    
+    reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+            element.classList.add('reveal', 'active');
+        }
+    });
+}
+
+// Smooth parallax effect for hero section
+function parallaxEffect() {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+}
+
+// Enhanced typing animation
+function initTypingAnimation() {
+    const typed = document.querySelector('.typed-cursor');
+    if (typed) {
+        setInterval(() => {
+            typed.style.opacity = typed.style.opacity === '0' ? '1' : '0';
+        }, 500);
+    }
+}
+
+// Initialize all animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add reveal class to elements
+    const elements = document.querySelectorAll('.section-margin, .service-item, .portfolio-card, .blog-item, .faq-item');
+    elements.forEach(el => el.classList.add('reveal'));
+    
+    // Initial reveal check
+    reveal();
+    
+    // Initialize typing animation
+    initTypingAnimation();
+    
+    // Add scroll event listeners
+    window.addEventListener('scroll', () => {
+        reveal();
+        requestAnimationFrame(parallaxEffect);
+    });
+    
+    // Enhanced button hover effects
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+// Add stagger animation to service items
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    const portfolioItems = document.querySelectorAll('.portfolio-card');
+    portfolioItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+</script>
 
 {% endblock %}

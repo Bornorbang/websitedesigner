@@ -1,223 +1,579 @@
 {% extends 'main.html' %}
 {% load static %}
 
+{% block title %}{{ category.name }} - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Browse {{ category.name }} articles and insights from Website Designer Nigeria. Latest posts about {{ category.name }} and related topics.{% endblock %}
+
+{% block og_title %}{{ category.name }} - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Browse {{ category.name }} articles and insights from Website Designer Nigeria. Latest posts about {{ category.name }} and related topics.{% endblock %}
+
 {% block extra_css %}
 <style>
-    /* Category Banner */
-    .category-banner {
-        background-color: #f4f4f4;
-        padding: 40px 0;
+    /* Modern Blog Container */
+    .blog-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: 100vh;
+    }
+
+    /* Blog Header Section */
+    .blog-header {
         text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .blog-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .blog-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b);
+        border-radius: 2px;
+    }
+
+    .blog-header p {
+        font-size: 1.1rem;
+        color: #636e72;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+
+    /* Row Layout */
+    .blog-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    /* Main Blog Section */
+    .blog-main {
+        flex: 0 0 65%;
+        max-width: 65%;
+    }
+
+    /* Modern Blog Post Card */
+    .blog-post {
+        margin-bottom: 40px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(239, 35, 60, 0.1);
+    }
+
+    .blog-post:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        border-color: #EF233C;
+    }
+
+    /* Blog Thumbnail */
+    .blog-thumbnail {
+        position: relative;
+        overflow: hidden;
+        height: 280px;
+    }
+
+    .blog-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .blog-post:hover .blog-thumbnail img {
+        transform: scale(1.05);
+    }
+
+    /* Blog Content */
+    .blog-content {
+        padding: 30px;
+    }
+
+    .blog-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #2d3436;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+
+    .blog-content h2 a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .blog-content h2 a:hover {
+        color: #EF233C;
+    }
+
+    /* Blog Meta Info */
+    .blog-meta-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .blog-meta-info p {
+        margin: 0;
+        color: #636e72;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .blog-meta-info p i {
+        color: #EF233C;
+        width: 16px;
+    }
+
+    .blog-meta-info a {
+        color: #636e72;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .blog-meta-info a:hover {
+        color: #EF233C;
+    }
+
+    /* Blog excerpt */
+    .blog-content p {
+        color: #636e72;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    /* Modern Read More Button */
+    .btn-read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
+    }
+
+    .btn-read-more:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(239, 35, 60, 0.4);
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* Sidebar Styling */
+    .blog-sidebar {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+
+    .sidebar-widget {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
         margin-bottom: 30px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        transition: all 0.3s ease;
     }
 
-    .category-banner h1 {
-        font-size: 36px;
-        color: #333;
-        font-weight: bold;
+    .sidebar-widget:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        border-color: rgba(239, 35, 60, 0.2);
     }
 
-    /* Blog Item */
-    .blog-item {
-        margin-bottom: 30px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .sidebar-widget h3 {
+        font-size: 1.3rem;
+        color: #2d3436;
+        margin-bottom: 20px;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 10px;
     }
 
-    .blog-item img {
-        max-width: 90%;
-        border-radius: 10px;
+    .sidebar-widget h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: #EF233C;
+        border-radius: 2px;
     }
 
-    .blog-item h2 {
-        font-size: 24px;
-        margin-top: 15px;
+    /* Sidebar Lists */
+    .sidebar-widget ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
-    .blog-item p {
-        font-size: 16px;
-        color: #666;
-        word-wrap: break-word;
+    .sidebar-widget ul li {
+        margin-bottom: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f3f4;
+        transition: all 0.3s ease;
     }
 
-    /* Pagination */
+    .sidebar-widget ul li:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .sidebar-widget ul li:hover {
+        padding-left: 10px;
+        background: rgba(239, 35, 60, 0.02);
+    }
+
+    .sidebar-widget ul li a {
+        color: #636e72;
+        text-decoration: none;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .sidebar-widget ul li a:hover {
+        color: #EF233C;
+    }
+
+    .sidebar-widget ul li a::before {
+        content: '▶';
+        color: #EF233C;
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-widget ul li:hover a::before {
+        transform: translateX(3px);
+    }
+
+    /* Banner Images */
+    .sidebar-banner {
+        text-align: center;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-banner:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-banner img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-banner:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Modern Pagination */
     .pagination {
         display: flex;
         justify-content: center;
-        margin-top: 20px;
+        align-items: center;
+        gap: 10px;
+        margin-top: 40px;
+        flex-wrap: wrap;
     }
 
     .pagination a,
     .pagination span {
-        margin: 0 5px;
-        padding: 10px 15px;
-        border: 1px solid #ddd;
-        color: #333;
+        padding: 12px 18px;
+        border-radius: 10px;
         text-decoration: none;
-        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .pagination a {
+        background: #fff;
+        color: #636e72;
+        border-color: #e9ecef;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .pagination a:hover {
+        background: #EF233C;
+        color: #fff;
+        border-color: #EF233C;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(239, 35, 60, 0.3);
     }
 
     .pagination .active {
-        background-color: #EF233C;
+        background: #EF233C;
         color: #fff;
         border-color: #EF233C;
+        box-shadow: 0 5px 20px rgba(239, 35, 60, 0.3);
     }
 
-    /* Sidebar Styles */
-    .sidebar {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 60px 30px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .sidebar-item {
-        margin-bottom: 30px; /* Increased bottom margin */
-        padding-bottom: 20px; /* Added padding for spacing */
-        border-bottom: 1px solid #ddd; /* Added border-bottom */
+    .empty-state i {
+        font-size: 4rem;
+        color: #e9ecef;
+        margin-bottom: 20px;
     }
 
-    .sidebar-item h4 {
-        font-size: 20px;
-        color: #333;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    .sidebar-item ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar-item ul li {
+    .empty-state h3 {
+        color: #636e72;
         margin-bottom: 10px;
     }
 
-    /* Custom '>' symbol for list items */
-    .sidebar-item ul li a {
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        position: relative;
-        padding-left: 20px;
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
     }
 
-    .sidebar-item ul li a::before {
-        content: '>';
-        position: absolute;
-        left: 0;
-        color: #EF233C;
-        font-weight: bold;
+    /* Responsive Design */
+    @media (max-width: 991px) {
+        .blog-row {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .blog-main,
+        .blog-sidebar {
+            flex: none;
+            max-width: 100%;
+        }
+
+        .blog-header h2 {
+            font-size: 2rem;
+        }
+
+        .blog-container {
+            padding: 40px 15px;
+        }
     }
 
-    .sidebar-img img {
-        max-width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @media (max-width: 576px) {
+        .blog-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .blog-post .blog-content {
+            padding: 20px;
+        }
+
+        .sidebar-widget {
+            padding: 20px;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 10px 14px;
+            font-size: 0.9rem;
+        }
     }
 
-    .sidebar-img a {
-        display: block;
-        margin-bottom: 15px;
+    /* Animation Enhancement */
+    .blog-post,
+    .sidebar-widget {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
 {% endblock %}
 
-
 {% block maincontent %}
-<!-- Page Title Banner -->
-<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">{{category.name}}</h1>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="announcement-container">
-    <div class="announcement-wrapper">
-        <div class="announcement-marquee">
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be infomed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We have received reports of imposters (webdesigns.ng) claiming to be us and using our properties. Please be infomed that our only website is <u><a href="https://www.websitedesigner.ng">www.websitedesigner.ng</a></u> and all official contact details are on our website. Thanks!</span>
-        </div>
-    </div>
-</div>
-
-<div class="mx-2 mx-lg-5">
-    <div class="row">
-        <!-- Blog Content -->
-        <div class="col-lg-9">
-            {% for post in page_obj %}
-            <div class="blog-item">
-                <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                <h2><a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}">{{ post.title }}</a></h2>
-                <p>{{ post.content|truncatewords:30|safe|striptags }}</p>
-                <p><small>By {{ post.author }} on {{ post.date|date:"F d, Y" }}</small></p>
-            </div>
-            {% empty %}
-            <p>No posts found in this category.</p>
-            {% endfor %}
-
-            <!-- Pagination -->
-            <div class="pagination">
-                {% if page_obj.has_previous %}
-                <a href="?page=1">First</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                {% endif %}
-
-                <span class="active">{{ page_obj.number }}</span>
-
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="col-lg-3">
-            <div class="sidebar">
-                <!-- Categories -->
-                <div class="sidebar-item">
-                    <h4>Categories</h4>
-                    <ul>
-                        {% for cat in categories %}
-                        <li><a href="{% url 'category_posts' category_slug=cat.slug %}">{{ cat.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <!-- Recent Posts -->
-                <div class="sidebar-item">
-                    <h4>Recent Posts</h4>
-                    <ul>
-                        {% for recent in recent_posts %}
-                        <li><a href="{% url 'blog_detail' category_slug=recent.category.slug slug=recent.slug %}">{{ recent.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <!-- Image Banners -->
-                <div class="sidebar-item">
-                    <h4>Advertisement</h4>
-                    <div class="sidebar-img">
-                        {% for banner in banners %}
-                        <a href="{{ banner.link|default:'https://example.com' }}" target="_blank">
-                            <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
-                        </a>
-                        {% endfor %}
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">{{ category.name|upper }}</h1>
+                            <p class="mb-2 mt-lg-3">Explore articles and insights about {{ category.name }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Modern Blog Container -->
+    <div class="blog-container">
+        <!-- Blog Header -->
+        <div class="blog-header wow fadeInUp" data-wow-delay="0.2s">
+            <h2>{{ category.name }}</h2>
+            <p>Discover the latest articles, insights, and updates about {{ category.name }}</p>
+        </div>
+
+        <!-- Blog Content Row -->
+        <div class="blog-row">
+            <!-- Main Blog Section -->
+            <div class="blog-main">
+                {% for post in page_obj %}
+                <article class="blog-post wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="blog-thumbnail">
+                        <img src="{{ post.image.url }}" alt="{{ category.name }} - Website Designer Nigeria">
+                    </div>
+                    <div class="blog-content">
+                        <h2>
+                            <a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}">
+                                {{ post.title }}
+                            </a>
+                        </h2>
+                        <div class="blog-meta-info">
+                            <p><i class="fas fa-user"></i> By {{ post.author }}</p>
+                            <p><i class="fas fa-calendar"></i> {{ post.date|date:"F d, Y" }}</p>
+                            <p><i class="fas fa-folder"></i> <a href="{% url 'category_posts' category_slug=post.category.slug %}">{{ post.category.name }}</a></p>
+                        </div>
+                        <p>{{ post.content|truncatewords:25|safe|striptags }}</p>
+                        <a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}" class="btn-read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+                {% empty %}
+                <div class="empty-state wow fadeInUp" data-wow-delay="0.3s">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Posts Found</h3>
+                    <p>There are currently no articles in the {{ category.name }} category.</p>
+                    <a href="{% url 'blogs' %}" class="btn-read-more">
+                        <i class="fas fa-arrow-left"></i> Back to All Posts
+                    </a>
+                </div>
+                {% endfor %}
+
+                <!-- Modern Pagination -->
+                {% if page_obj.has_other_pages %}
+                <div class="pagination wow fadeInUp" data-wow-delay="0.4s">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">First</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+
+                    <span class="active">{{ page_obj.number }}</span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Modern Sidebar -->
+            <div class="blog-sidebar">
+                <!-- Categories Widget -->
+                <div class="sidebar-widget wow fadeInRight" data-wow-delay="0.3s">
+                    <h3>Categories</h3>
+                    <ul>
+                        {% for cat in categories %}
+                        <li>
+                            <a href="{% url 'category_posts' category_slug=cat.slug %}">
+                                {{ cat.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Recent Posts Widget -->
+                <div class="sidebar-widget wow fadeInRight" data-wow-delay="0.4s">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        {% for recent in recent_posts %}
+                        <li>
+                            <a href="{% url 'blog_detail' category_slug=recent.category.slug slug=recent.slug %}">
+                                {{ recent.title }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Advertisement Widget -->
+                {% if banners %}
+                <div class="sidebar-widget wow fadeInRight" data-wow-delay="0.5s">
+                    <h3>Advertisement</h3>
+                    {% for banner in banners %}
+                    <div class="sidebar-banner">
+                        <a href="{{ banner.link|default:'#' }}" target="_blank">
+                            <img src="{{ banner.image.url }}" alt="{{ category.name }} - Website Designer Nigeria" class="img-fluid">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script>
+    // Initialize WOW
+    new WOW().init();
+</script>
 {% endblock %}

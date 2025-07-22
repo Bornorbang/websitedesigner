@@ -1,190 +1,433 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}Best Web Design Agency in Nigeria - Website Designer Nigeria{% endblock %}
+{% block title %}Web Design Agency in Nigeria - Website Designer Nigeria{% endblock %}
 
-{% block meta_description %}Website Designer Nigeria is the best web design agency in Lagos, Abuja Nigeria that creates custom website development servcies for businesses growth.{% endblock %}
+{% block meta_description %}Website Designer Nigeria is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth.{% endblock %}
 
-{% block og_title %}Best Web Design Agency in Nigeria - Website Designer Nigeria{% endblock %}
+{% block og_title %}Web Design Agency in Nigeria - Website Designer Nigeria{% endblock %}
 
-{% block og_description %}Website Designer Nigeria is the best web design agency in Lagos, Abuja Nigeria that creates custom website development servcies for businesses growth.{% endblock %}
+{% block og_description %}Website Designer Nigeria is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth.{% endblock %}
+
+{% block extra_css %}
+<style>
+/* FAQ Specific Styles for About Page */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    padding: 0 20px;
+}
+
+.faq-item.active .faq-answer {
+    padding: 20px;
+}
+
+.faq-question {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+</style>
+{% endblock %}
 
 {% block maincontent %}
-    <!-- Page Title Banner -->
-    <div class="about-banner wow fadeIn" data-wow-delay="0.1s">
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Best Web Design Agency in Nigeria</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Us Section -->
-    <div class="container-fluid py-5">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>WDN Agency Ltd</p>
-            <h2>Best Web Design Agency in Nigeria</h2>
-        </div>
-        <div class="row g-5">
-            <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
-                <p class="mb-4">Website Designer Nigeria (registered under WDN Agency Ltd) is a top web design agency committed to empowering businesses with innovative digital solutions. With offices in Lagos and Abuja, we bring together a team of tech professionals dedicated to delivering exceptional <b>website design and development services</b>. 
-                Our expertise spans across custom web development, <b>e-commerce design</b> and responsive web design, 
-                ensuring your brand stands out in today’s competitive online landscape. We pride ourselves on creating beautiful websites that not only capture attention but also drive engagement and conversions.</p>
-                <p class="mb-4">As the best web design agency in Nigeria, we understand that a great user experience is the cornerstone of any successful website. That’s why our services go beyond just design — we offer web hosting, <b>website maintenance</b>, SEO, graphic design, 
-                social media management and digital marketing solutions customized to meet your business goals. Whether you’re looking to redesign your existing site or launch a new one, our team ensures every project is optimized for search engines with strategic use of <a href="https://ahrefs.com/keyword-generator">SEO  keywords</a> to ensure your  business ranks at the top. 
-                With fast-loading, mobile-friendly designs, we help you attract and retain the right audience.</p>
-                <p class="mb-4"><a href="/">Website Designer Nigeria</a> is the best web design agency in Lagos, Abuja Nigeria that creates custom website development servcies for businesses growth. Our reach extends far beyond Nigeria, with a growing portfolio of satisfied clients from over 18 countries worldwide. As top web developers in Nigeria, we’re passionate about helping businesses achieve their digital goals with creativity and precision. 
-                Be you a startup or an established brand, we’re your trusted partner for professional website design and development services. 
-                Contact us today to take your online presence to the next level!</p>
-            </div>
-             <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="about-image-container">
-                <img class="img-fluid about-image" src="{% static 'img/About Website Designer Nigeria.jpg' %}" alt="web design agency in nigeria">
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <!-- Mission and Vision Section -->
-    <div class="container-fluid py-5">
-        <div class="row g-4">
-            <div class="col-lg-6 wow fadeInUp mb-3 mb-md-0" data-wow-delay="0.1s">
-                <div class="mission-item bg-light rounded h-100 p-5">
-                    <h4 class="mb-3">Our Mission</h4>
-                    <p class="mb-4">Our mission is to help businesses succeed by creating beautiful, functional, and user-friendly websites that truly reflect their brand. We’re passionate about combining creativity and technology 
-                    to deliver custom website development that not only look great but also drive results. Whether it’s helping a startup establish its online presence or enabling a big business to grow, we’re here to make your digital goals a reality.</p>
-                    <p>We believe that every business deserves a website that works as hard as they do. That’s why our website development services focus on designing websites that are easy to use, optimized for search engines, and customized to your requirements. 
-                    Our mission is to be more than just a service provider — we want to be a partner you can rely on to support your growth and success in the digital world.</p>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="mission-item bg-light rounded h-100 p-5">
-                    <h4 class="mb-3">Our Vision</h4>
-                    <p class="mb-4">Our vision is to become  the <b>best web design agency in Nigeria</b>, known for helping businesses thrive in the digital age. We aim to set the bar for creativity and quality, 
-                    delivering websites and digital solutions that leave a lasting impact on our clients and their customers.</p>
-                    <p>We see a future where businesses of all sizes can compete on a global scale with the right digital tools and strategies. 
-                    By staying ahead of trends and continually improving our skills, we want to help shape that future.  Our ultimate goal is to empower businesses to grow, connect, and succeed through the power of great design and technology. We are the best web developers in Nigeria.</p>
-                    <p>We are committed to becoming the best web designers in Nigeria known for delivering exceptional, results-driven web app solutions under the trusted leadership of WDN Agency Ltd.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Explore Services Button -->
-    <div class="container-fluid text-center py-5 wow fadeInUp" data-wow-delay="0.5s">
-        <a href="{% url 'services' %}" class="btn btn-primary py-3 px-5 animated slideInLeft">Explore Our Services</a>
-    </div>
-
-    <!-- Carousel Container -->
-<div class="container-fluid section-margin">
-    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-        <p>Technologies We Use</p>
-        <h2>Our Tech Stack</h2>
-    </div>
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">
-            <img src="{% static 'img/html5-logo.png' %}" alt="Best Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/css3-logo.png' %}" alt="Best Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/bootstrap-logo.png' %}" alt="Best Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/django-logo.png' %}" alt="Best Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/js5-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/mysql-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/python-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/react-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/shopify-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/woo-commerce-logo.png' %}" alt="Web Design Agency in Nigeria"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/wordpress-logo.png' %}" alt="Website Designer Nigeria"/>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- FAQ Start -->
-<div class="faq section-margin" id="faq">
-    <div class="container-fluid">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <h2>FREQUENTLY ASKED QUESTIONS</h2>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="faq-list">
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
-                        <h3 class="faq-question">How long does it take to develop a website?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>The timeline for your website depends on its complexity and features. A simple website with a few pages can be ready within 1 to 3 weeks, while a more advanced platform, such as an eCommerce store or a custom-built solution, may take 6 to 12 weeks. If you need a highly complex website with custom integrations, the process may extend up to several months. As the <strong>Best Web Design Agency in Nigeria</strong>, we prioritize quality, ensuring your site is built to perfection without unnecessary delays.</p>
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">WEB DESIGN AGENCY IN NIGERIA</h1>
+                            <p class="mb-2 mt-lg-3">Providing Premium Website Development Services.</p>
                         </div>
-                    </div>
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="faq-question">What is the pricing for your web development services?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>Our pricing is flexible and based on the scope of your project. Whether you need a basic website, a professional corporate site, or a feature-rich eCommerce platform, we offer affordable packages tailored to your budget. We also run discounts throughout the year to give you the best value. Get in touch with us for a customized quote from a top <strong>website designer Nigeria</strong> trusts.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="faq-question">What types of websites do you create?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>We develop all types of websites, including corporate business sites, real estate portals, fintech platforms, eCommerce stores, educational websites, classified ads sites, blogs, news websites, and more. Whether you're a startup, a growing business, or a large enterprise, our goal is to build a website that reflects your brand and helps you achieve your online goals.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="faq-question">What other services do you offer?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>As the <strong>Best Web Design Agency in Nigeria</strong>, we don’t just build websites; we offer a full range of digital services to help your business grow. Our services include SEO (Search Engine Optimization), mobile app development, graphic design, social media management, content creation, and more. Whatever your digital needs, we’ve got you covered.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="faq-question">Do you provide post-launch maintenance?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>Absolutely! We offer a free one-month maintenance period after your website goes live. This ensures everything runs smoothly, remains secure, and is optimized for performance. After that, you can choose a maintenance plan that fits your needs to keep your site up to date and running efficiently.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="faq-question">What do you need from me to get started?
-                            <span class="faq-icon">+</span>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>To kickstart your project, we’ll need some details about your business, the type of website you want, and any specific features you’d like to include. We also require content such as text, images, and branding elements. If you already have a domain and hosting, that’s great! If not, we can guide you through purchasing them. Once we have all the necessary information, our expert team will begin crafting your website right away!</p>
+                        <div class="hero-btn mt-lg-4">
+                            <a class="btn" href="{% url 'services' %}">
+                                <i class="fas fa-rocket"></i> OUR SERVICES
+                            </a>
+                            <a class="btn" href="{% url 'contact' %}">
+                                <i class="fas fa-handshake"></i> GET STARTED
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- FAQ End -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Story Section -->
+    <section class="about-story-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>Our Story</p>
+                <h2>Web Design Agency in Nigeria</h2>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <!-- Story Content -->
+                <div class="col-lg-6 col-md-12 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="story-content">
+                        <div class="story-text">
+                            <p>Website Designer Nigeria (registered under WDN Agency Ltd) is a web design agency in Nigeria committed to empowering businesses with innovative digital solutions. With offices in Lagos and Abuja, we bring together a team of tech professionals dedicated to delivering exceptional website design and development services.</p>
+                            
+                            <p>Our expertise spans across custom web development, e-commerce design and responsive web design, ensuring your brand stands out in today's competitive online landscape. We pride ourselves on creating beautiful websites that not only capture attention but also drive engagement and conversions.</p>
+                            
+                            <p>As a leading web design agency in Nigeria, we understand that a great user experience is the cornerstone of any successful website. That's why our services go beyond just design — we offer web hosting, website maintenance, SEO, graphic design, social media management and digital marketing solutions customized to meet your business goals.</p>
+
+                            <p>Whether you're looking to redesign your existing site or launch a new one, our team ensures every project is optimized for search engines with strategic use of <a href="https://ahrefs.com/keyword-generator">SEO keywords</a> to ensure your business ranks at the top.</p>
+
+                             <p><a href="/">Website Designer Nigeria</a> is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth. Our reach extends far beyond Nigeria, with a growing portfolio of satisfied clients from over 18 countries worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Story Image -->
+                <div class="col-lg-5 col-md-12 wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="story-image-wrapper">
+                        <div class="story-image-container">
+                            <img src="{% static 'img/about-us.jfif' %}" alt="Web Design Agency in Nigeria" class="story-image">
+                            <div class="image-overlay">
+                                <div class="overlay-content">
+                                    <div class="overlay-badge">
+                                        <i class="fas fa-award"></i>
+                                        <span>18+ Countries Served</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="story-decoration">
+                            <div class="decoration-dot dot-1"></div>
+                            <div class="decoration-dot dot-2"></div>
+                            <div class="decoration-dot dot-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story Features Row -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-10">
+                    <div class="story-features-extended">
+                        
+                        <div class="story-features wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="feature-item">
+                                <i class="fas fa-rocket"></i>
+                                <span>Fast-Loading Designs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile-Friendly</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-search"></i>
+                                <span>SEO Optimized</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-globe"></i>
+                                <span>Global Reach</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>Our Purpose</p>
+                <h2>Mission & Vision</h2>
+            </div>
+            <p class="text-center">Driving digital transformation with purpose and passion.</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-6 col-md-10 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="mission-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper mission-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>Our Mission</h3>
+                        </div>
+                        <div class="card-content">
+                            <p>Our mission is to help businesses succeed by creating beautiful, functional, and user-friendly websites that truly reflect their brand. We're passionate about combining creativity and technology to deliver custom website development that not only look great but also drive results.</p>
+                            
+                            <p>Whether it's helping a startup establish its online presence or enabling a big business to grow, we're here to make your digital goals a reality. We believe that every business deserves a website that works as hard as they do.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-10 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="vision-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper vision-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Our Vision</h3>
+                        </div>
+                        <div class="card-content">
+                            <p>Our vision is to become the best web design agency in Nigeria, known for helping businesses thrive in the digital age. We aim to set the bar for creativity and quality, delivering websites and digital solutions that leave a lasting impact on our clients and their customers.</p>
+                            
+                            <p>We see a future where businesses of all sizes can compete on a global scale with the right digital tools and strategies. By staying ahead of trends and continually improving our skills, we want to help shape that future.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="about-cta-section py-5">
+        <div class="container-fluid">
+            <div class="cta-content text-center wow fadeInUp" data-wow-delay="0.2s">
+                <div class="cta-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h2 style="color: #ffffff;">Ready to Start Your Digital Journey?</h2>
+                <p>Let's create something amazing together. Explore our website development services and see how we can help your business grow.</p>
+                <a href="{% url 'services' %}" class="cta-button">
+                    <span>Explore Our Services</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="tech-stack-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>Our Expertise</p>
+                <h2>Technologies We Use</h2>
+            </div>
+            <p class="text-center">Cutting-edge tools and frameworks for premium website development services.</p>
+
+            <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                <img src="{% static 'img/html5-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/css3-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/bootstrap-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/django-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/js5-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/mysql-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/python-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/react-logo.png' %}" alt="Web Designer Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/shopify-logo.png' %}" alt="Web Designer Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/woo-commerce-logo.png' %}" alt="Web Designer Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/wordpress-logo.png' %}" alt="Web Designer Nigeria"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>Got Questions?</p>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <p class="text-center">Everything you need to know about our services.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="faq-accordion">
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="faq-question">
+                                <h3>How long does it take to develop a website?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>The timeline for your website depends on its complexity and features. A simple website with a few pages can be ready within 1 to 3 weeks, while a more advanced platform, such as an eCommerce store or a custom-built solution, may take 6 to 12 weeks. If you need a highly complex website with custom integrations, the process may extend up to several months. As the Best Web Design Agency in Nigeria, we prioritize quality, ensuring your site is built to perfection without unnecessary delays.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="faq-question">
+                                <h3>What is the pricing for your web development services?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                               <p>Our pricing is project-based and depends on factors such as the site's complexity, number of pages, and required features. We offer affordable packages to ensure we work with your budget. We've also got discounts running all year long. Please check out our <a href="{% url 'pricing' %}"><u>pricing page</u></a> or contact us for a customized quote!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="faq-question">
+                                <h3>What types of websites do you create?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We develop all types of websites, including corporate business sites, real estate portals, fintech platforms, eCommerce stores, educational websites, classified ads sites, blogs, news websites, and more. Whether you're a startup, a growing business, or a large enterprise, our goal is to build a website that reflects your brand and helps you achieve your online goals.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="faq-question">
+                                <h3>What other services do you offer?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>As a leading Web Design Agency in Nigeria, we don't just build websites; we offer a full range of digital services to help your business grow. Our services include SEO (Search Engine Optimization), mobile app development, graphic design, social media management, content creation, and more. Whatever your digital needs, we've got you covered.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="faq-question">
+                                <h3>Do you provide post-launch maintenance?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Absolutely! We offer a free one-month maintenance period after your website goes live. This ensures everything runs smoothly, remains secure, and is optimized for performance. After that, you can choose a maintenance plan that fits your needs to keep your site up to date and running efficiently.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="faq-question">
+                                <h3>What do you need from me to get started?</h3>
+                                <span class="faq-icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>To kickstart your project, we'll need some details about your business, the type of website you want, and any specific features you'd like to include. We also require content such as text, images, and branding elements. If you already have a domain and hosting, that's great! If not, we can guide you through purchasing them. Once we have all the necessary information, our expert team will begin crafting your website right away!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+// FAQ Accordion Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon i');
+        
+        // Set initial state - ensure proper initial styling
+        answer.style.maxHeight = '0px';
+        answer.style.overflow = 'hidden';
+        answer.style.transition = 'max-height 0.4s ease-in-out';
+        answer.style.padding = '0 20px';
+        
+        question.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items first
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherIcon = otherItem.querySelector('.faq-icon i');
+                    otherAnswer.style.maxHeight = '0px';
+                    otherAnswer.style.padding = '0 20px';
+                    otherIcon.className = 'fas fa-plus';
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                // Close current item
+                item.classList.remove('active');
+                answer.style.maxHeight = '0px';
+                answer.style.padding = '0 20px';
+                icon.className = 'fas fa-plus';
+            } else {
+                // Open current item
+                item.classList.add('active');
+                
+                // Calculate the full height including padding
+                answer.style.padding = '20px';
+                const fullHeight = answer.scrollHeight;
+                answer.style.maxHeight = fullHeight + 'px';
+                icon.className = 'fas fa-minus';
+                
+                // Small delay to ensure smooth animation
+                setTimeout(() => {
+                    if (item.classList.contains('active')) {
+                        answer.style.maxHeight = 'none';
+                    }
+                }, 400);
+            }
+        });
+    });
+    
+    // Smooth scroll for CTA button
+    const ctaButton = document.querySelector('.cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Add smooth transition effect
+            this.style.transform = 'translateY(-3px) scale(0.95)';
+            setTimeout(() => {
+                window.location.href = this.getAttribute('href');
+            }, 150);
+        });
+    }
+    
+    // Enhanced hover effects for tech items
+    const techItems = document.querySelectorAll('.tech-item');
+    techItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+</script>
 
 {% endblock %}

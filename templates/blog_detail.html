@@ -22,267 +22,796 @@
 
 {% block extra_css %}
 <style>
+    /* Modern Blog Detail Container */
     .blog-detail {
-        padding: 20px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: 100vh;
+        padding: 0;
     }
 
-    .blog-detail-item {
-        background-color: #fff; /* Ensure a clear background */
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add border shadow */
-        padding: 20px; /* Add internal spacing */
-        overflow: hidden; /* Prevent content overflow */
+    /* Hero Image Section */
+    .blog-hero {
+        position: relative;
+        height: 50vh;
+        min-height: 300px;
+        overflow: hidden;
+        border-radius: 0 0 50px 50px;
+        margin-bottom: 60px;
     }
 
-    .blog-detail-img img {
-        width: 100%; /* Ensure the image is responsive */
+    .blog-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .blog-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(239, 35, 60, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%);
+    }
+
+    /* Blog Header with Title and Meta */
+    .blog-header {
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b, #fd79a8);
+    }
+
+    .blog-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #2d3436;
+        margin-bottom: 25px;
+        line-height: 1.2;
+    }
+
+    .blog-meta-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .blog-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .blog-meta-item:hover {
+        background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .blog-meta-item:hover i,
+    .blog-meta-item:hover span,
+    .blog-meta-item:hover a {
+        color: white !important;
+    }
+
+    .blog-meta-item i {
+        color: #EF233C;
+        width: 18px;
+        transition: color 0.3s ease;
+    }
+
+    .blog-meta-item a {
+        color: #2d3436;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .blog-meta-item span {
+        color: #636e72;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    /* Main Content Container */
+    .blog-content-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    /* Article Content */
+    .blog-article {
+        background: #fff;
+        border-radius: 30px;
+        padding: 60px;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b, #fd79a8);
+    }
+
+    .blog-article-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #2d3436;
+    }
+
+    .blog-article-content h1,
+    .blog-article-content h2,
+    .blog-article-content h3,
+    .blog-article-content h4 {
+        color: #2d3436;
+        font-weight: 700;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .blog-article-content h2 {
+        font-size: 2rem;
+        padding-bottom: 15px;
+    }
+
+    .blog-article-content h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b);
+        border-radius: 2px;
+    }
+
+    .blog-article-content h3 {
+        font-size: 1.5rem;
+        color: #EF233C;
+    }
+
+    .blog-article-content p {
+        margin-bottom: 25px;
+        text-align: justify;
+    }
+
+    .blog-article-content img {
+        max-width: 100%;
         height: auto;
-        max-width: 700px; /* Limit the maximum width of the image */
-        border-radius: 10px;
+        border-radius: 15px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .blog-article-content blockquote {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-left: 5px solid #EF233C;
+        padding: 25px 30px;
+        margin: 30px 0;
+        border-radius: 0 15px 15px 0;
+        font-style: italic;
+        position: relative;
+    }
+
+    .blog-article-content blockquote::before {
+        content: '"';
+        font-size: 4rem;
+        color: #EF233C;
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        opacity: 0.3;
+    }
+
+    /* Social Share Section */
+    .social-share {
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border: 1px solid rgba(239, 35, 60, 0.1);
+    }
+
+    .social-share h4 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #2d3436;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .share-buttons .btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        border: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .share-buttons .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transition: left 0.3s ease;
+    }
+
+    .share-buttons .btn:hover::before {
+        left: 100%;
+    }
+
+    .share-buttons .btn:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Comments Section */
+    .comments-section, .leave-reply {
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+    }
+
+    .comments-section h3, .leave-reply h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 30px;
+        position: relative;
+        text-align: center;
+    }
+
+    .comments-section h3::after, .leave-reply h3::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b);
+        border-radius: 2px;
+    }
+
+    .comment {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-left: 4px solid #EF233C;
+        transition: transform 0.3s ease;
+    }
+
+    .comment:hover {
+        transform: translateX(5px);
+    }
+
+    .comment h5 {
+        color: #EF233C;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .comment-divider {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #EF233C, transparent);
+        margin: 30px 0;
+    }
+
+    /* Form Styling */
+    .comment-form .form-group {
+        margin-bottom: 25px;
+    }
+
+    .comment-form label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 8px;
         display: block;
     }
 
-    .blog-detail-text h2 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-top: 15px;
+    .comment-form .form-control {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 15px 20px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #f8f9fa;
     }
 
-    .blog-meta {
-        margin: 10px 0;
-        font-size: 14px;
-        color: #999;
+    .comment-form .form-control:focus {
+        border-color: #EF233C;
+        box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+        background: #fff;
+        outline: none;
     }
 
-    .blog-meta p {
-        display: inline-block;
-        margin-right: 15px;
+    .comment-form .btn-primary {
+        background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
     }
 
-    .blog-meta p i {
-        margin-right: 5px;
+    .comment-form .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(239, 35, 60, 0.4);
     }
 
-    .blog-content {
-        font-size: 16px;
-        line-height: 1.6;
-        word-wrap: break-word;
+    /* Related Posts Section */
+    .related-posts {
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(239, 35, 60, 0.1);
     }
 
+    .related-posts h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    .related-posts h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b);
+        border-radius: 2px;
+    }
+
+    .related-post-item {
+        background: #f8f9fa;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        height: 100%;
+    }
+
+    .related-post-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: #EF233C;
+    }
+
+    .related-post-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .related-post-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .related-post-item h5 {
+        padding: 20px;
+        margin: 0;
+        font-weight: 600;
+        color: #2d3436;
+        line-height: 1.4;
+        transition: color 0.3s ease;
+    }
+
+    .related-post-item a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .related-post-item:hover h5 {
+        color: #EF233C;
+    }
+
+    /* Sidebar Styling */
     .sidebar {
-        margin-top: 20px;
+        margin-top: 0;
     }
 
     .sidebar-item {
+        background: #fff;
+        border-radius: 25px;
+        padding: 30px;
         margin-bottom: 30px;
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-item:hover {
+        transform: translateY(-5px);
     }
 
     .sidebar-item h4 {
-        font-size: 24px;
-        margin-bottom: 15px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .sidebar-item h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, #EF233C, #ff6b6b);
+        border-radius: 2px;
     }
 
     .sidebar-item ul {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
 
     .sidebar-item ul li {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
+        margin-bottom: 15px;
+        padding-left: 25px;
+        position: relative;
+        transition: all 0.3s ease;
     }
 
     .sidebar-item ul li::before {
-        content: "›";
-        margin-right: 10px;
-        font-size: 18px;
+        content: "▶";
+        position: absolute;
+        left: 0;
         color: #EF233C;
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-item ul li:hover::before {
+        transform: translateX(5px);
     }
 
     .sidebar-item ul li a {
-        color: #333;
+        color: #636e72;
         text-decoration: none;
-        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        line-height: 1.5;
     }
 
-    .sidebar-item ul li a:hover {
+    .sidebar-item ul li:hover a {
         color: #EF233C;
-    }
-
-    .sidebar-img img {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-     .blog-content img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: 20px auto;
     }
 
     .social-icons {
         display: flex;
-        gap: 10px; /* Space between icons */
-        justify-content: center; /* Center the icons */
+        gap: 15px;
+        justify-content: center;
     }
 
-    .social-icons a {
-        display: inline-flex;
+    .social-icons .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        text-decoration: none;
-        color: #fff; /* Icon color */
-        font-size: 20px;
+        font-size: 1.2rem;
+        border: none;
+        transition: all 0.3s ease;
     }
 
-    .social-icons a:hover {
-        opacity: 0.8; /* Slight transparency on hover */
+    .social-icons .btn:hover {
+        transform: translateY(-3px) scale(1.1);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .blog-content img {
-            width: 100%;
-        }
+    .sidebar-img img {
+        width: 100%;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-img img:hover {
+        transform: scale(1.02);
+    }
+
+    /* CTA Banner Styling */
+    .cta-banner {
+        background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+        border-radius: 30px;
+        margin: 60px 30px;
+        padding: 60px 40px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+        animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .cta-banner h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .cta-banner p {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .cta-banner .btn {
+        background: white;
+        color: #EF233C;
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .cta-banner .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        color: #EF233C;
     }
 
     /* Responsive Design */
-    @media (max-width: 991px) {
-        .blog-detail {
-            padding: 0px;
+    @media (max-width: 1200px) {
+        .blog-title {
+            font-size: 2.2rem;
         }
-
-        .blog-detail-img img {
-            max-width: 600px; /* Reduce image size on smaller screens */
+        
+        .blog-article {
+            padding: 40px;
         }
-
-        .blog-detail-text h2 {
-            font-size: 20px;
-        }
-
-        .blog-meta {
-            font-size: 12px;
-        }
-
-        .blog-content {
-            font-size: 14px;
-        }
-
-        .sidebar {
-            margin-top: 20px;
-        }
-
-        .blog-detail-item {
-        background-color: #fff; /* Ensure a clear background */
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add border shadow */
-        padding: 7px; /* Add internal spacing */
-        overflow: hidden; /* Prevent content overflow */
     }
+
+    @media (max-width: 991px) {
+        .blog-hero {
+            height: 40vh;
+            min-height: 250px;
+        }
+        
+        .blog-title {
+            font-size: 2rem;
+        }
+        
+        .blog-content-wrapper {
+            padding: 0 20px;
+        }
+        
+        .blog-article, .blog-header {
+            padding: 30px;
+        }
+        
+        .cta-banner {
+            margin: 40px 20px;
+            padding: 40px 30px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-hero {
+            height: 35vh;
+            min-height: 200px;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .blog-title {
+            font-size: 1.8rem;
+        }
+        
+        .blog-meta-info {
+            gap: 15px;
+        }
+        
+        .blog-article, .blog-header {
+            padding: 25px;
+            border-radius: 20px;
+        }
+        
+        .social-share, .comments-section, .leave-reply, .related-posts {
+            padding: 30px 25px;
+            border-radius: 20px;
+        }
+        
+        .sidebar-item {
+            padding: 25px;
+            border-radius: 20px;
+        }
+        
+        .cta-banner h2 {
+            font-size: 2rem;
+        }
     }
 
     @media (max-width: 576px) {
-        .blog-detail-img img {
-            max-width: 450px; /* Further reduce image size for very small screens */
+        .blog-hero {
+            height: 30vh;
+            min-height: 180px;
         }
-
-        .blog-detail-text h2 {
-            font-size: 18px;
+        
+        .blog-title {
+            font-size: 1.5rem;
         }
-
-        .blog-meta {
-            font-size: 12px;
+        
+        .blog-meta-info {
+            flex-direction: column;
+            gap: 10px;
         }
-
-        .blog-content {
-            font-size: 13px;
+        
+        .blog-meta-item {
+            justify-content: center;
+            text-align: center;
         }
-
-        .sidebar {
-            margin-top: 15px;
+        
+        .blog-content-wrapper {
+            padding: 0 15px;
         }
-    }
-
-    .social-share {
-        text-align: center;
-    }
-    .social-share h4 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .share-buttons {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-    }
-
-    .share-buttons i{
-        font-size: 26px;
+        
+        .blog-article, .blog-header {
+            padding: 20px;
+        }
+        
+        .blog-article-content {
+            font-size: 1rem;
+        }
+        
+        .share-buttons .btn {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-banner {
+            margin: 30px 15px;
+            padding: 30px 20px;
+        }
+        
+        .cta-banner h2 {
+            font-size: 1.8rem;
+        }
     }
 </style>
 
 {% endblock %}
 
 {% block maincontent %}
-<!-- Page Title Banner -->
-<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">{{blog.title}}</h1>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="announcement-container">
-    <div class="announcement-wrapper">
-        <div class="announcement-marquee">
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We are launching courses on top tech skills soon💃. Don't miss out!</span>
-            <i class="fas fa-bullhorn"></i>
-            <span class="announcement-text">We are launching courses on top tech skills soon💃. Don't miss out!</span>
-        </div>
+<!-- Blog Hero Section -->
+<div class="blog-hero wow fadeIn" data-wow-delay="0.1s">
+    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+    <div class="blog-hero-overlay">
     </div>
 </div>
 
 <!-- Blog Detail Start -->
 <div class="blog-detail">
-    <div class="mx-2 mx-lg-5">
+    <div class="blog-content-wrapper">
         <div class="row">
             <!-- Blog Content -->
             <div class="col-lg-9">
-                <div class="blog-detail-item mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="blog-detail-img">
-                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="image-fluid">
+                <!-- Blog Header with Title and Meta -->
+                <div class="blog-header wow fadeInUp" data-wow-delay="0.1s">
+                    <h1 class="blog-title">{{ blog.title }}</h1>
+                    <div class="blog-meta-info">
+                        <div class="blog-meta-item">
+                            <i class="far fa-user"></i>
+                            <span>{{ blog.author }}</span>
+                        </div>
+                        <div class="blog-meta-item">
+                            <i class="far fa-list-alt"></i>
+                            <a href="{% url 'category_posts' category_slug=blog.category.slug %}">{{ blog.category }}</a>
+                        </div>
+                        <div class="blog-meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>{{ blog.date|date:"F d, Y" }}</span>
+                        </div>
+                        <div class="blog-meta-item">
+                            <i class="far fa-comments"></i>
+                            <span>{{ blog.comments_count }} Comments</span>
+                        </div>
                     </div>
-                    <div class="blog-detail-text">
-                        <h2>{{ blog.title }}</h2>
-                        <div class="blog-meta">
-                            <p><i class="far fa-user"></i>{{ blog.author }}</p>
-                            <p><a href="{% url 'category_posts' category_slug=blog.category.slug %}"><i class="far fa-list-alt"></i>{{ blog.category }}</a></p>
-                            <p><i class="far fa-calendar-alt"></i>{{ blog.date|date:"F d, Y" }}</p>
-                            <p><i class="far fa-comments"></i>{{ blog.comments_count }}</p>
-                        </div>
-                        <div class="blog-content">
-                            <p>{{ blog.content | safe}}</p>
-                        </div>
+                </div>
+                
+                <!-- Article Content -->
+                <div class="blog-article wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="blog-article-content">
+                        {{ blog.content | safe }}
                     </div>
                 </div>
 
                 <!-- Social Media Share Icons -->
-                <div class="social-share mt-5 mb-5">
-                    <h4>Share this post:</h4>
+                <div class="social-share wow fadeInUp" data-wow-delay="0.2s">
+                    <h4>Share this post</h4>
                     <div class="share-buttons">
                         <!-- Facebook -->
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-primary">
@@ -304,7 +833,7 @@
                 </div>
 
                 <!-- Leave a Reply Section -->
-                <div class="leave-reply mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="leave-reply wow fadeInUp" data-wow-delay="0.3s">
                     <h3>Leave a Reply</h3>
                     <form action="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}" method="post" class="comment-form">
                         {% csrf_token %}
@@ -324,32 +853,32 @@
                     </form>
                 </div>
 
-                <div class="wow zoomIn" data-wow-delay="0.2s">
+                <div class="wow zoomIn" data-wow-delay="0.4s">
                     <a href="https://www.websitedesigner.ng/web-development-pricing/" target="_blank">
-                        <img src="{% static 'img/business deserves.png' %}" alt="{{ blog.title }}" class="img-fluid" style="max-width: 100%; height: auto; display: block; margin: 20px auto;">
+                        <img src="{% static 'img/business deserves.png' %}" alt="{{ blog.title }}" class="img-fluid" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 20px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);">
                     </a>
                 </div>
 
                 <!-- Comments Section -->
                 {% if comments %}
-                    <div class="comments-section mt-5 mb-5 wow fadeInUp" data-wow-delay="0.2s">
-                        <h3 class="text-center mt-5 mb-2 text-">Comments</h3>
-                        <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="comments-section wow fadeInUp" data-wow-delay="0.5s">
+                        <h3>Comments</h3>
+                        <hr class="comment-divider">
                         
-                            {% for comment in comments %}
-                                <div class="comment mb-4">
-                                    <h5>{{ comment.name }}</h5>
-                                    <small class="text-muted">{{ comment.created_at|date:"F d, Y " }}</small>
-                                    <p>{{ comment.content }}</p>
-                                </div>
-                            {% endfor %}
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <h5>{{ comment.name }}</h5>
+                                <small class="text-muted">{{ comment.created_at|date:"F d, Y" }}</small>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        {% endfor %}
+                        <hr class="comment-divider">
                     </div>
-                    <hr class="comment-divider wow fadeInUp" data-wow-delay="0.2s">
                 {% endif %}
 
                 <!-- Related Posts Section -->
-                <div class="related-posts mt-5 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="section-header wow zoomIn" data-wow-delay="0.1s">
+                <div class="related-posts wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="section-header">
                         <h2>Related Posts</h2>
                     </div>
                     <div class="row">
@@ -357,14 +886,14 @@
                             <div class="col-md-4 mb-4">
                                 <div class="related-post-item">
                                     <a href="{% url 'blog_detail' category_slug=related_post.category.slug slug=related_post.slug %}">
-                                        <img src="{{ related_post.image.url }}" alt="{{ blog.title }}" class="img-fluid mb-3">
+                                        <img src="{{ related_post.image.url }}" alt="{{ blog.title }}">
                                         <h5>{{ related_post.title }}</h5>
                                     </a>
                                 </div>
                             </div>
                         {% empty %}
                             <div class="col-12">
-                                <p>No related posts found.</p>
+                                <p style="text-align: center; color: #636e72; font-style: italic;">No related posts found.</p>
                             </div>
                         {% endfor %}
                     </div>
@@ -375,7 +904,7 @@
             <div class="col-lg-3">
                 <div class="sidebar">
                     <!-- Socials Bar -->
-                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.9s">
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.7s">
                         <h4>Follow Us</h4>
                         <div class="social-icons">
                             <a href="https://twitter.com/webdesignerng" target="_blank" class="btn btn-info">
@@ -391,7 +920,7 @@
                     </div>
 
                     <!-- Categories -->
-                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.8s">
                         <h4>Categories</h4>
                         <ul>
                             {% for category in categories %}
@@ -401,7 +930,7 @@
                     </div>
 
                     <!-- Recent Posts -->
-                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.9s">
                         <h4>Recent Posts</h4>
                         <ul>
                             {% for post in recent_posts %}
@@ -411,16 +940,17 @@
                     </div>
 
                     <!-- Image Banner -->
-                    <div class="sidebar-item wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="sidebar-item wow fadeInUp" data-wow-delay="1.0s">
                         <h4>Advertisement</h4>
                         <div class="sidebar-img">
                             {% for banner in banners %}
                                 <a href="{{ banner.link|default:'https://www.websitedesigner.ng/contact-website-designer-nigeria' }}" target="_blank">
-                                    <img src="{{ banner.image.url }}" alt="{{ blog.title }}" class="img-fluid mb-3" style="border-radius: 10px;">
+                                    <img src="{{ banner.image.url }}" alt="{{ blog.title }}">
                                 </a>
                             {% endfor %}
                         </div>
                     </div>
+                    
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4756517876694191"
                         crossorigin="anonymous"></script>
                     <!-- blog sidebar -->
@@ -472,7 +1002,7 @@
         <div class="row align-items-center">
             <div class="col-lg-8 col-md-12">
                 <h2>Need a Website?</h2>
-                <p>Contact <a href="/">Website Designer Nigeria</a>! Let's bring your vision to life with our expert web development services.</p>
+                <p>Contact <a href="/">Website Designer Nigeria</a> - Top Web Design Company in Lagos. We develop the best web apps!</p>
             </div>
             <div class="col-lg-4 col-md-12 text-center">
                     <a class="btn" href="{% url 'contact' %}">Get Started Now <i class="fa fa-angle-right"></i></a>

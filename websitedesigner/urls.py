@@ -39,9 +39,9 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
     path('tech-blog/', blog_list, name='blogs'),
-    path('website-designer-in-lagos/', website_lagos, name="website_lagos"),
+    path('web-designer-in-lagos/', website_lagos, name="website_lagos"),
     path('seo-company-in-nigeria', seo_company, name="seo_services"),
-    path('hire-graphic-designer-nigeria/', graphic_design, name="graphic_design"),
+    path('best-graphic-designer-nigeria/', graphic_design, name="graphic_design"),
     path('tech-tips/', tech_tips, name="tech_tips"),
     path('tech-reviews/', reviews, name="tech_reviews"),
     path('advertise-with-us/', advertise, name="advertise"),
@@ -49,6 +49,8 @@ urlpatterns = [
     path('web-development-pricing/', pricing, name="pricing"),
     path('tech-courses/', courses, name="courses"),
     path('seo-pricing/', seo_pricing, name="seo_pricing"),
+    path('terms-of-service/', terms, name="terms"),
+    path('privacy-policy/', privacy, name="privacy"),
     path('ecommerce-website-design-in-nigeria/', ecommerce, name="ecommerce"),
 ]
 

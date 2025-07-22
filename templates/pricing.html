@@ -10,22 +10,383 @@
 {% block og_description %}How much does Website Designer Nigeria charge for web development? Find out our web development pricing packages.{% endblock %}
 
 {% block extra_css %}
+<style>
+    /* Modern Pricing Section Styling */
+    .price {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        padding: 80px 0;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .price::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(239, 35, 60, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(239, 35, 60, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .price .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Section Header */
+    .price .section-header {
+        margin-bottom: 60px;
+    }
+
+    .price .section-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .price .section-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: #EF233C;
+        border-radius: 2px;
+    }
+
+    .price .section-header p {
+        font-size: 1.1rem;
+        color: #636e72;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    /* Description Text */
+    .price > .container > p {
+        font-size: 1.1rem;
+        color: #636e72;
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto 50px;
+    }
+
+    /* Pricing Cards */
+    .price-item {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+        border: 2px solid transparent;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .price-item:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        border-color: rgba(239, 35, 60, 0.3);
+    }
+
+    /* Featured Item */
+    .price-item.featured-item {
+        border-color: #EF233C;
+        background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        position: relative;
+    }
+
+    .price-item.featured-item:hover {
+        transform: translateY(-20px);
+        box-shadow: 0 30px 70px rgba(239, 35, 60, 0.2);
+    }
+
+    /* Price Header */
+    .price-header {
+        padding: 40px 30px 30px;
+        text-align: center;
+        background: #000;
+        color: white;
+        position: relative;
+    }
+
+    .price-item.featured-item .price-header {
+        background: #EF233C;
+    }
+
+    .price-title h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white; /* Ensure all titles are white */
+    }
+
+    .price-prices {
+        margin-top: 15px;
+    }
+
+    .price-prices h3 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        color: white;
+    }
+
+    .price-item.featured-item .price-prices h3 {
+        color: white !important;
+    }
+
+    .price-prices small {
+        font-size: 1.5rem;
+        font-weight: 600;
+        vertical-align: top;
+    }
+
+    /* Price Body */
+    .price-body {
+        padding: 40px 30px;
+    }
+
+    .price-description ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .price-description ul li {
+        position: relative;
+        padding-left: 40px; /* Add space for the tick icon */
+        margin-bottom: 20px; /* Add spacing between items */
+        text-align: left; /* Ensure left alignment */
+        font-size: 16px; /* Optional: Adjust font size */
+    }
+
+    .price-description ul li:first-child {
+        margin-top: 20px; /* Add padding before the first list item */
+    }
+
+    .price-description ul li::before {
+        content: '\2713'; /* Unicode for a tick/checkmark */
+        position: absolute;
+        left: 10px;
+        top: 0;
+        color: #ffffff; /* Tick icon text color */
+        font-size: 18px; /* Adjust size of the tick icon */
+        line-height: 1; /* Align icon vertically */
+        background-color: #EF233C; /* Background color for the tick */
+        border-radius: 50%; /* Make the background circular */
+        width: 20px; /* Set width for the background */
+        height: 20px; /* Set height for the background */
+        display: flex; /* Center the tick inside the circle */
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+    /* Price Footer */
+    .price-footer {
+        padding: 30px;
+        text-align: center;
+        background: #f8f9fa;
+    }
+
+    .price-item.featured-item .price-footer {
+        background: rgba(239, 35, 60, 0.05);
+    }
+
+    .price-footer .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 35px;
+        background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(239, 35, 60, 0.3);
+        border: none;
+        min-width: 200px;
+    }
+
+    .price-footer .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(239, 35, 60, 0.4);
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* First and Third Pricing Card Buttons - Black */
+    .price-item:first-child .price-footer .btn,
+    .price-item:last-child .price-footer .btn {
+        background: #000;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .price-item:first-child .price-footer .btn:hover,
+    .price-item:last-child .price-footer .btn:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Terms Notice Styling */
+    .price .text-center.mt-4 {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(239, 35, 60, 0.1);
+    }
+
+    .price .text-center.mt-4 p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .price .text-center.mt-4 a {
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .price .text-center.mt-4 a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 991px) {
+        .price {
+            padding: 60px 0;
+        }
+
+        .price .section-header h2 {
+            font-size: 2rem;
+        }
+
+        .price-item {
+            margin-bottom: 40px;
+        }
+
+        .price-header {
+            padding: 30px 25px 25px;
+        }
+
+        .price-body {
+            padding: 30px 25px;
+        }
+
+        .price-footer {
+            padding: 25px;
+        }
+
+        .price-prices h3 {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .price {
+            padding: 50px 0;
+        }
+
+        .price .section-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .price-header {
+            padding: 25px 20px;
+        }
+
+        .price-body {
+            padding: 25px 20px;
+        }
+
+        .price-footer {
+            padding: 20px;
+        }
+
+        .price-prices h3 {
+            font-size: 2rem;
+        }
+
+        .price-footer .btn {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+
+        .price-item.featured-item::before {
+            font-size: 0.7rem;
+            padding: 6px 35px;
+        }
+    }
+
+    /* Animation Enhancement */
+    .price-item {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+</style>
 {% endblock%}
 
 {% block maincontent %}
 
-<!-- Page Title Banner -->
-<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Web Development Pricing in Nigeria</h1>
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">WEB DEVELOPMENT PRICING</h1>
+                            <p class="mb-2 mt-lg-3">Affordable Website Development Packages in Nigeria.</p>
+                        </div>
+                        <div class="hero-btn mt-lg-4">
+                            <a class="btn" href="{% url 'contact' %}">
+                                <i class="fas fa-phone"></i> CONTACT US
+                            </a>
+                            <a class="btn" href="{% url 'seo_pricing' %}">
+                                <i class="fas fa-search"></i> SEO PRICING
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Page Title Banner End -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
 <!-- Price Start -->
  <div class="price" id="price">
@@ -35,6 +396,7 @@
             <h2>Web Development Pricing Packages</h2>
         </div>
         <p class="text-center mb-4">How much does Website Designer Nigeria charge for web development? Find out our web development pricing packages.</p>
+        
         <div class="row">
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="price-item">
@@ -68,7 +430,7 @@
                 <div class="price-item featured-item">
                     <div class="price-header">
                         <div class="price-title">
-                            <h2>E-COMMERCE</h2>
+                            <h2 class="text-white">E-COMMERCE</h2>
                         </div>
                         <div class="price-prices">
                             <h3><small>₦</small>500,000</h3>
@@ -126,6 +488,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Terms Notice -->
+        <div class="text-center mt-4 mb-3">
+            <p class="text-muted">
+                <small><i class="fas fa-info-circle" style="margin-right: 4px; color: #EF233C;"></i> By ordering our services, you agree to our <a href="{% url 'terms' %}" target="_blank" style="color: #EF233C;">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" style="color: #EF233C;">Privacy Policy</a>.</small>
+            </p>
         </div>
     </div>
 </div>

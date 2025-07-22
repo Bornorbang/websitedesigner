@@ -3,31 +3,403 @@
 
 {% block title %}Contact Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}
 
-{% block meta_description %}Contact Website Designer Nigeria for professional web design services. Let the best web designers in Nigeria create responsive websites that elevates your business. {% endblock %}
+{% block meta_description %}Contact Website Designer Nigeria - Best Web Designers in Nigeria via email, call or book a consultation. We typically reply within 24hrs. {% endblock %}
 
 {% block og_title %}Contact Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}
 
-{% block og_description %}Contact Website Designer Nigeria for professional web design services. Let the best web designers in Nigeria create responsive websites that elevates your business. {% endblock %}
+{% block og_description %}Contact Website Designer Nigeria - Best Web Designers in Nigeria via email, call or book a consultation. We typically reply within 24hrs. {% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<style>
+/* Modern Contact Section Styling */
+.contact-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 80px 0;
+    position: relative;
+    min-height: 100vh;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(239, 35, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(239, 35, 60, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.contact-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Contact Header */
+.contact-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.contact-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #EF233C;
+    border-radius: 2px;
+}
+
+.contact-text {
+    font-size: 1.1rem;
+    color: #636e72;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    line-height: 1.7;
+}
+
+/* Contact Form Card */
+.contact-form {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border-color: rgba(239, 35, 60, 0.2);
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    color: #2d3436;
+}
+
+.form-control:focus {
+    border-color: #EF233C;
+    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+    background: #ffffff;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 0.7;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit Button */
+.btn-submit {
+    background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(239, 35, 60, 0.3);
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(239, 35, 60, 0.4);
+    color: white;
+}
+
+.btn-submit:active {
+    transform: translateY(-1px);
+}
+
+/* Contact Info Card */
+.contact-info {
+    background: #000;
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: white;
+    position: relative;
+}
+
+.contact-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #EF233C;
+    border-radius: 2px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact-info i {
+    margin-right: 15px;
+    color: #EF233C;
+    font-size: 1.2rem;
+    margin-top: 2px;
+    min-width: 20px;
+}
+
+/* Map Styling */
+#map {
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 3px solid white;
+    transition: all 0.3s ease;
+}
+
+#map:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    color: white;
+}
+
+.alert-error {
+    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+    color: white;
+}
+
+/* Contact Method Cards */
+.contact-methods {
+    margin-top: 50px;
+}
+
+.contact-method-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+}
+
+.contact-method-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: #EF233C;
+}
+
+.contact-method-card i {
+    font-size: 2.5rem;
+    color: #EF233C;
+    margin-bottom: 15px;
+}
+
+.contact-method-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 10px;
+}
+
+.contact-method-card p {
+    color: #636e72;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Button Styling - Remove blue borders */
+.btn-outline-primary {
+    border-color: #EF233C;
+    color: #ffffff;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: #EF233C;
+    border-color: #EF233C;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .contact-heading {
+        font-size: 2rem;
+    }
+
+    .contact-form,
+    .contact-info {
+        padding: 30px;
+        margin-bottom: 40px;
+    }
+
+    #map {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-section {
+        padding: 50px 0;
+    }
+
+    .contact-heading {
+        font-size: 1.8rem;
+    }
+
+    .contact-form,
+    .contact-info {
+        padding: 25px;
+    }
+
+    .form-control {
+        padding: 12px 15px;
+    }
+
+    .btn-submit {
+        padding: 12px 30px;
+    }
+
+    .contact-method-card {
+        padding: 25px 15px;
+    }
+
+    #map {
+        height: 200px;
+    }
+}
+
+/* Animation Enhancement */
+.contact-form,
+.contact-info,
+.contact-method-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 {% endblock %}
 
 {% block maincontent %}
-<div class="about-banner wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Contact Website Designer Nigeria</h1>
+
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">CONTACT US</h1>
+                            <p class="mb-2 mt-lg-3">Get in touch with the best web designers in Nigeria.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
 <section class="contact-section">
     <div class="container">
         <h2 class="contact-heading wow fadeInUp" data-wow-delay="0.2s">Get in Touch</h2>
-        <p class="contact-text wow fadeInUp" data-wow-delay="0.3s">Contact Website Designer Nigeria for professional web design, custom development, e-commerce solutions, and SEO services. Let the best web designers in Nigeria create a responsive, user-friendly website that elevates your business. </p>
+        <p class="contact-text wow fadeInUp" data-wow-delay="0.3s">Contact Website Designer Nigeria - best Web Designers in Nigeria via email, call or book a consultation. We typically reply within 24hrs.</p>
         
         <div class="row">
             <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.4s">
@@ -63,11 +435,47 @@
             <div class="col-md-6 wow fadeInRight" data-wow-delay="0.4s">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Jabi, Gwarinpa 900108, F.C.T Abuja | 6, Otta road, Ijora Olopa, Lagos</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Jabi, Gwarinpa 900108, F.C.T Abuja | Otta road, Ijora Olopa, Lagos</p>
                     <p><i class="fas fa-phone"></i> 08148882303</p>
                     <p><i class="fas fa-envelope"></i> contact@websitedesigner.ng</p>
                 </div>
                 <div id="map" class="wow fadeIn" data-wow-delay="0.6s"></div>
+            </div>
+        </div>
+        
+        <!-- Contact Method Cards -->
+        <div class="contact-methods">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="contact-method-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>Quick responses via WhatsApp</p>
+                        <a href="http://wa.me/+2349058991274" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
+                            Chat Now
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="contact-method-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Schedule a Call</h4>
+                        <p>Book a consultation session</p>
+                        <a href="https://www.wa.link/q8q3a8" class="btn btn-outline-primary btn-sm mt-2">
+                            Book Now
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="contact-method-card">
+                        <i class="fas fa-envelope-open"></i>
+                        <h4>Email Support</h4>
+                        <p>Get detailed responses via email</p>
+                        <a href="mailto:contact@websitedesigner.ng" class="btn btn-outline-primary btn-sm mt-2">
+                            Send Email
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
