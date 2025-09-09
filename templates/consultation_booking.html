@@ -1,0 +1,1058 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Book a Consultation - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Book a consultation with Website Designer Nigeria. Get expert advice on your web design project. Schedule a call with our web design experts today.{% endblock %}
+
+{% block og_title %}Book a Consultation - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Book a consultation with Website Designer Nigeria. Get expert advice on your web design project. Schedule a call with our web design experts today.{% endblock %}
+
+{% block maincontent %}
+    <!-- Display Messages -->
+    {% if messages %}
+        <div class="container-fluid mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">BOOK A CONSULTATION</h1>
+                            <p class="mb-2 mt-lg-3">Schedule a consultation session with Website Designer Nigeria.</p>
+                        </div>
+                        <div class="hero-btn mt-lg-4">
+                            <a class="btn" href="#booking-form">
+                                <i class="fas fa-calendar-check"></i> BOOK NOW
+                            </a>
+                            <a class="btn" href="https://wa.link/f2kd41" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WHATSAPP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Consultation Benefits Section -->
+    <section class="consultation-benefits py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>WHY BOOK A CONSULTATION?</p>
+                <h2>What You'll Get From Our Consultation</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Expert Advice</h4>
+                        <p>Get professional insights on your project requirements, design approach, and technical considerations.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Custom Quote</h4>
+                        <p>Receive a detailed, personalized quote based on your specific needs and budget requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Timeline Planning</h4>
+                        <p>Understand realistic timelines for your project and plan your launch strategy effectively.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Technical Guidance</h4>
+                        <p>Learn about hosting, domains, maintenance, and all technical aspects of your website.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Growth Strategy</h4>
+                        <p>Discuss how your website can grow with your business and generate more leads and sales.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Professional Service</h4>
+                        <p>Get comprehensive consultation service with detailed project analysis and professional recommendations for your business.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Booking Form -->
+    <section class="consultation-booking py-5" id="booking-form">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="booking-form-container wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="section-header text-center mb-5">
+                            <p>BOOK YOUR SESSION</p>
+                            <h2>Schedule Your Consultation</h2>
+                        </div>
+                        <p>Fill out the form below and we'll get back to you within 24 hours to schedule your consultation.</p>
+                        
+                        <form class="consultation-form" id="consultationForm" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <!-- Personal Information -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                
+                                <!-- Business Information -->
+                                <div class="col-12 mb-3">
+                                    <label for="company" class="form-label">Company/Business Name</label>
+                                    <input type="text" class="form-control" id="company" name="company">
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="industry" class="form-label">Industry/Business Type</label>
+                                    <select class="form-select" id="industry" name="industry">
+                                        <option value="">Select your industry</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="fintech">Fintech/Finance</option>
+                                        <option value="ecommerce">E-commerce/Retail</option>
+                                        <option value="real-estate">Real Estate</option>
+                                        <option value="education">Education</option>
+                                        <option value="restaurant">Restaurant/Food</option>
+                                        <option value="travel">Travel/Tourism</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="nonprofit">Non-profit</option>
+                                        <option value="professional-services">Professional Services</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Project Information -->
+                                <div class="col-12 mb-3">
+                                    <label for="projectType" class="form-label">Project Type *</label>
+                                    <div class="project-type-options">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="newWebsite" value="new-website" required>
+                                            <label class="form-check-label" for="newWebsite">
+                                                New Website
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="redesign" value="redesign" required>
+                                            <label class="form-check-label" for="redesign">
+                                                Website Redesign
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="ecommerce" value="ecommerce" required>
+                                            <label class="form-check-label" for="ecommerce">
+                                                E-commerce Store
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="maintenance" value="maintenance" required>
+                                            <label class="form-check-label" for="maintenance">
+                                                Website Maintenance
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="seo" value="seo" required>
+                                            <label class="form-check-label" for="seo">
+                                                SEO
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="projectType" id="other-project" value="other" required>
+                                            <label class="form-check-label" for="other-project">
+                                                Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="budget" class="form-label">Budget Range</label>
+                                    <select class="form-select" id="budget" name="budget">
+                                        <option value="">Select your budget</option>
+                                        <option value="300k-500k">₦300,000 - ₦500,000</option>
+                                        <option value="500k-1m">₦500,000 - ₦1,000,000</option>
+                                        <option value="over-1m">Over ₦1,000,000</option>
+                                        <option value="not-sure">Not sure yet</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="timeline" class="form-label">Preferred Timeline</label>
+                                    <select class="form-select" id="timeline" name="timeline">
+                                        <option value="">Select timeline</option>
+                                        <option value="urgent">ASAP</option>
+                                        <option value="1-month">Within 3 weeks</option>
+                                        <option value="2-3-months">1-3 months</option>
+                                        <option value="3-6-months">3-6 months</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Consultation Preferences -->
+                                <div class="col-12 mb-3">
+                                    <label for="consultationType" class="form-label">Preferred Consultation Method *</label>
+                                    <div class="consultation-type-options">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="consultationType" id="video-call" value="video-call" required>
+                                            <label class="form-check-label" for="video-call">
+                                                <i class="fas fa-video"></i> Video Call (Zoom/Google Meet)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="consultationType" id="phone-call" value="phone-call" required>
+                                            <label class="form-check-label" for="phone-call">
+                                                <i class="fas fa-phone"></i> Phone Call
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="consultationType" id="in-person" value="in-person" required>
+                                            <label class="form-check-label" for="in-person">
+                                                <i class="fas fa-handshake"></i> In-Person Meeting (Lagos only)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="consultationType" id="whatsapp" value="whatsapp" required>
+                                            <label class="form-check-label" for="whatsapp">
+                                                <i class="fab fa-whatsapp"></i> WhatsApp Consultation
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="preferredDate" class="form-label">Preferred Date</label>
+                                    <input type="date" class="form-control" id="preferredDate" name="preferredDate">
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="preferredTime" class="form-label">Preferred Time</label>
+                                    <select class="form-select" id="preferredTime" name="preferredTime">
+                                        <option value="">Select time</option>
+                                        <option value="morning">Morning (9 AM - 12 PM)</option>
+                                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                        <option value="evening">Evening (5 PM - 8 PM)</option>
+                                        <option value="flexible">Flexible</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Project Details -->
+                                <div class="col-12 mb-3">
+                                    <label for="projectDescription" class="form-label">Tell us about your project</label>
+                                    <textarea class="form-control" id="projectDescription" name="projectDescription" rows="4" placeholder="Describe your website goals, features you need, design preferences, target audience, or any specific requirements..."></textarea>
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="currentWebsite" class="form-label">Current Website (if any)</label>
+                                    <input type="url" class="form-control" id="currentWebsite" name="currentWebsite" placeholder="https://yourwebsite.com">
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="inspiration" class="form-label">Inspiration/Reference Websites</label>
+                                    <textarea class="form-control" id="inspiration" name="inspiration" rows="2" placeholder="Share links to websites you like or describe the style you're looking for..."></textarea>
+                                </div>
+                                
+                                <!-- Additional Services -->
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Additional Services of Interest (Optional)</label>
+                                    <div class="additional-services">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="seo" name="additionalServices" value="seo">
+                                            <label class="form-check-label" for="seo">
+                                                SEO Optimization
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="content-writing" name="additionalServices" value="content-writing">
+                                            <label class="form-check-label" for="content-writing">
+                                                Content Writing
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="logo-design" name="additionalServices" value="logo-design">
+                                            <label class="form-check-label" for="logo-design">
+                                                Logo/Branding Design
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="hosting" name="additionalServices" value="hosting">
+                                            <label class="form-check-label" for="hosting">
+                                                Web Hosting Setup
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="maintenance-plan" name="additionalServices" value="maintenance">
+                                            <label class="form-check-label" for="maintenance-plan">
+                                                Ongoing Maintenance
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="mobile-app" name="additionalServices" value="mobile-app">
+                                            <label class="form-check-label" for="mobile-app">
+                                                Mobile App Development
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit Button -->
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg consultation-submit-btn">
+                                        <i class="fas fa-calendar-check"></i> Book My Consultation
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">
+                        <i class="fas fa-check-circle text-success"></i> Consultation Booked!
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Thank you for booking a consultation!</h4>
+                    <p>We've received your request and will contact you within 24 hours to confirm your consultation appointment.</p>
+                    <p><strong>What happens next?</strong></p>
+                    <ul class="text-start">
+                        <li>You'll receive a confirmation email shortly</li>
+                        <li>Our team will review your project details</li>
+                        <li>We'll contact you to schedule the perfect time</li>
+                        <li>Prepare for an exciting discussion about your project!</li>
+                    </ul>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it, thanks!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+/* Hero Section Consistency */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Consultation Benefits */
+.consultation-benefits {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.benefit-card {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #EF233C, #d91e36);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(239, 35, 60, 0.15);
+}
+
+.benefit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.benefit-icon {
+    font-size: 3.5rem;
+    color: #EF233C;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+    color: #d91e36;
+}
+
+.benefit-card h4 {
+    color: #2c3e50;
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.benefit-card p {
+    color: #6c757d;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Section Headers */
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-header p {
+    color: #EF233C;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section-header h2 {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Booking Form */
+.consultation-booking {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.booking-form-container {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.booking-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #EF233C, #d91e36);
+}
+
+.consultation-form .form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.consultation-form .form-control,
+.consultation-form .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.consultation-form .form-control:focus,
+.consultation-form .form-select:focus {
+    border-color: #EF233C;
+    box-shadow: 0 0 0 0.25rem rgba(239, 35, 60, 0.15);
+    background: white;
+}
+
+.consultation-form .form-control:hover,
+.consultation-form .form-select:hover {
+    border-color: #dee2e6;
+    background: white;
+}
+
+/* Select dropdown styling */
+.consultation-form .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EF233C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 15px center !important;
+    background-size: 16px 12px !important;
+    background-color: #fafafa;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+}
+
+.consultation-form .form-select::-ms-expand {
+    display: none;
+}
+
+.consultation-form .form-select:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EF233C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
+    background-color: white;
+}
+
+.consultation-form .form-select:hover {
+    background-color: white;
+}
+
+/* Select options styling */
+.consultation-form .form-select option {
+    background: white;
+    color: #495057;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/* Form Check Groups */
+.project-type-options, .consultation-type-options, .additional-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.form-check {
+    background: #f8f9fa;
+    padding: 20px 25px;
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-check::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #EF233C;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.form-check:hover {
+    border-color: #EF233C;
+    background: #fff5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(239, 35, 60, 0.1);
+}
+
+.form-check:hover::before {
+    transform: scaleX(1);
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #EF233C;
+    font-weight: 700;
+}
+
+.form-check-input:checked {
+    background-color: #EF233C;
+    border-color: #EF233C;
+}
+
+.form-check-input:checked ~ .form-check::before {
+    transform: scaleX(1);
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.form-check-label i {
+    margin-right: 8px;
+    color: #EF233C;
+}
+
+/* Submit Button */
+.consultation-submit-btn {
+    background: linear-gradient(135deg, #EF233C, #d91e36);
+    border: none;
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.consultation-submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.consultation-submit-btn:hover {
+    background: linear-gradient(135deg, #d91e36, #c11e32);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(239, 35, 60, 0.4);
+}
+
+.consultation-submit-btn:hover::before {
+    left: 100%;
+}
+
+/* Process Steps */
+.consultation-process {
+    background: white;
+    padding: 100px 0;
+}
+
+.process-step {
+    text-align: center;
+    padding: 40px 25px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    position: relative;
+    transition: all 0.4s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.process-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    background: white;
+}
+
+.step-number {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #EF233C, #d91e36);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    border: 4px solid white;
+    box-shadow: 0 5px 15px rgba(239, 35, 60, 0.3);
+}
+
+.step-icon {
+    font-size: 3rem;
+    color: #EF233C;
+    margin: 35px 0 25px;
+    transition: all 0.3s ease;
+}
+
+.process-step:hover .step-icon {
+    transform: scale(1.1);
+    color: #d91e36;
+}
+
+.process-step h4 {
+    color: #2c3e50;
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.process-step p {
+    color: #6c757d;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Modal Customization */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #EF233C, #d91e36);
+    color: white;
+    border-bottom: none;
+    padding: 30px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.modal-title i {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 40px;
+    text-align: center;
+}
+
+.modal-body h4 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.modal-body p {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.modal-body ul {
+    color: #6c757d;
+    line-height: 1.8;
+}
+
+.modal-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.modal-footer .btn {
+    background: linear-gradient(135deg, #EF233C, #d91e36);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+/* Alert Messages */
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 20px 25px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+}
+
+.alert i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .booking-form-container {
+        padding: 30px 20px;
+        margin: 15px;
+    }
+    
+    .project-type-options, .consultation-type-options, .additional-services {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefit-card, .process-step {
+        margin-bottom: 30px;
+    }
+    
+    .consultation-submit-btn {
+        width: 100%;
+        padding: 18px;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .benefit-icon, .step-icon {
+        font-size: 2.5rem;
+    }
+    
+    .consultation-benefits, .consultation-process {
+        padding: 60px 0;
+    }
+    
+    .consultation-booking {
+        padding: 60px 0;
+    }
+}
+
+/* Form Validation Styles */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #28a745;
+    background: #f8fff8;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.valid-feedback {
+    color: #28a745;
+    font-size: 0.875rem;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Loading State */
+.consultation-submit-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.consultation-submit-btn.loading::after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 12px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Hover Effects */
+.benefit-card, .process-step, .form-check {
+    will-change: transform;
+}
+
+/* Custom Scrollbar for Textarea */
+.consultation-form textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.consultation-form textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.consultation-form textarea::-webkit-scrollbar-thumb {
+    background: #EF233C;
+    border-radius: 10px;
+}
+
+.consultation-form textarea::-webkit-scrollbar-thumb:hover {
+    background: #d91e36;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('consultationForm');
+    const submitBtn = document.querySelector('.consultation-submit-btn');
+    
+    // Set minimum date to today
+    const dateInput = document.getElementById('preferredDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+    
+    // Form submission handler
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            submitForm();
+        }
+    });
+    
+    function validateForm() {
+        let isValid = true;
+        const requiredFields = form.querySelectorAll('[required]');
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                showFieldError(field, 'This field is required');
+                isValid = false;
+            } else {
+                clearFieldError(field);
+            }
+        });
+        
+        // Email validation
+        const email = document.getElementById('email');
+        if (email.value && !isValidEmail(email.value)) {
+            showFieldError(email, 'Please enter a valid email address');
+            isValid = false;
+        }
+        
+        // Phone validation
+        const phone = document.getElementById('phone');
+        if (phone.value && !isValidPhone(phone.value)) {
+            showFieldError(phone, 'Please enter a valid phone number');
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+    
+    function submitForm() {
+        // Show loading state
+        submitBtn.classList.add('loading');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Booking Consultation...';
+        
+        // Submit the form to the backend
+        form.submit();
+    }
+    
+    function showFieldError(field, message) {
+        field.classList.add('is-invalid');
+        field.classList.remove('is-valid');
+        
+        let feedback = field.parentNode.querySelector('.invalid-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'invalid-feedback';
+            field.parentNode.appendChild(feedback);
+        }
+        feedback.textContent = message;
+    }
+    
+    function clearFieldError(field) {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+        
+        const feedback = field.parentNode.querySelector('.invalid-feedback');
+        if (feedback) {
+            feedback.remove();
+        }
+    }
+    
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    
+    function isValidPhone(phone) {
+        const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/;
+        return phoneRegex.test(phone);
+    }
+    
+    // Real-time validation
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                showFieldError(this, 'This field is required');
+            } else if (this.type === 'email' && this.value && !isValidEmail(this.value)) {
+                showFieldError(this, 'Please enter a valid email address');
+            } else if (this.type === 'tel' && this.value && !isValidPhone(this.value)) {
+                showFieldError(this, 'Please enter a valid phone number');
+            } else {
+                clearFieldError(this);
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

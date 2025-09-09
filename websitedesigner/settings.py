@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-qxy$q(y(i#w+$%qwlk^&lm6vag0i6m$98ii+0(oy!w^!*1)2&z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0da0aae520d8.ngrok-free.app','127.0.0.1']
+ALLOWED_HOSTS = ['0da0aae520d8.ngrok-free.app','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'app',
     'django.contrib.sitemaps',
     'ckeditor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'websitedesigner.wsgi.application'
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'app.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Database

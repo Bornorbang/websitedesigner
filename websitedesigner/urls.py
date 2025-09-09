@@ -37,6 +37,7 @@ urlpatterns = [
     path('categories/<slug:category_slug>/', category_posts, name='category_posts'),
     path('contact-website-designer-nigeria/', contact, name= 'contact'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('course/<slug:slug>/', course_detail, name="course_detail"),
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
     path('tech-blog/', blog_list, name='blogs'),
     path('web-designer-in-lagos/', website_lagos, name="website_lagos"),
@@ -46,12 +47,33 @@ urlpatterns = [
     path('tech-reviews/', reviews, name="tech_reviews"),
     path('advertise-with-us/', advertise, name="advertise"),
     path('consultation/', consultation, name="consultation"),
+    path('book-consultation/', consultation_booking, name="consultation_booking"),
     path('web-development-pricing/', pricing, name="pricing"),
     path('tech-courses/', courses, name="courses"),
     path('seo-pricing/', seo_pricing, name="seo_pricing"),
     path('terms-of-service/', terms, name="terms"),
     path('privacy-policy/', privacy, name="privacy"),
     path('ecommerce-website-design-in-nigeria/', ecommerce, name="ecommerce"),
+    path('portfolio/', portfolio, name="portfolio"),
+    
+    # Authentication URLs
+    path('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('profile/', profile_view, name='profile'),
+    path('check-email/', check_email_exists, name='check_email'),
+    path('check-username/', check_username_exists, name='check_username'),
+    path('remove-profile-image/', remove_profile_image, name='remove_profile_image'),
+    
+    # Course URLs
+    path('course/<int:course_id>/review/', submit_review, name='submit_review'),
+    path('course/<int:course_id>/enroll/', enroll_course, name='enroll_course'),
+    path('review/<int:review_id>/like/', like_review, name='like_review'),
+    
+    # Lecture URLs
+    path('course/<slug:course_slug>/lecture/<int:lecture_id>/', lecture_detail, name='lecture_detail'),
+    path('lecture/<int:lecture_id>/download/', download_attachment, name='download_attachment'),
+    path('lecture/<int:lecture_id>/resources/', lecture_resources, name='lecture_resources'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

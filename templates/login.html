@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Sign In - Website Designer Nigeria{% endblock %}
+
+{% block maincontent %}
+<style>
+:root {
+    --primary-color: #EF233C;
+    --secondary-color: #d01f37;
+    --dark-color: #2B2D42;
+    --light-color: #8D99AE;
+    --white-color: #EDF2F4;
+}
+
+.auth-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem 0;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    margin: 3rem auto 0;
+}
+
+.auth-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.auth-header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: white;
+}
+
+.auth-header p {
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+}
+
+.auth-body {
+    padding: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+    background-color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--light-color);
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid var(--primary-color);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.help-text {
+    font-size: 0.875rem;
+    color: var(--light-color);
+    margin-top: 0.25rem;
+}
+
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+}
+
+.errorlist li {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.field-icon {
+    position: relative;
+}
+
+.field-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-color);
+    z-index: 1;
+}
+
+.field-icon .form-control {
+    padding-left: 3rem;
+}
+
+.welcome-back {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 0.5rem;
+        min-height: 90vh;
+    }
+    
+    .auth-card {
+        margin: 2rem 0.5rem 0;
+    }
+    
+    .auth-header {
+        padding: 1.5rem;
+    }
+    
+    .auth-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-body {
+        padding: 1rem;
+    }
+}
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Welcome Back</h2>
+        </div>
+        
+        <div class="auth-body">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Email or Username</label>
+                    <div class="field-icon">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+                    {% if form.username.help_text %}
+                        <small class="help-text">{{ form.username.help_text }}</small>
+                    {% endif %}
+                    {{ form.username.errors }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    <div class="field-icon">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password|add_class:"form-control" }}
+                    </div>
+                    {% if form.password.help_text %}
+                        <small class="help-text">{{ form.password.help_text }}</small>
+                    {% endif %}
+                    {{ form.password.errors }}
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+                
+                <div class="auth-link">
+                    Don't have an account? <a href="{% url 'signup' %}">Create Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Focus on first input
+    $('#id_username').focus();
+    
+    // Form validation
+    $('form').on('submit', function(e) {
+        var isValid = true;
+        
+        // Check if fields are empty
+        if (!$('#id_username').val().trim()) {
+            $('#id_username').addClass('is-invalid');
+            isValid = false;
+        } else {
+            $('#id_username').removeClass('is-invalid');
+        }
+        
+        if (!$('#id_password').val().trim()) {
+            $('#id_password').addClass('is-invalid');
+            isValid = false;
+        } else {
+            $('#id_password').removeClass('is-invalid');
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+    
+    // Remove error styling on input
+    $('.form-control').on('input', function() {
+        $(this).removeClass('is-invalid');
+    });
+});
+</script>
+{% endblock %}

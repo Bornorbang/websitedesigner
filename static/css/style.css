@@ -200,7 +200,7 @@ a:focus {
 }
 
 .navbar-nav .nav-item {
-    margin: 0 10px; /* Add space between items */
+    margin: 0 8px; /* Reduced space between items for better fit */
 }
 
 .navbar-nav .nav-link {
@@ -283,6 +283,103 @@ a:focus {
     
     .navbar .dropdown-menu {
         box-shadow: none;
+    }
+}
+
+/* Mobile Profile Icon */
+.mobile-profile-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.mobile-profile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #EF233C;
+    color: white !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(239, 35, 60, 0.3);
+}
+
+.mobile-profile-btn:hover {
+    background-color: #d01f37;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 35, 60, 0.4);
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.mobile-profile-btn i {
+    font-size: 20px;
+    color: white !important;
+}
+
+/* Remove focus outlines */
+.mobile-profile-btn:focus {
+    outline: none !important;
+    box-shadow: 0 4px 8px rgba(239, 35, 60, 0.4) !important;
+}
+
+/* Desktop Profile Icon */
+.desktop-profile-item {
+    margin-left: 10px;
+}
+
+.desktop-profile-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background-color: #EF233C !important;
+    color: white !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 5px rgba(239, 35, 60, 0.3) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.desktop-profile-btn:hover {
+    background-color: #d01f37 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(239, 35, 60, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.desktop-profile-btn i {
+    font-size: 18px !important;
+    color: white !important;
+}
+
+.desktop-profile-btn:focus {
+    outline: none !important;
+    box-shadow: 0 4px 8px rgba(239, 35, 60, 0.4) !important;
+}
+
+/* Reduce navbar menu area on desktop */
+@media (min-width: 992px) {
+    .navbar-nav {
+        max-width: calc(100vw - 350px);
+        margin-right: 0;
+    }
+    
+    /* Reduce spacing between nav items to fit more items */
+    .navbar-nav .nav-item {
+        margin: 0 8px;
+    }
+    
+    /* Reduce profile icon margin */
+    .desktop-profile-item {
+        margin-left: 10px;
     }
 }
 

@@ -1,0 +1,280 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Web Design Portfolio - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}View our web design portfolio showing our best web design projects in Nigeria. See examples of Website Designer Nigeria works across different business niches.{% endblock %}
+
+{% block og_title %}Web Design Portfolio - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}View our web design portfolio showing our best web design projects in Nigeria. See examples of Website Designer Nigeria works across different business niches.{% endblock %}
+
+{% block maincontent %}
+    <!-- Hero Banner Section -->
+    <section class="hero about-hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="hero-text mt-lg-2">
+                            <h1 class="mb-2 mt-lg-2">WEB DESIGN PORTFOLIO</h1>
+                            <p class="mb-2 mt-lg-3">Showcasing Our Best Web Design Projects in Nigeria.</p>
+                        </div>
+                        <div class="hero-btn mt-lg-4">
+                            <a class="btn" href="{% url 'pricing' %}">
+                                <i class="fas fa-tags"></i> VIEW PRICING
+                            </a>
+                            <a class="btn" href="https://wa.link/f2kd41" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WHATSAPP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section class="portfolio-gallery-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
+                <p>FEATURED PROJECTS</p>
+                <h2>Our Recent Works</h2>
+            </div>
+            
+            <div class="row">
+            <!-- Portfolio Item 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/evisa_website.jpg' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Travel Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/lilyhearthomecare-ca.jpg' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="https://lilyhearthomecare.ca/" target="_blank"><h3 class="portfolio-title text-center mt-3">HomeCare Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/kofoshi.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Food Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/ladyflora.png' %}" alt="Website Designer Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Brand Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/azafricanstore.png' %}" alt="Website Designer Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">E-commerce Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 15 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/cassidy_website.jpg' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="https://www.cassidyfx.com/" target="_blank"><h3 class="portfolio-title text-center mt-3">FX Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/owodex.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Fintech Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/empowering.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Church Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/graceempoweredearlyyears.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">NGO Web Design</h3></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Start -->
+    <div class="faq section-margin" id="faq">
+        <div class="container-fluid">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>FREQUENTLY ASKED QUESTIONS</p>
+                <h2>What Our Clients Want to Know</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="faq-list">
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
+                            <h3 class="faq-question">How quickly can you build my website?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>Great question! The timeline really depends on what you're looking for. If you need a simple, clean website with a few pages, we can usually have you up and running in 1-3 weeks. For something more complex like an online store or a custom platform with special features, we're looking at about 6-12 weeks. We take our time to make sure everything is perfect, properly tested, and optimized for your success.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">What will my website cost?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>We totally understand you want to know the investment upfront! Our pricing varies based on what you need - think of it like building a house, the cost depends on the size and features you want. We work with different budgets and always aim to give you the best value. Plus, we run special discounts throughout the year! Check out our <a href="{% url 'pricing' %}"><u>pricing page</u></a> for details, or just message us for a personalized quote that fits your budget.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">What kind of websites do you specialize in?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>We love variety! We've built everything from sleek corporate sites to bustling online stores, educational platforms, real estate websites, fintech solutions, investment platforms, banking portals, and so much more. Honestly, if you can dream it, we can probably build it. Every business is unique, and we create websites that perfectly match your vision and goals.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">Do you offer other services besides web design?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>Absolutely! We're like a one-stop digital shop. Beyond creating beautiful websites, we also help with SEO to get you found on Google, graphic design for your branding needs, mobile app development, social media management, and ongoing content management. We believe in supporting your entire digital journey, not just building your website and disappearing.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">Will you help me after my website goes live?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>Of course! We don't just build and run. You get a full month of free technical support and maintenance after launch - think of it as our way of making sure everything runs smoothly while you get comfortable with your new site. After that first month, we offer flexible maintenance plans so you can choose the level of ongoing support that works for your business.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">What do you need from me to get started?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>To get started, we’ll need details about your business operations, content (text, images), and any design preferences you have. If you already have a domain and hosting, great! If not, we can assist you purchase them. Once we have these, we’ll begin the development process right away! </p>
+                            </div>
+                        </div>
+                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question">What else do I need to know?
+                                <span class="faq-icon">+</span>
+                            </h3>
+                            <div class="faq-answer">
+                                <p>We’re committed to making your website a success. This means we’ll need your feedback and input throughout the process. We’ll also provide training on how to use your new site, so you feel confident managing it. And remember, our support doesn’t end at launch - we’re here for you as your business grows and evolves! One more thing, please check out our <a href="{% url 'terms' %}">terms of service</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQ End -->
+
+<style>
+/* Portfolio Grid */
+.portfolio-grid {
+    margin-top: 40px;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+/* Portfolio Card Enhanced */
+.portfolio-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .image-container img {
+    transform: scale(1.1);
+}
+
+/* Portfolio Details */
+.portfolio-details {
+    padding: 20px;
+}
+
+.portfolio-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.portfolio-details p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .image-container {
+        height: 350px;
+    }
+    
+    .cta-buttons .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+</style>
+
+{% endblock %}

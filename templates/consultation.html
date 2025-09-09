@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Free Web Design Consultation - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Book a free consultation with Website Designer Nigeria. Get expert advice on your web design project from Nigeria's leading web design agency.{% endblock %}
+
+{% block maincontent %}
+<script>
+    // Redirect to the new consultation booking page
+    window.location.href = "{% url 'consultation_booking' %}";
+</script>
+
+<div class="container-fluid text-center py-5">
+    <h2>Redirecting to our consultation booking page...</h2>
+    <p>If you're not redirected automatically, <a href="{% url 'consultation_booking' %}">click here</a>.</p>
+</div>
+{% endblock %}

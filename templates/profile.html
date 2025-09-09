@@ -1,0 +1,474 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}My Profile - Website Designer Nigeria{% endblock %}
+
+{% block maincontent %}
+<style>
+:root {
+    --primary-color: #EF233C;
+    --secondary-color: #d01f37;
+    --dark-color: #2B2D42;
+    --light-color: #8D99AE;
+    --white-color: #EDF2F4;
+}
+
+.profile-container {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.profile-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 4rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="30" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="70" r="1.2" fill="rgba(255,255,255,0.1)"/></svg>');
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateX(-50px) translateY(-20px); }
+    50% { transform: translateX(50px) translateY(20px); }
+    100% { transform: translateX(-50px) translateY(-20px); }
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar .avatar-placeholder {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.profile-info {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-info h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: white;
+}
+
+.profile-info .user-email {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.profile-stat p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0;
+    color: white;
+}
+
+.profile-content {
+    padding: 3rem 0;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.profile-card-header {
+    padding: 1.5rem 2rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-card-header h4 {
+    margin: 0;
+    color: var(--dark-color);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.profile-card-header h4 i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.profile-card-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+    background-color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
+}
+
+.btn-secondary {
+    background: var(--light-color);
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--dark-color);
+    transform: translateY(-2px);
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid var(--primary-color);
+}
+
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+}
+
+.errorlist li {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.field-icon {
+    position: relative;
+}
+
+.field-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-color);
+    z-index: 1;
+}
+
+.field-icon .form-control {
+    padding-left: 3rem;
+}
+
+@media (max-width: 768px) {
+    .profile-hero {
+        padding: 2rem 0 2rem;
+    }
+    
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .profile-avatar .avatar-placeholder {
+        font-size: 2.5rem;
+    }
+    
+    .profile-info h1 {
+        font-size: 2rem;
+    }
+    
+    .profile-stats {
+        gap: 2rem;
+        flex-direction: column;
+    }
+    
+    .profile-content {
+        padding: 2rem 0;
+    }
+    
+    .profile-card-body {
+        padding: 1.5rem;
+    }
+}
+</style>
+
+<div class="profile-container">
+    <!-- Hero Section -->
+    <div class="profile-hero">
+        <div class="container">
+            <div class="profile-avatar">
+                {% if user.userprofile.profile_image %}
+                    <img src="{{ user.userprofile.profile_image.url }}" alt="Profile Picture">
+                {% else %}
+                    <i class="fas fa-user avatar-placeholder"></i>
+                {% endif %}
+            </div>
+            
+            <div class="profile-info">
+                <h1>{{ user.get_full_name|default:user.username }}</h1>
+                <p class="user-email">{{ user.email }}</p>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <h3>{{ user.date_joined|date:"M Y" }}</h3>
+                        <p>Member Since</p>
+                    </div>
+                    <div class="profile-stat">
+                        <h3>{{ user.last_login|date:"M d" }}</h3>
+                        <p>Last Login</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile Content -->
+    <div class="profile-content">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <i class="fas fa-check-circle mr-2"></i>{{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- Personal Information Card -->
+                    <div class="profile-card">
+                        <div class="profile-card-header">
+                            <h4><i class="fas fa-user-edit"></i>Personal Information</h4>
+                        </div>
+                        <div class="profile-card-body">
+                            <form method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="{{ user_form.first_name.id_for_label }}">First Name</label>
+                                            <div class="field-icon">
+                                                <i class="fas fa-user"></i>
+                                                {{ user_form.first_name|add_class:"form-control" }}
+                                            </div>
+                                            {{ user_form.first_name.errors }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="{{ user_form.last_name.id_for_label }}">Last Name</label>
+                                            <div class="field-icon">
+                                                <i class="fas fa-user"></i>
+                                                {{ user_form.last_name|add_class:"form-control" }}
+                                            </div>
+                                            {{ user_form.last_name.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="{{ user_form.username.id_for_label }}">Username</label>
+                                    <div class="field-icon">
+                                        <i class="fas fa-at"></i>
+                                        {{ user_form.username|add_class:"form-control" }}
+                                    </div>
+                                    {{ user_form.username.errors }}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="{{ user_form.email.id_for_label }}">Email Address</label>
+                                    <div class="field-icon">
+                                        <i class="fas fa-envelope"></i>
+                                        {{ user_form.email|add_class:"form-control" }}
+                                    </div>
+                                    {{ user_form.email.errors }}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="{{ profile_form.phone_number.id_for_label }}">Phone Number</label>
+                                    <div class="field-icon">
+                                        <i class="fas fa-phone"></i>
+                                        {{ profile_form.phone_number|add_class:"form-control" }}
+                                    </div>
+                                    {{ profile_form.phone_number.errors }}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="{{ profile_form.bio.id_for_label }}">Bio</label>
+                                    {{ profile_form.bio|add_class:"form-control" }}
+                                    <small class="text-muted">Tell us a bit about yourself (optional)</small>
+                                    {{ profile_form.bio.errors }}
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save mr-2"></i>Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Username validation
+    $('#id_username').on('blur', function() {
+        var username = $(this).val();
+        var userId = {{ user.id }};
+        
+        if (username && username !== '{{ user.username }}') {
+            $.ajax({
+                url: '{% url "check_username" %}',
+                data: {
+                    'username': username,
+                    'user_id': userId
+                },
+                success: function(data) {
+                    if (data.exists) {
+                        $('#id_username').addClass('is-invalid');
+                        if (!$('#id_username').next('.invalid-feedback').length) {
+                            $('#id_username').after('<div class="invalid-feedback">This username is already taken.</div>');
+                        }
+                    } else {
+                        $('#id_username').removeClass('is-invalid');
+                        $('#id_username').next('.invalid-feedback').remove();
+                    }
+                }
+            });
+        }
+    });
+    
+    // Email validation
+    $('#id_email').on('blur', function() {
+        var email = $(this).val();
+        var userId = {{ user.id }};
+        
+        if (email && email !== '{{ user.email }}') {
+            $.ajax({
+                url: '{% url "check_email" %}',
+                data: {
+                    'email': email,
+                    'user_id': userId
+                },
+                success: function(data) {
+                    if (data.exists) {
+                        $('#id_email').addClass('is-invalid');
+                        if (!$('#id_email').next('.invalid-feedback').length) {
+                            $('#id_email').after('<div class="invalid-feedback">This email is already taken.</div>');
+                        }
+                    } else {
+                        $('#id_email').removeClass('is-invalid');
+                        $('#id_email').next('.invalid-feedback').remove();
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

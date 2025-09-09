@@ -1,6 +1,5 @@
 {% load static %}
 
-{% load static%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,8 +17,8 @@
         <!-- Open Graph Meta Tags (For Social Media Sharing) -->
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
         <meta property="og:description" content="{% block og_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
-        <meta property="og:image" content="{% static 'img/favicon.png' %}"> 
-        <meta property="og:url" content="https://websitedesigner.ng">
+        <meta property="og:image" content="{% block og_image %}{% static 'img/favicon.png' %}{% endblock %}"> 
+        <meta property="og:url" content="{% block og_url %}https://websitedesigner.ng{% endblock %}">
         <meta property="og:type" content="website">
 
         {% block extra_meta %}
@@ -89,6 +88,52 @@
             /* Navbar Container */
             .navbar .container-fluid {
                 padding: 15px 30px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            /* Mobile navbar layout adjustments */
+            @media (max-width: 991px) {
+                .navbar .container-fluid {
+                    padding: 12px 20px;
+                }
+
+                /* Position mobile profile icon and hamburger menu together on the right */
+                .mobile-profile-icon {
+                    order: 2;
+                    margin-right: 10px;
+                }
+
+                .navbar-toggler {
+                    order: 3;
+                    margin-left: 0;
+                }
+
+                .navbar-brand-wrapper {
+                    order: 1;
+                    flex: 1;
+                }
+            }
+
+            /* Mobile profile button styling */
+            .mobile-profile-btn {
+                color: #EF233C;
+                font-size: 24px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-profile-btn:hover {
+                color: #d01f37;
+                background-color: rgba(239, 35, 60, 0.1);
+                text-decoration: none;
             }
 
             /* Logo Styling */
@@ -121,6 +166,16 @@
             .navbar-nav {
                 align-items: center;
                 gap: 10px;
+            }
+
+            /* Ensure navbar is visible on desktop */
+            @media (min-width: 992px) {
+                .navbar-collapse {
+                    position: static !important;
+                    display: flex !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
             }
 
             .navbar-nav .nav-item {
@@ -226,9 +281,32 @@
                 border: 1px solid #e9ecef;
             }
 
+            /* Fix navbar header elements positioning */
             @media (max-width: 991px) {
-                .navbar .container-fluid {
+                /* Ensure navbar header stays fixed */
+                .navbar > .container-fluid {
+                    flex-wrap: nowrap !important;
+                    position: relative;
                     padding: 12px 20px;
+                }
+
+                /* Make sure collapse menu doesn't affect header elements */
+                .navbar-brand-wrapper,
+                .mobile-profile-icon,
+                .navbar-toggler {
+                    position: relative !important;
+                    z-index: 1001;
+                }
+
+                /* Ensure collapsible content appears below header */
+                .navbar-collapse {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    z-index: 1000;
+                    width: 100%;
+                    margin-top: 0;
                 }
 
                 .navbar-nav {
@@ -278,13 +356,21 @@
             }
 
             /* Smooth animations */
+            .navbar-collapse {
+                transition: opacity 0.3s ease;
+            }
+
             .navbar-collapse.show {
-                animation: fadeIn 0.3s ease;
+                opacity: 1;
+            }
+
+            .navbar-collapse:not(.show) {
+                opacity: 0;
             }
 
             @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(-10px); }
-                to { opacity: 1; transform: translateY(0); }
+                from { opacity: 0; }
+                to { opacity: 1; }
             }
 
             /* Responsive font sizes */
@@ -351,7 +437,9 @@
                 background: #fff;
                 transition: all 0.3s ease;
                 border: 1px solid rgba(239, 35, 60, 0.1);
-                height: 100%;
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
             }
 
             .blog-item:hover {
@@ -383,7 +471,7 @@
                 padding: 30px;
                 display: flex;
                 flex-direction: column;
-                height: calc(100% - 280px);
+                flex: 1;
             }
 
             .blog-text h2 {
@@ -487,7 +575,7 @@
 
                 .blog-text {
                     padding: 25px;
-                    height: calc(100% - 220px);
+                    flex: 1;
                 }
 
                 .blog-text h2 {
@@ -510,7 +598,7 @@
 
                 .blog-text {
                     padding: 20px;
-                    height: calc(100% - 200px);
+                    flex: 1;
                 }
 
                 .blog-meta {
@@ -1178,23 +1266,42 @@
             }
 
             /* Prevent horizontal overflow on mobile devices */
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+            
             body, html {
                 max-width: 100vw;
                 overflow-x: hidden;
             }
+            
             .container, .row, .section, .content, .footer, .header, .hero-section {
                 box-sizing: border-box;
                 max-width: 100vw;
                 overflow-x: hidden;
             }
+            
+            /* Prevent scroll hooking on mobile */
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+            
             @media (max-width: 767px) {
                 body, html {
                   width: 100vw;
                   overflow-x: hidden !important;
+                  scroll-behavior: smooth;
                 }
                 .container, .row, .section, .content, .footer, .header, .hero-section {
                   max-width: 100vw;
                   overflow-x: hidden !important;
+                }
+                
+                /* Fix any elements that might interfere with scrolling */
+                .blog-item, .card, .content-wrapper {
+                    overflow-y: visible !important;
+                    height: auto !important;
                 }
             }
         </style>
@@ -1226,6 +1333,19 @@
                         <img src="{% static 'img/website designer nigeria logo.png' %}" class="desktop d-none d-lg-block" alt="Web Design Company in Lagos">
                         <img src="{% static 'img/website designer nigeria logo.png' %}" class="mobile d-block d-lg-none" alt="Web Design Company in Lagos">
                     </a>
+                </div>
+
+                <!-- Mobile Profile Icon -->
+                <div class="mobile-profile-icon d-block d-lg-none">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile' %}" class="mobile-profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'signup' %}" class="mobile-profile-btn">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                    {% endif %}
                 </div>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -1265,6 +1385,16 @@
                                 <a class="dropdown-item" href="{% url 'advertise' %}">
                                     <i class="fas fa-bullhorn mr-2"></i>Advertise
                                 </a>
+                                <div class="dropdown-divider"></div>
+                                {% if user.is_authenticated %}
+                                    <a class="dropdown-item" href="{% url 'profile' %}">
+                                        <i class="fas fa-user mr-2"></i>Dashboard
+                                    </a>
+                                {% else %}
+                                    <a class="dropdown-item" href="{% url 'signup' %}">
+                                        <i class="fas fa-user-plus mr-2"></i>Signup/Login
+                                    </a>
+                                {% endif %}
                             </div>
                         </li>
                         
@@ -1274,8 +1404,28 @@
                                 Courses
                             </a>
                         </li>
+                        
+                        <!-- Portfolio Menu Item -->
+                        <li class="nav-item">
+                            <a href="{% url 'portfolio' %}" class="nav-link">
+                                Portfolio
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
+                        </li>
+                        
+                        <!-- Desktop Profile Icon -->
+                        <li class="nav-item desktop-profile-item d-none d-lg-block">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'profile' %}" class="nav-link desktop-profile-btn">
+                                    <i class="fas fa-user-circle"></i>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'signup' %}" class="nav-link desktop-profile-btn">
+                                    <i class="fas fa-user-plus"></i>
+                                </a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ lecture.title }} - {{ course.title }}{% endblock %}
+
+{% block maincontent %}
+<style>
+    .lecture-container {
+        background: #f8f9fa;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .lecture-header {
+        background: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .lecture-navigation {
+        background: #EF233C;
+        color: white;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .lecture-nav-btn {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .lecture-nav-btn:hover {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        text-decoration: none;
+    }
+
+    .lecture-nav-btn:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .lecture-content-area {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .lecture-video-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        background: #000;
+    }
+
+    .lecture-video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .lecture-video-placeholder {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #666;
+    }
+
+    .lecture-info {
+        padding: 2rem;
+    }
+
+    .lecture-type-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .lecture-type-video {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .lecture-type-text {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+
+    .lecture-type-quiz {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+
+    .lecture-type-assignment {
+        background: #e8f5e8;
+        color: #388e3c;
+    }
+
+    .lecture-content {
+        margin: 1.5rem 0;
+        line-height: 1.6;
+    }
+
+    .lecture-content h1, .lecture-content h2, .lecture-content h3,
+    .lecture-content h4, .lecture-content h5, .lecture-content h6 {
+        color: #333;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .lecture-content p {
+        margin-bottom: 1rem;
+        color: #555;
+    }
+
+    .lecture-content ul, .lecture-content ol {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+    }
+
+    .lecture-content li {
+        margin-bottom: 0.5rem;
+        color: #555;
+    }
+
+    .lecture-sidebar {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .sidebar-section {
+        margin-bottom: 2rem;
+    }
+
+    .sidebar-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .sidebar-title {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        border-bottom: 2px solid #EF233C;
+        padding-bottom: 0.5rem;
+    }
+
+    .attachment-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .attachment-item:hover {
+        background: #f5f5f5;
+        border-color: #EF233C;
+    }
+
+    .attachment-icon {
+        color: #EF233C;
+        margin-right: 0.75rem;
+        font-size: 1.2rem;
+    }
+
+    .download-btn {
+        background: #EF233C;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .download-btn:hover {
+        background: #d01f37;
+        color: white;
+        text-decoration: none;
+    }
+
+    .lecture-meta {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        color: #666;
+    }
+
+    .meta-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .meta-icon {
+        color: #EF233C;
+        margin-right: 0.5rem;
+        width: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .lecture-container {
+            padding: 1rem 0;
+        }
+        
+        .lecture-header {
+            padding: 1rem 0;
+        }
+        
+        .lecture-info {
+            padding: 1rem;
+        }
+        
+        .lecture-sidebar {
+            margin-top: 1.5rem;
+        }
+    }
+</style>
+
+<div class="lecture-container">
+    <!-- Lecture Navigation -->
+    <div class="lecture-navigation">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3">
+                        {% if prev_lecture %}
+                            <a href="{% url 'lecture_detail' course.slug prev_lecture.id %}" class="lecture-nav-btn">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </a>
+                        {% else %}
+                            <span class="lecture-nav-btn" style="opacity: 0.5;">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </span>
+                        {% endif %}
+                        
+                        {% if next_lecture %}
+                            <a href="{% url 'lecture_detail' course.slug next_lecture.id %}" class="lecture-nav-btn">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {% else %}
+                            <span class="lecture-nav-btn" style="opacity: 0.5;">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <small>Lecture {{ lecture_number }} of {{ total_lectures }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lecture Header -->
+    <div class="lecture-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'courses' %}">Courses</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
+                            <li class="breadcrumb-item active">{{ lecture.title }}</li>
+                        </ol>
+                    </nav>
+                    <h1>{{ lecture.title }}</h1>
+                    <p class="text-muted">{{ course.title }} • {{ lecture.section.title }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Main Lecture Content -->
+            <div class="col-lg-8">
+                <div class="lecture-content-area">
+                    <!-- Video Section (for video lectures) -->
+                    {% if lecture.lecture_type == 'video' and lecture.video_url %}
+                        <div class="lecture-video-container">
+                            {% if 'youtube.com' in lecture.video_url or 'youtu.be' in lecture.video_url %}
+                                {% comment %} Convert YouTube URL to embed format {% endcomment %}
+                                {% if 'watch?v=' in lecture.video_url %}
+                                    <iframe src="{{ lecture.video_url|slice:'32:' }}" 
+                                            frameborder="0" 
+                                            allowfullscreen>
+                                    </iframe>
+                                {% else %}
+                                    <iframe src="{{ lecture.video_url }}" 
+                                            frameborder="0" 
+                                            allowfullscreen>
+                                    </iframe>
+                                {% endif %}
+                            {% else %}
+                                <video controls width="100%" height="100%">
+                                    <source src="{{ lecture.video_url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        {% if lecture.lecture_type == 'video' %}
+                            <div class="lecture-video-container">
+                                <div class="lecture-video-placeholder">
+                                    <i class="fas fa-video fa-3x mb-3"></i>
+                                    <p>Video content will be available soon</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    <!-- Lecture Information -->
+                    <div class="lecture-info">
+                        <!-- Lecture Type Badge -->
+                        <div class="lecture-type-badge lecture-type-{{ lecture.lecture_type }}">
+                            {% if lecture.lecture_type == 'video' %}
+                                <i class="fas fa-video"></i> Video Lecture
+                            {% elif lecture.lecture_type == 'text' %}
+                                <i class="fas fa-file-text"></i> Text Lesson
+                            {% elif lecture.lecture_type == 'quiz' %}
+                                <i class="fas fa-question-circle"></i> Quiz
+                            {% elif lecture.lecture_type == 'assignment' %}
+                                <i class="fas fa-tasks"></i> Assignment
+                            {% endif %}
+                        </div>
+
+                        <!-- Lecture Description -->
+                        {% if lecture.description %}
+                            <div class="lecture-description">
+                                <h4>About this lecture</h4>
+                                <p>{{ lecture.description }}</p>
+                            </div>
+                        {% endif %}
+
+                        <!-- Lecture Content -->
+                        {% if lecture.content %}
+                            <div class="lecture-content">
+                                {{ lecture.content|safe }}
+                            </div>
+                        {% endif %}
+
+                        <!-- Lecture Meta Information -->
+                        <div class="lecture-meta">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% if lecture.duration %}
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock meta-icon"></i>
+                                            Duration: {{ lecture.duration }} minutes
+                                        </div>
+                                    {% endif %}
+                                    <div class="meta-item">
+                                        <i class="fas fa-list meta-icon"></i>
+                                        Section: {{ lecture.section.title }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="meta-item">
+                                        <i class="fas fa-book meta-icon"></i>
+                                        Course: {{ course.title }}
+                                    </div>
+                                    {% if lecture.is_preview %}
+                                        <div class="meta-item">
+                                            <i class="fas fa-eye meta-icon"></i>
+                                            Preview Available
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Course Information -->
+                <div class="lecture-sidebar">
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">Course Information</div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap meta-icon"></i>
+                            {{ course.title }}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user meta-icon"></i>
+                            {{ course.instructor.name }}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock meta-icon"></i>
+                            {{ course.total_duration }} minutes total
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-video meta-icon"></i>
+                            {{ course.lectures_count }} lectures
+                        </div>
+                    </div>
+
+                    <!-- Attachments -->
+                    {% if lecture.attachments %}
+                        <div class="sidebar-section">
+                            <div class="sidebar-title">Lecture Resources</div>
+                            <div class="attachment-item">
+                                <i class="fas fa-paperclip attachment-icon"></i>
+                                <div class="flex-grow-1">
+                                    <div class="font-weight-bold">Download Attachment</div>
+                                    <small class="text-muted">{{ lecture.attachments.name|slice:"20:" }}</small>
+                                </div>
+                            </div>
+                            <a href="{% url 'download_attachment' lecture.id %}" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <!-- Actions -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">Actions</div>
+                        <a href="{% url 'course_detail' course.slug %}" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Course
+                        </a>
+                        {% if not user_enrolled %}
+                            <a href="{% url 'course_detail' course.slug %}#enroll" class="btn btn-primary btn-block">
+                                <i class="fas fa-shopping-cart"></i>
+                                Enroll in Course
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-play functionality for video lectures
+document.addEventListener('DOMContentLoaded', function() {
+    // You can add auto-play logic here if needed
+    
+    // Track lecture progress (you can implement this based on your needs)
+    function trackProgress() {
+        // Implementation for tracking lecture completion
+        console.log('Lecture viewed: {{ lecture.id }}');
+    }
+    
+    // Call tracking function
+    trackProgress();
+});
+</script>
+{% endblock %}
