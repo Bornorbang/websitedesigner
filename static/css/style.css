@@ -425,6 +425,7 @@ a:focus {
     bottom: 0;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(239, 35, 60, 0.3));
     z-index: 2;
+    pointer-events: none;
 }
 
 .hero::after {
@@ -475,6 +476,7 @@ a:focus {
     justify-content: center;
     flex-direction: column;
     z-index: 4;
+    isolation: isolate;
 }
 
 .hero .hero-text p {
@@ -4491,6 +4493,16 @@ a:focus {
     
     .hero-overlay {
         background: rgba(0, 0, 0, 0.6) !important;
+    }
+    
+    /* Ensure hero text elements are fully visible on mobile */
+    .hero .hero-text h1,
+    .hero .hero-text p,
+    .about-hero-section .hero-text h1,
+    .about-hero-section .hero-text p {
+        opacity: 1 !important;
+        z-index: 10 !important;
+        position: relative !important;
     }
     
     /* Specific fix for about-hero-section mobile background */

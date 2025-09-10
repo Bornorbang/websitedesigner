@@ -383,7 +383,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             # Automatically log in the user after signup
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, f'Welcome to Website Designer Nigeria, {user.get_full_name() or user.username}!')
             next_url = request.POST.get('next') or request.GET.get('next')
             if next_url:
@@ -425,7 +425,7 @@ def login_view(request):
                 user = authenticate(request, username=username, password=password)
             
             if user:
-                login(request, user)
+                login(request, user, backend='app.backends.EmailOrUsernameModelBackend')
                 messages.success(request, f'Welcome back, {user.get_full_name() or user.username}!')
                 next_url = request.POST.get('next') or request.GET.get('next')
                 if next_url:

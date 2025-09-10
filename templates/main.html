@@ -281,31 +281,26 @@
                 border: 1px solid #e9ecef;
             }
 
-            /* Fix navbar header elements positioning */
             @media (max-width: 991px) {
-                /* Ensure navbar header stays fixed */
-                .navbar > .container-fluid {
-                    flex-wrap: nowrap !important;
-                    position: relative;
+                .navbar .container-fluid {
                     padding: 12px 20px;
+                    flex-wrap: nowrap;
+                    position: relative;
                 }
 
-                /* Make sure collapse menu doesn't affect header elements */
                 .navbar-brand-wrapper,
                 .mobile-profile-icon,
                 .navbar-toggler {
-                    position: relative !important;
+                    position: relative;
                     z-index: 1001;
                 }
 
-                /* Ensure collapsible content appears below header */
                 .navbar-collapse {
                     position: absolute;
                     top: 100%;
                     left: 0;
                     right: 0;
                     z-index: 1000;
-                    width: 100%;
                     margin-top: 0;
                 }
 

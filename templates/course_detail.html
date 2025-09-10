@@ -2386,8 +2386,8 @@ function showReviewForm() {
 // Play preview video
 function playPreview() {
     {% if course.preview_video %}
-        // Open video in same window
-        window.open('{{ course.preview_video }}', '_self');
+        // Use direct navigation to allow mobile apps to intercept
+        window.location.href = '{{ course.preview_video }}';
     {% else %}
         showNotification('Preview video will be available soon!', 'info');
     {% endif %}
@@ -2396,7 +2396,8 @@ function playPreview() {
 // Play preview lecture
 function playPreviewLecture(videoUrl) {
     if (videoUrl) {
-        window.open(videoUrl, '_self');
+        // Use direct navigation to allow mobile apps to intercept
+        window.location.href = videoUrl;
     } else {
         showNotification('Preview will be available soon!', 'info');
     }
@@ -2405,7 +2406,8 @@ function playPreviewLecture(videoUrl) {
 // Play full lecture (for enrolled users)
 function playLecture(videoUrl) {
     if (videoUrl) {
-        window.open(videoUrl, '_self');
+        // Use direct navigation to allow mobile apps to intercept
+        window.location.href = videoUrl;
     } else {
         showNotification('Lecture video will be available soon!', 'info');
     }

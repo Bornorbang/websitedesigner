@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qxy$q(y(i#w+$%qwlk^&lm6vag0i6m$98ii+0(oy!w^!*1)2&z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0da0aae520d8.ngrok-free.app','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["www.websitedesigner.ng", "websitedesigner.ng"]
 
 
 # Application definition
@@ -157,8 +157,8 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
 CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
 
-ONESIGNAL_APP_ID = os.environ.get('ONESIGNAL_APP_ID')
-ONESIGNAL_API_KEY = os.environ.get('ONESIGNAL_API_KEY')
+ONESIGNAL_APP_ID = os.getenv('ONESIGNAL_APP_ID')
+ONESIGNAL_API_KEY = os.getenv('ONESIGNAL_API_KEY')
 
 # CKEDITOR_CONFIGS = {
 #     'default': {
