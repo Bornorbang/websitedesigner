@@ -827,6 +827,34 @@
         text-align: left;
     }
 
+    /* Instructor Contact Button */
+    .instructor-contact .btn {
+        background: #25d366;
+        border-color: #25d366;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .instructor-contact .btn:hover {
+        background: #128c7e;
+        border-color: #128c7e;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .instructor-contact .btn i {
+        font-size: 1.1em;
+    }
+
     /* Empty State Styling */
     .empty-state {
         text-align: center;
@@ -1678,6 +1706,15 @@
                                 <p>{{ course.instructor.bio }}</p>
                             </div>
                             {% endif %}
+                            
+                            <!-- Contact Instructor Button (only for enrolled users) -->
+                            {% if user.is_authenticated and user_enrolled and course.instructor.whatsapp_url %}
+                            <div class="instructor-contact mt-3">
+                                <a href="{{ course.instructor.whatsapp_url }}" target="_blank" class="btn btn-success btn-sm icon-gap-sm">
+                                    <i class="fab fa-whatsapp"></i> Contact Instructor
+                                </a>
+                            </div>
+                            {% endif %}
 
                             {% if course.instructor.linkedin_url or course.instructor.twitter_url or course.instructor.website_url %}
                             <div class="instructor-social mt-4">
@@ -1712,7 +1749,7 @@
                                 <div class="curriculum-stats">
                                     <span><i class="fas fa-folder icon-gap-lg"></i>{{ course.sections.count }} section{{ course.sections.count|pluralize }}</span>
                                     <span><i class="fas fa-video icon-gap-lg"></i>{{ course.lectures_count }} lecture{{ course.lectures_count|pluralize }}</span>
-                                    <span><i class="fas fa-clock icon-gap-lg"></i>{{ course.total_duration }} minutes total</span>
+                                    <span><i class="fas fa-clock icon-gap-lg"></i>{% if course.total_duration and course.total_duration > 0 %}{{ course.total_duration }}{% else %}180{% endif %} minutes total</span>
                                 </div>
                             </div>
 
@@ -2031,14 +2068,26 @@
                                 <button class="enroll-btn enrolled" disabled>
                                     <i class="fas fa-check icon-gap-xl"></i>Enrolled
                                 </button>
+                            {% elif has_pending_payment %}
+                                <!-- Hidden CSRF token for AJAX requests -->
+                                {% csrf_token %}
+                                <div class="pending-payment-section">
+                                    <button class="enroll-btn" onclick="processCoursePayment({{ course.id }})" id="pendingPaymentBtn" style="background: #ffc107; border-color: #ffc107;">
+                                        <i class="fas fa-clock icon-gap-xl"></i>Payment Pending
+                                    </button>
+                                </div>
                             {% else %}
-                                <button class="enroll-btn" onclick="enrollInCourse({{ course.id }})" id="enrollBtn">
-                                    {% if course.is_free %}
+                                <!-- Hidden CSRF token for AJAX requests -->
+                                {% csrf_token %}
+                                {% if course.is_free %}
+                                    <button class="enroll-btn" onclick="enrollInCourse({{ course.id }})" id="enrollBtn">
                                         <i class="fas fa-user-plus icon-gap-xl"></i>Enroll for free
-                                    {% else %}
-                                        <i class="fas fa-shopping-cart icon-gap-xl"></i>Enroll Now - ₦{{ course.price|floatformat:0 }}
-                                    {% endif %}
-                                </button>
+                                    </button>
+                                {% else %}
+                                    <button class="enroll-btn" onclick="processCoursePayment({{ course.id }})" id="paymentBtn">
+                                        <i class="fas fa-shopping-cart icon-gap-xl"></i>Buy Now - ₦{{ course.price|floatformat:0 }}
+                                    </button>
+                                {% endif %}
                             {% endif %}
                         {% else %}
                             <a href="{% url 'signup' %}?next={{ request.path }}" class="enroll-btn">
@@ -2058,15 +2107,7 @@
                             <ul class="course-includes">
                                 <li>
                                     <i class="fas fa-video"></i>
-                                    <span>{{ course.total_duration }} minutes on-demand video</span>
-                                </li>
-                                <li>
-                                    <i class="fas fa-file-alt"></i>
-                                    <span>{{ course.lectures_count }} lectures</span>
-                                </li>
-                                <li>
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <span>Access on mobile and TV</span>
+                                    <span>{% if course.total_duration and course.total_duration > 0 %}{{ course.total_duration }}{% else %}180{% endif %} minutes on-demand video</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-infinity"></i>
@@ -2077,8 +2118,16 @@
                                     <span>Certificate of completion</span>
                                 </li>
                                 <li>
+                                    <i class="fas fa-phone"></i>
+                                    <span>Access to contact instructor</span>
+                                </li>
+                                <li>
                                     <i class="fas fa-users"></i>
                                     <span>Access to course community</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>Exclusive mentorship for 1 month</span>
                                 </li>
                             </ul>
                         </div>
@@ -2514,6 +2563,89 @@ function enrollInCourse(courseId) {
     });
 }
 
+// Payment processing functionality
+function processCoursePayment(courseId) {
+    // Try to find the payment button (could be paymentBtn or pendingPaymentBtn)
+    let btn = document.getElementById('paymentBtn');
+    if (!btn) {
+        btn = document.getElementById('pendingPaymentBtn');
+    }
+    
+    if (!btn) {
+        console.error('Payment button not found');
+        alert('Payment button not found. Please refresh the page and try again.');
+        return;
+    }
+    
+    const originalText = btn.innerHTML;
+    
+    // Get CSRF token
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (!csrfToken) {
+        console.error('CSRF token not found');
+        alert('Security token not found. Please refresh the page and try again.');
+        return;
+    }
+    
+    console.log('Starting payment process for course:', courseId);
+    
+    // Show loading state
+    btn.innerHTML = '<span class="spinner icon-gap-sm"></span>Processing...';
+    btn.classList.add('loading');
+    btn.disabled = true;
+    
+    // Make AJAX request to process payment
+    fetch('/payment/process/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken.value,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'course_id': courseId,
+            'payment_method': 'kora_pay'
+        })
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Payment response:', data);
+        if (data.success && data.payment_url) {
+            console.log('Redirecting to:', data.payment_url);
+            // Redirect to Kora Pay checkout
+            window.location.href = data.payment_url;
+        } else {
+            const errorMsg = data.error || 'Payment initialization failed. Please try again.';
+            console.error('Payment failed:', errorMsg);
+            if (typeof showNotification === 'function') {
+                showNotification(errorMsg, 'error');
+            } else {
+                alert(errorMsg);
+            }
+            btn.innerHTML = originalText;
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    })
+    .catch(error => {
+        console.error('Payment error:', error);
+        const errorMsg = 'An error occurred. Please try again.';
+        if (typeof showNotification === 'function') {
+            showNotification(errorMsg, 'error');
+        } else {
+            alert(errorMsg);
+        }
+        btn.innerHTML = originalText;
+        btn.classList.remove('loading');
+        btn.disabled = false;
+    });
+}
+
 // Review form functionality
 document.addEventListener('DOMContentLoaded', function() {
     const reviewForm = document.getElementById('reviewForm');
@@ -2538,14 +2670,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    document.querySelector('.star-rating-input').addEventListener('mouseleave', function() {
-        const checkedInput = document.querySelector('.star-rating-input input:checked');
-        if (checkedInput) {
-            highlightStars(parseInt(checkedInput.value));
-        } else {
-            highlightStars(0);
-        }
-    });
+    // Add null check for star rating input
+    const starRatingInput = document.querySelector('.star-rating-input');
+    if (starRatingInput) {
+        starRatingInput.addEventListener('mouseleave', function() {
+            const checkedInput = document.querySelector('.star-rating-input input:checked');
+            if (checkedInput) {
+                highlightStars(parseInt(checkedInput.value));
+            } else {
+                highlightStars(0);
+            }
+        });
+    }
 });
 
 function highlightStars(rating) {

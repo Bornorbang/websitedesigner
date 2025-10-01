@@ -9,6 +9,18 @@ body {
     overflow-x: hidden;
 }
 
+/* Prevent nested scrolling issues on main sections */
+.portfolio, .service, .about-section, .section-margin {
+    overflow: visible;
+    height: auto;
+    min-height: auto;
+}
+
+/* Ensure smooth page scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Modern scrollbar styling */
 ::-webkit-scrollbar {
     width: 8px;
@@ -1472,6 +1484,8 @@ a:focus {
     background: #fff;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     margin-bottom: 30px;
+    /* Prevent scroll interference */
+    contain: layout style;
 }
 
 .portfolio-card:hover {
@@ -1492,6 +1506,9 @@ a:focus {
     height: 400px;
     overflow: hidden;
     border-radius: 20px 20px 0 0;
+    /* Prevent scrolling interference */
+    pointer-events: auto;
+    touch-action: manipulation;
 }
 
 .image-container::after {
@@ -1517,23 +1534,27 @@ a:focus {
     left: 0;
     width: 100%;
     height: auto;
+    min-height: 100%;
+    object-fit: cover;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     filter: brightness(1.05) saturate(1.1);
+    /* Prevent scroll interference */
+    will-change: transform;
 }
 
-/* Hover Effect */
-.image-container:hover .scrolling-images {
+/* Hover Effect - Only trigger on direct hover, not during page scroll */
+.portfolio-card:hover .image-container:hover .scrolling-images {
     animation: scrollPartial 8s linear forwards;
     filter: brightness(1.1) saturate(1.2);
 }
 
-/* Scrolling Animation */
+/* Scrolling Animation - Made less aggressive */
 @keyframes scrollPartial {
     0% {
         transform: translateY(0) scale(1);
     }
     100% {
-        transform: translateY(-70%) scale(1.02);
+        transform: translateY(-30%) scale(1.01);
     }
 }
 
@@ -1550,6 +1571,31 @@ a:focus {
 
 .portfolio-card:hover .portfolio-title {
     color: #EF233C;
+}
+
+/* Responsive improvements for scrolling */
+@media (max-width: 768px) {
+    .image-container {
+        height: 250px;
+    }
+    
+    /* Disable hover animations on touch devices to prevent scroll interference */
+    .portfolio-card:hover .image-container:hover .scrolling-images {
+        animation: none;
+    }
+    
+    .scrolling-images {
+        position: static;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .image-container {
+        height: 200px;
+    }
 }
 
 

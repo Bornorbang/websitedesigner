@@ -57,10 +57,20 @@ class CustomUserCreationForm(UserCreationForm):
             'placeholder': 'Confirm Password'
         })
     )
+    
+    agree_to_terms = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input'
+        }),
+        error_messages={
+            'required': 'You must agree to the Privacy Policy and Terms of Service to create an account.'
+        }
+    )
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', 'agree_to_terms')
 
     def clean_username(self):
         username = self.cleaned_data.get('username')

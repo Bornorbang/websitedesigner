@@ -6,6 +6,11 @@
 
 {% block maincontent %}
 <style>
+/* Disable floating alerts for this page since we have inline form alerts */
+.messages-container {
+    display: none !important;
+}
+
 :root {
     --primary-color: #EF233C;
     --secondary-color: #d01f37;
@@ -135,6 +140,33 @@
     border-left: 4px solid #28a745;
 }
 
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: inherit;
+    opacity: 0.7;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    line-height: 1;
+}
+
+.alert-dismissible .btn-close:hover {
+    opacity: 1;
+    background: none;
+}
+
+.alert-dismissible .btn-close span {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 .help-text {
     font-size: 0.875rem;
     color: var(--light-color);
@@ -212,8 +244,11 @@
         <div class="auth-body">
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
+                    <div class="alert alert-{{ message.tags }} alert-dismissible">
                         {{ message }}
+                        <button type="button" class="btn-close" onclick="this.parentElement.remove()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 {% endfor %}
             {% endif %}

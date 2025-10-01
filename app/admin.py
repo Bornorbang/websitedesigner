@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 import requests
 
-from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, ConsultationBooking, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment
+from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment
 
 
 @admin.register(Blog)
@@ -80,24 +80,43 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(ConsultationBooking)
 class ConsultationBookingAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'phone', 'project_type', 'consultation_type', 'status', 'created_at')
-    list_filter = ('status', 'project_type', 'consultation_type', 'budget', 'created_at')
-    search_fields = ('first_name', 'last_name', 'email', 'phone', 'company')
-    readonly_fields = ('created_at', 'updated_at')
+    list_display = ('full_name', 'email', 'phone', 'consultation_type', 'session_duration', 'consultation_cost', 'payment_status', 'status', 'created_at')
+    list_filter = ('status', 'consultation_type', 'session_duration', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'phone')
+    readonly_fields = ('created_at', 'updated_at', 'payment_status')
     list_editable = ('status',)
+    
+    def get_queryset(self, request):
+        """Only show consultation bookings with successful payments"""
+        qs = super().get_queryset(request)
+        # Filter to only show consultations with completed payments
+        return qs.filter(
+            payment__status='completed'
+        ).distinct()
+    
+    def changelist_view(self, request, extra_context=None):
+        """Add context to show admin that only paid consultations are displayed"""
+        extra_context = extra_context or {}
+        extra_context['title'] = 'Paid Consultation Bookings'
+        extra_context['subtitle'] = 'Only showing consultations with successful payments'
+        return super().changelist_view(request, extra_context=extra_context)
     
     fieldsets = (
         ('Personal Information', {
-            'fields': ('first_name', 'last_name', 'email', 'phone', 'company', 'industry')
+            'fields': ('first_name', 'last_name', 'email', 'phone')
+        }),
+        ('Consultation Details', {
+            'fields': ('consultation_type', 'session_duration', 'consultation_cost', 'preferred_date', 'preferred_time')
         }),
         ('Project Details', {
-            'fields': ('project_type', 'budget', 'timeline', 'project_description', 'current_website', 'inspiration')
-        }),
-        ('Consultation Preferences', {
-            'fields': ('consultation_type', 'preferred_date', 'preferred_time')
+            'fields': ('project_description', 'inspiration')
         }),
         ('Additional Information', {
-            'fields': ('additional_services', 'status', 'notes')
+            'fields': ('status', 'notes')
+        }),
+        ('Payment Information', {
+            'fields': ('payment_status',),
+            'classes': ('collapse',)
         }),
         ('System Information', {
             'fields': ('created_at', 'updated_at'),
@@ -108,6 +127,27 @@ class ConsultationBookingAdmin(admin.ModelAdmin):
     def full_name(self, obj):
         return f'{obj.first_name} {obj.last_name}'
     full_name.short_description = 'Name'
+    
+    def payment_status(self, obj):
+        try:
+            payment = obj.payment
+            if payment:
+                status_color = {
+                    'completed': 'green',
+                    'pending': 'orange',
+                    'failed': 'red',
+                    'cancelled': 'gray'
+                }.get(payment.status, 'gray')
+                return format_html(
+                    '<span style="color: {}; font-weight: bold;">{} (₦{})</span>',
+                    status_color,
+                    payment.status.title(),
+                    payment.amount
+                )
+            return format_html('<span style="color: gray;">No Payment</span>')
+        except:
+            return format_html('<span style="color: gray;">No Payment</span>')
+    payment_status.short_description = 'Payment Status'
     
     actions = ['mark_as_confirmed', 'mark_as_completed', 'mark_as_cancelled']
     
@@ -127,6 +167,40 @@ class ConsultationBookingAdmin(admin.ModelAdmin):
     mark_as_cancelled.short_description = 'Mark selected consultations as cancelled'
 
 
+@admin.register(ConsultationPayment)
+class ConsultationPaymentAdmin(admin.ModelAdmin):
+    list_display = ('consultation_client', 'amount', 'currency', 'status', 'payment_method', 'transaction_id', 'created_at')
+    list_filter = ('status', 'payment_method', 'currency', 'created_at')
+    search_fields = ('consultation_booking__first_name', 'consultation_booking__last_name', 'consultation_booking__email', 'transaction_id', 'reference')
+    readonly_fields = ('created_at', 'updated_at', 'paid_at', 'external_transaction_id')
+    
+    fieldsets = (
+        ('Consultation Information', {
+            'fields': ('consultation_booking',)
+        }),
+        ('Payment Details', {
+            'fields': ('amount', 'currency', 'payment_method', 'status')
+        }),
+        ('Transaction Information', {
+            'fields': ('transaction_id', 'reference', 'external_transaction_id')
+        }),
+        ('System Information', {
+            'fields': ('created_at', 'updated_at', 'paid_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def consultation_client(self, obj):
+        return f'{obj.consultation_booking.full_name} ({obj.consultation_booking.email})'
+    consultation_client.short_description = 'Client'
+    
+    def has_add_permission(self, request):
+        # Payments should only be created through the payment process
+        return False
+
+
+
+
 # Course Platform Admin
 @admin.register(CourseCategory)
 class CourseCategoryAdmin(admin.ModelAdmin):
@@ -141,6 +215,17 @@ class InstructorAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'expertise')
     list_filter = ('years_experience', 'rating')
     readonly_fields = ('students_count', 'courses_count')
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'email', 'bio', 'profile_image', 'expertise', 'years_experience')
+        }),
+        ('Social Links', {
+            'fields': ('linkedin_url', 'twitter_url', 'website_url', 'whatsapp_url')
+        }),
+        ('Statistics', {
+            'fields': ('rating', 'students_count', 'courses_count')
+        }),
+    )
 
 
 class LectureInline(admin.TabularInline):
@@ -159,6 +244,11 @@ class CourseSectionInline(admin.TabularInline):
     model = CourseSection
     extra = 1
     fields = ('title', 'description', 'order', 'is_active')
+    
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+        formset.form.base_fields['is_active'].help_text = "Enrolled students can access lectures when checked"
+        return formset
 
 
 @admin.register(Course)
@@ -197,10 +287,22 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'course', 'order', 'is_active')
+    list_display = ('title', 'course', 'order', 'is_active', 'lectures_count')
     list_filter = ('course', 'is_active')
     search_fields = ('title', 'course__title')
     list_editable = ('order', 'is_active')
+    
+    def lectures_count(self, obj):
+        return obj.lectures.count()
+    lectures_count.short_description = 'Lectures'
+    
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['is_active'].help_text = (
+            "When checked, enrolled students can access all lectures in this section. "
+            "Uncheck to restrict access (lectures will show padlock icon)."
+        )
+        return form
     
     inlines = [LectureInline]
 
@@ -255,3 +357,31 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('user', 'course')
+
+
+@admin.register(CoursePayment)
+class CoursePaymentAdmin(admin.ModelAdmin):
+    list_display = ('transaction_id', 'user', 'course', 'amount', 'payment_method', 'status', 'created_at', 'paid_at')
+    list_filter = ('status', 'payment_method', 'created_at', 'paid_at')
+    search_fields = ('transaction_id', 'reference', 'external_transaction_id', 'user__username', 'user__email', 'course__title')
+    readonly_fields = ('transaction_id', 'reference', 'created_at', 'updated_at', 'paid_at', 'payment_details')
+    list_editable = ('status',)
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('user', 'course', 'enrollment', 'amount', 'currency')
+        }),
+        ('Payment Details', {
+            'fields': ('payment_method', 'status', 'transaction_id', 'reference', 'external_transaction_id')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at', 'paid_at')
+        }),
+        ('Additional Details', {
+            'fields': ('payment_details', 'failure_reason'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('user', 'course', 'enrollment')

@@ -10,19 +10,6 @@
 {% block og_description %}Book a consultation with Website Designer Nigeria. Get expert advice on your web design project. Schedule a call with our web design experts today.{% endblock %}
 
 {% block maincontent %}
-    <!-- Display Messages -->
-    {% if messages %}
-        <div class="container-fluid mt-3">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
-                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <!-- Hero Banner Section -->
     <section class="hero about-hero-section">
         <div class="hero-overlay"></div>
@@ -51,78 +38,6 @@
         </div>
     </section>
 
-    <!-- Consultation Benefits Section -->
-    <section class="consultation-benefits py-5">
-        <div class="container-fluid">
-            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
-                <p>WHY BOOK A CONSULTATION?</p>
-                <h2>What You'll Get From Our Consultation</h2>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h4>Expert Advice</h4>
-                        <p>Get professional insights on your project requirements, design approach, and technical considerations.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                        <h4>Custom Quote</h4>
-                        <p>Receive a detailed, personalized quote based on your specific needs and budget requirements.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h4>Timeline Planning</h4>
-                        <p>Understand realistic timelines for your project and plan your launch strategy effectively.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h4>Technical Guidance</h4>
-                        <p>Learn about hosting, domains, maintenance, and all technical aspects of your website.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Growth Strategy</h4>
-                        <p>Discuss how your website can grow with your business and generate more leads and sales.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="benefit-card wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="benefit-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h4>Professional Service</h4>
-                        <p>Get comprehensive consultation service with detailed project analysis and professional recommendations for your business.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Consultation Booking Form -->
     <section class="consultation-booking py-5" id="booking-form">
         <div class="container-fluid">
@@ -133,20 +48,29 @@
                             <p>BOOK YOUR SESSION</p>
                             <h2>Schedule Your Consultation</h2>
                         </div>
+                        
+                        <!-- Display Messages within form area -->
+                        {% if messages %}
+                            <div class="mb-4">
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
                         <p>Fill out the form below and we'll get back to you within 24 hours to schedule your consultation.</p>
                         
-                        <form class="consultation-form" id="consultationForm" method="post">
+                        <form class="consultation-form" id="consultationForm" method="post" action="{% url 'process_consultation_payment' %}">
                             {% csrf_token %}
                             <div class="row">
                                 <!-- Personal Information -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName" class="form-label">First Name *</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName" class="form-label">Last Name *</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                <div class="col-12 mb-3">
+                                    <label for="fullName" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
@@ -157,95 +81,6 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="phone" class="form-label">Phone Number *</label>
                                     <input type="tel" class="form-control" id="phone" name="phone" required>
-                                </div>
-                                
-                                <!-- Business Information -->
-                                <div class="col-12 mb-3">
-                                    <label for="company" class="form-label">Company/Business Name</label>
-                                    <input type="text" class="form-control" id="company" name="company">
-                                </div>
-                                
-                                <div class="col-12 mb-3">
-                                    <label for="industry" class="form-label">Industry/Business Type</label>
-                                    <select class="form-select" id="industry" name="industry">
-                                        <option value="">Select your industry</option>
-                                        <option value="healthcare">Healthcare</option>
-                                        <option value="fintech">Fintech/Finance</option>
-                                        <option value="ecommerce">E-commerce/Retail</option>
-                                        <option value="real-estate">Real Estate</option>
-                                        <option value="education">Education</option>
-                                        <option value="restaurant">Restaurant/Food</option>
-                                        <option value="travel">Travel/Tourism</option>
-                                        <option value="technology">Technology</option>
-                                        <option value="nonprofit">Non-profit</option>
-                                        <option value="professional-services">Professional Services</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <!-- Project Information -->
-                                <div class="col-12 mb-3">
-                                    <label for="projectType" class="form-label">Project Type *</label>
-                                    <div class="project-type-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="newWebsite" value="new-website" required>
-                                            <label class="form-check-label" for="newWebsite">
-                                                New Website
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="redesign" value="redesign" required>
-                                            <label class="form-check-label" for="redesign">
-                                                Website Redesign
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="ecommerce" value="ecommerce" required>
-                                            <label class="form-check-label" for="ecommerce">
-                                                E-commerce Store
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="maintenance" value="maintenance" required>
-                                            <label class="form-check-label" for="maintenance">
-                                                Website Maintenance
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="seo" value="seo" required>
-                                            <label class="form-check-label" for="seo">
-                                                SEO
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="projectType" id="other-project" value="other" required>
-                                            <label class="form-check-label" for="other-project">
-                                                Other
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 mb-3">
-                                    <label for="budget" class="form-label">Budget Range</label>
-                                    <select class="form-select" id="budget" name="budget">
-                                        <option value="">Select your budget</option>
-                                        <option value="300k-500k">₦300,000 - ₦500,000</option>
-                                        <option value="500k-1m">₦500,000 - ₦1,000,000</option>
-                                        <option value="over-1m">Over ₦1,000,000</option>
-                                        <option value="not-sure">Not sure yet</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-12 mb-3">
-                                    <label for="timeline" class="form-label">Preferred Timeline</label>
-                                    <select class="form-select" id="timeline" name="timeline">
-                                        <option value="">Select timeline</option>
-                                        <option value="urgent">ASAP</option>
-                                        <option value="1-month">Within 3 weeks</option>
-                                        <option value="2-3-months">1-3 months</option>
-                                        <option value="3-6-months">3-6 months</option>
-                                    </select>
                                 </div>
                                 
                                 <!-- Consultation Preferences -->
@@ -265,15 +100,9 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="consultationType" id="in-person" value="in-person" required>
-                                            <label class="form-check-label" for="in-person">
-                                                <i class="fas fa-handshake"></i> In-Person Meeting (Lagos only)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="consultationType" id="whatsapp" value="whatsapp" required>
                                             <label class="form-check-label" for="whatsapp">
-                                                <i class="fab fa-whatsapp"></i> WhatsApp Consultation
+                                                <i class="fab fa-whatsapp"></i> WhatsApp Call
                                             </label>
                                         </div>
                                     </div>
@@ -302,66 +131,49 @@
                                 </div>
                                 
                                 <div class="col-12 mb-3">
-                                    <label for="currentWebsite" class="form-label">Current Website (if any)</label>
-                                    <input type="url" class="form-control" id="currentWebsite" name="currentWebsite" placeholder="https://yourwebsite.com">
-                                </div>
-                                
-                                <div class="col-12 mb-3">
                                     <label for="inspiration" class="form-label">Inspiration/Reference Websites</label>
                                     <textarea class="form-control" id="inspiration" name="inspiration" rows="2" placeholder="Share links to websites you like or describe the style you're looking for..."></textarea>
                                 </div>
                                 
-                                <!-- Additional Services -->
                                 <div class="col-12 mb-3">
-                                    <label class="form-label">Additional Services of Interest (Optional)</label>
-                                    <div class="additional-services">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="seo" name="additionalServices" value="seo">
-                                            <label class="form-check-label" for="seo">
-                                                SEO Optimization
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="content-writing" name="additionalServices" value="content-writing">
-                                            <label class="form-check-label" for="content-writing">
-                                                Content Writing
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="logo-design" name="additionalServices" value="logo-design">
-                                            <label class="form-check-label" for="logo-design">
-                                                Logo/Branding Design
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="hosting" name="additionalServices" value="hosting">
-                                            <label class="form-check-label" for="hosting">
-                                                Web Hosting Setup
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="maintenance-plan" name="additionalServices" value="maintenance">
-                                            <label class="form-check-label" for="maintenance-plan">
-                                                Ongoing Maintenance
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="mobile-app" name="additionalServices" value="mobile-app">
-                                            <label class="form-check-label" for="mobile-app">
-                                                Mobile App Development
-                                            </label>
-                                        </div>
+                                    <label for="sessionDuration" class="form-label">Choose Session Duration *</label>
+                                    <select class="form-select" id="sessionDuration" name="sessionDuration" required onchange="updateConsultationCost()">
+                                        <option value="">Select duration</option>
+                                        <option value="20">20 minutes</option>
+                                        <option value="40">40 minutes</option>
+                                        <option value="60">60 minutes</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label for="consultationCost" class="form-label">Cost</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">₦</span>
+                                        <input type="text" class="form-control" id="consultationCost" name="consultationCost" readonly placeholder="Select duration to see cost">
                                     </div>
                                 </div>
                                 
                                 <!-- Submit Button -->
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary btn-lg consultation-submit-btn">
-                                        <i class="fas fa-calendar-check"></i> Book My Consultation
+                                        <i class="fas fa-credit-card"></i> Proceed to Payment
                                     </button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Terms Notice -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-8">
+                    <div class="text-center">
+                        <div style="background: rgba(255, 255, 255, 0.8); border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); border: 1px solid rgba(239, 35, 60, 0.1);">
+                            <p class="text-muted mb-0">
+                                <small><i class="fas fa-info-circle" style="margin-right: 4px; color: #EF233C;"></i> By booking our consultation, you agree to our <a href="{% url 'terms' %}" target="_blank" style="color: #EF233C; font-weight: 600; transition: all 0.3s ease;">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" style="color: #EF233C; font-weight: 600; transition: all 0.3s ease;">Privacy Policy</a>.</small>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -407,65 +219,6 @@
 .consultation-benefits {
     background: #f8f9fa;
     padding: 80px 0;
-}
-
-.benefit-card {
-    background: white;
-    padding: 40px 25px;
-    border-radius: 15px;
-    text-align: center;
-    height: 100%;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    transition: all 0.4s ease;
-    border: 1px solid #f0f0f0;
-    position: relative;
-    overflow: hidden;
-}
-
-.benefit-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #EF233C, #d91e36);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
-
-.benefit-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 50px rgba(239, 35, 60, 0.15);
-}
-
-.benefit-card:hover::before {
-    transform: scaleX(1);
-}
-
-.benefit-icon {
-    font-size: 3.5rem;
-    color: #EF233C;
-    margin-bottom: 25px;
-    transition: all 0.3s ease;
-}
-
-.benefit-card:hover .benefit-icon {
-    transform: scale(1.1);
-    color: #d91e36;
-}
-
-.benefit-card h4 {
-    color: #2c3e50;
-    margin-bottom: 18px;
-    font-weight: 700;
-    font-size: 1.3rem;
-}
-
-.benefit-card p {
-    color: #6c757d;
-    line-height: 1.7;
-    font-size: 15px;
 }
 
 /* Section Headers */
@@ -530,6 +283,8 @@
     font-size: 15px;
     transition: all 0.3s ease;
     background: #fafafa;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .consultation-form .form-control:focus,
@@ -537,12 +292,46 @@
     border-color: #EF233C;
     box-shadow: 0 0 0 0.25rem rgba(239, 35, 60, 0.15);
     background: white;
+    outline: none;
 }
 
 .consultation-form .form-control:hover,
 .consultation-form .form-select:hover {
     border-color: #dee2e6;
     background: white;
+}
+
+/* Remove valid/invalid styling */
+.consultation-form .form-control:valid,
+.consultation-form .form-select:valid {
+    border-color: #e9ecef !important;
+    background-image: none !important;
+}
+
+.consultation-form .form-control.is-valid,
+.consultation-form .form-select.is-valid {
+    border-color: #e9ecef !important;
+    background-image: none !important;
+}
+
+/* Input group styling for cost field */
+.consultation-form .input-group-text {
+    background: #EF233C;
+    color: white;
+    border: 2px solid #EF233C;
+    border-right: none;
+    font-weight: 600;
+    border-radius: 10px 0 0 10px;
+}
+
+.consultation-form .input-group .form-control {
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+
+.consultation-form .input-group .form-control:focus {
+    border-left: none;
+    box-shadow: 0 0 0 0.25rem rgba(239, 35, 60, 0.15);
 }
 
 /* Select dropdown styling */
@@ -580,7 +369,7 @@
 }
 
 /* Form Check Groups */
-.project-type-options, .consultation-type-options, .additional-services {
+.consultation-type-options {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
@@ -598,27 +387,16 @@
     overflow: hidden;
 }
 
-.form-check::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #EF233C;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
 .form-check:hover {
-    border-color: #EF233C;
-    background: #fff5f5;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(239, 35, 60, 0.1);
+    border-color: #dee2e6;
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.form-check:hover::before {
-    transform: scaleX(1);
+/* Remove any background color changes on checked state */
+.form-check-input:checked ~ .form-check {
+    background: #f8f9fa !important;
 }
 
 .form-check-input:checked + .form-check-label {
@@ -631,8 +409,17 @@
     border-color: #EF233C;
 }
 
-.form-check-input:checked ~ .form-check::before {
-    transform: scaleX(1);
+/* Ensure no green background on any state */
+.form-check,
+.form-check:hover,
+.form-check:focus,
+.form-check:active,
+.form-check.checked {
+    background: #f8f9fa !important;
+}
+
+.form-check:hover {
+    background: #ffffff !important;
 }
 
 .form-check-label {
@@ -651,10 +438,10 @@
 .consultation-submit-btn {
     background: linear-gradient(135deg, #EF233C, #d91e36);
     border: none;
-    padding: 18px 50px;
-    font-size: 18px;
+    padding: 12px 30px;
+    font-size: 16px;
     font-weight: 700;
-    border-radius: 50px;
+    border-radius: 25px;
     transition: all 0.4s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -841,7 +628,7 @@
         margin: 15px;
     }
     
-    .project-type-options, .consultation-type-options, .additional-services {
+    .consultation-type-options {
         grid-template-columns: 1fr;
     }
     
@@ -851,7 +638,8 @@
     
     .consultation-submit-btn {
         width: 100%;
-        padding: 18px;
+        padding: 12px 20px;
+        font-size: 15px;
     }
     
     .section-header h2 {
@@ -947,6 +735,25 @@
 </style>
 
 <script>
+// Cost calculation function (global scope for onchange access)
+function updateConsultationCost() {
+    const sessionDuration = document.getElementById('sessionDuration').value;
+    const costField = document.getElementById('consultationCost');
+    
+    const costs = {
+        '20': '30,000',
+        '40': '50,000',
+        '60': '70,000'
+    };
+    
+    if (sessionDuration && costs[sessionDuration]) {
+        costField.value = costs[sessionDuration];
+    } else {
+        costField.value = '';
+        costField.placeholder = 'Select duration to see cost';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('consultationForm');
     const submitBtn = document.querySelector('.consultation-submit-btn');
@@ -992,13 +799,41 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
+        // Session duration validation
+        const sessionDurationField = document.getElementById('sessionDuration');
+        if (!sessionDurationField.value) {
+            showFieldError(sessionDurationField, 'Please select a session duration');
+            isValid = false;
+        }
+        
+        // Cost validation
+        const consultationCostField = document.getElementById('consultationCost');
+        if (!consultationCostField.value) {
+            showFieldError(consultationCostField, 'Please select a session duration to see the cost');
+            isValid = false;
+        }
+        
+        // Session duration validation
+        const sessionDuration = document.getElementById('sessionDuration');
+        if (!sessionDuration.value) {
+            showFieldError(sessionDuration, 'Please select a session duration');
+            isValid = false;
+        }
+        
+        // Cost validation
+        const consultationCost = document.getElementById('consultationCost');
+        if (!consultationCost.value) {
+            showFieldError(consultationCost, 'Cost will be calculated automatically when you select duration');
+            isValid = false;
+        }
+        
         return isValid;
     }
     
     function submitForm() {
         // Show loading state
         submitBtn.classList.add('loading');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Booking Consultation...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to Payment...';
         
         // Submit the form to the backend
         form.submit();

@@ -6,6 +6,11 @@
 
 {% block maincontent %}
 <style>
+/* Disable floating alerts for this page since we have inline form alerts */
+.messages-container {
+    display: none !important;
+}
+
 :root {
     --primary-color: #EF233C;
     --secondary-color: #d01f37;
@@ -129,10 +134,72 @@
     border-left: 4px solid var(--primary-color);
 }
 
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: inherit;
+    opacity: 0.7;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    line-height: 1;
+}
+
+.alert-dismissible .btn-close:hover {
+    opacity: 1;
+    background: none;
+}
+
+.alert-dismissible .btn-close span {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 .help-text {
     font-size: 0.875rem;
     color: var(--light-color);
     margin-top: 0.25rem;
+}
+
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.5rem;
+}
+
+.form-check-input {
+    position: absolute;
+    margin-top: 0.3rem;
+    margin-left: -1.5rem;
+    accent-color: var(--primary-color);
+}
+
+.form-check-label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.form-check-label a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-check-label a:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
 }
 
 .errorlist {
@@ -206,8 +273,11 @@
         <div class="auth-body">
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
+                    <div class="alert alert-{{ message.tags }} alert-dismissible">
                         {{ message }}
+                        <button type="button" class="btn-close" onclick="this.parentElement.remove()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -308,6 +378,16 @@
                     {{ form.password2.errors }}
                 </div>
                 
+                <div class="form-group">
+                    <div class="form-check" style="margin-bottom: 1rem;">
+                        {{ form.agree_to_terms }}
+                        <label class="form-check-label" for="{{ form.agree_to_terms.id_for_label }}" style="font-size: 0.9rem; margin-left: 1.5rem;">
+                            I agree to the <a href="{% url 'privacy' %}" target="_blank" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a> and <a href="{% url 'terms' %}" target="_blank" style="color: var(--primary-color); text-decoration: none;">Terms of Service</a>
+                        </label>
+                        {{ form.agree_to_terms.errors }}
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-user-plus mr-2"></i>Create Account
                 </button>
@@ -381,6 +461,18 @@ $(document).ready(function() {
             } else {
                 $('#id_password2').removeClass('is-valid').addClass('is-invalid');
             }
+        }
+    });
+    
+    // Form submission validation
+    $('form').on('submit', function(e) {
+        var agreementChecked = $('#agreementCheck').is(':checked');
+        
+        if (!agreementChecked) {
+            e.preventDefault();
+            alert('Please agree to the Privacy Policy and Terms of Service to continue.');
+            $('#agreementCheck').focus();
+            return false;
         }
     });
 });

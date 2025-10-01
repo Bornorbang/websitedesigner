@@ -38,7 +38,6 @@ urlpatterns = [
     path('contact-website-designer-nigeria/', contact, name= 'contact'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('course/<slug:slug>/', course_detail, name="course_detail"),
-    path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
     path('tech-blog/', blog_list, name='blogs'),
     path('web-designer-in-lagos/', website_lagos, name="website_lagos"),
     path('seo-company-in-nigeria', seo_company, name="seo_services"),
@@ -70,10 +69,25 @@ urlpatterns = [
     path('course/<int:course_id>/enroll/', enroll_course, name='enroll_course'),
     path('review/<int:review_id>/like/', like_review, name='like_review'),
     
+    # Payment URLs
+    path('payment/course/<int:course_id>/', initiate_course_payment, name='initiate_course_payment'),
+    path('payment/process/', process_course_payment, name='process_course_payment'),
+    path('payment/verify/', verify_payment, name='verify_payment'),
+    path('payment/webhook/', kora_pay_webhook, name='kora_pay_webhook'),
+    path('payment/success/', payment_success, name='payment_success'),
+    path('payment/failed/', payment_failed, name='payment_failed'),
+    
+    # Consultation Payment URLs
+    path('consultation/payment/process/', process_consultation_payment, name='process_consultation_payment'),
+    path('verify-consultation-payment/<str:reference>/', verify_consultation_payment, name='verify_consultation_payment'),
+    
     # Lecture URLs
     path('course/<slug:course_slug>/lecture/<int:lecture_id>/', lecture_detail, name='lecture_detail'),
     path('lecture/<int:lecture_id>/download/', download_attachment, name='download_attachment'),
     path('lecture/<int:lecture_id>/resources/', lecture_resources, name='lecture_resources'),
+    
+    # Blog URLs - MUST BE LAST because it's a catch-all pattern
+    path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

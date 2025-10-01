@@ -47,6 +47,24 @@
             </div>
             
             <div class="row">
+             <!-- Portfolio Item 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/owodex.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Finance Web Design</h3></a>
+                </div>
+            </div>
+             <!-- Portfolio Item 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/omega_website.png' %}" alt="web design portfolio" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Business Web Design</h3></a>
+                </div>
+            </div>
             <!-- Portfolio Item 1 -->
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
@@ -105,9 +123,9 @@
             <div class="col-lg-4 col-md-6">
                 <div class="portfolio-card">
                     <div class="image-container">
-                        <img src="{% static 'img/owodex.png' %}" alt="web design portfolio" class="scrolling-images">
+                        <img src="{% static 'img/verifunds.png' %}" alt="web design portfolio" class="scrolling-images">
                     </div>
-                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Fintech Web Design</h3></a>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Company Web Design</h3></a>
                 </div>
             </div>
             <!-- Portfolio Item 3 -->
@@ -234,16 +252,35 @@
     height: 400px;
 }
 
-.image-container img {
+/* Fixed Scrolling Images CSS */
+.scrolling-images {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    min-height: 100%; /* Ensure image is tall enough to scroll */
+    object-fit: contain; /* Changed from cover to contain */
     object-position: top center;
-    transition: transform 0.5s ease;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(1.05) saturate(1.1);
+    will-change: transform;
 }
 
-.portfolio-card:hover .image-container img {
-    transform: scale(1.1);
+/* Hover Effect - Properly trigger scrolling animation */
+.portfolio-card:hover .image-container:hover .scrolling-images {
+    animation: scrollPartial 8s linear forwards;
+    filter: brightness(1.1) saturate(1.2);
+}
+
+/* Scrolling Animation - Extended to scroll to the very end */
+@keyframes scrollPartial {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(-100%) scale(1.01);
+    }
 }
 
 /* Portfolio Details */
@@ -256,6 +293,11 @@
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-title {
+    color: #EF233C;
 }
 
 .portfolio-details p {
@@ -269,10 +311,28 @@
         height: 350px;
     }
     
+    /* Disable hover animations on touch devices to prevent scroll interference */
+    .portfolio-card:hover .image-container:hover .scrolling-images {
+        animation: none;
+    }
+    
+    .scrolling-images {
+        position: static;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
     .cta-buttons .btn {
         display: block;
         width: 100%;
         margin: 10px 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .image-container {
+        height: 300px;
     }
 }
 </style>

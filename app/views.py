@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 import logging
 from django.db.models import Q
 from django.contrib.auth import login, authenticate, logout
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserProfileForm, CourseReviewForm
@@ -175,21 +177,39 @@ def course_detail(request, slug):
         else:
             review.user_found_helpful = False
     
-    # Check user enrollment and review status
+    # Check user enrollment and payment status
     user_enrolled = False
     can_review = False
     user_review = None
     review_form = None
+    enrollment_status = None
+    has_pending_payment = False
     
     if request.user.is_authenticated:
-        # Auto-enroll logged-in users
-        enrollment, created = CourseEnrollment.objects.get_or_create(
-            user=request.user,
-            course=course,
-            defaults={'is_paid': True}  # Mark as paid for free access
-        )
+        # Check if user is enrolled (paid)
+        user_enrolled = course.is_enrolled_by_user(request.user)
         
-        user_enrolled = True  # Always true since we auto-enroll
+        # Check for pending payments
+        has_pending_payment = course.has_pending_payment(request.user)
+        
+        # Get enrollment status
+        enrollment = course.get_user_enrollment(request.user)
+        if enrollment:
+            enrollment_status = enrollment.status
+        
+        # For free courses, auto-enroll if not already enrolled
+        if course.is_free and not user_enrolled and not has_pending_payment:
+            enrollment, created = CourseEnrollment.objects.get_or_create(
+                user=request.user,
+                course=course,
+                defaults={
+                    'status': 'enrolled',
+                    'is_paid': True  # Free courses are considered "paid"
+                }
+            )
+            user_enrolled = True
+            enrollment_status = 'enrolled'
+        
         can_review = course.can_user_review(request.user)
         user_review = course.get_user_review(request.user)
         
@@ -205,6 +225,8 @@ def course_detail(request, slug):
         'can_review': can_review,
         'user_review': user_review,
         'review_form': review_form,
+        'enrollment_status': enrollment_status,
+        'has_pending_payment': has_pending_payment,
     }
     return render(request, 'course_detail.html', context)
 
@@ -224,150 +246,332 @@ def portfolio(request):
     return render(request, 'portfolio.html')
 
 def consultation_booking(request):
+    # Check for payment success parameter
+    if request.GET.get('payment') == 'success':
+        reference = request.GET.get('reference')
+        if reference:
+            # Auto-verify the payment if reference is provided
+            return verify_consultation_payment(request, reference)
+        # If no reference, just show success message
+        messages.success(request, 'Payment successful! We will contact you within 24 hours to confirm your appointment.')
+    
     if request.method == 'POST':
-        # Extract form data
-        first_name = request.POST.get('firstName')
-        last_name = request.POST.get('lastName')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        company = request.POST.get('company', '')
-        industry = request.POST.get('industry', '')
-        project_type = request.POST.get('projectType')
-        budget = request.POST.get('budget', '')
-        timeline = request.POST.get('timeline', '')
-        consultation_type = request.POST.get('consultationType')
-        preferred_date = request.POST.get('preferredDate', '')
-        preferred_time = request.POST.get('preferredTime', '')
-        project_description = request.POST.get('projectDescription', '')
-        current_website = request.POST.get('currentWebsite', '')
-        inspiration = request.POST.get('inspiration', '')
-        additional_services = request.POST.getlist('additionalServices')
-        
-        # Format additional services
-        services_text = ', '.join(additional_services) if additional_services else ''
-        
-        # Save to database
+        # All form submissions now go through payment processing
+        return process_consultation_payment(request)
+    
+    return render(request, 'consultation_booking.html')
+
+
+def process_consultation_payment(request):
+    """Process consultation payment via Kora Pay"""
+    if request.method == 'POST':
         try:
+            # Extract form data
+            full_name = request.POST.get('fullName')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            consultation_type = request.POST.get('consultationType')
+            preferred_date = request.POST.get('preferredDate', '')
+            preferred_time = request.POST.get('preferredTime', '')
+            project_description = request.POST.get('projectDescription', '')
+            inspiration = request.POST.get('inspiration', '')
+            session_duration = request.POST.get('sessionDuration', '')
+            consultation_cost = request.POST.get('consultationCost', '')
+            
+            # Validate required fields
+            if not all([full_name, email, phone, consultation_type, session_duration, consultation_cost]):
+                messages.error(request, 'Please fill in all required fields.')
+                return redirect('consultation_booking')
+            
+            # Parse consultation cost (remove commas)
+            try:
+                amount = float(consultation_cost.replace(',', ''))
+            except ValueError:
+                messages.error(request, 'Invalid consultation cost.')
+                return redirect('consultation_booking')
+            
+            # Split full name into first and last name for model compatibility
+            name_parts = full_name.strip().split(' ', 1) if full_name else ['', '']
+            first_name = name_parts[0] if name_parts else ''
+            last_name = name_parts[1] if len(name_parts) > 1 else ''
+            
+            # Create consultation booking first
             consultation = ConsultationBooking.objects.create(
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
                 phone=phone,
-                company=company,
-                industry=industry,
-                project_type=project_type,
-                budget=budget,
-                timeline=timeline,
+                company='',
+                industry='',
+                project_type='consultation',
+                budget='',
+                timeline='',
                 consultation_type=consultation_type,
                 preferred_date=preferred_date if preferred_date else None,
                 preferred_time=preferred_time,
+                session_duration=session_duration,
+                consultation_cost=consultation_cost,
                 project_description=project_description,
-                current_website=current_website,
+                current_website='',
                 inspiration=inspiration,
-                additional_services=services_text,
+                additional_services='',
+                status='pending'  # Will be updated when payment is completed
             )
             
-            # Create email content
-            subject = f"New Consultation Request from {first_name} {last_name} (ID: {consultation.id})"
+            # Generate unique transaction reference
+            import uuid
+            transaction_id = f"CONS_{consultation.id}_{uuid.uuid4().hex[:8].upper()}"
+            reference = f"consultation_{consultation.id}_{uuid.uuid4().hex[:12]}"
             
-            email_message = f"""
-New consultation booking received!
+            # Create consultation payment record
+            from .models import ConsultationPayment
+            payment = ConsultationPayment.objects.create(
+                consultation_booking=consultation,
+                amount=amount,
+                currency='NGN',
+                payment_method='kora_pay',
+                status='pending',
+                transaction_id=transaction_id,
+                reference=reference
+            )
+            
+            # Initialize payment with Kora Pay
+            import requests
+            from django.conf import settings
+            
+            kora_pay_data = {
+                "amount": int(amount),  # Amount in naira (not kobo)
+                "currency": "NGN",
+                "reference": reference,
+                "redirect_url": request.build_absolute_uri("/book-consultation/?payment=success"),
+                "notification_url": request.build_absolute_uri(f"/verify-consultation-payment/{reference}/"),
+                "narration": f"Consultation booking payment - {session_duration} minutes",
+                "channels": ["card", "bank_transfer", "pay_with_bank"],
+                "customer": {
+                    "email": email,
+                    "name": full_name
+                },
+                "metadata": {
+                    "consultation_id": str(consultation.id),
+                    "payment_id": str(payment.id),
+                    "session_duration": session_duration,
+                    "phone": phone
+                }
+            }
+            
+            headers = {
+                "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+                "Content-Type": "application/json"
+            }
+            
+            # Debug logging
+            print(f"Kora Pay API URL: {settings.KORA_PAY_BASE_URL}/charges/initialize")
+            print(f"Headers: {headers}")
+            print(f"Request data: {kora_pay_data}")
+            
+            response = requests.post(
+                f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
+                json=kora_pay_data,
+                headers=headers,
+                timeout=30
+            )
+            
+            print(f"Response status: {response.status_code}")
+            print(f"Response content: {response.text}")
+            
+            if response.status_code == 200:
+                response_data = response.json()
+                
+                if response_data.get('status') and response_data.get('data'):
+                    checkout_url = response_data['data'].get('checkout_url')
+                    
+                    # Store payment details
+                    payment.payment_details = response_data['data']
+                    payment.external_transaction_id = response_data['data'].get('reference', reference)
+                    payment.save()
+                    
+                    return redirect(checkout_url)
+                else:
+                    payment.mark_as_failed('Invalid response from payment gateway')
+                    messages.error(request, 'Payment initialization failed. Please try again.')
+                    return redirect('consultation_booking')
+            else:
+                payment.mark_as_failed(f'Payment gateway error: {response.status_code}')
+                messages.error(request, 'Payment service unavailable. Please try again later.')
+                return redirect('consultation_booking')
+                
+        except Exception as e:
+            logging.error(f"Consultation payment error: {e}")
+            messages.error(request, 'An error occurred while processing your payment. Please try again.')
+            return redirect('consultation_booking')
+    
+    return redirect('consultation_booking')
+
+
+def verify_consultation_payment(request, reference):
+    """Verify consultation payment from Kora Pay"""
+    try:
+        from .models import ConsultationPayment
+        payment = ConsultationPayment.objects.get(reference=reference)
+        
+        # Verify payment with Kora Pay
+        import requests
+        from django.conf import settings
+        
+        headers = {
+            "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.get(
+            f"{settings.KORA_PAY_BASE_URL}/charges/{reference}",
+            headers=headers,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            
+            if response_data.get('status') and response_data.get('data'):
+                transaction_data = response_data['data']
+                transaction_status = transaction_data.get('status', '').lower()
+                
+                if transaction_status == 'success':
+                    # Mark payment as completed
+                    payment.external_transaction_id = transaction_data.get('payment_reference', reference)
+                    payment.payment_details.update(transaction_data)
+                    payment.mark_as_completed()
+                    
+                    # Update consultation booking status to confirmed
+                    consultation = payment.consultation_booking
+                    consultation.status = 'confirmed'
+                    consultation.save()
+                    
+                    # Send confirmation emails (reuse existing email logic)
+                    from django.core.mail import send_mail
+                
+                # Admin email
+                admin_subject = f"New Paid Consultation Request from {consultation.full_name} (ID: {consultation.id})"
+                admin_message = f"""
+Paid consultation booking received!
 
 CONSULTATION ID: {consultation.id}
+PAYMENT ID: {payment.id}
 BOOKING DATE: {consultation.created_at.strftime('%Y-%m-%d %H:%M:%S')}
+PAYMENT STATUS: PAID
 
 PERSONAL INFORMATION:
-Name: {first_name} {last_name}
-Email: {email}
-Phone: {phone}
-Company: {company if company else 'Not provided'}
-Industry: {industry if industry else 'Not provided'}
+Name: {consultation.full_name}
+Email: {consultation.email}
+Phone: {consultation.phone}
+
+CONSULTATION DETAILS:
+Consultation Type: {consultation.consultation_type}
+Session Duration: {consultation.session_duration} minutes
+Amount Paid: ₦{payment.amount}
+Preferred Date: {consultation.preferred_date if consultation.preferred_date else 'Not specified'}
+Preferred Time: {consultation.preferred_time if consultation.preferred_time else 'Not specified'}
 
 PROJECT DETAILS:
-Project Type: {project_type}
-Budget Range: {budget if budget else 'Not specified'}
-Timeline: {timeline if timeline else 'Not specified'}
-Description: {project_description if project_description else 'Not provided'}
-Current Website: {current_website if current_website else 'None'}
-Inspiration/References: {inspiration if inspiration else 'None'}
+Description: {consultation.project_description if consultation.project_description else 'Not provided'}
+Inspiration/References: {consultation.inspiration if consultation.inspiration else 'None'}
 
-CONSULTATION PREFERENCES:
-Consultation Type: {consultation_type}
-Preferred Date: {preferred_date if preferred_date else 'Not specified'}
-Preferred Time: {preferred_time if preferred_time else 'Not specified'}
-
-ADDITIONAL SERVICES:
-{services_text if services_text else 'None'}
+PAYMENT DETAILS:
+Transaction ID: {payment.transaction_id}
+Reference: {payment.reference}
+Payment Method: KoraPay
 
 ---
-This consultation request was submitted via the Website Designer Nigeria consultation form.
-Please respond within 24 hours as promised to the client.
+This is a PAID consultation request. Please prioritize and respond within 24 hours.
 
 View in Admin: http://yourwebsite.com/admin/app/consultationbooking/{consultation.id}/
-            """
-            
-            # Email to admin
-            send_mail(
-                subject,
-                email_message,
-                "consultation@websitedesigner.ng",
-                ["admin@websitedesigner.ng", "info@websitedesigner.ng"],
-                fail_silently=False,
-            )
-            
-            # Confirmation email to client
-            client_subject = "Your Consultation Request - Website Designer Nigeria"
-            client_message = f"""
-Dear {first_name},
+"""
+                
+                send_mail(
+                    admin_subject,
+                    admin_message,
+                    "consultation@websitedesigner.ng",
+                    [settings.CONTACT_EMAIL],
+                    fail_silently=True,
+                )
+                
+                # Client confirmation email
+                client_subject = "Payment Confirmed - Your Consultation is Booked!"
+                client_message = f"""
+Dear {consultation.first_name},
 
-Thank you for booking a consultation with Website Designer Nigeria!
+Great news! Your payment has been confirmed and your consultation is now booked.
 
-We've received your consultation request for your {project_type} project and are excited to discuss how we can help bring your vision to life.
+PAYMENT CONFIRMATION:
+✅ Amount Paid: ₦{payment.amount}
+✅ Transaction ID: {payment.transaction_id}
+✅ Payment Date: {payment.paid_at.strftime('%Y-%m-%d %H:%M:%S')}
 
-CONSULTATION REFERENCE: #{consultation.id}
+YOUR CONSULTATION DETAILS:
+• Session Duration: {consultation.session_duration} minutes
+• Consultation Type: {consultation.consultation_type}
+• Preferred Date: {consultation.preferred_date if consultation.preferred_date else 'To be confirmed'}
+• Preferred Time: {consultation.preferred_time if consultation.preferred_time else 'To be confirmed'}
 
 WHAT HAPPENS NEXT:
-• Our team will review your project details
-• We'll contact you within 24 hours to confirm your consultation appointment
+• Our team will contact you within 24 hours to confirm your appointment
 • You'll receive a calendar invite for the scheduled time
 • We'll prepare a custom discussion agenda based on your requirements
 
-YOUR CONSULTATION DETAILS:
-• Consultation Type: {consultation_type}
-• Preferred Date: {preferred_date if preferred_date else 'To be confirmed'}
-• Preferred Time: {preferred_time if preferred_time else 'To be confirmed'}
-
-CONSULTATION FEES:
-Please note that consultation fees may apply based on the scope and complexity of your project. Our team will discuss this with you during the scheduling call.
-
-If you have any urgent questions before our call, feel free to reach out to us at:
+If you have any questions, please contact us at:
 • WhatsApp: https://wa.link/f2kd41
 • Email: info@websitedesigner.ng
-• Phone: +234 XXX XXX XXXX
 
-We're looking forward to our conversation!
+Thank you for choosing Website Designer Nigeria!
 
 Best regards,
 The Website Designer Nigeria Team
 www.websitedesigner.ng
-            """
-            
-            send_mail(
-                client_subject,
-                client_message,
-                "consultation@websitedesigner.ng",
-                [email],
-                fail_silently=False,
-            )
-            
-            messages.success(request, 'Your consultation has been booked successfully! We will contact you within 24 hours.')
+"""
+                
+                send_mail(
+                    client_subject,
+                    client_message,
+                    "consultation@websitedesigner.ng",
+                    [consultation.email],
+                    fail_silently=True,
+                )
+                
+                messages.success(request, 'Payment successful! We will contact you within 24 hours to confirm your appointment.')
+                return redirect('consultation_booking')
+                
+            elif transaction_status == 'failed':
+                payment.mark_as_failed('Payment failed at gateway')
+                messages.error(request, 'Payment failed. Please try again.')
+                return redirect('consultation_booking')
+                
+            elif transaction_status == 'pending':
+                messages.info(request, 'Payment is still being processed. Please check back shortly.')
+                return redirect('consultation_booking')
+                
+            elif transaction_status == 'processing':
+                messages.info(request, 'Payment is being processed. Please check back in a few minutes.')
+                return redirect('consultation_booking')
+                
+            elif transaction_status in ['cancelled', 'abandoned']:
+                payment.mark_as_failed('Payment cancelled by user')
+                messages.warning(request, 'Payment was cancelled. You can try again to complete your consultation booking.')
+                return redirect('consultation_booking')
+                
+            else:
+                messages.info(request, f'Payment status: {transaction_status}. Please contact support if you need assistance.')
+                return redirect('consultation_booking')
+        else:
+            messages.error(request, 'Unable to verify payment status. Please contact support with your payment reference.')
             return redirect('consultation_booking')
             
-        except Exception as e:
-            messages.error(request, 'There was an error processing your request. Please try again or contact us directly.')
-            logging.error(f"Consultation booking error: {e}")
-    
-    return render(request, 'consultation_booking.html')
+    except ConsultationPayment.DoesNotExist:
+        messages.error(request, 'Payment record not found')
+        return redirect('consultation_booking')
+    except Exception as e:
+        logging.error(f"Consultation payment verification error: {e}")
+        messages.error(request, 'Payment verification failed. Please contact support.')
+        return redirect('consultation_booking')
 
 
 # Authentication Views
@@ -591,8 +795,15 @@ def like_review(request, review_id):
 
 @login_required
 def enroll_course(request, course_id):
-    """Handle course enrollment"""
+    """Handle course enrollment/payment initiation"""
     course = get_object_or_404(Course, id=course_id, status='published')
+    
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            'success': False,
+            'error': 'Please login to enroll in courses.',
+            'redirect': '/login/'
+        })
     
     if request.method == 'POST':
         # Check if already enrolled
@@ -602,21 +813,468 @@ def enroll_course(request, course_id):
                 'error': 'You are already enrolled in this course.'
             })
         
-        # Create enrollment
-        from .models import CourseEnrollment
-        enrollment = CourseEnrollment.objects.create(
+        # Check if has pending payment
+        if course.has_pending_payment(request.user):
+            return JsonResponse({
+                'success': False,
+                'error': 'You already have a pending payment for this course.'
+            })
+        
+        # Handle free courses
+        if course.is_free:
+            enrollment = CourseEnrollment.objects.create(
+                user=request.user,
+                course=course,
+                status='enrolled',
+                is_paid=True
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'Successfully enrolled in {course.title}!',
+                'is_free': True,
+                'redirect': course.get_absolute_url()
+            })
+        
+        # Handle paid courses - get or create pending enrollment and redirect to payment
+        enrollment, created = CourseEnrollment.objects.get_or_create(
             user=request.user,
             course=course,
-            is_paid=course.is_free  # For free courses, mark as paid immediately
+            defaults={
+                'status': 'pending',
+                'is_paid': False
+            }
         )
         
         return JsonResponse({
             'success': True,
-            'message': f'Successfully enrolled in {course.title}!',
-            'is_free': course.is_free
+            'message': 'Please complete payment to enroll.',
+            'is_free': False,
+            'payment_url': f'/payment/course/{course.id}/',
+            'redirect': f'/payment/course/{course.id}/'
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+def initiate_course_payment(request, course_id):
+    """Initiate payment for course enrollment"""
+    course = get_object_or_404(Course, id=course_id, status='published')
+    
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    # Check if course is free
+    if course.is_free:
+        messages.error(request, 'This course is free. No payment required.')
+        return redirect(course.get_absolute_url())
+    
+    # Check if already enrolled
+    if course.is_enrolled_by_user(request.user):
+        messages.error(request, 'You are already enrolled in this course.')
+        return redirect(course.get_absolute_url())
+    
+    # Get or create enrollment
+    enrollment, created = CourseEnrollment.objects.get_or_create(
+        user=request.user,
+        course=course,
+        defaults={
+            'status': 'pending',
+            'is_paid': False
+        }
+    )
+    
+    context = {
+        'course': course,
+        'enrollment': enrollment,
+        'kora_pay_public_key': settings.KORA_PAY_PUBLIC_KEY,
+    }
+    
+    return render(request, 'payment/course_payment.html', context)
+
+
+def process_course_payment(request):
+    """Process course payment via Kora Pay"""
+    try:
+        if request.method != 'POST':
+            return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        
+        if not request.user.is_authenticated:
+            return JsonResponse({'success': False, 'error': 'Authentication required'})
+        
+        # Handle both JSON and form data
+        if request.content_type == 'application/json':
+            import json
+            data = json.loads(request.body)
+            course_id = data.get('course_id')
+            payment_method = data.get('payment_method', 'kora_pay')
+        else:
+            course_id = request.POST.get('course_id')
+            payment_method = request.POST.get('payment_method', 'kora_pay')
+        
+        if not course_id:
+            return JsonResponse({'success': False, 'error': 'Course ID is required'})
+            
+        try:
+            course = Course.objects.get(id=course_id, status='published')
+        except Course.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Course not found'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': f'Error finding course: {str(e)}'})
+            
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': f'Request processing error: {str(e)}'})
+    
+    # Check if user already has a completed enrollment for this course
+    existing_enrollment = CourseEnrollment.objects.filter(
+        user=request.user,
+        course=course,
+        status='completed',
+        is_paid=True
+    ).first()
+    
+    if existing_enrollment:
+        return JsonResponse({
+            'success': False,
+            'error': 'You have already purchased this course. Please check your enrolled courses.'
+        })
+    
+    # Check if there's already a pending/processing payment
+    from .models import CoursePayment, PaymentMethod
+    existing_payment = CoursePayment.objects.filter(
+        user=request.user,
+        course=course,
+        status__in=['pending', 'processing']
+    ).first()
+    
+    # Get or create Kora Pay payment method (for future use, not directly used in CoursePayment)
+    payment_method_obj, created = PaymentMethod.objects.get_or_create(
+        provider='kora_pay',
+        defaults={
+            'name': 'Kora Pay',
+            'is_active': True,
+            'public_key': getattr(settings, 'KORA_PAY_PUBLIC_KEY', ''),
+            'secret_key': getattr(settings, 'KORA_PAY_SECRET_KEY', ''),
+        }
+    )
+    
+    if existing_payment:
+        # User already has a pending payment, generate new unique reference for retry
+        import uuid
+        while True:
+            new_reference = f"REF_{uuid.uuid4().hex[:10].upper()}"
+            # Check if this reference is already used by any payment
+            if not CoursePayment.objects.filter(reference=new_reference).exists():
+                break
+        
+        existing_payment.reference = new_reference
+        existing_payment.status = 'pending'
+        existing_payment.save()
+        payment = existing_payment
+        enrollment = existing_payment.enrollment
+    else:
+        # Get or create enrollment (this handles the case where admin removed enrollment)
+        enrollment, created = CourseEnrollment.objects.get_or_create(
+            user=request.user,
+            course=course,
+            defaults={
+                'status': 'pending',
+                'is_paid': False
+            }
+        )
+        
+        # Try to get or create payment record to avoid constraint issues
+        payment, created = CoursePayment.objects.get_or_create(
+            user=request.user,
+            course=course,
+            enrollment=enrollment,
+            defaults={
+                'amount': course.price,
+                'payment_method': 'kora_pay',  # Use string value, not model instance
+                'status': 'pending'
+            }
+        )
+        
+        # If payment already exists, update it
+        if not created:
+            # Generate new unique reference for retry to avoid duplicate reference error
+            import uuid
+            while True:
+                new_reference = f"REF_{uuid.uuid4().hex[:10].upper()}"
+                # Check if this reference is already used by any payment
+                if not CoursePayment.objects.filter(reference=new_reference).exists():
+                    break
+            
+            payment.reference = new_reference
+            payment.amount = course.price
+            payment.payment_method = 'kora_pay'  # Use string value, not model instance
+            payment.status = 'pending'
+            payment.save()
+        else:
+            # Even for new payments, ensure unique reference
+            import uuid
+            while True:
+                new_reference = f"REF_{uuid.uuid4().hex[:10].upper()}"
+                if not CoursePayment.objects.filter(reference=new_reference).exists():
+                    break
+            
+            payment.reference = new_reference
+            payment.save()
+    
+    # Initialize payment with Kora Pay
+    import requests
+    
+    kora_pay_data = {
+        "amount": int(course.price),  # Amount in naira
+        "currency": "NGN",
+        "reference": payment.reference,
+        "redirect_url": request.build_absolute_uri('/payment/verify/'),
+        "notification_url": request.build_absolute_uri('/payment/webhook/'),
+        "narration": f"Payment for {course.title}",
+        "channels": ["card", "bank_transfer", "pay_with_bank"],
+        "customer": {
+            "email": request.user.email,
+            "name": request.user.get_full_name() or request.user.username
+        },
+        "metadata": {
+            "course_id": str(course.id),
+            "user_id": str(request.user.id),
+            "payment_id": str(payment.id),
+        }
+    }
+    
+    headers = {
+        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    try:
+        response = requests.post(
+            f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
+            json=kora_pay_data,
+            headers=headers
+        )
+        
+        print(f"Kora Pay API URL: {settings.KORA_PAY_BASE_URL}/charges/initialize")
+        print(f"Request headers: {headers}")
+        print(f"Request data: {kora_pay_data}")
+        print(f"Response status: {response.status_code}")
+        print(f"Response text: {response.text}")
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            
+            if response_data.get('status'):
+                # Store the checkout URL in payment details
+                payment.payment_details = response_data
+                payment.save()
+                
+                return JsonResponse({
+                    'success': True,
+                    'payment_url': response_data['data']['checkout_url'],
+                    'checkout_url': response_data['data']['checkout_url'],
+                    'reference': payment.reference
+                })
+            else:
+                error_msg = response_data.get('message', 'Payment initialization failed')
+                payment.mark_as_failed(error_msg)
+                return JsonResponse({
+                    'success': False,
+                    'error': error_msg
+                })
+        else:
+            error_msg = f'HTTP {response.status_code}: {response.text}'
+            payment.mark_as_failed(error_msg)
+            return JsonResponse({
+                'success': False,
+                'error': f'Payment service error: {error_msg}'
+            })
+            
+    except requests.RequestException as e:
+        error_msg = f'Network error: {str(e)}'
+        payment.mark_as_failed(error_msg)
+        return JsonResponse({
+            'success': False,
+            'error': f'Network error: {str(e)}'
+        })
+    
+    return JsonResponse({'success': False, 'error': 'Payment method not supported'})
+
+
+def verify_payment(request):
+    """Verify payment with Kora Pay and complete enrollment"""
+    reference = request.GET.get('reference')
+    
+    if not reference:
+        messages.error(request, 'Invalid payment reference')
+        return redirect('courses')
+    
+    try:
+        from .models import CoursePayment
+        payment = CoursePayment.objects.get(reference=reference)
+    except CoursePayment.DoesNotExist:
+        messages.error(request, 'Payment not found')
+        return redirect('courses')
+    
+    # Verify with Kora Pay
+    import requests
+    
+    headers = {
+        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    try:
+        response = requests.get(
+            f"{settings.KORA_PAY_BASE_URL}/charges/{reference}",
+            headers=headers
+        )
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            
+            if response_data.get('status') and response_data.get('data'):
+                transaction_data = response_data['data']
+                transaction_status = transaction_data.get('status')
+                
+                if transaction_status == 'success' and payment.status == 'pending':
+                    # Mark payment as completed
+                    payment.external_transaction_id = transaction_data.get('payment_reference', reference)
+                    payment.payment_details.update(transaction_data)
+                    payment.mark_as_completed()
+                    
+                    messages.success(request, f'Payment successful! You are now enrolled in {payment.course.title}')
+                    return redirect(payment.course.get_absolute_url())
+                    
+                elif transaction_status == 'failed':
+                    payment.mark_as_failed('Payment failed at gateway')
+                    messages.error(request, 'Payment failed. Please try again.')
+                    return redirect('initiate_course_payment', course_id=payment.course.id)
+                    
+                elif transaction_status == 'pending':
+                    messages.info(request, 'Payment is still being processed. Please check back shortly.')
+                    return redirect(payment.course.get_absolute_url())
+                    
+                elif transaction_status in ['cancelled', 'abandoned']:
+                    payment.mark_as_failed('Payment cancelled by user')
+                    messages.warning(request, 'Payment was cancelled. You can try again to complete your purchase.')
+                    return redirect('initiate_course_payment', course_id=payment.course.id)
+                    
+                else:
+                    # For any other unknown status
+                    messages.info(request, f'Payment status: {transaction_status}. Please contact support if you need assistance.')
+                    return redirect(payment.course.get_absolute_url())
+            else:
+                messages.error(request, 'Unable to verify payment status')
+                return redirect('courses')
+                
+    except requests.RequestException as e:
+        messages.error(request, 'Payment verification failed. Please contact support.')
+        return redirect('courses')
+    
+    messages.info(request, 'Payment verification completed')
+    return redirect(payment.course.get_absolute_url())
+
+
+def payment_success(request):
+    """Payment success page"""
+    reference = request.GET.get('reference')
+    
+    if reference:
+        try:
+            from .models import CoursePayment
+            payment = CoursePayment.objects.get(reference=reference, status='completed')
+            context = {
+                'payment': payment,
+                'course': payment.course
+            }
+            return render(request, 'payment/success.html', context)
+        except CoursePayment.DoesNotExist:
+            pass
+    
+    return render(request, 'payment/success.html')
+
+
+def payment_failed(request):
+    """Payment failed page"""
+    reference = request.GET.get('reference')
+    
+    if reference:
+        try:
+            from .models import CoursePayment
+            payment = CoursePayment.objects.get(reference=reference)
+            if payment.status != 'completed':
+                payment.mark_as_failed('Payment cancelled by user')
+            
+            context = {
+                'payment': payment,
+                'course': payment.course
+            }
+            return render(request, 'payment/failed.html', context)
+        except CoursePayment.DoesNotExist:
+            pass
+    
+    return render(request, 'payment/failed.html')
+
+
+@csrf_exempt
+def kora_pay_webhook(request):
+    """Handle Kora Pay webhook notifications"""
+    if request.method != 'POST':
+        return HttpResponse(status=405)
+    
+    try:
+        import json
+        payload = json.loads(request.body.decode('utf-8'))
+        
+        # Verify webhook is from Kora Pay
+        event = payload.get('event')
+        if event != 'charge.success':
+            return HttpResponse(status=200)  # Acknowledge other events
+        
+        data = payload.get('data', {})
+        reference = data.get('reference')
+        
+        if not reference:
+            return HttpResponse(status=400)
+        
+        # Find the payment
+        try:
+            from .models import CoursePayment
+            payment = CoursePayment.objects.get(reference=reference)
+        except CoursePayment.DoesNotExist:
+            return HttpResponse(status=404)
+        
+        # Only process if payment is still pending
+        if payment.status == 'pending':
+            # Verify the payment amount matches
+            expected_amount = int(payment.amount * 100)  # Convert to kobo
+            received_amount = data.get('amount', 0)
+            
+            if expected_amount == received_amount:
+                # Mark payment as completed
+                payment.external_transaction_id = data.get('payment_reference', reference)
+                payment.payment_details.update(data)
+                payment.mark_as_completed()
+                
+                # Log successful webhook processing
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.info(f"Webhook processed successfully for payment {payment.transaction_id}")
+            else:
+                # Amount mismatch - mark as failed
+                payment.mark_as_failed(f"Amount mismatch: expected {expected_amount}, received {received_amount}")
+        
+        return HttpResponse(status=200)
+        
+    except json.JSONDecodeError:
+        return HttpResponse(status=400)
+    except Exception as e:
+        # Log the error but return 200 to acknowledge receipt
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Webhook processing error: {str(e)}")
+        return HttpResponse(status=200)
 
 
 def lecture_detail(request, course_slug, lecture_id):
@@ -628,20 +1286,36 @@ def lecture_detail(request, course_slug, lecture_id):
     
     # Check if user has access to this lecture
     user_enrolled = False
-    if request.user.is_authenticated:
-        # Auto-enroll logged-in users
-        enrollment, created = CourseEnrollment.objects.get_or_create(
-            user=request.user,
-            course=course,
-            defaults={'is_paid': True}  # Mark as paid for free access
-        )
-        user_enrolled = True
+    has_access = False
     
-    # Access control
-    has_access = lecture.is_preview or user_enrolled or (request.user.is_authenticated and request.user.is_staff)
+    if request.user.is_authenticated:
+        # Check if user is properly enrolled (paid)
+        user_enrolled = course.is_enrolled_by_user(request.user)
+        
+        # For free courses, auto-enroll if not already enrolled
+        if course.is_free and not user_enrolled:
+            enrollment, created = CourseEnrollment.objects.get_or_create(
+                user=request.user,
+                course=course,
+                defaults={
+                    'status': 'enrolled',
+                    'is_paid': True
+                }
+            )
+            user_enrolled = True
+    
+    # Access control - preview lectures or enrolled users or staff
+    has_access = (
+        lecture.is_preview or 
+        user_enrolled or 
+        (request.user.is_authenticated and request.user.is_staff)
+    )
     
     if not has_access:
-        messages.error(request, 'You need to enroll in this course to access this lecture.')
+        if course.is_free:
+            messages.error(request, 'You need to enroll in this course to access this lecture.')
+        else:
+            messages.error(request, 'You need to purchase this course to access this lecture.')
         return redirect('course_detail', slug=course_slug)
     
     # Get neighboring lectures for navigation

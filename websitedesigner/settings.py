@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qxy$q(y(i#w+$%qwlk^&lm6vag0i6m$98ii+0(oy!w^!*1)2&z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["www.websitedesigner.ng", "websitedesigner.ng"]
+ALLOWED_HOSTS = ["www.websitedesigner.ng", "websitedesigner.ng", "127.0.0.1"]
 
 
 # Application definition
@@ -100,9 +100,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
@@ -190,4 +187,5 @@ CKEDITOR_CONFIGS = {
         'allowedContent': True,
     },
 }
+
 

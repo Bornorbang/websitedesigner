@@ -136,6 +136,181 @@
                 text-decoration: none;
             }
 
+            /* User Initial Styling */
+            .user-initial {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #EF233C, #d63031);
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+                text-decoration: none;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 8px rgba(239, 35, 60, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                box-sizing: border-box;
+                line-height: 1;
+            }
+
+            .user-initial:hover {
+                color: white;
+                text-decoration: none;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(239, 35, 60, 0.4);
+            }
+
+            /* Desktop profile button styling */
+            .desktop-profile-btn {
+                color: #2c3e50;
+                font-size: 20px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                margin-left: 10px;
+            }
+
+            .desktop-profile-btn:hover {
+                color: #EF233C;
+                background-color: rgba(239, 35, 60, 0.1);
+                text-decoration: none;
+            }
+
+            /* Global Alert Styling */
+            .alert {
+                border-radius: 12px;
+                border: none;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                font-weight: 500;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                animation: slideInFromRight 0.3s ease-out;
+            }
+
+            @keyframes slideInFromRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .alert::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: currentColor;
+            }
+
+            .alert-success {
+                background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                color: #155724;
+                border-color: #28a745;
+            }
+
+            .alert-success::before {
+                background: #28a745;
+            }
+
+            .alert-danger, .alert-error {
+                background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+                color: #721c24;
+                border-color: #EF233C;
+            }
+
+            .alert-danger::before, .alert-error::before {
+                background: #EF233C;
+            }
+
+            .alert-warning {
+                background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+                color: #856404;
+                border-color: #ffc107;
+            }
+
+            .alert-warning::before {
+                background: #ffc107;
+            }
+
+            .alert-info {
+                background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+                color: #0c5460;
+                border-color: #17a2b8;
+            }
+
+            .alert-info::before {
+                background: #17a2b8;
+            }
+
+            .alert i {
+                margin-right: 10px;
+                font-size: 16px;
+            }
+
+            .alert-dismissible .btn-close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 1rem;
+                color: inherit;
+                opacity: 0.7;
+                background: none;
+                border: none;
+                font-size: 18px;
+                font-weight: bold;
+                cursor: pointer;
+                width: auto;
+                height: auto;
+                line-height: 1;
+            }
+
+            .alert-dismissible .btn-close:hover {
+                opacity: 1;
+                background: none;
+            }
+
+            .alert-dismissible .btn-close span {
+                font-size: 20px;
+                font-weight: normal;
+            }
+
+            /* Messages Container */
+            .messages-container {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                z-index: 1050;
+                max-width: 400px;
+                width: 100%;
+            }
+
+            @media (max-width: 768px) {
+                .messages-container {
+                    top: 80px;
+                    right: 10px;
+                    left: 10px;
+                    max-width: none;
+                }
+            }
+
             /* Logo Styling */
             .navbar-brand {
                 padding: 0;
@@ -1333,8 +1508,8 @@
                 <!-- Mobile Profile Icon -->
                 <div class="mobile-profile-icon d-block d-lg-none">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'profile' %}" class="mobile-profile-btn">
-                            <i class="fas fa-user-circle"></i>
+                        <a href="{% url 'profile' %}" class="user-initial">
+                            {{ user.username.0|upper }}
                         </a>
                     {% else %}
                         <a href="{% url 'signup' %}" class="mobile-profile-btn">
@@ -1354,9 +1529,6 @@
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'about-website-designer-nigeria' %}" class="nav-link">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'services' %}" class="nav-link">Our Services</a>
                         </li>
                         
                         <!-- Resources Dropdown -->
@@ -1406,6 +1578,13 @@
                                 Portfolio
                             </a>
                         </li>
+                        
+                        <!-- Consultation Menu Item -->
+                        <li class="nav-item">
+                            <a href="{% url 'consultation_booking' %}" class="nav-link">
+                                Consultation
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
                         </li>
@@ -1413,8 +1592,8 @@
                         <!-- Desktop Profile Icon -->
                         <li class="nav-item desktop-profile-item d-none d-lg-block">
                             {% if user.is_authenticated %}
-                                <a href="{% url 'profile' %}" class="nav-link desktop-profile-btn">
-                                    <i class="fas fa-user-circle"></i>
+                                <a href="{% url 'profile' %}" class="user-initial">
+                                    {{ user.username.0|upper }}
                                 </a>
                             {% else %}
                                 <a href="{% url 'signup' %}" class="nav-link desktop-profile-btn">
@@ -1427,6 +1606,21 @@
             </div>
         </nav>
         <!-- Nav Bar End -->
+
+        <!-- Django Messages -->
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' or message.tags == 'danger' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         {% block maincontent %}
         {% endblock %}
@@ -1702,6 +1896,44 @@
         delay: 2500,
         disableOnInteraction: false,
     },
+});
+
+// Enhanced Alert System
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-dismiss alerts after 5 seconds
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+        // Only auto-dismiss if it doesn't have a close button or if it's in messages container
+        if (alert.closest('.messages-container')) {
+            setTimeout(function() {
+                if (alert && alert.parentNode) {
+                    alert.style.opacity = '0';
+                    alert.style.transform = 'translateX(100%)';
+                    setTimeout(function() {
+                        if (alert.parentNode) {
+                            alert.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+    });
+
+    // Handle close button clicks
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-close') || e.target.closest('.btn-close')) {
+            const alert = e.target.closest('.alert');
+            if (alert) {
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateX(100%)';
+                setTimeout(function() {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 300);
+            }
+        }
+    });
 });
 </script>
 

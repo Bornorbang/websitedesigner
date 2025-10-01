@@ -160,6 +160,8 @@ class ConsultationBooking(models.Model):
     consultation_type = models.CharField(max_length=20, choices=CONSULTATION_TYPE_CHOICES)
     preferred_date = models.DateField(blank=True, null=True)
     preferred_time = models.CharField(max_length=20, blank=True)
+    session_duration = models.CharField(max_length=10, blank=True, help_text="Duration in minutes (20, 40, or 60)")
+    consultation_cost = models.CharField(max_length=20, blank=True, help_text="Cost in Naira")
     
     # Additional Services
     additional_services = models.TextField(blank=True)  # Store as comma-separated values
@@ -217,6 +219,7 @@ class Instructor(models.Model):
     linkedin_url = models.URLField(blank=True)
     twitter_url = models.URLField(blank=True)
     website_url = models.URLField(blank=True)
+    whatsapp_url = models.URLField(blank=True, help_text="WhatsApp contact link for enrolled students")
     rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
     students_count = models.PositiveIntegerField(default=0)
     courses_count = models.PositiveIntegerField(default=0)
@@ -327,10 +330,33 @@ class Course(models.Model):
         return []
     
     def is_enrolled_by_user(self, user):
-        """Check if a user is enrolled in this course"""
+        """Check if a user is enrolled in this course with paid status"""
         if not user.is_authenticated:
             return False
-        return self.enrollments.filter(user=user, status='enrolled').exists()
+        return self.enrollments.filter(user=user, status='enrolled', is_paid=True).exists()
+    
+    def has_pending_payment(self, user):
+        """Check if user has pending payment for this course"""
+        if not user.is_authenticated:
+            return False
+        return self.enrollments.filter(user=user, status='pending').exists()
+    
+    def get_user_enrollment(self, user):
+        """Get user's enrollment for this course"""
+        if not user.is_authenticated:
+            return None
+        try:
+            return self.enrollments.get(user=user)
+        except CourseEnrollment.DoesNotExist:
+            return None
+    
+    def can_user_access(self, user):
+        """Check if user can access course content"""
+        if not user.is_authenticated:
+            return False
+        if self.is_free:
+            return True
+        return self.is_enrolled_by_user(user)
     
     def can_user_review(self, user):
         """Check if a user can review this course (must be enrolled and not already reviewed)"""
@@ -526,6 +552,7 @@ class CourseReview(models.Model):
 class CourseEnrollment(models.Model):
     """Track course enrollments/purchases"""
     ENROLLMENT_STATUS_CHOICES = [
+        ('pending', 'Pending Payment'),
         ('enrolled', 'Enrolled'),
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
@@ -534,7 +561,7 @@ class CourseEnrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
     enrolled_at = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=20, choices=ENROLLMENT_STATUS_CHOICES, default='enrolled')
+    status = models.CharField(max_length=20, choices=ENROLLMENT_STATUS_CHOICES, default='pending')
     is_paid = models.BooleanField(default=False)  # Track if payment was made for paid courses
     progress = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)  # Course completion percentage
     
@@ -544,6 +571,159 @@ class CourseEnrollment(models.Model):
     
     def __str__(self):
         return f"{self.user.username} enrolled in {self.course.title}"
+
+
+class CoursePayment(models.Model):
+    """Track course payment transactions"""
+    PAYMENT_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+        ('refunded', 'Refunded'),
+    ]
+    
+    PAYMENT_METHOD_CHOICES = [
+        ('kora_pay', 'Kora Pay'),
+        ('bank_transfer', 'Bank Transfer'),
+        ('card', 'Card Payment'),
+        ('pay_with_bank', 'Pay with Bank'),
+        ('mobile_money', 'Mobile Money'),
+    ]
+    
+    # Basic Info
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_payments')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payments')
+    enrollment = models.OneToOneField(CourseEnrollment, on_delete=models.CASCADE, related_name='payment', null=True, blank=True)
+    
+    # Payment Details
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='NGN')
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES)
+    status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    
+    # Transaction IDs
+    transaction_id = models.CharField(max_length=100, unique=True)  # Our internal transaction ID
+    external_transaction_id = models.CharField(max_length=100, blank=True, null=True)  # Payment provider's transaction ID
+    reference = models.CharField(max_length=100, unique=True)  # Payment reference
+    
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    paid_at = models.DateTimeField(null=True, blank=True)
+    
+    # Additional Details
+    payment_details = models.JSONField(default=dict, blank=True)  # Store additional payment provider data
+    failure_reason = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Payment {self.transaction_id} - {self.user.username} - {self.course.title}"
+    
+    def generate_transaction_id(self):
+        """Generate unique transaction ID"""
+        import uuid
+        return f"TXN_{uuid.uuid4().hex[:12].upper()}"
+    
+    def generate_reference(self):
+        """Generate unique payment reference"""
+        import uuid
+        return f"REF_{uuid.uuid4().hex[:10].upper()}"
+    
+    def save(self, *args, **kwargs):
+        if not self.transaction_id:
+            self.transaction_id = self.generate_transaction_id()
+        if not self.reference:
+            self.reference = self.generate_reference()
+        super().save(*args, **kwargs)
+    
+    def mark_as_completed(self, external_transaction_id=None):
+        """Mark payment as completed and enroll user"""
+        self.status = 'completed'
+        self.paid_at = timezone.now()
+        if external_transaction_id:
+            self.external_transaction_id = external_transaction_id
+        self.save()
+        
+        # Update enrollment status
+        if self.enrollment:
+            self.enrollment.status = 'enrolled'
+            self.enrollment.is_paid = True
+            self.enrollment.save()
+    
+    def mark_as_failed(self, reason=None):
+        """Mark payment as failed"""
+        self.status = 'failed'
+        if reason:
+            self.failure_reason = reason
+        self.save()
+
+
+class ConsultationPayment(models.Model):
+    """Track consultation payment transactions"""
+    PAYMENT_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+        ('refunded', 'Refunded'),
+    ]
+    
+    PAYMENT_METHOD_CHOICES = [
+        ('kora_pay', 'Kora Pay'),
+        ('bank_transfer', 'Bank Transfer'),
+        ('card', 'Card Payment'),
+        ('pay_with_bank', 'Pay with Bank'),
+        ('mobile_money', 'Mobile Money'),
+    ]
+    
+    # Basic Info
+    consultation_booking = models.OneToOneField(ConsultationBooking, on_delete=models.CASCADE, related_name='payment')
+    
+    # Payment Details
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='NGN')
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES)
+    status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    
+    # Transaction IDs
+    transaction_id = models.CharField(max_length=100, unique=True)  # Our internal transaction ID
+    external_transaction_id = models.CharField(max_length=100, blank=True, null=True)  # Payment provider's transaction ID
+    reference = models.CharField(max_length=100, unique=True)  # Payment reference
+    
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    paid_at = models.DateTimeField(null=True, blank=True)
+    
+    # Additional Details
+    payment_details = models.JSONField(default=dict, blank=True)  # Store additional payment provider data
+    failure_reason = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Consultation Payment'
+        verbose_name_plural = 'Consultation Payments'
+    
+    def __str__(self):
+        return f"Payment for {self.consultation_booking.full_name} - ₦{self.amount} ({self.status})"
+    
+    def mark_as_completed(self):
+        """Mark payment as completed and update consultation booking status"""
+        self.status = 'completed'
+        self.paid_at = timezone.now()
+        self.consultation_booking.status = 'confirmed'
+        self.consultation_booking.save()
+        self.save()
+    
+    def mark_as_failed(self, reason=None):
+        """Mark payment as failed"""
+        self.status = 'failed'
+        if reason:
+            self.failure_reason = reason
+        self.save()
 
 
 # Signals to automatically update course statistics

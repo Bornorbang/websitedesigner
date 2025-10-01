@@ -228,6 +228,33 @@
     border-left: 4px solid var(--primary-color);
 }
 
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: inherit;
+    opacity: 0.7;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    line-height: 1;
+}
+
+.alert-dismissible .btn-close:hover {
+    opacity: 1;
+    background: none;
+}
+
+.alert-dismissible .btn-close span {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 .errorlist {
     list-style: none;
     padding: 0;
@@ -325,8 +352,11 @@
         <div class="container">
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
+                    <div class="alert alert-{{ message.tags }} alert-dismissible">
                         <i class="fas fa-check-circle mr-2"></i>{{ message }}
+                        <button type="button" class="btn-close" onclick="this.parentElement.remove()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 {% endfor %}
             {% endif %}
