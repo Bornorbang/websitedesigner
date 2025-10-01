@@ -940,23 +940,12 @@ def process_course_payment(request):
         })
     
     # Check if there's already a pending/processing payment
-    from .models import CoursePayment, PaymentMethod
+    from .models import CoursePayment
     existing_payment = CoursePayment.objects.filter(
         user=request.user,
         course=course,
         status__in=['pending', 'processing']
     ).first()
-    
-    # Get or create Kora Pay payment method (for future use, not directly used in CoursePayment)
-    payment_method_obj, created = PaymentMethod.objects.get_or_create(
-        provider='kora_pay',
-        defaults={
-            'name': 'Kora Pay',
-            'is_active': True,
-            'public_key': getattr(settings, 'KORA_PAY_PUBLIC_KEY', ''),
-            'secret_key': getattr(settings, 'KORA_PAY_SECRET_KEY', ''),
-        }
-    )
     
     if existing_payment:
         # User already has a pending payment, generate new unique reference for retry

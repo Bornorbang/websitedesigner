@@ -236,8 +236,11 @@ class Instructor(models.Model):
     
     @property
     def dynamic_students_count(self):
-        """Return the dynamic count of total students"""
-        return self.get_total_students_count()
+        """Return the sum of manual student counts from all published courses"""
+        total = 0
+        for course in self.courses.filter(status='published'):
+            total += course.students_count
+        return total
 
 
 class Course(models.Model):
@@ -394,8 +397,8 @@ class Course(models.Model):
     
     @property
     def dynamic_students_count(self):
-        """Return the dynamic count of enrolled students"""
-        return self.get_enrolled_students_count()
+        """Return the manual student count set in admin"""
+        return self.students_count
     
     def get_total_lectures_count(self):
         """Calculate total number of lectures across all sections"""

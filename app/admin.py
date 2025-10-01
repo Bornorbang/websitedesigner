@@ -257,8 +257,8 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ('status', 'level', 'category', 'is_free', 'created_at')
     search_fields = ('title', 'description', 'instructor__name')
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields = ('rating', 'reviews_count', 'students_count', 'created_at', 'updated_at')
-    list_editable = ('status', 'price')
+    readonly_fields = ('rating', 'reviews_count', 'created_at', 'updated_at')
+    list_editable = ('status', 'price', 'students_count')
     
     fieldsets = (
         ('Basic Information', {
@@ -273,11 +273,14 @@ class CourseAdmin(admin.ModelAdmin):
         ('Content', {
             'fields': ('learning_objectives', 'prerequisites', 'target_audience', 'total_duration', 'lectures_count')
         }),
+        ('Statistics', {
+            'fields': ('students_count',)
+        }),
         ('Meta & SEO', {
             'fields': ('meta_description', 'status')
         }),
-        ('Statistics', {
-            'fields': ('rating', 'reviews_count', 'students_count', 'created_at', 'updated_at'),
+        ('System Info', {
+            'fields': ('rating', 'reviews_count', 'created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
     )
