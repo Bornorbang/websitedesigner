@@ -254,32 +254,24 @@
 
 /* Fixed Scrolling Images CSS */
 .scrolling-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100%; /* Ensure image is tall enough to scroll */
-    object-fit: contain; /* Changed from cover to contain */
+    min-height: 150%; /* Ensure image is tall enough to scroll */
+    object-fit: cover;
     object-position: top center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: brightness(1.05) saturate(1.1);
-    will-change: transform;
 }
 
-/* Hover Effect - Properly trigger scrolling animation */
-.portfolio-card:hover .image-container:hover .scrolling-images {
-    animation: scrollPartial 8s linear forwards;
-    filter: brightness(1.1) saturate(1.2);
+/* Enhanced hover effect */
+.portfolio-card:hover .scrolling-images,
+.image-container:hover .scrolling-images {
+    animation: scrollPartial 6s linear forwards;
 }
 
-/* Scrolling Animation - Extended to scroll to the very end */
+/* Scrolling Animation - Consistent with main CSS */
 @keyframes scrollPartial {
     0% {
         transform: translateY(0) scale(1);
     }
     100% {
-        transform: translateY(-100%) scale(1.01);
+        transform: translateY(-80%) scale(1.01);
     }
 }
 
@@ -308,19 +300,19 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .image-container {
-        height: 350px;
+        height: 450px; /* Increased for better mobile experience */
     }
     
-    /* Disable hover animations on touch devices to prevent scroll interference */
-    .portfolio-card:hover .image-container:hover .scrolling-images {
-        animation: none;
+    /* Enable animations on touch devices */
+    .scrolling-images.scrolling {
+        animation: scrollPartial 6s ease-in-out forwards !important;
     }
     
     .scrolling-images {
-        position: static;
-        width: 100%;
-        height: 100%;
+        min-height: 180%; /* Increased for more scrollable content */
         object-fit: cover;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(239, 35, 60, 0.3);
     }
     
     .cta-buttons .btn {
@@ -332,9 +324,39 @@
 
 @media (max-width: 575.98px) {
     .image-container {
-        height: 300px;
+        height: 400px; /* Increased from 300px */
+    }
+    
+    .scrolling-images {
+        min-height: 200%; /* Even more content for smaller screens */
     }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Portfolio page loaded');
+    
+    const scrollingImages = document.querySelectorAll('.scrolling-images');
+    console.log('Found', scrollingImages.length, 'scrolling images');
+    
+    scrollingImages.forEach((img, index) => {
+        // Unified click/touch handler
+        img.addEventListener('click', function(e) {
+            console.log('Image', index, 'clicked/touched');
+            this.classList.add('scrolling');
+            
+            setTimeout(() => {
+                this.classList.remove('scrolling');
+            }, 7000);
+        });
+        
+        // Also listen for touchstart for better mobile responsiveness
+        img.addEventListener('touchstart', function(e) {
+            console.log('Image', index, 'touch started');
+        });
+    });
+});
+</script>
 
 {% endblock %}

@@ -110,5 +110,20 @@
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
     
+    
+    // Portfolio scrolling images functionality
+    $(document).ready(function() {
+        $('.scrolling-images').on('click touch', function(e) {
+            e.preventDefault();
+            console.log('Portfolio image clicked/touched!');
+            $(this).addClass('scrolling');
+            
+            // Remove class after animation
+            setTimeout(() => {
+                $(this).removeClass('scrolling');
+            }, 6000);
+        });
+    });
+    
 })(jQuery);
 

@@ -1126,13 +1126,19 @@ def verify_payment(request):
                 transaction_data = response_data['data']
                 transaction_status = transaction_data.get('status')
                 
-                if transaction_status == 'success' and payment.status == 'pending':
-                    # Mark payment as completed
-                    payment.external_transaction_id = transaction_data.get('payment_reference', reference)
-                    payment.payment_details.update(transaction_data)
-                    payment.mark_as_completed()
+                if transaction_status == 'success':
+                    if payment.status == 'pending':
+                        # Mark payment as completed
+                        payment.external_transaction_id = transaction_data.get('payment_reference', reference)
+                        payment.payment_details.update(transaction_data)
+                        payment.mark_as_completed()
+                        
+                        messages.success(request, f'Payment successful! You are now enrolled in {payment.course.title}')
+                    else:
+                        # Payment already processed - ensure enrollment is completed
+                        payment.mark_as_completed()  # This ensures enrollment status is also updated
+                        messages.info(request, f'You are already enrolled in {payment.course.title}')
                     
-                    messages.success(request, f'Payment successful! You are now enrolled in {payment.course.title}')
                     return redirect(payment.course.get_absolute_url())
                     
                 elif transaction_status == 'failed':

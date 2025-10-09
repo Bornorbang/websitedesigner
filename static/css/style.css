@@ -1506,9 +1506,9 @@ a:focus {
     height: 400px;
     overflow: hidden;
     border-radius: 20px 20px 0 0;
-    /* Prevent scrolling interference */
+    /* Allow all touch actions for portfolio scrolling */
     pointer-events: auto;
-    touch-action: manipulation;
+    touch-action: auto;
 }
 
 .image-container::after {
@@ -1534,27 +1534,34 @@ a:focus {
     left: 0;
     width: 100%;
     height: auto;
-    min-height: 100%;
+    min-height: 150%; /* Ensure image is tall enough to scroll */
     object-fit: cover;
+    object-position: top center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     filter: brightness(1.05) saturate(1.1);
-    /* Prevent scroll interference */
     will-change: transform;
+    cursor: pointer;
 }
 
-/* Hover Effect - Only trigger on direct hover, not during page scroll */
-.portfolio-card:hover .image-container:hover .scrolling-images {
-    animation: scrollPartial 8s linear forwards;
+/* Hover Effect - Simplified selector for better triggering */
+.portfolio-card:hover .scrolling-images,
+.image-container:hover .scrolling-images {
+    animation: scrollPartial 6s linear forwards;
     filter: brightness(1.1) saturate(1.2);
 }
 
-/* Scrolling Animation - Made less aggressive */
+/* Click Effect - For mobile and desktop */
+.scrolling-images.scrolling {
+    animation: scrollPartial 6s linear forwards;
+}
+
+/* Scrolling Animation - Scroll to show full image */
 @keyframes scrollPartial {
     0% {
         transform: translateY(0) scale(1);
     }
     100% {
-        transform: translateY(-30%) scale(1.01);
+        transform: translateY(-80%) scale(1.01);
     }
 }
 
@@ -1579,22 +1586,9 @@ a:focus {
         height: 250px;
     }
     
-    /* Disable hover animations on touch devices to prevent scroll interference */
-    .portfolio-card:hover .image-container:hover .scrolling-images {
-        animation: none;
-    }
-    
     .scrolling-images {
-        position: static;
-        width: 100%;
-        height: 100%;
+        min-height: 120%;
         object-fit: cover;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .image-container {
-        height: 200px;
     }
 }
 

@@ -60,6 +60,8 @@
         <!-- SwiperJS CSS -->
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
+        <!-- SweetAlert2 CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.min.css">
 
         <!-- Template Stylesheet -->
         <link href="{%static 'css/style.css' %}" rel="stylesheet">
@@ -1473,6 +1475,83 @@
                     overflow-y: visible !important;
                     height: auto !important;
                 }
+                
+                /* SweetAlert2 Tech Courses Popup Customization */
+                .tech-courses-popup,
+                .tech-courses-popup-clickable {
+                    border-radius: 15px !important;
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15) !important;
+                }
+                
+                .tech-courses-popup-clickable {
+                    cursor: pointer !important;
+                    transition: transform 0.2s ease !important;
+                }
+                
+                .tech-courses-popup-clickable:hover {
+                    transform: scale(1.02) !important;
+                }
+                
+                .tech-courses-close-btn {
+                    position: absolute !important;
+                    top: 10px !important;
+                    right: 10px !important;
+                    background: rgba(108, 117, 125, 0.1) !important;
+                    color: #6c757d !important;
+                    border: none !important;
+                    border-radius: 50% !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    font-size: 14px !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .tech-courses-close-btn:hover {
+                    background: #EF233C !important;
+                    color: white !important;
+                    transform: scale(1.1) !important;
+                }
+                
+                .tech-courses-btn-primary {
+                    background: linear-gradient(135deg, #EF233C, #d91e36) !important;
+                    border: none !important;
+                    border-radius: 8px !important;
+                    padding: 12px 20px !important;
+                    font-weight: 600 !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .tech-courses-btn-primary:hover {
+                    transform: translateY(-2px) !important;
+                    box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3) !important;
+                }
+                
+                .tech-courses-btn-secondary {
+                    background: transparent !important;
+                    border: 2px solid #e9ecef !important;
+                    border-radius: 8px !important;
+                    color: #6c757d !important;
+                    padding: 12px 20px !important;
+                    font-weight: 500 !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .tech-courses-btn-secondary:hover {
+                    border-color: #EF233C !important;
+                    color: #EF233C !important;
+                    background: transparent !important;
+                }
+                
+                /* Mobile responsive for SweetAlert2 */
+                @media (max-width: 768px) {
+                    .tech-courses-popup,
+                    .tech-courses-popup-clickable {
+                        width: calc(100% - 20px) !important;
+                        margin: 10px !important;
+                        max-width: calc(100vw - 20px) !important;
+                        min-width: 340px !important;
+                    }
+                }
             }
         </style>
 
@@ -1754,6 +1833,9 @@
         <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
         <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
 
+        <!-- SweetAlert2 JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.all.min.js"></script>
+
         
         <!-- Contact Javascript File -->
         <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
@@ -1935,6 +2017,112 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+</script>
+
+<!-- Tech Courses Popup with SweetAlert2 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if popup has been shown in this session
+    const hasSeenPopup = sessionStorage.getItem('techCoursesPopupShown');
+    
+    if (!hasSeenPopup) {
+        // Show popup after 5 seconds
+        setTimeout(function() {
+            showTechCoursesPopup();
+        }, 5000);
+    }
+});
+
+function showTechCoursesPopup() {
+    // Mark popup as shown in this session
+    sessionStorage.setItem('techCoursesPopupShown', 'true');
+    
+    // Track popup shown event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'popup_shown', {
+            'event_category': 'tech_courses',
+            'event_label': 'sweetalert_popup'
+        });
+    }
+    
+    Swal.fire({
+        html: `
+            <div style="text-align: center; padding: 15px;">
+                <img src="{% static 'img/tech-courses.png' %}" alt="Tech Courses" style="width: 100%; max-width: 320px; height: auto; border-radius: 10px; margin-bottom: 15px;">
+                
+                <h2 style="color: #2c3e50; font-weight: 700; margin-bottom: 20px; font-size: 1.3rem;">
+                    Learn a tech skill before the year ends!
+                </h2>
+                
+                <div style="padding: 6px 10px; background: linear-gradient(135deg, #EF233C, #d91e36); border-radius: 5px; color: white; margin-bottom: 8px; display: inline-block; border: 2px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 0.75rem; margin-bottom: 2px; opacity: 0.9;">Starting from</div>
+                    <div style="font-size: 1.4rem; font-weight: 700;">₦6,999</div>
+                </div>
+            </div>
+        `,
+        showCancelButton: false,
+        confirmButtonText: '<i class="fas fa-graduation-cap"></i> Explore Courses',
+        confirmButtonColor: '#EF233C',
+        buttonsStyling: true,
+        allowOutsideClick: true,
+        showCloseButton: true,
+        customClass: {
+            popup: 'tech-courses-popup-clickable',
+            confirmButton: 'tech-courses-btn-primary',
+            closeButton: 'tech-courses-close-btn'
+        },
+        width: '450px',
+        showClass: {
+            popup: 'animate__animated animate__zoomIn animate__faster'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__zoomOut animate__faster'
+        },
+        didOpen: () => {
+            // Make the entire popup clickable
+            const popup = document.querySelector('.tech-courses-popup-clickable');
+            if (popup) {
+                popup.style.cursor = 'pointer';
+                popup.addEventListener('click', function(e) {
+                    // Don't trigger if clicking the close button
+                    if (!e.target.closest('.swal2-close')) {
+                        // Track popup click
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'popup_clicked', {
+                                'event_category': 'tech_courses',
+                                'event_label': 'entire_popup_clicked',
+                                'value': 1
+                            });
+                        }
+                        // Redirect to courses page
+                        window.location.href = "{% url 'courses' %}";
+                    }
+                });
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Track course exploration click
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'course_explore_clicked', {
+                    'event_category': 'tech_courses',
+                    'event_label': 'popup_cta_button',
+                    'value': 1
+                });
+            }
+            // Redirect to courses page
+            window.location.href = "{% url 'courses' %}";
+        } else if (result.isDismissed) {
+            // Track popup dismissed
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'popup_dismissed', {
+                    'event_category': 'tech_courses',
+                    'event_label': 'maybe_later_clicked'
+                });
+            }
+        }
+    });
+}
 </script>
 
 
