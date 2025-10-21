@@ -110,8 +110,7 @@
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
     
-    
-    // Portfolio scrolling images functionality
+    // Simple portfolio scrolling for both desktop and mobile
     $(document).ready(function() {
         $('.scrolling-images').on('click touch', function(e) {
             e.preventDefault();
