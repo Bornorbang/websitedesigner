@@ -17,8 +17,8 @@
         <!-- Open Graph Meta Tags (For Social Media Sharing) -->
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
         <meta property="og:description" content="{% block og_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
-        <meta property="og:image" content="{% block og_image %}{% static 'img/favicon.png' %}{% endblock %}"> 
-        <meta property="og:url" content="{% block og_url %}https://websitedesigner.ng{% endblock %}">
+        <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/website-designer-nigeria-logo.png' %}{% endblock %}"> 
+        <meta property="og:url" content="{% block og_url %}{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}{% endblock %}">
         <meta property="og:type" content="website">
 
         {% block extra_meta %}
@@ -38,7 +38,7 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Website Designer Nigeria - Best Web Designers in Nigeria">
         <meta name="twitter:description" content="Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.">
-        <meta name="twitter:image" content="{% static 'img/favicon.png' %}">
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/website-designer-nigeria-logo.png' %}">
 
         <!-- Favicon -->
         <link href="{% static 'img/favicon.png' %}" rel="icon">
@@ -2017,112 +2017,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
-
-<!-- Tech Courses Popup with SweetAlert2 -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if popup has been shown in this session
-    const hasSeenPopup = sessionStorage.getItem('techCoursesPopupShown');
-    
-    if (!hasSeenPopup) {
-        // Show popup after 5 seconds
-        setTimeout(function() {
-            showTechCoursesPopup();
-        }, 5000);
-    }
-});
-
-function showTechCoursesPopup() {
-    // Mark popup as shown in this session
-    sessionStorage.setItem('techCoursesPopupShown', 'true');
-    
-    // Track popup shown event
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'popup_shown', {
-            'event_category': 'tech_courses',
-            'event_label': 'sweetalert_popup'
-        });
-    }
-    
-    Swal.fire({
-        html: `
-            <div style="text-align: center; padding: 15px;">
-                <img src="{% static 'img/tech-courses.png' %}" alt="Tech Courses" style="width: 100%; max-width: 320px; height: auto; border-radius: 10px; margin-bottom: 15px;">
-                
-                <h2 style="color: #2c3e50; font-weight: 700; margin-bottom: 20px; font-size: 1.3rem;">
-                    Learn a tech skill before the year ends!
-                </h2>
-                
-                <div style="padding: 6px 10px; background: linear-gradient(135deg, #EF233C, #d91e36); border-radius: 5px; color: white; margin-bottom: 8px; display: inline-block; border: 2px solid rgba(255,255,255,0.2);">
-                    <div style="font-size: 0.75rem; margin-bottom: 2px; opacity: 0.9;">Starting from</div>
-                    <div style="font-size: 1.4rem; font-weight: 700;">₦6,999</div>
-                </div>
-            </div>
-        `,
-        showCancelButton: false,
-        confirmButtonText: '<i class="fas fa-graduation-cap"></i> Explore Courses',
-        confirmButtonColor: '#EF233C',
-        buttonsStyling: true,
-        allowOutsideClick: true,
-        showCloseButton: true,
-        customClass: {
-            popup: 'tech-courses-popup-clickable',
-            confirmButton: 'tech-courses-btn-primary',
-            closeButton: 'tech-courses-close-btn'
-        },
-        width: '450px',
-        showClass: {
-            popup: 'animate__animated animate__zoomIn animate__faster'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__zoomOut animate__faster'
-        },
-        didOpen: () => {
-            // Make the entire popup clickable
-            const popup = document.querySelector('.tech-courses-popup-clickable');
-            if (popup) {
-                popup.style.cursor = 'pointer';
-                popup.addEventListener('click', function(e) {
-                    // Don't trigger if clicking the close button
-                    if (!e.target.closest('.swal2-close')) {
-                        // Track popup click
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'popup_clicked', {
-                                'event_category': 'tech_courses',
-                                'event_label': 'entire_popup_clicked',
-                                'value': 1
-                            });
-                        }
-                        // Redirect to courses page
-                        window.location.href = "{% url 'courses' %}";
-                    }
-                });
-            }
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Track course exploration click
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'course_explore_clicked', {
-                    'event_category': 'tech_courses',
-                    'event_label': 'popup_cta_button',
-                    'value': 1
-                });
-            }
-            // Redirect to courses page
-            window.location.href = "{% url 'courses' %}";
-        } else if (result.isDismissed) {
-            // Track popup dismissed
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'popup_dismissed', {
-                    'event_category': 'tech_courses',
-                    'event_label': 'maybe_later_clicked'
-                });
-            }
-        }
-    });
-}
 </script>
 
 

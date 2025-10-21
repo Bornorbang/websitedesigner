@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}{{ course.title }} Course - {{ course.subtitle }}{% endblock %}
+{% block title %}{{ course.title }} - {{ course.subtitle }}{% endblock %}
 
 {% block meta_description %}{{ course.meta_description|default:course.short_description }}{% endblock %}
 
@@ -14,16 +14,70 @@
 {% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
 
 {% block extra_meta %}
-<!-- Twitter Card overrides -->
+<!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@websitedesignerng">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{{ course.title }} Course - {{ course.subtitle }}">
 <meta name="twitter:description" content="{{ course.meta_description|default:course.short_description }}">
 {% if course.thumbnail %}
 <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ course.thumbnail.url }}">
 {% else %}
-<meta name="twitter:image" content="{% static 'img/favicon.png' %}">
+<meta name="twitter:image" content="https://host-students.com/app/uploads/2023/05/1-6.webp">
 {% endif %}
+
+<!-- Additional Course-specific Meta Tags -->
+<meta name="author" content="{{ course.instructor.name }}">
+<meta name="publisher" content="Website Designer Nigeria">
+<meta property="article:author" content="{{ course.instructor.name }}">
+<meta property="course:price:amount" content="{{ course.price }}">
+<meta property="course:price:currency" content="NGN">
+<meta property="course:instructor" content="{{ course.instructor.name }}">
+<meta property="course:category" content="{{ course.category.name }}">
+<meta property="course:duration" content="{% if course.total_duration %}{{ course.total_duration }}{% else %}180{% endif %} minutes">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+<!-- Schema.org Course Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "{{ course.title }}",
+  "description": "{{ course.meta_description|default:course.short_description|escapejs }}",
+  "image": "{% if course.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ course.thumbnail.url }}{% else %}https://host-students.com/app/uploads/2023/05/1-6.webp{% endif %}",
+  "provider": {
+    "@type": "Organization",
+    "name": "Website Designer Nigeria",
+    "url": "https://websitedesigner.ng"
+  },
+  "instructor": {
+    "@type": "Person",
+    "name": "{{ course.instructor.name }}"
+  },
+  "educationalLevel": "Beginner to Advanced",
+  "courseMode": "Online",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "Online",
+    "instructor": {
+      "@type": "Person",
+      "name": "{{ course.instructor.name }}"
+    }
+  },
+  {% if not course.is_free %}
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ course.price }}",
+    "priceCurrency": "NGN",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "{{ course.created_at|date:'Y-m-d' }}"
+  },
+  {% endif %}
+  "totalTime": "PT{% if course.total_duration %}{{ course.total_duration }}{% else %}180{% endif %}M",
+  "teaches": "{{ course.short_description|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}"
+}
+</script>
 {% endblock %}
 
 {% block extra_head %}
@@ -2090,13 +2144,16 @@
                                 {% endif %}
                             {% endif %}
                         {% else %}
-                            <a href="{% url 'signup' %}?next={{ request.path }}" class="enroll-btn">
+                            <a href="{% url 'signup' %}?course_id={{ course.id }}&next={{ request.path }}" class="enroll-btn">
                                 <i class="fas fa-user-plus icon-gap-xl"></i>Sign Up to Enroll
                             </a>
+                            <div class="text-center" style="margin-top: 4px;">
+                                <small>Already have an account? <a href="{% url 'login' %}?course_id={{ course.id }}&next={{ request.path }}" style="color: var(--primary-color); text-decoration: none;">Login here</a></small>
+                            </div>
                         {% endif %}
 
                         <!-- This course includes -->
-                        <div class="mb-3">
+                        <div class="mb-3 mt-4">
                             <h6 style="font-size: 0.9rem;"><i class="fas fa-gift icon-gap-xl"></i>This course includes:</h6>
                             <ul class="course-includes">
                                 <li>

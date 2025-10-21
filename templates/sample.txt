@@ -119,6 +119,16 @@
                 </form>
             </div>
         </div>
+        
+        <!-- Additional Info -->
+        <div class="mt-6 text-center">
+            <p class="text-xs text-gray-500">
+                By signing in, you agree to our 
+                <a href="{% url 'terms' %}" class="text-red-600 hover:text-red-700">Terms of Service</a> 
+                and 
+                <a href="{% url 'privacy' %}" class="text-red-600 hover:text-red-700">Privacy Policy</a>
+            </p>
+        </div>
     </div>
 </div>
 

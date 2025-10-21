@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'master.html' %}
 {% load static %}
 
 {% block title %}Book a Consultation - Website Designer Nigeria{% endblock %}
@@ -9,171 +9,267 @@
 
 {% block og_description %}Book a consultation with Website Designer Nigeria. Get expert advice on your web design project. Schedule a call with our web design experts today.{% endblock %}
 
-{% block maincontent %}
+{% block content %}
     <!-- Hero Banner Section -->
-    <section class="hero about-hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-8 col-12">
-                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="hero-text mt-lg-2">
-                            <h1 class="mb-2 mt-lg-2">BOOK A CONSULTATION</h1>
-                            <p class="mb-2 mt-lg-3">Schedule a consultation session with Website Designer Nigeria.</p>
+    <section class="relative min-h-[65vh] md:min-h-[80vh] lg:min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="space-y-6">
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">BOOK A</span>
+                            <span class="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent block">CONSULTATION</span>
+                        </h1>
+                        <p class="text-xl lg:text-2xl text-gray-300 font-light max-w-2xl">
+                            Schedule a consultation session with Website Designer Nigeria.
+                        </p>
+                        <div class="flex flex-row gap-4 pt-6">
+                            <a href="#booking-form" class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                                <i class= "fas fa-calendar mr-2"></i>
+                                <span class="text-sm lg:text-base">BOOK NOW</span>
+                            </a>
+                            <a href="https://wa.link/f2kd41" target="_blank" class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                                <i class= "fab fa-whatsapp mr-2"></i>
+                                <span class="text-sm lg:text-base">WHATSAPP</span>
+                            </a>
                         </div>
-                        <div class="hero-btn mt-lg-4">
-                            <a class="btn" href="#booking-form">
-                                <i class="fas fa-calendar-check"></i> BOOK NOW
-                            </a>
-                            <a class="btn" href="https://wa.link/f2kd41" target="_blank">
-                                <i class="fab fa-whatsapp"></i> WHATSAPP
-                            </a>
+                    </div>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="relative">
+                        <!-- Floating Code Elements -->
+                        <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 backdrop-blur-sm">
+                            <div class="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full animate-ping"></div>
+                            <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500 rounded-full animate-ping delay-300"></div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;consultation</span>
+                                        <span class="text-blue-400">type=</span>
+                                        <span class="text-green-400">"success"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;meeting</span>
+                                        <span class="text-blue-400">status=</span>
+                                        <span class="text-green-400">"scheduled"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="ml-8 text-white">Your Project Starts Here</div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;/meeting&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;/consultation&gt;</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            </div>
         </div>
     </section>
 
     <!-- Consultation Booking Form -->
-    <section class="consultation-booking py-5" id="booking-form">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10 col-12">
-                    <div class="booking-form-container wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="section-header text-center mb-5">
-                            <p>BOOK YOUR SESSION</p>
-                            <h2>Schedule Your Consultation</h2>
+    <section class="py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden" id="booking-form">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-red-100 rounded-full blur-3xl opacity-30"></div>
+            <div class="absolute bottom-1/3 left-1/3 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                    <!-- Header with gradient -->
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 h-2"></div>
+                    
+                    <div class="p-8 lg:p-12">
+                        <!-- Section Header -->
+                        <div class="text-center mb-12 wow zoomIn" data-wow-delay="0.1s">
+                            <p class="text-red-600 font-bold mb-4 text-base tracking-wider uppercase">BOOK YOUR SESSION</p>
+                            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Schedule Your Consultation</h2>
+                            <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-8 rounded-full"></div>
                         </div>
                         
-                        <!-- Display Messages within form area -->
+                        <!-- Display Messages -->
                         {% if messages %}
-                            <div class="mb-4">
+                            <div class="mb-8">
                                 {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
-                                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
-                                        {{ message }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <div class="p-4 rounded-xl mb-4 {% if message.tags == 'success' %}bg-green-50 border border-green-200 text-green-800{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-800{% else %}bg-blue-50 border border-blue-200 text-blue-800{% endif %}">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %} mr-3"></i>
+                                            {{ message }}
+                                        </div>
                                     </div>
                                 {% endfor %}
                             </div>
                         {% endif %}
                         
-                        <p>Fill out the form below and we'll get back to you within 24 hours to schedule your consultation.</p>
+                        <p class="text-gray-600 text-center mb-8">Fill out the form below and we'll get back to you within 24 hours to schedule your consultation.</p>
                         
-                        <form class="consultation-form" id="consultationForm" method="post" action="{% url 'process_consultation_payment' %}">
+                        <form id="consultationForm" method="post" action="{% url 'process_consultation_payment' %}" class="space-y-6">
                             {% csrf_token %}
-                            <div class="row">
-                                <!-- Personal Information -->
-                                <div class="col-12 mb-3">
-                                    <label for="fullName" class="form-label">Full Name *</label>
-                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                            
+                            <!-- Personal Information -->
+                            <div class="space-y-6">
+                                <div>
+                                    <label for="fullName" class="block text-sm font-semibold text-gray-900 mb-2">Full Name *</label>
+                                    <input type="text" id="fullName" name="fullName" required 
+                                           class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
                                 </div>
                                 
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email Address *</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Phone Number *</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" required>
-                                </div>
-                                
-                                <!-- Consultation Preferences -->
-                                <div class="col-12 mb-3">
-                                    <label for="consultationType" class="form-label">Preferred Consultation Method *</label>
-                                    <div class="consultation-type-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="consultationType" id="video-call" value="video-call" required>
-                                            <label class="form-check-label" for="video-call">
-                                                <i class="fas fa-video"></i> Video Call (Zoom/Google Meet)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="consultationType" id="phone-call" value="phone-call" required>
-                                            <label class="form-check-label" for="phone-call">
-                                                <i class="fas fa-phone"></i> Phone Call
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="consultationType" id="whatsapp" value="whatsapp" required>
-                                            <label class="form-check-label" for="whatsapp">
-                                                <i class="fab fa-whatsapp"></i> WhatsApp Call
-                                            </label>
-                                        </div>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">Email Address *</label>
+                                        <input type="email" id="email" name="email" required 
+                                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">Phone Number *</label>
+                                        <input type="tel" id="phone" name="phone" required 
+                                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
                                     </div>
                                 </div>
                                 
-                                <div class="col-12 mb-3">
-                                    <label for="preferredDate" class="form-label">Preferred Date</label>
-                                    <input type="date" class="form-control" id="preferredDate" name="preferredDate">
+                                <!-- Consultation Method -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-900 mb-4">Preferred Consultation Method *</label>
+                                    <div class="grid md:grid-cols-3 gap-4">
+                                        <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 group">
+                                            <input type="radio" name="consultationType" value="video-call" required class="sr-only">
+                                            <div class="w-5 h-5 border-2 border-gray-300 rounded-full mr-3 group-hover:border-red-500 flex items-center justify-center">
+                                                <div class="w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            </div>
+                                            <i class="fas fa-video text-red-500 mr-2"></i>
+                                            <span class="text-sm font-medium">Video Call</span>
+                                        </label>
+                                        
+                                        <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 group">
+                                            <input type="radio" name="consultationType" value="phone-call" required class="sr-only">
+                                            <div class="w-5 h-5 border-2 border-gray-300 rounded-full mr-3 group-hover:border-red-500 flex items-center justify-center">
+                                                <div class="w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            </div>
+                                            <i class="fas fa-phone text-red-500 mr-2"></i>
+                                            <span class="text-sm font-medium">Phone Call</span>
+                                        </label>
+                                        
+                                        <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 group">
+                                            <input type="radio" name="consultationType" value="whatsapp" required class="sr-only">
+                                            <div class="w-5 h-5 border-2 border-gray-300 rounded-full mr-3 group-hover:border-red-500 flex items-center justify-center">
+                                                <div class="w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            </div>
+                                            <i class="fab fa-whatsapp text-red-500 mr-2"></i>
+                                            <span class="text-sm font-medium">WhatsApp</span>
+                                        </label>
+                                    </div>
                                 </div>
                                 
-                                <div class="col-12 mb-3">
-                                    <label for="preferredTime" class="form-label">Preferred Time</label>
-                                    <select class="form-select" id="preferredTime" name="preferredTime">
-                                        <option value="">Select time</option>
-                                        <option value="morning">Morning (9 AM - 12 PM)</option>
-                                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                                        <option value="evening">Evening (5 PM - 8 PM)</option>
-                                        <option value="flexible">Flexible</option>
-                                    </select>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="preferredDate" class="block text-sm font-semibold text-gray-900 mb-2">Preferred Date</label>
+                                        <input type="date" id="preferredDate" name="preferredDate" 
+                                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="preferredTime" class="block text-sm font-semibold text-gray-900 mb-2">Preferred Time</label>
+                                        <select id="preferredTime" name="preferredTime" 
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
+                                            <option value="">Select time</option>
+                                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                                            <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                            <option value="evening">Evening (5 PM - 8 PM)</option>
+                                            <option value="flexible">Flexible</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 
                                 <!-- Project Details -->
-                                <div class="col-12 mb-3">
-                                    <label for="projectDescription" class="form-label">Tell us about your project</label>
-                                    <textarea class="form-control" id="projectDescription" name="projectDescription" rows="4" placeholder="Describe your website goals, features you need, design preferences, target audience, or any specific requirements..."></textarea>
+                                <div>
+                                    <label for="projectDescription" class="block text-sm font-semibold text-gray-900 mb-2">Tell us about your project</label>
+                                    <textarea id="projectDescription" name="projectDescription" rows="4" 
+                                              placeholder="Describe your website goals, features you need, design preferences, target audience, or any specific requirements..."
+                                              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white resize-none"></textarea>
                                 </div>
                                 
-                                <div class="col-12 mb-3">
-                                    <label for="inspiration" class="form-label">Inspiration/Reference Websites</label>
-                                    <textarea class="form-control" id="inspiration" name="inspiration" rows="2" placeholder="Share links to websites you like or describe the style you're looking for..."></textarea>
+                                <div>
+                                    <label for="inspiration" class="block text-sm font-semibold text-gray-900 mb-2">Inspiration/Reference Websites</label>
+                                    <textarea id="inspiration" name="inspiration" rows="2" 
+                                              placeholder="Share links to websites you like or describe the style you're looking for..."
+                                              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white resize-none"></textarea>
                                 </div>
                                 
-                                <div class="col-12 mb-3">
-                                    <label for="sessionDuration" class="form-label">Choose Session Duration *</label>
-                                    <select class="form-select" id="sessionDuration" name="sessionDuration" required onchange="updateConsultationCost()">
-                                        <option value="">Select duration</option>
-                                        <option value="20">20 minutes</option>
-                                        <option value="40">40 minutes</option>
-                                        <option value="60">60 minutes</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-12 mb-3">
-                                    <label for="consultationCost" class="form-label">Cost</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">₦</span>
-                                        <input type="text" class="form-control" id="consultationCost" name="consultationCost" readonly placeholder="Select duration to see cost">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="sessionDuration" class="block text-sm font-semibold text-gray-900 mb-2">Choose Session Duration *</label>
+                                        <select id="sessionDuration" name="sessionDuration" required onchange="updateConsultationCost()"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
+                                            <option value="">Select duration</option>
+                                            <option value="20">20 minutes</option>
+                                            <option value="40">40 minutes</option>
+                                            <option value="60">60 minutes</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="consultationCost" class="block text-sm font-semibold text-gray-900 mb-2">Cost</label>
+                                        <div class="flex">
+                                            <span class="inline-flex items-center px-3 bg-red-600 text-white font-semibold rounded-l-xl border-2 border-red-600">₦</span>
+                                            <input type="text" id="consultationCost" name="consultationCost" readonly 
+                                                   placeholder="Select duration to see cost"
+                                                   class="flex-1 px-4 py-3 border-2 border-l-0 border-gray-200 rounded-r-xl focus:border-red-500 focus:ring-0 transition-colors duration-300 bg-gray-50 focus:bg-white">
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Submit Button -->
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg consultation-submit-btn">
-                                        <i class="fas fa-credit-card"></i> Proceed to Payment
+                                <div class="text-center pt-6">
+                                    <button type="submit" class="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25 uppercase tracking-wider">
+                                        <i class="fas fa-credit-card mr-3 group-hover:animate-bounce"></i>
+                                        Proceed to Payment
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Terms Notice -->
-            <div class="row justify-content-center mt-4">
-                <div class="col-lg-8">
-                    <div class="text-center">
-                        <div style="background: rgba(255, 255, 255, 0.8); border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); border: 1px solid rgba(239, 35, 60, 0.1);">
-                            <p class="text-muted mb-0">
-                                <small><i class="fas fa-info-circle" style="margin-right: 4px; color: #EF233C;"></i> By booking our consultation, you agree to our <a href="{% url 'terms' %}" target="_blank" style="color: #EF233C; font-weight: 600; transition: all 0.3s ease;">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" style="color: #EF233C; font-weight: 600; transition: all 0.3s ease;">Privacy Policy</a>.</small>
-                            </p>
-                        </div>
+                
+                <!-- Terms Notice -->
+                <div class="text-center mt-8">
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-red-100">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-info-circle text-red-600 mr-2"></i>
+                            By booking our consultation, you agree to our 
+                            <a href="{% url 'terms' %}" target="_blank" class="text-red-600 font-semibold hover:text-red-700 transition-colors duration-300">Terms of Service</a> 
+                            and 
+                            <a href="{% url 'privacy' %}" target="_blank" class="text-red-600 font-semibold hover:text-red-700 transition-colors duration-300">Privacy Policy</a>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -181,561 +277,45 @@
     </section>
 
     <!-- Success Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">
-                        <i class="fas fa-check-circle text-success"></i> Consultation Booked!
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <h4>Thank you for booking a consultation!</h4>
-                    <p>We've received your request and will contact you within 24 hours to confirm your consultation appointment.</p>
-                    <p><strong>What happens next?</strong></p>
-                    <ul class="text-start">
-                        <li>You'll receive a confirmation email shortly</li>
-                        <li>Our team will review your project details</li>
-                        <li>We'll contact you to schedule the perfect time</li>
-                        <li>Prepare for an exciting discussion about your project!</li>
-                    </ul>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it, thanks!</button>
-                </div>
+    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-red-600 to-red-700 p-6">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-check-circle mr-3"></i>
+                    Consultation Booked!
+                </h3>
+            </div>
+            <div class="p-8 text-center">
+                <h4 class="text-xl font-bold text-gray-900 mb-4">Thank you for booking a consultation!</h4>
+                <p class="text-gray-600 mb-4">We've received your request and will contact you within 24 hours to confirm your consultation appointment.</p>
+                <p class="font-semibold text-gray-900 mb-4">What happens next?</p>
+                <ul class="text-left text-gray-600 space-y-2 mb-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                        You'll receive a confirmation email shortly
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                        Our team will review your project details
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                        We'll contact you to schedule the perfect time
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                        Prepare for an exciting discussion about your project!
+                    </li>
+                </ul>
+                <button onclick="closeSuccessModal()" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                    Got it, thanks!
+                </button>
             </div>
         </div>
     </div>
 
-<style>
-/* Hero Section Consistency */
-.hero {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Consultation Benefits */
-.consultation-benefits {
-    background: #f8f9fa;
-    padding: 80px 0;
-}
-
-/* Section Headers */
-.section-header {
-    margin-bottom: 60px;
-}
-
-.section-header p {
-    color: #EF233C;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.section-header h2 {
-    color: #2c3e50;
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-/* Booking Form */
-.consultation-booking {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.booking-form-container {
-    background: white;
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    border: 1px solid #f0f0f0;
-    position: relative;
-    overflow: hidden;
-}
-
-.booking-form-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, #EF233C, #d91e36);
-}
-
-.consultation-form .form-label {
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 15px;
-}
-
-.consultation-form .form-control,
-.consultation-form .form-select {
-    border: 2px solid #e9ecef;
-    border-radius: 10px;
-    padding: 15px 20px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    background: #fafafa;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.consultation-form .form-control:focus,
-.consultation-form .form-select:focus {
-    border-color: #EF233C;
-    box-shadow: 0 0 0 0.25rem rgba(239, 35, 60, 0.15);
-    background: white;
-    outline: none;
-}
-
-.consultation-form .form-control:hover,
-.consultation-form .form-select:hover {
-    border-color: #dee2e6;
-    background: white;
-}
-
-/* Remove valid/invalid styling */
-.consultation-form .form-control:valid,
-.consultation-form .form-select:valid {
-    border-color: #e9ecef !important;
-    background-image: none !important;
-}
-
-.consultation-form .form-control.is-valid,
-.consultation-form .form-select.is-valid {
-    border-color: #e9ecef !important;
-    background-image: none !important;
-}
-
-/* Input group styling for cost field */
-.consultation-form .input-group-text {
-    background: #EF233C;
-    color: white;
-    border: 2px solid #EF233C;
-    border-right: none;
-    font-weight: 600;
-    border-radius: 10px 0 0 10px;
-}
-
-.consultation-form .input-group .form-control {
-    border-left: none;
-    border-radius: 0 10px 10px 0;
-}
-
-.consultation-form .input-group .form-control:focus {
-    border-left: none;
-    box-shadow: 0 0 0 0.25rem rgba(239, 35, 60, 0.15);
-}
-
-/* Select dropdown styling */
-.consultation-form .form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EF233C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 15px center !important;
-    background-size: 16px 12px !important;
-    background-color: #fafafa;
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    -ms-appearance: none !important;
-}
-
-.consultation-form .form-select::-ms-expand {
-    display: none;
-}
-
-.consultation-form .form-select:focus {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EF233C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
-    background-color: white;
-}
-
-.consultation-form .form-select:hover {
-    background-color: white;
-}
-
-/* Select options styling */
-.consultation-form .form-select option {
-    background: white;
-    color: #495057;
-    padding: 10px;
-    font-size: 15px;
-}
-
-/* Form Check Groups */
-.consultation-type-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.form-check {
-    background: #f8f9fa;
-    padding: 20px 25px;
-    border-radius: 12px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.form-check:hover {
-    border-color: #dee2e6;
-    background: #ffffff;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* Remove any background color changes on checked state */
-.form-check-input:checked ~ .form-check {
-    background: #f8f9fa !important;
-}
-
-.form-check-input:checked + .form-check-label {
-    color: #EF233C;
-    font-weight: 700;
-}
-
-.form-check-input:checked {
-    background-color: #EF233C;
-    border-color: #EF233C;
-}
-
-/* Ensure no green background on any state */
-.form-check,
-.form-check:hover,
-.form-check:focus,
-.form-check:active,
-.form-check.checked {
-    background: #f8f9fa !important;
-}
-
-.form-check:hover {
-    background: #ffffff !important;
-}
-
-.form-check-label {
-    font-weight: 500;
-    color: #495057;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.form-check-label i {
-    margin-right: 8px;
-    color: #EF233C;
-}
-
-/* Submit Button */
-.consultation-submit-btn {
-    background: linear-gradient(135deg, #EF233C, #d91e36);
-    border: none;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 25px;
-    transition: all 0.4s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-}
-
-.consultation-submit-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.consultation-submit-btn:hover {
-    background: linear-gradient(135deg, #d91e36, #c11e32);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(239, 35, 60, 0.4);
-}
-
-.consultation-submit-btn:hover::before {
-    left: 100%;
-}
-
-/* Process Steps */
-.consultation-process {
-    background: white;
-    padding: 100px 0;
-}
-
-.process-step {
-    text-align: center;
-    padding: 40px 25px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 20px;
-    height: 100%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    position: relative;
-    transition: all 0.4s ease;
-    border: 1px solid #f0f0f0;
-}
-
-.process-step:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    background: white;
-}
-
-.step-number {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #EF233C, #d91e36);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
-    border: 4px solid white;
-    box-shadow: 0 5px 15px rgba(239, 35, 60, 0.3);
-}
-
-.step-icon {
-    font-size: 3rem;
-    color: #EF233C;
-    margin: 35px 0 25px;
-    transition: all 0.3s ease;
-}
-
-.process-step:hover .step-icon {
-    transform: scale(1.1);
-    color: #d91e36;
-}
-
-.process-step h4 {
-    color: #2c3e50;
-    margin-bottom: 18px;
-    font-weight: 700;
-    font-size: 1.3rem;
-}
-
-.process-step p {
-    color: #6c757d;
-    line-height: 1.7;
-    font-size: 15px;
-}
-
-/* Modal Customization */
-.modal-content {
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-    overflow: hidden;
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #EF233C, #d91e36);
-    color: white;
-    border-bottom: none;
-    padding: 30px;
-}
-
-.modal-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.modal-title i {
-    color: #fff;
-}
-
-.modal-body {
-    padding: 40px;
-    text-align: center;
-}
-
-.modal-body h4 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.modal-body p {
-    color: #6c757d;
-    line-height: 1.6;
-}
-
-.modal-body ul {
-    color: #6c757d;
-    line-height: 1.8;
-}
-
-.modal-footer {
-    border-top: 1px solid #f0f0f0;
-    padding: 30px;
-    background: #f8f9fa;
-}
-
-.modal-footer .btn {
-    background: linear-gradient(135deg, #EF233C, #d91e36);
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-weight: 600;
-}
-
-/* Alert Messages */
-.alert {
-    border-radius: 12px;
-    border: none;
-    padding: 20px 25px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
-.alert-success {
-    background: linear-gradient(135deg, #d4edda, #c3e6cb);
-    color: #155724;
-}
-
-.alert-danger {
-    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-    color: #721c24;
-}
-
-.alert i {
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .booking-form-container {
-        padding: 30px 15px;
-        margin: 5px;
-    }
-    
-    .consultation-type-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .benefit-card, .process-step {
-        margin-bottom: 30px;
-    }
-    
-    .consultation-submit-btn {
-        width: 100%;
-        padding: 12px 20px;
-        font-size: 15px;
-    }
-    
-    .section-header h2 {
-        font-size: 2rem;
-    }
-    
-    .benefit-icon, .step-icon {
-        font-size: 2.5rem;
-    }
-    
-    .consultation-benefits, .consultation-process {
-        padding: 60px 0;
-    }
-    
-    .consultation-booking {
-        padding: 60px 0;
-    }
-}
-
-/* Form Validation Styles */
-.form-control.is-invalid,
-.form-select.is-invalid {
-    border-color: #dc3545;
-    background: #fff5f5;
-}
-
-.form-control.is-valid,
-.form-select.is-valid {
-    border-color: #28a745;
-    background: #f8fff8;
-}
-
-.invalid-feedback {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 8px;
-    font-weight: 500;
-}
-
-.valid-feedback {
-    color: #28a745;
-    font-size: 0.875rem;
-    margin-top: 8px;
-    font-weight: 500;
-}
-
-/* Loading State */
-.consultation-submit-btn.loading {
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-.consultation-submit-btn.loading::after {
-    content: "";
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-left: 12px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Enhanced Hover Effects */
-.benefit-card, .process-step, .form-check {
-    will-change: transform;
-}
-
-/* Custom Scrollbar for Textarea */
-.consultation-form textarea::-webkit-scrollbar {
-    width: 8px;
-}
-
-.consultation-form textarea::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.consultation-form textarea::-webkit-scrollbar-thumb {
-    background: #EF233C;
-    border-radius: 10px;
-}
-
-.consultation-form textarea::-webkit-scrollbar-thumb:hover {
-    background: #d91e36;
-}
-</style>
-
 <script>
-// Cost calculation function (global scope for onchange access)
+// Cost calculation function
 function updateConsultationCost() {
     const sessionDuration = document.getElementById('sessionDuration').value;
     const costField = document.getElementById('consultationCost');
@@ -754,14 +334,40 @@ function updateConsultationCost() {
     }
 }
 
+// Main functionality
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Consultation page loaded successfully');
+    
     const form = document.getElementById('consultationForm');
-    const submitBtn = document.querySelector('.consultation-submit-btn');
+    const submitBtn = form.querySelector('button[type="submit"]');
     
     // Set minimum date to today
     const dateInput = document.getElementById('preferredDate');
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
+    
+    // Handle radio button styling
+    const radioInputs = document.querySelectorAll('input[type="radio"]');
+    radioInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            // Reset all radio buttons in this group
+            const groupName = this.name;
+            const groupInputs = document.querySelectorAll(`input[name="${groupName}"]`);
+            groupInputs.forEach(groupInput => {
+                const label = groupInput.closest('label');
+                const indicator = label.querySelector('div > div');
+                if (groupInput === this) {
+                    label.classList.add('border-red-500', 'bg-red-50');
+                    indicator.classList.remove('opacity-0');
+                    indicator.classList.add('opacity-100');
+                } else {
+                    label.classList.remove('border-red-500', 'bg-red-50');
+                    indicator.classList.remove('opacity-100');
+                    indicator.classList.add('opacity-0');
+                }
+            });
+        });
+    });
     
     // Form submission handler
     form.addEventListener('submit', function(e) {
@@ -777,7 +383,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const requiredFields = form.querySelectorAll('[required]');
         
         requiredFields.forEach(field => {
-            if (!field.value.trim()) {
+            if (field.type === 'radio') {
+                const radioGroup = form.querySelectorAll(`input[name="${field.name}"]`);
+                const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                if (!isChecked) {
+                    showFieldError(field, 'Please select an option');
+                    isValid = false;
+                } else {
+                    clearFieldError(field);
+                }
+            } else if (!field.value.trim()) {
                 showFieldError(field, 'This field is required');
                 isValid = false;
             } else {
@@ -799,31 +414,10 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
-        // Session duration validation
-        const sessionDurationField = document.getElementById('sessionDuration');
-        if (!sessionDurationField.value) {
-            showFieldError(sessionDurationField, 'Please select a session duration');
-            isValid = false;
-        }
-        
-        // Cost validation
-        const consultationCostField = document.getElementById('consultationCost');
-        if (!consultationCostField.value) {
-            showFieldError(consultationCostField, 'Please select a session duration to see the cost');
-            isValid = false;
-        }
-        
-        // Session duration validation
-        const sessionDuration = document.getElementById('sessionDuration');
-        if (!sessionDuration.value) {
-            showFieldError(sessionDuration, 'Please select a session duration');
-            isValid = false;
-        }
-        
         // Cost validation
         const consultationCost = document.getElementById('consultationCost');
         if (!consultationCost.value) {
-            showFieldError(consultationCost, 'Cost will be calculated automatically when you select duration');
+            showFieldError(consultationCost, 'Please select a session duration to see the cost');
             isValid = false;
         }
         
@@ -832,31 +426,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function submitForm() {
         // Show loading state
-        submitBtn.classList.add('loading');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to Payment...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>Redirecting to Payment...';
+        submitBtn.disabled = true;
         
-        // Submit the form to the backend
+        // Submit the form
         form.submit();
     }
     
     function showFieldError(field, message) {
-        field.classList.add('is-invalid');
-        field.classList.remove('is-valid');
+        field.classList.remove('border-gray-200');
+        field.classList.add('border-red-500', 'bg-red-50');
         
-        let feedback = field.parentNode.querySelector('.invalid-feedback');
+        let feedback = field.parentNode.querySelector('.error-message');
         if (!feedback) {
             feedback = document.createElement('div');
-            feedback.className = 'invalid-feedback';
+            feedback.className = 'error-message text-red-600 text-sm mt-1 font-medium';
             field.parentNode.appendChild(feedback);
         }
         feedback.textContent = message;
     }
     
     function clearFieldError(field) {
-        field.classList.remove('is-invalid');
-        field.classList.add('is-valid');
+        field.classList.remove('border-red-500', 'bg-red-50');
+        field.classList.add('border-gray-200');
         
-        const feedback = field.parentNode.querySelector('.invalid-feedback');
+        const feedback = field.parentNode.querySelector('.error-message');
         if (feedback) {
             feedback.remove();
         }
@@ -888,6 +482,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function closeSuccessModal() {
+    document.getElementById('successModal').classList.add('hidden');
+}
 </script>
 
 {% endblock %}

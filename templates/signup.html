@@ -1,478 +1,436 @@
-{% extends 'base.html' %}
+{% extends 'master.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Sign Up - Website Designer Nigeria{% endblock %}
 
-{% block maincontent %}
+{% block content %}
+<!-- Disable floating alerts for this page since we have inline form alerts -->
 <style>
-/* Disable floating alerts for this page since we have inline form alerts */
 .messages-container {
     display: none !important;
 }
-
-:root {
-    --primary-color: #EF233C;
-    --secondary-color: #d01f37;
-    --dark-color: #2B2D42;
-    --light-color: #8D99AE;
-    --white-color: #EDF2F4;
-}
-
-.auth-container {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 2rem 0;
-}
-
-.auth-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    max-width: 500px;
-    width: 100%;
-    margin: 3rem auto 0;
-}
-
-.auth-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 2rem;
-    text-align: center;
-}
-
-.auth-header h2 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 2rem;
-    color: white;
-}
-
-.auth-header p {
-    margin: 0.5rem 0 0;
-    opacity: 0.9;
-}
-
-.auth-body {
-    padding: 2.5rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    font-weight: 600;
-    color: var(--dark-color);
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.form-control {
-    border: 2px solid #e9ecef;
-    border-radius: 10px;
-    padding: 0.875rem 1rem;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background-color: #f8f9fa;
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
-    background-color: white;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    border: none;
-    border-radius: 10px;
-    padding: 0.875rem 2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
-}
-
-.auth-link {
-    text-align: center;
-    margin-top: 1.5rem;
-    color: var(--light-color);
-}
-
-.auth-link a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.auth-link a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-.alert {
-    border-radius: 10px;
-    border: none;
-    margin-bottom: 1.5rem;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-left: 4px solid var(--primary-color);
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border-left: 4px solid #28a745;
-}
-
-.alert-dismissible .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    color: inherit;
-    opacity: 0.7;
-    background: none;
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    width: auto;
-    height: auto;
-    line-height: 1;
-}
-
-.alert-dismissible .btn-close:hover {
-    opacity: 1;
-    background: none;
-}
-
-.alert-dismissible .btn-close span {
-    font-size: 20px;
-    font-weight: normal;
-}
-
-.help-text {
-    font-size: 0.875rem;
-    color: var(--light-color);
-    margin-top: 0.25rem;
-}
-
-.form-check {
-    position: relative;
-    display: block;
-    padding-left: 1.5rem;
-}
-
-.form-check-input {
-    position: absolute;
-    margin-top: 0.3rem;
-    margin-left: -1.5rem;
-    accent-color: var(--primary-color);
-}
-
-.form-check-label {
-    margin-bottom: 0;
-    cursor: pointer;
-}
-
-.form-check-label a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.form-check-label a:hover {
-    text-decoration: underline;
-    color: var(--secondary-color);
-}
-
-.errorlist {
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0 0;
-}
-
-.errorlist li {
-    color: var(--primary-color);
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-}
-
-.field-icon {
-    position: relative;
-}
-
-.field-icon i {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--light-color);
-    z-index: 1;
-}
-
-.field-icon .form-control {
-    padding-left: 3rem;
-}
-
-@media (max-width: 768px) {
-    .auth-container {
-        padding: 0.5rem;
-        min-height: 90vh;
-    }
-    
-    .auth-card {
-        margin: 2rem 0.5rem 0;
-    }
-    
-    .auth-header {
-        padding: 1.5rem;
-    }
-    
-    .auth-header h2 {
-        font-size: 1.5rem;
-    }
-    
-    .auth-body {
-        padding: 1rem;
-    }
-    
-    .row .col-md-6 {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-    }
-    
-    .form-group {
-        margin-bottom: 1rem;
-    }
-}
 </style>
 
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-header">
-            <h2>Create Account</h2>
-        </div>
-        
-        <div class="auth-body">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible">
-                        {{ message }}
-                        <button type="button" class="btn-close" onclick="this.parentElement.remove()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+    <div class="w-full max-w-lg">
+        <!-- Auth Card -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6 text-center">
+                <h2 class="text-2xl font-bold text-white">Create Account</h2>
+                <p class="text-red-100 text-sm mt-1">Join our community today</p>
+            </div>
             
-            <form method="post" novalidate>
-                {% csrf_token %}
-                {% if request.GET.next %}
-                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <!-- Body -->
+            <div class="px-8 py-8">
+                <!-- Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mb-4 p-3 rounded-lg border-l-4 {% if message.tags == 'error' %}bg-red-50 border-red-400 text-red-700{% elif message.tags == 'success' %}bg-green-50 border-green-400 text-green-700{% elif message.tags == 'warning' %}bg-yellow-50 border-yellow-400 text-yellow-700{% else %}bg-blue-50 border-blue-400 text-blue-700{% endif %}">
+                            <div class="flex justify-between items-start">
+                                <span class="text-sm">{{ message }}</span>
+                                <button type="button" class="ml-2 text-gray-400 hover:text-gray-600 font-bold text-lg leading-none" onclick="this.parentElement.parentElement.remove()">
+                                    ×
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
                 {% endif %}
                 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="{{ form.first_name.id_for_label }}">First Name</label>
-                            <div class="field-icon">
-                                <i class="fas fa-user"></i>
-                                {{ form.first_name|add_class:"form-control" }}
+                <!-- Signup Form -->
+                <form method="post" novalidate class="space-y-5">
+                    {% csrf_token %}
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+                    {% if request.GET.course_id %}
+                        <input type="hidden" name="course_id" value="{{ request.GET.course_id }}">
+                    {% endif %}
+                    
+                    <!-- Name Fields Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- First Name -->
+                        <div>
+                            <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                First Name
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                {{ form.first_name|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
                             </div>
                             {% if form.first_name.help_text %}
-                                <small class="help-text">{{ form.first_name.help_text }}</small>
+                                <p class="mt-1 text-xs text-gray-500">{{ form.first_name.help_text }}</p>
                             {% endif %}
-                            {{ form.first_name.errors }}
+                            {% if form.first_name.errors %}
+                                <div class="mt-1">
+                                    {% for error in form.first_name.errors %}
+                                        <p class="text-xs text-red-600">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Last Name -->
+                        <div>
+                            <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Last Name
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                {{ form.last_name|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                            </div>
+                            {% if form.last_name.help_text %}
+                                <p class="mt-1 text-xs text-gray-500">{{ form.last_name.help_text }}</p>
+                            {% endif %}
+                            {% if form.last_name.errors %}
+                                <div class="mt-1">
+                                    {% for error in form.last_name.errors %}
+                                        <p class="text-xs text-red-600">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
-                            <div class="field-icon">
-                                <i class="fas fa-user"></i>
-                                {{ form.last_name|add_class:"form-control" }}
+                    <!-- Username Field -->
+                    <div>
+                        <label for="{{ form.username.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Username
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
                             </div>
-                            {% if form.last_name.help_text %}
-                                <small class="help-text">{{ form.last_name.help_text }}</small>
+                            {{ form.username|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                        </div>
+                        {% if form.username.help_text %}
+                            <p class="mt-1 text-xs text-gray-500">{{ form.username.help_text }}</p>
+                        {% endif %}
+                        {% if form.username.errors %}
+                            <div class="mt-1">
+                                {% for error in form.username.errors %}
+                                    <p class="text-xs text-red-600">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Email Field -->
+                    <div>
+                        <label for="{{ form.email.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Email Address
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            {{ form.email|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                        </div>
+                        {% if form.email.help_text %}
+                            <p class="mt-1 text-xs text-gray-500">{{ form.email.help_text }}</p>
+                        {% endif %}
+                        {% if form.email.errors %}
+                            <div class="mt-1">
+                                {% for error in form.email.errors %}
+                                    <p class="text-xs text-red-600">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Phone Number Field -->
+                    <div>
+                        <label for="{{ form.phone_number.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Phone Number
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                </svg>
+                            </div>
+                            {{ form.phone_number|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                        </div>
+                        {% if form.phone_number.help_text %}
+                            <p class="mt-1 text-xs text-gray-500">{{ form.phone_number.help_text }}</p>
+                        {% endif %}
+                        {% if form.phone_number.errors %}
+                            <div class="mt-1">
+                                {% for error in form.phone_number.errors %}
+                                    <p class="text-xs text-red-600">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Password Fields -->
+                    <div class="space-y-4">
+                        <!-- Password -->
+                        <div>
+                            <label for="{{ form.password1.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Password
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                {{ form.password1|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                            </div>
+                            {% if form.password1.help_text %}
+                                <p class="mt-1 text-xs text-gray-500">{{ form.password1.help_text }}</p>
                             {% endif %}
-                            {{ form.last_name.errors }}
+                            {% if form.password1.errors %}
+                                <div class="mt-1">
+                                    {% for error in form.password1.errors %}
+                                        <p class="text-xs text-red-600">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="{{ form.password2.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Confirm Password
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                {{ form.password2|add_class:"block w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white text-sm" }}
+                            </div>
+                            {% if form.password2.help_text %}
+                                <p class="mt-1 text-xs text-gray-500">{{ form.password2.help_text }}</p>
+                            {% endif %}
+                            {% if form.password2.errors %}
+                                <div class="mt-1">
+                                    {% for error in form.password2.errors %}
+                                        <p class="text-xs text-red-600">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="{{ form.username.id_for_label }}">Username</label>
-                    <div class="field-icon">
-                        <i class="fas fa-at"></i>
-                        {{ form.username|add_class:"form-control" }}
+                    
+                    <!-- Terms Agreement -->
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 pt-1">
+                            {{ form.agree_to_terms|add_class:"h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500" }}
+                        </div>
+                        <div class="text-sm">
+                            <label for="{{ form.agree_to_terms.id_for_label }}" class="text-gray-700">
+                                I agree to the 
+                                <a href="{% url 'privacy' %}" target="_blank" class="text-red-600 hover:text-red-700 font-medium">Privacy Policy</a> 
+                                and 
+                                <a href="{% url 'terms' %}" target="_blank" class="text-red-600 hover:text-red-700 font-medium">Terms of Service</a>
+                            </label>
+                            {% if form.agree_to_terms.errors %}
+                                <div class="mt-1">
+                                    {% for error in form.agree_to_terms.errors %}
+                                        <p class="text-xs text-red-600">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    {% if form.username.help_text %}
-                        <small class="help-text">{{ form.username.help_text }}</small>
-                    {% endif %}
-                    {{ form.username.errors }}
-                </div>
-                
-                <div class="form-group">
-                    <label for="{{ form.email.id_for_label }}">Email Address</label>
-                    <div class="field-icon">
-                        <i class="fas fa-envelope"></i>
-                        {{ form.email|add_class:"form-control" }}
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-lg">
+                        <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+                        </svg>
+                        Create Account
+                    </button>
+                    
+                    <!-- Sign In Link -->
+                    <div class="text-center pt-4">
+                        <p class="text-sm text-gray-600">
+                            Already have an account? 
+                            <a href="{% url 'login' %}" class="font-semibold text-red-600 hover:text-red-700 transition-colors">
+                                Sign In
+                            </a>
+                        </p>
                     </div>
-                    {% if form.email.help_text %}
-                        <small class="help-text">{{ form.email.help_text }}</small>
-                    {% endif %}
-                    {{ form.email.errors }}
-                </div>
-                
-                <div class="form-group">
-                    <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
-                    <div class="field-icon">
-                        <i class="fas fa-phone"></i>
-                        {{ form.phone_number|add_class:"form-control" }}
-                    </div>
-                    {% if form.phone_number.help_text %}
-                        <small class="help-text">{{ form.phone_number.help_text }}</small>
-                    {% endif %}
-                    {{ form.phone_number.errors }}
-                </div>
-                
-                <div class="form-group">
-                    <label for="{{ form.password1.id_for_label }}">Password</label>
-                    <div class="field-icon">
-                        <i class="fas fa-lock"></i>
-                        {{ form.password1|add_class:"form-control" }}
-                    </div>
-                    {% if form.password1.help_text %}
-                        <small class="help-text">{{ form.password1.help_text }}</small>
-                    {% endif %}
-                    {{ form.password1.errors }}
-                </div>
-                
-                <div class="form-group">
-                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
-                    <div class="field-icon">
-                        <i class="fas fa-lock"></i>
-                        {{ form.password2|add_class:"form-control" }}
-                    </div>
-                    {% if form.password2.help_text %}
-                        <small class="help-text">{{ form.password2.help_text }}</small>
-                    {% endif %}
-                    {{ form.password2.errors }}
-                </div>
-                
-                <div class="form-group">
-                    <div class="form-check" style="margin-bottom: 1rem;">
-                        {{ form.agree_to_terms }}
-                        <label class="form-check-label" for="{{ form.agree_to_terms.id_for_label }}" style="font-size: 0.9rem; margin-left: 1.5rem;">
-                            I agree to the <a href="{% url 'privacy' %}" target="_blank" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a> and <a href="{% url 'terms' %}" target="_blank" style="color: var(--primary-color); text-decoration: none;">Terms of Service</a>
-                        </label>
-                        {{ form.agree_to_terms.errors }}
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-user-plus mr-2"></i>Create Account
-                </button>
-                
-                <div class="auth-link">
-                    Already have an account? <a href="{% url 'login' %}">Sign In</a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-$(document).ready(function() {
-    // Username validation
-    $('#id_username').on('blur', function() {
-        var username = $(this).val();
-        if (username) {
-            $.ajax({
-                url: '{% url "check_username" %}',
-                data: {
-                    'username': username
-                },
-                success: function(data) {
-                    if (data.exists) {
-                        $('#id_username').addClass('is-invalid');
-                        if (!$('#id_username').next('.invalid-feedback').length) {
-                            $('#id_username').after('<div class="invalid-feedback">This username is already taken.</div>');
-                        }
-                    } else {
-                        $('#id_username').removeClass('is-invalid');
-                        $('#id_username').next('.invalid-feedback').remove();
-                    }
-                }
-            });
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // Focus on first input
+    const firstNameField = document.getElementById('id_first_name');
+    if (firstNameField) {
+        firstNameField.focus();
+    }
     
-    // Email validation
-    $('#id_email').on('blur', function() {
-        var email = $(this).val();
-        if (email) {
-            $.ajax({
-                url: '{% url "check_email" %}',
-                data: {
-                    'email': email
-                },
-                success: function(data) {
-                    if (data.exists) {
-                        $('#id_email').addClass('is-invalid');
-                        if (!$('#id_email').next('.invalid-feedback').length) {
-                            $('#id_email').after('<div class="invalid-feedback">This email is already registered.</div>');
+    // Username validation (if check_username URL exists)
+    const usernameField = document.getElementById('id_username');
+    if (usernameField) {
+        usernameField.addEventListener('blur', function() {
+            const username = this.value;
+            if (username) {
+                // Check if the check_username URL exists before making the AJAX call
+                try {
+                    fetch('{% url "check_username" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        body: 'username=' + encodeURIComponent(username)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            usernameField.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                            usernameField.classList.remove('border-gray-200');
+                            
+                            // Add error message if not already present
+                            let errorDiv = usernameField.parentElement.nextElementSibling;
+                            if (!errorDiv || !errorDiv.classList.contains('username-error')) {
+                                errorDiv = document.createElement('div');
+                                errorDiv.className = 'mt-1 username-error';
+                                errorDiv.innerHTML = '<p class="text-xs text-red-600">This username is already taken.</p>';
+                                usernameField.parentElement.parentNode.insertBefore(errorDiv, usernameField.parentElement.nextSibling);
+                            }
+                        } else {
+                            usernameField.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                            usernameField.classList.add('border-gray-200');
+                            
+                            // Remove error message
+                            const errorDiv = document.querySelector('.username-error');
+                            if (errorDiv) {
+                                errorDiv.remove();
+                            }
                         }
-                    } else {
-                        $('#id_email').removeClass('is-invalid');
-                        $('#id_email').next('.invalid-feedback').remove();
-                    }
+                    })
+                    .catch(error => {
+                        console.log('Username validation not available');
+                    });
+                } catch (error) {
+                    console.log('Username validation not available');
                 }
-            });
-        }
-    });
-    
-    // Real-time password validation
-    $('#id_password1, #id_password2').on('keyup', function() {
-        var password1 = $('#id_password1').val();
-        var password2 = $('#id_password2').val();
-        
-        if (password1 && password2) {
-            if (password1 === password2) {
-                $('#id_password2').removeClass('is-invalid').addClass('is-valid');
-            } else {
-                $('#id_password2').removeClass('is-valid').addClass('is-invalid');
             }
+        });
+    }
+    
+    // Email validation (if check_email URL exists)
+    const emailField = document.getElementById('id_email');
+    if (emailField) {
+        emailField.addEventListener('blur', function() {
+            const email = this.value;
+            if (email) {
+                try {
+                    fetch('{% url "check_email" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        body: 'email=' + encodeURIComponent(email)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            emailField.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                            emailField.classList.remove('border-gray-200');
+                            
+                            // Add error message if not already present
+                            let errorDiv = emailField.parentElement.nextElementSibling;
+                            if (!errorDiv || !errorDiv.classList.contains('email-error')) {
+                                errorDiv = document.createElement('div');
+                                errorDiv.className = 'mt-1 email-error';
+                                errorDiv.innerHTML = '<p class="text-xs text-red-600">This email is already registered.</p>';
+                                emailField.parentElement.parentNode.insertBefore(errorDiv, emailField.parentElement.nextSibling);
+                            }
+                        } else {
+                            emailField.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                            emailField.classList.add('border-gray-200');
+                            
+                            // Remove error message
+                            const errorDiv = document.querySelector('.email-error');
+                            if (errorDiv) {
+                                errorDiv.remove();
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Email validation not available');
+                    });
+                } catch (error) {
+                    console.log('Email validation not available');
+                }
+            }
+        });
+    }
+    
+    // Form validation
+    const form = document.querySelector('form');
+    const requiredFields = [
+        document.getElementById('id_first_name'),
+        document.getElementById('id_last_name'),
+        document.getElementById('id_username'),
+        document.getElementById('id_email'),
+        document.getElementById('id_password1'),
+        document.getElementById('id_password2')
+    ];
+    
+    form.addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Check required fields
+        requiredFields.forEach(field => {
+            if (field && !field.value.trim()) {
+                field.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                field.classList.remove('border-gray-200');
+                isValid = false;
+            } else if (field) {
+                field.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                field.classList.add('border-gray-200');
+            }
+        });
+        
+        // Check terms agreement
+        const termsCheckbox = document.getElementById('id_agree_to_terms');
+        if (termsCheckbox && !termsCheckbox.checked) {
+            termsCheckbox.classList.add('border-red-500', 'focus:ring-red-500');
+            isValid = false;
+        } else if (termsCheckbox) {
+            termsCheckbox.classList.remove('border-red-500', 'focus:ring-red-500');
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
         }
     });
     
-    // Form submission validation
-    $('form').on('submit', function(e) {
-        var agreementChecked = $('#agreementCheck').is(':checked');
-        
-        if (!agreementChecked) {
-            e.preventDefault();
-            alert('Please agree to the Privacy Policy and Terms of Service to continue.');
-            $('#agreementCheck').focus();
-            return false;
+    // Remove error styling on input
+    [...requiredFields, document.getElementById('id_agree_to_terms')].forEach(field => {
+        if (field) {
+            field.addEventListener('input', function() {
+                this.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                this.classList.add('border-gray-200');
+            });
         }
     });
 });

@@ -261,7 +261,6 @@ def consultation_booking(request):
     
     return render(request, 'consultation_booking.html')
 
-
 def process_consultation_payment(request):
     """Process consultation payment via Kora Pay"""
     if request.method == 'POST':
@@ -588,8 +587,34 @@ def signup_view(request):
             user = form.save()
             # Automatically log in the user after signup
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            messages.success(request, f'Welcome to Website Designer Nigeria, {user.get_full_name() or user.username}!')
+            
+            # Check for direct course purchase flow
+            course_id = request.POST.get('course_id') or request.GET.get('course_id')
             next_url = request.POST.get('next') or request.GET.get('next')
+            
+            if course_id:
+                try:
+                    course = Course.objects.get(id=course_id, status='published')
+                    
+                    # For free courses, enroll directly
+                    if course.is_free:
+                        enrollment = CourseEnrollment.objects.create(
+                            user=user,
+                            course=course,
+                            status='enrolled',
+                            is_paid=True
+                        )
+                        messages.success(request, f'Welcome to Website Designer Nigeria, {user.get_full_name() or user.username}! You have been enrolled in {course.title}!')
+                        return redirect(course.get_absolute_url())
+                    
+                    # For paid courses, redirect to direct checkout (don't show welcome message yet)
+                    return redirect('direct_course_checkout', course_id=course.id)
+                    
+                except Course.DoesNotExist:
+                    messages.error(request, 'Course not found.')
+            
+            # Show welcome message for regular signup (non-course)
+            messages.success(request, f'Welcome to Website Designer Nigeria, {user.get_full_name() or user.username}!')
             if next_url:
                 return redirect(next_url)
             return redirect('profile')
@@ -630,8 +655,39 @@ def login_view(request):
             
             if user:
                 login(request, user, backend='app.backends.EmailOrUsernameModelBackend')
-                messages.success(request, f'Welcome back, {user.get_full_name() or user.username}!')
+                
+                # Check for direct course purchase flow
+                course_id = request.POST.get('course_id') or request.GET.get('course_id')
                 next_url = request.POST.get('next') or request.GET.get('next')
+                
+                if course_id:
+                    try:
+                        course = Course.objects.get(id=course_id, status='published')
+                        
+                        # For free courses, enroll directly
+                        if course.is_free:
+                            enrollment, created = CourseEnrollment.objects.get_or_create(
+                                user=user,
+                                course=course,
+                                defaults={
+                                    'status': 'enrolled',
+                                    'is_paid': True
+                                }
+                            )
+                            if created:
+                                messages.success(request, f'Welcome back, {user.get_full_name() or user.username}! You have been enrolled in {course.title}!')
+                            else:
+                                messages.success(request, f'Welcome back, {user.get_full_name() or user.username}!')
+                            return redirect(course.get_absolute_url())
+                        
+                        # For paid courses, redirect to direct checkout (don't show welcome message yet)
+                        return redirect('direct_course_checkout', course_id=course.id)
+                        
+                    except Course.DoesNotExist:
+                        messages.error(request, 'Course not found.')
+                
+                # Show welcome message for regular login (non-course)
+                messages.success(request, f'Welcome back, {user.get_full_name() or user.username}!')
                 if next_url:
                     return redirect(next_url)
                 return redirect('profile')
@@ -855,6 +911,132 @@ def enroll_course(request, course_id):
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+@login_required
+def direct_course_checkout(request, course_id):
+    """Direct course checkout for new users after signup"""
+    course = get_object_or_404(Course, id=course_id, status='published')
+    
+    # Check if course is free
+    if course.is_free:
+        messages.error(request, 'This course is free. No payment required.')
+        return redirect(course.get_absolute_url())
+    
+    # Check if already enrolled
+    if course.is_enrolled_by_user(request.user):
+        messages.error(request, 'You are already enrolled in this course.')
+        return redirect(course.get_absolute_url())
+    
+    # Create or get pending enrollment
+    enrollment, created = CourseEnrollment.objects.get_or_create(
+        user=request.user,
+        course=course,
+        defaults={
+            'status': 'pending',
+            'is_paid': False
+        }
+    )
+    
+    # Check for existing pending payment
+    from .models import CoursePayment
+    existing_payment = CoursePayment.objects.filter(
+        user=request.user,
+        course=course,
+        status__in=['pending', 'processing']
+    ).first()
+    
+    if existing_payment:
+        # Update existing payment with new reference
+        import uuid
+        while True:
+            new_reference = f"REF_{uuid.uuid4().hex[:10].upper()}"
+            if not CoursePayment.objects.filter(reference=new_reference).exists():
+                break
+        
+        existing_payment.reference = new_reference
+        existing_payment.status = 'pending'
+        existing_payment.save()
+        payment = existing_payment
+    else:
+        # Create new payment record
+        import uuid
+        while True:
+            reference = f"REF_{uuid.uuid4().hex[:10].upper()}"
+            if not CoursePayment.objects.filter(reference=reference).exists():
+                break
+        
+        payment = CoursePayment.objects.create(
+            user=request.user,
+            course=course,
+            enrollment=enrollment,
+            amount=course.price,
+            payment_method='kora_pay',
+            status='pending',
+            reference=reference
+        )
+    
+    # Initialize payment with Kora Pay
+    import requests
+    
+    kora_pay_data = {
+        "amount": int(course.price),
+        "currency": "NGN", 
+        "reference": payment.reference,
+        "redirect_url": request.build_absolute_uri('/payment/verify/'),
+        "notification_url": request.build_absolute_uri('/payment/webhook/'),
+        "narration": f"Payment for {course.title}",
+        "channels": ["card", "bank_transfer", "pay_with_bank"],
+        "customer": {
+            "email": request.user.email,
+            "name": request.user.get_full_name() or request.user.username
+        },
+        "metadata": {
+            "course_id": str(course.id),
+            "user_id": str(request.user.id),
+            "payment_id": str(payment.id),
+            "signup_checkout": "true"  # Flag to identify signup-checkout flow
+        }
+    }
+    
+    headers = {
+        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    try:
+        response = requests.post(
+            f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
+            json=kora_pay_data,
+            headers=headers,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            
+            if response_data.get('status'):
+                # Store payment details and redirect to checkout
+                payment.payment_details = response_data
+                payment.save()
+                
+                # Don't show a message here - it will persist after payment
+                return redirect(response_data['data']['checkout_url'])
+            else:
+                error_msg = response_data.get('message', 'Payment initialization failed')
+                payment.mark_as_failed(error_msg)
+                messages.error(request, f'Payment initialization failed: {error_msg}')
+        else:
+            error_msg = f'HTTP {response.status_code}: {response.text}'
+            payment.mark_as_failed(error_msg)
+            messages.error(request, 'Payment service unavailable. Please try again.')
+            
+    except requests.RequestException as e:
+        error_msg = f'Network error: {str(e)}'
+        payment.mark_as_failed(error_msg)
+        messages.error(request, 'Network error. Please try again.')
+    
+    return redirect(course.get_absolute_url())
 
 
 def initiate_course_payment(request, course_id):
@@ -1133,7 +1315,16 @@ def verify_payment(request):
                         payment.payment_details.update(transaction_data)
                         payment.mark_as_completed()
                         
-                        messages.success(request, f'Payment successful! You are now enrolled in {payment.course.title}')
+                        # Check if this was a signup-checkout flow
+                        metadata = payment.payment_details.get('metadata', {})
+                        is_signup_checkout = metadata.get('signup_checkout') == 'true'
+                        
+                        if is_signup_checkout:
+                            # Welcome new user and announce successful enrollment
+                            messages.success(request, f'Welcome to Website Designer Nigeria, {payment.user.get_full_name() or payment.user.username}! Payment successful - you are now enrolled in {payment.course.title}!')
+                        else:
+                            # Regular purchase success message
+                            messages.success(request, f'Payment successful! You are now enrolled in {payment.course.title}')
                     else:
                         # Payment already processed - ensure enrollment is completed
                         payment.mark_as_completed()  # This ensures enrollment status is also updated

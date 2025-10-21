@@ -1,0 +1,576 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block maincontent %}
+<section class="hero" id="home" style="position:relative;">
+    <div class="hero-overlay"></div>
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8 col-12">
+                <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="hero-text">
+                        <h1 class="mb-2 mt-lg-2">WEBSITE DESIGNER NIGERIA</h1>
+                        <p class="mb-2 mt-lg-3">Best Web Designers in Nigeria || Top Web Design Company in Lagos</p>
+
+                    </div>
+                    <div class="hero-btn mt-lg-4">
+                        <a class="btn" href="mailto:contact@websitedesigner.ng">
+                            <i class="fas fa-envelope"></i> EMAIL
+                        </a>
+                        <a class="btn" href="https://wa.link/f2kd41" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>ABOUT US</p>
+            <h2>Website Designer Nigeria</h2>
+        </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="about-content-card">
+                    <div class="about-intro">
+                        <p>Website Designer Nigeria are the best web designers in Nigeria. We are passionate about helping businesses in the retail, finance, health and corporate industries fully leverage the latest <a href="https://www.sciencedirect.com/topics/computer-science/software-technology">software technologies</a>. As a top web design company in Lagos and Abuja, our tech team is dedicated to create websites that meet your exact needs because we pride ourselves on being the best web designers in Nigeria.</p>
+                        <p class="mt-4">We build corporate business websites and ecommerce websites for all kinds of businesses across <a href="https://kpakpakpa.com/industries-in-nigeria/">industries in Nigeria</a> and beyond. Our services include responsive website design, ecommerce website development via Shopify or WooCommerce, WordPress web development, website maintenance, website redesign, SEO, mobile app dev, social media management and many more.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
+                <div class="about-stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Award Winning</h4>
+                            <p>Best Web Designers in Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>500+ Clients</h4>
+                            <p>Satisfied customers nationwide</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Lagos & Abuja</h4>
+                            <p>Offices in major cities</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>24/7 Support</h4>
+                            <p>Always here to help you</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services, Mission & Vision Cards -->
+        <div class="row">
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Our Key Services</h3>
+                    <ul class="feature-list">
+                        <li><strong>Web Development</strong>: We create custom websites developed to your business needs and goals.</li>
+                        <li><strong>E-commerce Development</strong>: Our <a href="{% url 'ecommerce' %}">ecommerce web design</a> provides you online stores that drive sales.</li>
+                        <li><strong>SEO</strong>: We help you grow your brand's organic traffic via our world's leading <a href="{% url 'seo_services' %}">SEO services</a>.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <ul class="feature-list">
+                        <li>To help businesses build their brand through professional websites that drive in sales.</li>
+                        <li>To create websites and software solutions that perfectly align with each client's specific needs and goals.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="about-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <ul class="feature-list">
+                        <li>To become the best web designers in Nigeria known for delivering exceptional, results-driven web app solutions.</li>
+                        <li>To empower businesses & individuals across Africa with premium <a href="https://crosstechcom.com/the-6-forms-of-digital-solution/">digital solutions</a> that drive growth and success.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- Carousel Container -->
+<div class="section-margin">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>Technologies We Use</p>
+            <h2>Our Tech Stack</h2>
+        </div>
+        <p class="text-center">We are highly proficient in HTML, CSS, Javascript, Python, Django, Bootstrap, MySQL, React JS, Woocommerce, Wordpress, Shopify and many other tools.</p>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                <img src="{% static 'img/html5-logo.png' %}" alt="Web Design Company in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/css3-logo.png' %}" alt="Web Design Company in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/bootstrap-logo.png' %}" alt="Web Design Company in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/django-logo.png' %}" alt="Web Design Company in Nigeria"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/js5-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/mysql-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/python-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/react-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/shopify-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/woo-commerce-logo.png' %}" alt="Web Design Company in Lagos"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/wordpress-logo.png' %}" alt="Web Designer in Nigeria"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Service Start -->
+<div class="service section-margin" id="service">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>WHAT WE DO</p>
+            <h2>Website Development Services</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-laptop"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Ecommerce Web Design</h3>
+                        <p>
+                            <a href="https://www.websitedesigner.ng/">Website Designer Nigeria</a> builds ecommerce websites that will appeal to your audiences, showcase your products and drive in sales. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-laptop-code"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Website Development</h3>
+                        <p>
+                            Website development services for all types of sites according to your custom needs; investment, socials, corporate, shipping, educational, e.t.c
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>SEO</h3>
+                        <p>
+                            Driving your business to Google's first pages is what we do best. Our rich SEO technique will shoot your websites to the top in few weeks!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Mobile App Development</h3>
+                        <p>
+                            We offer app development services that build powerful, user-friendly iOS and Android mobile apps for your business needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Website Maintenance</h3>
+                        <p>
+                            We provide regular web maintenance to keep your site running smoothly with no technical issues. We also manage blog content, run update and resolve bugs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="1.0s">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Social Media Management</h3>
+                        <p>
+                            We manage your social media, creating engaging content and growing your online presence. Let us help you connect with and build your audience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+<!-- Portfolio Start -->
+<div class="portfolio section-margin" id="portfolio">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>Some Examples of Our Works</p>
+            <h2>Our Portfolio</h2>
+        </div>
+        <p>As the top web designer in Nigeria and a leading web design company in Lagos, we've poured our hearts into hundreds of projects. Below are some of our works:</p>
+        <div class="row">
+            <!-- Portfolio Item 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/evisa_website.jpg' %}" alt="Website Designer Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Travel Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/lilyhearthomecare-ca.jpg' %}" alt="Website Designer Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="https://lilyhearthomecare.ca/" target="_blank"><h3 class="portfolio-title text-center mt-3">HomeCare Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/kofoshi.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Food Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/ladyflora.png' %}" alt="Website Designer in Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Brand Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/azafricanstore.png' %}" alt="Website Designer in Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">E-commerce Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 15 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/cassidy_website.jpg' %}" alt="Website Designer Nigeria" class="scrolling-images">
+                    </div>
+                    <a href="https://www.cassidyfx.com/" target="_blank"><h3 class="portfolio-title text-center mt-3">FX Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/owodex.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Fintech Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/empowering.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">Church Web Design</h3></a>
+                </div>
+            </div>
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-card">
+                    <div class="image-container">
+                        <img src="{% static 'img/graceempoweredearlyyears.png' %}" alt="Web Design Company in Lagos" class="scrolling-images">
+                    </div>
+                    <a href="/" target="_blank"><h3 class="portfolio-title text-center mt-3">NGO Web Design</h3></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio End -->
+
+<!-- Blog Start -->
+<div class="blog section-margin" id="blog">
+    <div class="container-fluid">
+        <div class="section-header text-center wow fadeInUp" data-wow-delay="0.1s">
+            <p>From Blog</p>
+            <h2>Latest Articles</h2>
+        </div>
+        <div class="row justify-content-center">
+            {% for blog in recent_blogs %}
+            <div class="col-lg-6 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.{{ forloop.counter }}s">
+                <div class="blog-item h-100">
+                    <div class="blog-img">
+                        <img src="{{ blog.image.url }}" alt="Web Design Company in Lagos">
+                    </div>
+                    <div class="blog-text">
+                        <h2><a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">{{ blog.title }}</a></h2>
+                        <div class="blog-meta">
+                            <p><i class="far fa-user"></i>{{ blog.author }}</p>
+                            <p><a href="{% url 'category_posts' category_slug=blog.category.slug %}"><i class="far fa-list-alt"></i>{{ blog.category }}</a></p>
+                            <p><i class="far fa-calendar-alt"></i>{{ blog.date|date:"F d, Y" }}</p>
+                        </div>
+                        <div>
+                            <p>
+                                {{ blog.content|truncatewords:25|safe|striptags }}
+                            </p>
+                        </div>
+                        <a class="btn" href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}">
+                            Read More <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Blogs Button -->
+        <div class="row">
+            <div class="col-12 text-center mt-4 wow fadeInUp" data-wow-delay="0.5s">
+                <a href="{% url 'blogs' %}" class="btn btn-lg">
+                    View All Articles <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+<!-- FAQ Start -->
+<div class="faq section-margin" id="faq">
+    <div class="container-fluid">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>FREQUENTLY ASKED QUESTIONS</p>
+            <h2>What Our Clients Want to Know</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="faq-list">
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
+                        <h3 class="faq-question">How long does it take to develop a website?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>The time it takes to create your website depends on its complexity and the features you want. A basic website with a few pages and standard functionality can typically be completed within 1 to 3 weeks. If you need a more advanced site — such as an eCommerce platform, or one with custom development — it might take 6 to 12 weeks to ensure everything is properly designed, developed, tested, and optimized.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">What is the pricing for your web development services?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>Our pricing is project-based and depends on factors such as the site's complexity, number of pages, and required features. We offer affordable packages to ensure we work with your budget. We've also got discounts running all year long. Please check out our <a href="{% url 'pricing' %}"><u>pricing page</u></a> or contact us for a customized quote!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">What types of websites do you create?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>We build all any type of websites, including Corporate, VTU, Real estate, Fintech, Educational, Classified,  E-Commerce, Blogs, Investment, Banking, and many more. Whatever your needs are, we create websites that suits your requirements and taste.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">What are other services that you offer?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>As the number 1 web design company in Lagos, we also offer other digital services: SEO, Graphics Design, Mobile App Development, SM Management, Content Management, e.t.c </p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">Do you provide post-launch maintenance?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>After your website goes live, we offer a month of technical support and website maintenance at no extra cost. This ensures your site remains secure, updated, and optimized for performance. After the first month, you can also choose a maintenance plan that suits your needs to keep our support going. </p>
+                        </div>
+                    </div>
+                    <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question">What do you need from me to get started?
+                            <span class="faq-icon">+</span>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>To get started, we’ll need details about your business operations, content (text, images), and any design preferences you have. If you already have a domain and hosting, great! If not, we can assist you purchase them. Once we have these, we’ll begin the development process right away! </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ End -->
+
+<script>
+// Modern scroll reveal animation
+function reveal() {
+    const reveals = document.querySelectorAll('.section-margin, .service-item, .portfolio-card, .blog-item, .faq-item');
+    
+    reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+            element.classList.add('reveal', 'active');
+        }
+    });
+}
+
+// Smooth parallax effect for hero section
+function parallaxEffect() {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+}
+
+// Enhanced typing animation
+function initTypingAnimation() {
+    const typed = document.querySelector('.typed-cursor');
+    if (typed) {
+        setInterval(() => {
+            typed.style.opacity = typed.style.opacity === '0' ? '1' : '0';
+        }, 500);
+    }
+}
+
+// Initialize all animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add reveal class to elements
+    const elements = document.querySelectorAll('.section-margin, .service-item, .portfolio-card, .blog-item, .faq-item');
+    elements.forEach(el => el.classList.add('reveal'));
+    
+    // Initial reveal check
+    reveal();
+    
+    // Initialize typing animation
+    initTypingAnimation();
+    
+    // Add scroll event listeners
+    window.addEventListener('scroll', () => {
+        reveal();
+        requestAnimationFrame(parallaxEffect);
+    });
+    
+    // Enhanced button hover effects
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+// Add stagger animation to service items
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    const portfolioItems = document.querySelectorAll('.portfolio-card');
+    portfolioItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+</script>
+
+{% endblock %}

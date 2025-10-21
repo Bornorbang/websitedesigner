@@ -1463,74 +1463,107 @@
         <script>
             // Tech Courses Popup Implementation
             document.addEventListener('DOMContentLoaded', function() {
-                // Check if popup has already been shown this session
-                if (sessionStorage.getItem('techCoursesPopupShown')) {
-                    return;
+                // Check if popup has been shown in this session
+                const hasSeenPopup = sessionStorage.getItem('techCoursesPopupShown');
+                
+                if (!hasSeenPopup) {
+                    // Show popup after 5 seconds
+                    setTimeout(function() {
+                        showTechCoursesPopup();
+                    }, 5000);
                 }
+            });
 
-                // Show popup after 5 seconds
-                setTimeout(function() {
-                    Swal.fire({
-                        title: 'Learn a tech skill before the year ends!',
-                        html: `
-                            <img src="/static/img/tech-courses.png" alt="Tech Courses" class="course-image">
-                            <div class="pricing-badge">Only ₦6,999</div>
-                            <p style="margin: 10px 0; font-size: 14px; opacity: 0.9; line-height: 1.6;">
-                                ✓ Web Development ✓ SEO<br>
-                                ✓ Social Media Leverage ✓ UI/UX
-                            </p>
-                        `,
-                        showCancelButton: true,
-                        confirmButtonText: 'View Courses',
-                        cancelButtonText: 'Maybe Later',
-                        customClass: {
-                            popup: 'tech-courses-popup'
-                        },
-                        allowOutsideClick: true,
-                        allowEscapeKey: true,
-                        showCloseButton: true,
-                        backdrop: `rgba(0,0,0,0.7)`
-                    }).then((result) => {
-                        // Mark popup as shown for this session
-                        sessionStorage.setItem('techCoursesPopupShown', 'true');
-                        
-                        if (result.isConfirmed) {
-                            // Track the click with Google Analytics if available
-                            if (typeof gtag !== 'undefined') {
-                                gtag('event', 'click', {
-                                    'event_category': 'Popup',
-                                    'event_label': 'Tech Courses Popup'
-                                });
-                            }
-                            
-                            // Redirect to tech courses page
-                            window.location.href = '/tech-courses/';
-                        }
+            function showTechCoursesPopup() {
+                // Mark popup as shown in this session
+                sessionStorage.setItem('techCoursesPopupShown', 'true');
+                
+                // Track popup shown event
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'popup_shown', {
+                        'event_category': 'tech_courses',
+                        'event_label': 'sweetalert_popup'
                     });
-
-                    // Make entire popup clickable (except buttons)
-                    setTimeout(() => {
-                        const popup = document.querySelector('.swal2-popup.tech-courses-popup');
+                }
+                
+                Swal.fire({
+                    html: `
+                        <div style="text-align: center; padding: 15px;">
+                            <img src="{% static 'img/tech-courses.png' %}" alt="Tech Courses" style="width: 100%; max-width: 320px; height: auto; border-radius: 10px; margin-bottom: 15px;">
+                            
+                            <h2 style="color: #2c3e50; font-weight: 700; margin-bottom: 20px; font-size: 1.3rem;">
+                                Learn a tech skill before the year ends!
+                            </h2>
+                            
+                            <div style="padding: 6px 10px; background: linear-gradient(135deg, #EF233C, #d91e36); border-radius: 5px; color: white; margin-bottom: 8px; display: inline-block; border: 2px solid rgba(255,255,255,0.2);">
+                                <div style="font-size: 0.75rem; margin-bottom: 2px; opacity: 0.9;">Starting from</div>
+                                <div style="font-size: 1.4rem; font-weight: 700;">₦6,999</div>
+                            </div>
+                        </div>
+                    `,
+                    showCancelButton: false,
+                    confirmButtonText: '<i class="fas fa-graduation-cap"></i> Explore Courses',
+                    confirmButtonColor: '#EF233C',
+                    buttonsStyling: true,
+                    allowOutsideClick: true,
+                    showCloseButton: true,
+                    customClass: {
+                        popup: 'tech-courses-popup-clickable',
+                        confirmButton: 'tech-courses-btn-primary',
+                        closeButton: 'tech-courses-close-btn'
+                    },
+                    width: '450px',
+                    showClass: {
+                        popup: 'animate__animated animate__zoomIn animate__faster'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__zoomOut animate__faster'
+                    },
+                    didOpen: () => {
+                        // Make the entire popup clickable
+                        const popup = document.querySelector('.tech-courses-popup-clickable');
                         if (popup) {
                             popup.style.cursor = 'pointer';
                             popup.addEventListener('click', function(e) {
-                                // Don't trigger if clicking on buttons or close button
-                                if (!e.target.closest('.swal2-actions') && !e.target.closest('.swal2-close')) {
-                                    // Track the click with Google Analytics if available
+                                // Don't trigger if clicking the close button
+                                if (!e.target.closest('.swal2-close')) {
+                                    // Track popup click
                                     if (typeof gtag !== 'undefined') {
-                                        gtag('event', 'click', {
-                                            'event_category': 'Popup',
-                                            'event_label': 'Tech Courses Popup Background'
+                                        gtag('event', 'popup_clicked', {
+                                            'event_category': 'tech_courses',
+                                            'event_label': 'entire_popup_clicked',
+                                            'value': 1
                                         });
                                     }
-                                    // Redirect to tech courses page
-                                    window.location.href = '/tech-courses/';
+                                    // Redirect to courses page
+                                    window.location.href = "{% url 'courses' %}";
                                 }
                             });
                         }
-                    }, 100);
-                }, 5000); // Show after 5 seconds
-            });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Track course exploration click
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'course_explore_clicked', {
+                                'event_category': 'tech_courses',
+                                'event_label': 'popup_cta_button',
+                                'value': 1
+                            });
+                        }
+                        // Redirect to courses page
+                        window.location.href = "{% url 'courses' %}";
+                    } else if (result.isDismissed) {
+                        // Track popup dismissed
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'popup_dismissed', {
+                                'event_category': 'tech_courses',
+                                'event_label': 'maybe_later_clicked'
+                            });
+                        }
+                    }
+                });
+            }
         </script>
 
         {% block extra_js %}

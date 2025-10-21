@@ -31,7 +31,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),  # Add this line to redirect to the home view.
+    path('', home, name='home'),  
     path('about-website-designer-nigeria/', about, name= 'about-website-designer-nigeria'),
     path('website-development-services/', services, name= 'services'),
     path('categories/<slug:category_slug>/', category_posts, name='category_posts'),
@@ -67,6 +67,7 @@ urlpatterns = [
     # Course URLs
     path('course/<int:course_id>/review/', submit_review, name='submit_review'),
     path('course/<int:course_id>/enroll/', enroll_course, name='enroll_course'),
+    path('course/<int:course_id>/checkout/', direct_course_checkout, name='direct_course_checkout'),
     path('review/<int:review_id>/like/', like_review, name='like_review'),
     
     # Payment URLs
