@@ -54,6 +54,7 @@ urlpatterns = [
     path('privacy-policy/', privacy, name="privacy"),
     path('ecommerce-website-design-in-nigeria/', ecommerce, name="ecommerce"),
     path('portfolio/', portfolio, name="portfolio"),
+    path('20-days-with-wdn/', twenty_days_workshop, name="twenty_days_workshop"),
     
     # Authentication URLs
     path('signup/', signup_view, name='signup'),
@@ -74,7 +75,8 @@ urlpatterns = [
     path('payment/course/<int:course_id>/', initiate_course_payment, name='initiate_course_payment'),
     path('payment/process/', process_course_payment, name='process_course_payment'),
     path('payment/verify/', verify_payment, name='verify_payment'),
-    path('payment/webhook/', kora_pay_webhook, name='kora_pay_webhook'),
+    path('payment/webhook/', paystack_webhook, name='paystack_webhook'),
+    path('payment/webhook/', kora_pay_webhook, name='kora_pay_webhook'),  # Backward compatibility
     path('payment/success/', payment_success, name='payment_success'),
     path('payment/failed/', payment_failed, name='payment_failed'),
     

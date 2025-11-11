@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations - 20 Days with WDN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto my-8 bg-white rounded-lg shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 px-8 py-12 text-center">
+            <h1 class="text-4xl font-bold text-white mb-2">🎉 Congratulations! 🎉</h1>
+            <p class="text-red-100 text-lg">You've Been Selected!</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="px-8 py-10">
+            <p class="text-gray-800 text-lg mb-6">
+                Dear <strong class="text-red-600">{{ full_name }}</strong>,
+            </p>
+
+            <p class="text-gray-700 text-base leading-relaxed mb-8">
+                We are thrilled to inform you that you have been selected to participate in the <strong class="text-red-600">20 Days with WDN</strong> tech workshop!
+            </p>
+
+            <!-- PIN Section -->
+            <p class="text-gray-700 text-base leading-relaxed mb-2">
+                🔑 Your Workshop PIN is <strong class="text-red-600 text-xl">{{ pin }}</strong>
+            </p>
+
+            <p class="text-gray-600 text-sm leading-relaxed mb-8">
+                Please keep this PIN safe as you may need it for workshop access.
+            </p>
+
+            <!-- What's Next Section -->
+            <h3 class="text-xl font-bold text-red-600 mb-4">📋 What's Next?</h3>
+            
+            <ul class="space-y-2 text-gray-700 mb-8 ml-4">
+                <li><strong>Workshop Starts:</strong> December 1, 2025</li>
+                <li>Join the whatsapp community using the link below.</li>
+                <li>Check your email for a message from <strong class="text-red-600">Hosting Nigeria</strong> containing your hosting details</li>
+                <li>Ensure your hosting plan from <strong>hostingnigeria.com</strong> is active</li>
+            </ul>
+
+            <!-- WhatsApp Link -->
+            <p class="text-gray-700 text-base leading-relaxed mb-8">
+                <strong>Join Our WhatsApp Community:</strong> <a href="https://chat.whatsapp.com/DWNSL2LLwxR0BpDo6DESAT" class="text-green-600 hover:text-green-700 underline">https://chat.whatsapp.com/DWNSL2LLwxR0BpDo6DESAT</a>
+            </p>
+
+            <!-- Closing -->
+            <p class="text-gray-700 text-base leading-relaxed mb-6">
+                We look forward to seeing you grow and excel during this workshop. If you have any questions, feel free to reply to this email.
+            </p>
+
+            <p class="text-gray-800 text-base">
+                Best regards,<br>
+                <strong class="text-red-600">Website Designer Nigeria Team</strong><br>
+                <a href="https://www.websitedesigner.ng" class="text-red-600 hover:text-red-700">www.websitedesigner.ng</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

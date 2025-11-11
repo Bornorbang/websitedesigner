@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 import requests
 
-from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment
+from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, WorkshopRegistration, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment
 
 
 @admin.register(Blog)
@@ -73,9 +73,158 @@ class BlogslistSidebarBannerAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'blog', 'created_at')
-    list_filter = ('created_at',)
+    list_display = ('name', 'email', 'blog', 'approved', 'created_at')
+    list_filter = ('approved', 'created_at')
     search_fields = ('name', 'email', 'content')
+    list_editable = ('approved',)
+    actions = ['approve_comments', 'unapprove_comments']
+    
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)
+        self.message_user(request, f'{queryset.count()} comments approved.')
+    approve_comments.short_description = 'Approve selected comments'
+    
+    def unapprove_comments(self, request, queryset):
+        queryset.update(approved=False)
+        self.message_user(request, f'{queryset.count()} comments unapproved.')
+    unapprove_comments.short_description = 'Unapprove selected comments'
+
+
+@admin.register(WorkshopRegistration)
+class WorkshopRegistrationAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'phone', 'status', 'view_receipt', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('full_name', 'email', 'phone')
+    list_editable = ('status',)
+    readonly_fields = ('created_at', 'updated_at', 'receipt_preview', 'send_selection_email_button')
+    
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('<int:registration_id>/send-selection-email/', self.admin_site.admin_view(self.send_selection_email), name='send_selection_email'),
+        ]
+        return custom_urls + urls
+    
+    def send_selection_email_button(self, obj):
+        if not obj.pk:
+            return "-"
+        url = reverse('admin:send_selection_email', args=[obj.pk])
+        return format_html(
+            '<a class="button" href="{}" style="background-color: #417690; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block;">Send Selection Email</a>',
+            url
+        )
+    send_selection_email_button.short_description = 'Email Actions'
+    
+    def send_selection_email(self, request, registration_id, *args, **kwargs):
+        from django.core.mail import send_mail
+        from django.template.loader import render_to_string
+        from django.conf import settings
+        
+        registration = WorkshopRegistration.objects.get(pk=registration_id)
+        
+        # Check if PIN is set
+        if not registration.pin:
+            messages.error(request, 'Please set a PIN for this participant before sending the selection email.')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        # Email subject
+        subject = 'Congratulations! You Have Been Selected for 20 Days with WDN Workshop'
+        
+        # Render HTML email from template
+        html_message = render_to_string('emails/workshop_selection.html', {
+            'full_name': registration.full_name,
+            'pin': registration.pin,
+        })
+        
+        # Plain text version
+        plain_message = f"""
+Congratulations! You Have Been Selected for 20 Days with WDN Workshop
+
+Dear {registration.full_name},
+
+We are thrilled to inform you that you have been selected to participate in the 20 Days with WDN tech workshop!
+
+🔑 Your Workshop PIN is {registration.pin}
+
+Please keep this PIN safe as you may need it for workshop access.
+
+📋 What's Next?
+
+Workshop Starts: December 1, 2025
+Join the whatsapp community using the link below.
+Check your email for a message from Hosting Nigeria containing your hosting details
+Ensure your hosting plan from hostingnigeria.com is active
+
+Join Our WhatsApp Community: https://chat.whatsapp.com/DWNSL2LLwxR0BpDo6DESAT
+
+We look forward to seeing you grow and excel during this workshop. If you have any questions, feel free to reply to this email.
+
+Best regards,
+Website Designer Nigeria Team
+www.websitedesigner.ng
+        """
+        
+        try:
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[registration.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            messages.success(request, f'Selection email sent successfully to {registration.email}!')
+        except Exception as e:
+            messages.error(request, f'Failed to send email: {str(e)}')
+        
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
+    fieldsets = (
+        ('Personal Information', {
+            'fields': ('full_name', 'email', 'phone')
+        }),
+        ('Registration Requirements', {
+            'fields': ('social_media_link', 'linkedin_profile')
+        }),
+        ('Payment Receipt', {
+            'fields': ('payment_receipt', 'receipt_preview')
+        }),
+        ('Status & Notes', {
+            'fields': ('status', 'pin', 'notes', 'send_selection_email_button')
+        }),
+        ('System Information', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def view_receipt(self, obj):
+        if obj.payment_receipt:
+            return format_html('<a href="{}" target="_blank">View Receipt</a>', obj.payment_receipt.url)
+        return '-'
+    view_receipt.short_description = 'Receipt'
+    
+    def receipt_preview(self, obj):
+        if obj.payment_receipt:
+            file_url = obj.payment_receipt.url
+            if file_url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
+                return format_html('<img src="{}" style="max-width: 300px; max-height: 300px;" />', file_url)
+            else:
+                return format_html('<a href="{}" target="_blank">Download Receipt (PDF)</a>', file_url)
+        return '-'
+    receipt_preview.short_description = 'Receipt Preview'
+    
+    actions = ['approve_registrations', 'reject_registrations']
+    
+    def approve_registrations(self, request, queryset):
+        queryset.update(status='approved')
+        self.message_user(request, f'{queryset.count()} registrations approved.')
+    approve_registrations.short_description = 'Approve selected registrations'
+    
+    def reject_registrations(self, request, queryset):
+        queryset.update(status='rejected')
+        self.message_user(request, f'{queryset.count()} registrations rejected.')
+    reject_registrations.short_description = 'Reject selected registrations'
 
 
 @admin.register(ConsultationBooking)

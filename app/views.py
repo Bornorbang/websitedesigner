@@ -17,7 +17,7 @@ from django.http import JsonResponse
 # Create your views here.
 
 def home(request):
-    recent_blogs = Blog.objects.exclude(category__slug__in=['tech-reviews', 'tech-tips']).order_by('-date')[:2]
+    recent_blogs = Blog.objects.exclude(category__slug__in=['tech-reviews', 'tech-tips']).order_by('-date')[:3]
     return render(request, 'index.html', {'recent_blogs': recent_blogs})
 
 def about(request):
@@ -55,7 +55,8 @@ def blog_detail(request, category_slug, slug):
     categories = Category.objects.all()
     banners = BlogSidebarBanner.objects.all()[:3]
     
-    comments = blog.comments.all()
+    # Only show approved comments
+    comments = blog.comments.filter(approved=True)
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -64,7 +65,7 @@ def blog_detail(request, category_slug, slug):
         
         if name and email and content:
             Comment.objects.create(blog=blog, name=name, email=email, content=content)
-            messages.success(request, 'Your comment has been posted successfully.')
+            messages.success(request, 'Your comment has been submitted and is awaiting approval.')
             return redirect('blog_detail', category_slug=category_slug, slug=slug)
         else:
             messages.error(request, 'Please fill in all fields.')
@@ -245,6 +246,47 @@ def privacy(request):
 def portfolio(request):
     return render(request, 'portfolio.html')
 
+def twenty_days_workshop(request):
+    if request.method == 'POST':
+        from .models import WorkshopRegistration
+        
+        # Handle form submission
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        social_media_link = request.POST.get('social_media_link')
+        linkedin_profile = request.POST.get('linkedin_profile')
+        payment_receipt = request.FILES.get('payment_receipt')
+        
+        # Check if email or phone already exists
+        if WorkshopRegistration.objects.filter(email=email).exists():
+            messages.error(request, f'This email ({email}) has already been used for a registration. Each person can only register once.')
+            return redirect('twenty_days_workshop')
+        
+        if WorkshopRegistration.objects.filter(phone=phone).exists():
+            messages.error(request, f'This phone number ({phone}) has already been used for a registration. Each person can only register once.')
+            return redirect('twenty_days_workshop')
+        
+        # Save registration to database
+        registration = WorkshopRegistration.objects.create(
+            full_name=full_name,
+            email=email,
+            phone=phone,
+            social_media_link=social_media_link,
+            linkedin_profile=linkedin_profile,
+            payment_receipt=payment_receipt
+        )
+        
+        # Get first name from full name
+        first_name = full_name.split()[0] if full_name else full_name
+        
+        messages.success(request, f'Thank you {first_name}! Your registration has been received. You will be contacted on {email} if selected.')
+        
+        # Redirect to prevent form resubmission
+        return redirect('twenty_days_workshop')
+    
+    return render(request, '20_days_with_wdn.html')
+
 def consultation_booking(request):
     # Check for payment success parameter
     if request.GET.get('payment') == 'success':
@@ -262,7 +304,7 @@ def consultation_booking(request):
     return render(request, 'consultation_booking.html')
 
 def process_consultation_payment(request):
-    """Process consultation payment via Kora Pay"""
+    """Process consultation payment via Paystack"""
     if request.method == 'POST':
         try:
             # Extract form data
@@ -328,49 +370,47 @@ def process_consultation_payment(request):
                 consultation_booking=consultation,
                 amount=amount,
                 currency='NGN',
-                payment_method='kora_pay',
+                payment_method='paystack',
                 status='pending',
                 transaction_id=transaction_id,
                 reference=reference
             )
             
-            # Initialize payment with Kora Pay
+            # Initialize payment with Paystack
             import requests
             from django.conf import settings
             
-            kora_pay_data = {
-                "amount": int(amount),  # Amount in naira (not kobo)
-                "currency": "NGN",
+            # Convert amount to kobo (Paystack uses subunit)
+            amount_in_kobo = int(amount * 100)
+            
+            paystack_data = {
+                "email": email,
+                "amount": amount_in_kobo,  # Amount in kobo
                 "reference": reference,
-                "redirect_url": request.build_absolute_uri("/book-consultation/?payment=success"),
-                "notification_url": request.build_absolute_uri(f"/verify-consultation-payment/{reference}/"),
-                "narration": f"Consultation booking payment - {session_duration} minutes",
-                "channels": ["card", "bank_transfer", "pay_with_bank"],
-                "customer": {
-                    "email": email,
-                    "name": full_name
-                },
+                "callback_url": request.build_absolute_uri("/book-consultation/?payment=success"),
                 "metadata": {
                     "consultation_id": str(consultation.id),
                     "payment_id": str(payment.id),
                     "session_duration": session_duration,
-                    "phone": phone
+                    "phone": phone,
+                    "full_name": full_name,
+                    "cancel_action": request.build_absolute_uri('/book-consultation/')
                 }
             }
             
             headers = {
-                "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+                "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
                 "Content-Type": "application/json"
             }
             
             # Debug logging
-            print(f"Kora Pay API URL: {settings.KORA_PAY_BASE_URL}/charges/initialize")
+            print(f"Paystack API URL: {settings.PAYSTACK_BASE_URL}/transaction/initialize")
             print(f"Headers: {headers}")
-            print(f"Request data: {kora_pay_data}")
+            print(f"Request data: {paystack_data}")
             
             response = requests.post(
-                f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
-                json=kora_pay_data,
+                f"{settings.PAYSTACK_BASE_URL}/transaction/initialize",
+                json=paystack_data,
                 headers=headers,
                 timeout=30
             )
@@ -382,14 +422,14 @@ def process_consultation_payment(request):
                 response_data = response.json()
                 
                 if response_data.get('status') and response_data.get('data'):
-                    checkout_url = response_data['data'].get('checkout_url')
+                    authorization_url = response_data['data'].get('authorization_url')
                     
                     # Store payment details
                     payment.payment_details = response_data['data']
                     payment.external_transaction_id = response_data['data'].get('reference', reference)
                     payment.save()
                     
-                    return redirect(checkout_url)
+                    return redirect(authorization_url)
                 else:
                     payment.mark_as_failed('Invalid response from payment gateway')
                     messages.error(request, 'Payment initialization failed. Please try again.')
@@ -408,22 +448,22 @@ def process_consultation_payment(request):
 
 
 def verify_consultation_payment(request, reference):
-    """Verify consultation payment from Kora Pay"""
+    """Verify consultation payment from Paystack"""
     try:
         from .models import ConsultationPayment
         payment = ConsultationPayment.objects.get(reference=reference)
         
-        # Verify payment with Kora Pay
+        # Verify payment with Paystack
         import requests
         from django.conf import settings
         
         headers = {
-            "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+            "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
             "Content-Type": "application/json"
         }
         
         response = requests.get(
-            f"{settings.KORA_PAY_BASE_URL}/charges/{reference}",
+            f"{settings.PAYSTACK_BASE_URL}/transaction/verify/{reference}",
             headers=headers,
             timeout=30
         )
@@ -437,7 +477,7 @@ def verify_consultation_payment(request, reference):
                 
                 if transaction_status == 'success':
                     # Mark payment as completed
-                    payment.external_transaction_id = transaction_data.get('payment_reference', reference)
+                    payment.external_transaction_id = transaction_data.get('id', reference)
                     payment.payment_details.update(transaction_data)
                     payment.mark_as_completed()
                     
@@ -478,7 +518,7 @@ Inspiration/References: {consultation.inspiration if consultation.inspiration el
 PAYMENT DETAILS:
 Transaction ID: {payment.transaction_id}
 Reference: {payment.reference}
-Payment Method: KoraPay
+Payment Method: Paystack
 
 ---
 This is a PAID consultation request. Please prioritize and respond within 24 hours.
@@ -588,6 +628,10 @@ def signup_view(request):
             # Automatically log in the user after signup
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             
+            # Rotate CSRF token after login to prevent CSRF issues
+            from django.middleware.csrf import rotate_token
+            rotate_token(request)
+            
             # Check for direct course purchase flow
             course_id = request.POST.get('course_id') or request.GET.get('course_id')
             next_url = request.POST.get('next') or request.GET.get('next')
@@ -655,6 +699,10 @@ def login_view(request):
             
             if user:
                 login(request, user, backend='app.backends.EmailOrUsernameModelBackend')
+                
+                # Rotate CSRF token after login to prevent CSRF issues
+                from django.middleware.csrf import rotate_token
+                rotate_token(request)
                 
                 # Check for direct course purchase flow
                 course_id = request.POST.get('course_id') or request.GET.get('course_id')
@@ -971,43 +1019,42 @@ def direct_course_checkout(request, course_id):
             course=course,
             enrollment=enrollment,
             amount=course.price,
-            payment_method='kora_pay',
+            payment_method='paystack',
             status='pending',
             reference=reference
         )
     
-    # Initialize payment with Kora Pay
+    # Initialize payment with Paystack
     import requests
     
-    kora_pay_data = {
-        "amount": int(course.price),
-        "currency": "NGN", 
+    # Convert amount to kobo
+    amount_in_kobo = int(course.price * 100)
+    
+    paystack_data = {
+        "email": request.user.email,
+        "amount": amount_in_kobo,
         "reference": payment.reference,
-        "redirect_url": request.build_absolute_uri('/payment/verify/'),
-        "notification_url": request.build_absolute_uri('/payment/webhook/'),
-        "narration": f"Payment for {course.title}",
-        "channels": ["card", "bank_transfer", "pay_with_bank"],
-        "customer": {
-            "email": request.user.email,
-            "name": request.user.get_full_name() or request.user.username
-        },
+        "callback_url": request.build_absolute_uri('/payment/verify/'),
         "metadata": {
             "course_id": str(course.id),
+            "course_title": course.title,
             "user_id": str(request.user.id),
+            "user_name": request.user.get_full_name() or request.user.username,
             "payment_id": str(payment.id),
-            "signup_checkout": "true"  # Flag to identify signup-checkout flow
+            "signup_checkout": "true",  # Flag to identify signup-checkout flow
+            "cancel_action": request.build_absolute_uri(course.get_absolute_url())
         }
     }
     
     headers = {
-        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
         "Content-Type": "application/json"
     }
     
     try:
         response = requests.post(
-            f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
-            json=kora_pay_data,
+            f"{settings.PAYSTACK_BASE_URL}/transaction/initialize",
+            json=paystack_data,
             headers=headers,
             timeout=30
         )
@@ -1021,7 +1068,7 @@ def direct_course_checkout(request, course_id):
                 payment.save()
                 
                 # Don't show a message here - it will persist after payment
-                return redirect(response_data['data']['checkout_url'])
+                return redirect(response_data['data']['authorization_url'])
             else:
                 error_msg = response_data.get('message', 'Payment initialization failed')
                 payment.mark_as_failed(error_msg)
@@ -1069,14 +1116,14 @@ def initiate_course_payment(request, course_id):
     context = {
         'course': course,
         'enrollment': enrollment,
-        'kora_pay_public_key': settings.KORA_PAY_PUBLIC_KEY,
+        'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
     }
     
     return render(request, 'payment/course_payment.html', context)
 
 
 def process_course_payment(request):
-    """Process course payment via Kora Pay"""
+    """Process course payment via Paystack"""
     try:
         if request.method != 'POST':
             return JsonResponse({'success': False, 'error': 'Invalid request method'})
@@ -1089,10 +1136,10 @@ def process_course_payment(request):
             import json
             data = json.loads(request.body)
             course_id = data.get('course_id')
-            payment_method = data.get('payment_method', 'kora_pay')
+            payment_method = data.get('payment_method', 'paystack')
         else:
             course_id = request.POST.get('course_id')
-            payment_method = request.POST.get('payment_method', 'kora_pay')
+            payment_method = request.POST.get('payment_method', 'paystack')
         
         if not course_id:
             return JsonResponse({'success': False, 'error': 'Course ID is required'})
@@ -1161,7 +1208,7 @@ def process_course_payment(request):
             enrollment=enrollment,
             defaults={
                 'amount': course.price,
-                'payment_method': 'kora_pay',  # Use string value, not model instance
+                'payment_method': 'paystack',  # Updated to paystack
                 'status': 'pending'
             }
         )
@@ -1178,7 +1225,7 @@ def process_course_payment(request):
             
             payment.reference = new_reference
             payment.amount = course.price
-            payment.payment_method = 'kora_pay'  # Use string value, not model instance
+            payment.payment_method = 'paystack'  # Updated to paystack
             payment.status = 'pending'
             payment.save()
         else:
@@ -1192,43 +1239,42 @@ def process_course_payment(request):
             payment.reference = new_reference
             payment.save()
     
-    # Initialize payment with Kora Pay
+    # Initialize payment with Paystack
     import requests
     
-    kora_pay_data = {
-        "amount": int(course.price),  # Amount in naira
-        "currency": "NGN",
+    # Convert amount to kobo (Paystack uses subunit - kobo for NGN)
+    amount_in_kobo = int(course.price * 100)
+    
+    paystack_data = {
+        "email": request.user.email,
+        "amount": amount_in_kobo,  # Amount in kobo (smallest currency unit)
         "reference": payment.reference,
-        "redirect_url": request.build_absolute_uri('/payment/verify/'),
-        "notification_url": request.build_absolute_uri('/payment/webhook/'),
-        "narration": f"Payment for {course.title}",
-        "channels": ["card", "bank_transfer", "pay_with_bank"],
-        "customer": {
-            "email": request.user.email,
-            "name": request.user.get_full_name() or request.user.username
-        },
+        "callback_url": request.build_absolute_uri('/payment/verify/'),
         "metadata": {
             "course_id": str(course.id),
+            "course_title": course.title,
             "user_id": str(request.user.id),
+            "user_name": request.user.get_full_name() or request.user.username,
             "payment_id": str(payment.id),
+            "cancel_action": request.build_absolute_uri(f'/tech-courses/{course.slug}/')
         }
     }
     
     headers = {
-        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
         "Content-Type": "application/json"
     }
     
     try:
         response = requests.post(
-            f"{settings.KORA_PAY_BASE_URL}/charges/initialize",
-            json=kora_pay_data,
+            f"{settings.PAYSTACK_BASE_URL}/transaction/initialize",
+            json=paystack_data,
             headers=headers
         )
         
-        print(f"Kora Pay API URL: {settings.KORA_PAY_BASE_URL}/charges/initialize")
+        print(f"Paystack API URL: {settings.PAYSTACK_BASE_URL}/transaction/initialize")
         print(f"Request headers: {headers}")
-        print(f"Request data: {kora_pay_data}")
+        print(f"Request data: {paystack_data}")
         print(f"Response status: {response.status_code}")
         print(f"Response text: {response.text}")
         
@@ -1236,14 +1282,17 @@ def process_course_payment(request):
             response_data = response.json()
             
             if response_data.get('status'):
-                # Store the checkout URL in payment details
+                # Store the authorization URL and response data
                 payment.payment_details = response_data
                 payment.save()
                 
+                authorization_url = response_data['data']['authorization_url']
+                
                 return JsonResponse({
                     'success': True,
-                    'payment_url': response_data['data']['checkout_url'],
-                    'checkout_url': response_data['data']['checkout_url'],
+                    'payment_url': authorization_url,
+                    'authorization_url': authorization_url,
+                    'access_code': response_data['data']['access_code'],
                     'reference': payment.reference
                 })
             else:
@@ -1273,7 +1322,7 @@ def process_course_payment(request):
 
 
 def verify_payment(request):
-    """Verify payment with Kora Pay and complete enrollment"""
+    """Verify payment with Paystack and complete enrollment"""
     reference = request.GET.get('reference')
     
     if not reference:
@@ -1287,17 +1336,17 @@ def verify_payment(request):
         messages.error(request, 'Payment not found')
         return redirect('courses')
     
-    # Verify with Kora Pay
+    # Verify with Paystack
     import requests
     
     headers = {
-        "Authorization": f"Bearer {settings.KORA_PAY_SECRET_KEY}",
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
         "Content-Type": "application/json"
     }
     
     try:
         response = requests.get(
-            f"{settings.KORA_PAY_BASE_URL}/charges/{reference}",
+            f"{settings.PAYSTACK_BASE_URL}/transaction/verify/{reference}",
             headers=headers
         )
         
@@ -1311,12 +1360,12 @@ def verify_payment(request):
                 if transaction_status == 'success':
                     if payment.status == 'pending':
                         # Mark payment as completed
-                        payment.external_transaction_id = transaction_data.get('payment_reference', reference)
+                        payment.external_transaction_id = transaction_data.get('id', reference)
                         payment.payment_details.update(transaction_data)
                         payment.mark_as_completed()
                         
                         # Check if this was a signup-checkout flow
-                        metadata = payment.payment_details.get('metadata', {})
+                        metadata = transaction_data.get('metadata', {})
                         is_signup_checkout = metadata.get('signup_checkout') == 'true'
                         
                         if is_signup_checkout:
@@ -1404,22 +1453,43 @@ def payment_failed(request):
 
 
 @csrf_exempt
-def kora_pay_webhook(request):
-    """Handle Kora Pay webhook notifications"""
+def paystack_webhook(request):
+    """Handle Paystack webhook notifications"""
     if request.method != 'POST':
         return HttpResponse(status=405)
     
     try:
         import json
-        payload = json.loads(request.body.decode('utf-8'))
+        import hmac
+        import hashlib
         
-        # Verify webhook is from Kora Pay
-        event = payload.get('event')
+        payload = request.body.decode('utf-8')
+        
+        # Verify webhook signature from Paystack
+        paystack_signature = request.headers.get('x-paystack-signature', '')
+        
+        # Generate hash using secret key
+        hash_object = hmac.new(
+            settings.PAYSTACK_SECRET_KEY.encode('utf-8'),
+            payload.encode('utf-8'),
+            hashlib.sha512
+        )
+        expected_signature = hash_object.hexdigest()
+        
+        # Verify signature matches
+        if paystack_signature != expected_signature:
+            return HttpResponse(status=401)  # Unauthorized
+        
+        # Parse the payload
+        data = json.loads(payload)
+        
+        # Check event type
+        event = data.get('event')
         if event != 'charge.success':
             return HttpResponse(status=200)  # Acknowledge other events
         
-        data = payload.get('data', {})
-        reference = data.get('reference')
+        event_data = data.get('data', {})
+        reference = event_data.get('reference')
         
         if not reference:
             return HttpResponse(status=400)
@@ -1435,12 +1505,12 @@ def kora_pay_webhook(request):
         if payment.status == 'pending':
             # Verify the payment amount matches
             expected_amount = int(payment.amount * 100)  # Convert to kobo
-            received_amount = data.get('amount', 0)
+            received_amount = event_data.get('amount', 0)
             
             if expected_amount == received_amount:
                 # Mark payment as completed
-                payment.external_transaction_id = data.get('payment_reference', reference)
-                payment.payment_details.update(data)
+                payment.external_transaction_id = event_data.get('id', reference)
+                payment.payment_details.update(event_data)
                 payment.mark_as_completed()
                 
                 # Log successful webhook processing
@@ -1461,6 +1531,10 @@ def kora_pay_webhook(request):
         logger = logging.getLogger(__name__)
         logger.error(f"Webhook processing error: {str(e)}")
         return HttpResponse(status=200)
+
+
+# Keep old function name for backward compatibility
+kora_pay_webhook = paystack_webhook
 
 
 def lecture_detail(request, course_slug, lecture_id):

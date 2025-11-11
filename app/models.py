@@ -100,12 +100,41 @@ class Comment(models.Model):
     email = models.EmailField()
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
+    approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
         return f'Comment by {self.name} on {self.blog.title}'
+
+
+class WorkshopRegistration(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=20, unique=True)
+    social_media_link = models.URLField(help_text="Link to your X/TikTok post")
+    linkedin_profile = models.URLField(help_text="Your LinkedIn profile URL")
+    payment_receipt = models.FileField(upload_to='workshop_receipts/', help_text="Upload payment receipt image or PDF")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    notes = models.TextField(blank=True, null=True, help_text="Admin notes")
+    pin = models.CharField(max_length=20, blank=True, null=True, help_text="Unique PIN for participant")
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Workshop Registration"
+        verbose_name_plural = "Workshop Registrations"
+
+    def __str__(self):
+        return f'{self.full_name} - {self.email} ({self.status})'
 
 
 class ConsultationBooking(models.Model):

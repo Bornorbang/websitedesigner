@@ -95,4 +95,45 @@
         </div>
     </div>
 </div>
+
+<script>
+// TikTok Tracking - Purchase Event
+document.addEventListener('DOMContentLoaded', function() {
+    {% if payment and course %}
+        if (typeof ttq !== 'undefined') {
+            // Identify user
+            {% if user.is_authenticated %}
+            ttq.identify({
+                "external_id": "{{ user.id }}"
+            });
+            {% endif %}
+            
+            // Track Purchase event
+            ttq.track('Purchase', {
+                "contents": [
+                    {
+                        "content_id": "{{ course.id }}", 
+                        "content_name": "{{ course.title|escapejs }}"
+                    }
+                ],
+                "value": {{ payment.amount|default:0 }}, 
+                "currency": "NGN"
+            });
+            
+            // Also track PlaceAnOrder event for additional tracking
+            ttq.track('PlaceAnOrder', {
+                "contents": [
+                    {
+                        "content_id": "{{ course.id }}", 
+                        "content_type": "product", 
+                        "content_name": "{{ course.title|escapejs }}"
+                    }
+                ],
+                "value": {{ payment.amount|default:0 }}, 
+                "currency": "NGN"
+            });
+        }
+    {% endif %}
+});
+</script>
 {% endblock %}

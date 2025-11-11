@@ -29,8 +29,69 @@ SECRET_KEY = 'django-insecure-qxy$q(y(i#w+$%qwlk^&lm6vag0i6m$98ii+0(oy!w^!*1)2&z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.websitedesigner.ng", "websitedesigner.ng", "127.0.0.1"]
+# Logging configuration for CSRF debugging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'django_errors.log',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.security.csrf': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
+ALLOWED_HOSTS = ["www.websitedesigner.ng", "websitedesigner.ng", "127.0.0.1", "localhost"]
+
+# CSRF Settings for production
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.websitedesigner.ng',
+    'https://websitedesigner.ng',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
+
+CSRF_COOKIE_SECURE = not DEBUG  # Use secure cookies in production
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_AGE = 31449600  # 1 year
+CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'
+CSRF_COOKIE_DOMAIN = None  # Allow for subdomains if needed
+
+# Additional CSRF settings for production
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# Session settings
+SESSION_COOKIE_SECURE = not DEBUG  # Use secure cookies in production
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_AGE = 7776000  # 90 days
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Security Settings
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
@@ -41,6 +102,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'app',
     'django.contrib.sitemaps',
     'ckeditor',
@@ -145,6 +207,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email settings
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -187,4 +250,9 @@ CKEDITOR_CONFIGS = {
         'allowedContent': True,
     },
 }
+
+# Payment Settings - Paystack
+PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY', 'sk_test_1b50a2bca611240a42e3bdb97990cf78cd7b3432')
+PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY', 'pk_test_7790209be7aee237ddf3d60019fda84d155141b3')
+PAYSTACK_BASE_URL = 'https://api.paystack.co'
 
