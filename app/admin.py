@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 import requests
 
-from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, WorkshopRegistration, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment
+from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, WorkshopRegistration, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment, CourseAccessPin
 
 
 @admin.register(Blog)
@@ -537,3 +537,85 @@ class CoursePaymentAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('user', 'course', 'enrollment')
+
+
+@admin.register(CourseAccessPin)
+class CourseAccessPinAdmin(admin.ModelAdmin):
+    list_display = ('pin', 'is_active', 'used_count', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('pin',)
+    list_editable = ('is_active',)
+    readonly_fields = ('used_count', 'created_at')
+    
+    # Custom change form template message
+    change_form_template = None
+    
+    def get_fields(self, request, obj=None):
+        if obj:  # Editing existing PIN
+            return ['pin', 'is_active', 'used_count', 'created_at']
+        else:  # Creating new PIN(s)
+            return ['bulk_pins', 'is_active']
+    
+    def get_form(self, request, obj=None, **kwargs):
+        from django import forms
+        
+        if obj:  # Editing existing object
+            form = super().get_form(request, obj, **kwargs)
+        else:  # Creating new object(s)
+            # Create custom form for bulk creation
+            class BulkPinForm(forms.ModelForm):
+                bulk_pins = forms.CharField(
+                    widget=forms.Textarea(attrs={'rows': 3, 'cols': 60, 'placeholder': 'PIN001, PIN002, PIN003'}),
+                    label='PINs',
+                    help_text='Enter PINs separated by commas (e.g., PIN001, PIN002, PIN003). Whitespace will be trimmed.',
+                    required=True
+                )
+                
+                class Meta:
+                    model = CourseAccessPin
+                    fields = ['is_active']
+            
+            form = BulkPinForm
+        
+        return form
+    
+    def save_model(self, request, obj, form, change):
+        if not change:  # Only for new objects
+            # Get the bulk PINs from the form
+            bulk_pins_text = form.cleaned_data.get('bulk_pins', '')
+            pins = [pin.strip() for pin in bulk_pins_text.split(',') if pin.strip()]
+            
+            created_count = 0
+            duplicate_count = 0
+            
+            for pin in pins:
+                # Check if PIN already exists
+                if not CourseAccessPin.objects.filter(pin=pin).exists():
+                    CourseAccessPin.objects.create(
+                        pin=pin,
+                        is_active=form.cleaned_data.get('is_active', True)
+                    )
+                    created_count += 1
+                else:
+                    duplicate_count += 1
+            
+            # Show success/warning messages
+            if created_count > 0:
+                messages.success(request, f'Successfully created {created_count} PIN(s).')
+            if duplicate_count > 0:
+                messages.warning(request, f'{duplicate_count} PIN(s) already existed and were skipped.')
+        else:
+            # Normal save for existing objects
+            super().save_model(request, obj, form, change)
+    
+    def response_add(self, request, obj, post_url_continue=None):
+        # Redirect to changelist after bulk creation
+        from django.http import HttpResponseRedirect
+        from django.urls import reverse
+        return HttpResponseRedirect(reverse('admin:app_courseaccesspin_changelist'))
+    
+    def get_readonly_fields(self, request, obj=None):
+        # Make PIN readonly after creation to prevent changes
+        if obj:  # Editing existing object
+            return self.readonly_fields + ('pin',)
+        return self.readonly_fields

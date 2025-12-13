@@ -453,6 +453,14 @@
         </div>
         <p class="text-center mb-8 text-base text-gray-600">How much does Website Designer Nigeria charge for web development? Find out our web development pricing packages.</p>
         
+        <!-- Currency Switcher -->
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex rounded-lg border border-gray-300 bg-white p-1 shadow-sm">
+                <button onclick="switchCurrency('NGN')" id="btn-ngn" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 bg-red-600 text-white">NGN (₦)</button>
+                <button onclick="switchCurrency('USD')" id="btn-usd" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 hover:text-gray-900">USD ($)</button>
+            </div>
+        </div>
+        
         <div class="grid md:grid-cols-3 gap-8">
             <div class="wow fadeInUp" data-wow-delay="0.5s">
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-red-600">
@@ -461,7 +469,10 @@
                             <h2 class="text-xl font-bold text-white">CORPORATE</h2>
                         </div>
                         <div class="mb-4">
-                            <h3 class="text-4xl font-bold text-white"><small class="text-2xl">₦</small>350,000</h3>
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="350000" data-usd="290">350,000</span>
+                            </h3>
                         </div>
                     </div>
                     <div class="p-8">
@@ -490,7 +501,10 @@
                             <h2 class="text-xl font-bold text-white">E-COMMERCE</h2>
                         </div>
                         <div class="mb-4">
-                            <h3 class="text-4xl font-bold text-white"><small class="text-2xl">₦</small>500,000</h3>
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="500000" data-usd="420">500,000</span>
+                            </h3>
                         </div>
                     </div>
                     <div class="p-8">
@@ -521,7 +535,10 @@
                             <h2 class="text-xl font-bold text-white">CUSTOM</h2>
                         </div>
                         <div class="mb-4">
-                            <h3 class="text-4xl font-bold text-white"><small class="text-2xl">₦</small>XXX,XXX</h3>
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="XXX" data-usd="XXX">XXX,XXX</span>
+                            </h3>
                         </div>
                     </div>
                     <div class="p-8">
@@ -559,6 +576,52 @@
 
 {% endblock %}
 {% block extra_js %}
-
-
+<script>
+function switchCurrency(currency) {
+    const ngnBtn = document.getElementById('btn-ngn');
+    const usdBtn = document.getElementById('btn-usd');
+    const priceElements = document.querySelectorAll('.price-value');
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
+    
+    if (currency === 'NGN') {
+        // Update button styles
+        ngnBtn.classList.add('bg-red-600', 'text-white');
+        ngnBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        usdBtn.classList.remove('bg-red-600', 'text-white');
+        usdBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '₦';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const ngnPrice = element.getAttribute('data-ngn');
+            if (ngnPrice && ngnPrice !== 'XXX') {
+                element.textContent = parseInt(ngnPrice).toLocaleString();
+            }
+        });
+    } else {
+        // Update button styles
+        usdBtn.classList.add('bg-red-600', 'text-white');
+        usdBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        ngnBtn.classList.remove('bg-red-600', 'text-white');
+        ngnBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '$';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const usdPrice = element.getAttribute('data-usd');
+            if (usdPrice && usdPrice !== 'XXX') {
+                element.textContent = parseInt(usdPrice).toLocaleString();
+            }
+        });
+    }
+}
+</script>
 {% endblock %}

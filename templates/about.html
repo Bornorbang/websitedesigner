@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'master.html' %}
 {% load static %}
 
 {% block title %}Web Design Agency in Nigeria - Website Designer Nigeria{% endblock %}
@@ -9,219 +9,219 @@
 
 {% block og_description %}Website Designer Nigeria is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth.{% endblock %}
 
-{% block extra_css %}
-<style>
-/* FAQ Specific Styles for About Page */
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
-    padding: 0 20px;
-}
+{% block content %}
 
-.faq-item.active .faq-answer {
-    padding: 20px;
-}
-
-.faq-question {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.faq-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-icon {
-    transform: rotate(180deg);
-}
-</style>
-{% endblock %}
-
-{% block maincontent %}
-    <!-- Hero Banner Section -->
-    <section class="hero about-hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-8 col-12">
-                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="hero-text mt-lg-2">
-                            <h1 class="mb-2 mt-lg-2">WEB DESIGN AGENCY IN NIGERIA</h1>
-                            <p class="mb-2 mt-lg-3">Providing Premium Website Development Services.</p>
-                        </div>
-                        <div class="hero-btn mt-lg-4">
-                            <a class="btn" href="{% url 'services' %}">
-                                <i class="fas fa-rocket"></i> OUR SERVICES
-                            </a>
-                            <a class="btn" href="{% url 'contact' %}">
-                                <i class="fas fa-handshake"></i> GET STARTED
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- About Story Section -->
-    <section class="about-story-section py-5">
-        <div class="container-fluid">
-            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
-                <p>Our Story</p>
-                <h2>Web Design Agency in Nigeria</h2>
-            </div>
-            <div class="row align-items-center justify-content-center">
-                <!-- Story Content -->
-                <div class="col-lg-6 col-md-12 wow fadeInLeft" data-wow-delay="0.2s">
-                    <div class="story-content">
-                        <div class="story-text">
-                            <p>Website Designer Nigeria (RC 8598183) is a registered web design agency in Nigeria committed to empowering businesses with innovative digital solutions. With offices in Lagos and Abuja, we bring together a team of tech professionals dedicated to delivering exceptional website design and development services.</p>
-                            
-                            <p>Our expertise spans across custom web development, e-commerce design and responsive web design, ensuring your brand stands out in today's competitive online landscape. We pride ourselves on creating beautiful websites that not only capture attention but also drive engagement and conversions.</p>
-                            
-                            <p>As a leading web design agency in Nigeria, we understand that a great user experience is the cornerstone of any successful website. That's why our services go beyond just design — we offer web hosting, website maintenance, SEO, graphic design, social media management and digital marketing solutions customized to meet your business goals.</p>
-
-                            <p><a href="/">Website Designer Nigeria</a> popularly known as WDN is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth. Our reach extends far beyond Nigeria, with a growing portfolio of satisfied clients from over 18 countries worldwide.</p>
-
-                            <p>Beyond client services, we are passionate about building the next generation of tech talent through our online platform offering beginner to advanced <a href="{% url 'courses' %}">tech courses</a> in web design, development, and digital skills. We also host impactful initiatives like the #20DayswithWDN tech workshop, which recently empowered young Nigerians with hands-on training, ₦50,000 in cash prizes, and paid internships worth ₦350,000, reinforcing our commitment to <a href="https://www.websitedesigner.ng/web-design/wdn-free-20-day-tech-workshop-in-nigeria/">tech education and youth empowerment.</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Story Image -->
-                <div class="col-lg-5 col-md-12 wow fadeInRight" data-wow-delay="0.4s">
-                    <div class="story-image-wrapper">
-                        <div class="story-image-container">
-                            <img src="{% static 'img/about-us.jfif' %}" alt="Web Design Agency in Nigeria" class="story-image">
-                            <div class="image-overlay">
-                                <div class="overlay-content">
-                                    <div class="overlay-badge">
-                                        <i class="fas fa-award"></i>
-                                        <span>18+ Countries Served</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Decorative elements -->
-                        <div class="story-decoration">
-                            <div class="decoration-dot dot-1"></div>
-                            <div class="decoration-dot dot-2"></div>
-                            <div class="decoration-dot dot-3"></div>
-                        </div>
+<!-- Hero Section -->
+<section class="hero relative min-h-[65vh] md:min-h-[80vh] lg:min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center" style="position:relative;">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="grid lg:grid-cols-5 gap-4 lg:gap-12 items-center w-full">
+            <!-- Left Content - Wider on desktop -->
+            <div class="lg:col-span-3 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="text-left space-y-2 lg:space-y-6">
+                    <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                        <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">WEB DESIGN </span>
+                        <span class="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">AGENCY</span>
+                        <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block">IN NIGERIA</span>
+                    </h1>
+                    
+                    <p class="text-xl lg:text-2xl text-gray-300 font-light max-w-2xl">
+                        Providing Premium Website Development Services.
+                    </p>
+                    
+                    <div class="flex flex-row gap-4 pt-2 lg:pt-6">
+                        <a href="{% url 'services' %}" 
+                           class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                            <i class="fas fa-rocket mr-2"></i>
+                            <span class="text-sm lg:text-base">OUR SERVICES</span>
+                        </a>
+                        <a href="{% url 'contact' %}" 
+                           class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                            <i class="fas fa-handshake mr-2"></i>
+                            <span class="text-sm lg:text-base">GET STARTED</span>
+                        </a>
                     </div>
                 </div>
             </div>
             
-            <!-- Story Features Row -->
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-10">
-                    <div class="story-features-extended">
+            <!-- Right Visual -->
+            <div class="lg:col-span-2 hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                <div class="relative">
+                    <!-- Floating Code Elements -->
+                    <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 backdrop-blur-sm">
+                        <div class="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full animate-ping"></div>
+                        <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500 rounded-full animate-ping delay-300"></div>
                         
-                        <div class="story-features wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="feature-item">
-                                <i class="fas fa-rocket"></i>
-                                <span>Fast-Loading Designs</span>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                             </div>
-                            <div class="feature-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Mobile-Friendly</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-search"></i>
-                                <span>SEO Optimized</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-globe"></i>
-                                <span>Global Reach</span>
+                            
+                            <div class="space-y-2 text-sm">
+                                <div class="flex space-x-2">
+                                    <span class="text-purple-400">&lt;div</span>
+                                    <span class="text-blue-400">class=</span>
+                                    <span class="text-green-400">"website"</span>
+                                    <span class="text-purple-400">&gt;</span>
+                                </div>
+                                <div class="flex space-x-2 ml-4">
+                                    <span class="text-purple-400">&lt;h1</span>
+                                    <span class="text-blue-400">class=</span>
+                                    <span class="text-green-400">"modern"</span>
+                                    <span class="text-purple-400">&gt;</span>
+                                </div>
+                                <div class="ml-8 text-white">Your Success Story</div>
+                                <div class="flex space-x-2 ml-4">
+                                    <span class="text-purple-400">&lt;/h1&gt;</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <span class="text-purple-400">&lt;/div&gt;</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Mission & Vision Section -->
-    <section class="mission-vision-section py-5">
-        <div class="container-fluid">
-            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
-                <p>Our Purpose</p>
-                <h2>Mission & Vision</h2>
-            </div>
-            <p class="text-center">Driving digital transformation with purpose and passion.</p>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-6 col-md-10 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="mission-card">
-                        <div class="card-header">
-                            <div class="icon-wrapper mission-icon">
-                                <i class="fas fa-bullseye"></i>
-                            </div>
-                            <h3>Our Mission</h3>
-                        </div>
-                        <div class="card-content">
-                            <p>Our mission is to help businesses succeed by creating beautiful, functional, and user-friendly websites that truly reflect their brand. We're passionate about combining creativity and technology to deliver custom website development that not only look great but also drive results.</p>
-                            
-                            <p>Whether it's helping a startup establish its online presence or enabling a big business to grow, we're here to make your digital goals a reality. We believe that every business deserves a website that works as hard as they do.</p>
-                            
-                        </div>
-                    </div>
+<!-- About Story Section -->
+<section class="py-16 lg:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold text-sm uppercase tracking-wider mb-2">Our Story</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Web Design Agency in Nigeria</h2>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <!-- Story Content -->
+            <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4">Website Designer Nigeria (RC 8598183) is a registered web design agency in Nigeria committed to empowering businesses with innovative digital solutions. With offices in Lagos and Abuja, we bring together a team of tech professionals dedicated to delivering exceptional website design and development services.</p>
+                    
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4">Our expertise spans across custom web development, e-commerce design and responsive web design, ensuring your brand stands out in today's competitive online landscape. We pride ourselves on creating beautiful websites that not only capture attention but also drive engagement and conversions.</p>
+                    
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4">As a leading web design agency in Nigeria, we understand that a great user experience is the cornerstone of any successful website. That's why our services go beyond just design — we offer web hosting, website maintenance, SEO, graphic design, social media management and digital marketing solutions customized to meet your business goals.</p>
+
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4"><a href="/" class="text-red-600 hover:text-red-700 underline">Website Designer Nigeria</a> popularly known as WDN is the best web design agency in Lagos, Abuja Nigeria that creates custom website development services for businesses growth. Our reach extends far beyond Nigeria, with a growing portfolio of satisfied clients from over 18 countries worldwide.</p>
+
+                    <p class="text-gray-700 text-sm leading-relaxed">Beyond client services, we are passionate about building the next generation of tech talent through our online platform offering beginner to advanced <a href="{% url 'courses' %}" class="text-red-600 hover:text-red-700 underline">tech courses</a> in web design, development, and digital skills. We also host impactful initiatives like the #20DayswithWDN tech workshop, which recently empowered young Nigerians with hands-on training, ₦50,000 in cash prizes, and paid internships worth ₦350,000, reinforcing our commitment to <a href="https://www.websitedesigner.ng/web-design/wdn-free-20-day-tech-workshop-in-nigeria/" class="text-red-600 hover:text-red-700 underline">tech education and youth empowerment.</a></p>
                 </div>
-                
-                <div class="col-lg-6 col-md-10 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="vision-card">
-                        <div class="card-header">
-                            <div class="icon-wrapper vision-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Our Vision</h3>
-                        </div>
-                        <div class="card-content">
-                            <p>Our vision is to become the best web design agency in Nigeria, known for helping businesses thrive in the digital age. We aim to set the bar for creativity and quality, delivering websites and digital solutions that leave a lasting impact on our clients and their customers.</p>
-                            
-                            <p>We see a future where businesses of all sizes can compete on a global scale with the right digital tools and strategies. By staying ahead of trends and continually improving our skills, we want to help shape that future.</p>
-                            
+            </div>
+            
+            <!-- Story Image -->
+            <div class="wow fadeInRight" data-wow-delay="0.4s">
+                <div class="relative">
+                    <img src="{% static 'img/about-us.jfif' %}" alt="Web Design Agency in Nigeria" class="rounded-2xl shadow-2xl w-full">
+                    <div class="absolute -bottom-6 -right-6 bg-red-600 text-white px-6 py-4 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-award text-2xl"></i>
+                            <span class="font-bold text-sm">18+ Countries Served</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="about-cta-section py-5">
-        <div class="container-fluid">
-            <div class="cta-content text-center wow fadeInUp" data-wow-delay="0.2s">
-                <div class="cta-icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h2 style="color: #ffffff;">Ready to Start Your Digital Journey?</h2>
-                <p>Let's create something amazing together. Explore our website development services and see how we can help your business grow.</p>
-                <a href="{% url 'services' %}" class="cta-button">
-                    <span>Explore Our Services</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+        
+        <!-- Story Features Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <i class="fas fa-rocket text-3xl text-red-600 mb-3"></i>
+                <span class="text-sm font-semibold text-gray-900">Fast-Loading Designs</span>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <i class="fas fa-mobile-alt text-3xl text-red-600 mb-3"></i>
+                <span class="text-sm font-semibold text-gray-900">Mobile-Friendly</span>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <i class="fas fa-search text-3xl text-red-600 mb-3"></i>
+                <span class="text-sm font-semibold text-gray-900">SEO Optimized</span>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <i class="fas fa-globe text-3xl text-red-600 mb-3"></i>
+                <span class="text-sm font-semibold text-gray-900">Global Reach</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Technologies Section -->
-    <section class="tech-stack-section py-5">
-        <div class="container-fluid">
-            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
-                <p>Our Expertise</p>
-                <h2>Technologies We Use</h2>
+<!-- Mission & Vision Section -->
+<section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold text-sm uppercase tracking-wider mb-2">Our Purpose</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Mission & Vision</h2>
+            <p class="text-sm text-gray-600">Driving digital transformation with purpose and passion.</p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-red-50 to-white p-8 lg:p-10 rounded-2xl shadow-xl wow fadeInUp" data-wow-delay="0.2s">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-bullseye text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Our Mission</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm text-gray-700 leading-relaxed">Our mission is to help businesses succeed by creating beautiful, functional, and user-friendly websites that truly reflect their brand. We're passionate about combining creativity and technology to deliver custom website development that not only look great but also drive results.</p>
+                    
+                    <p class="text-sm text-gray-700 leading-relaxed">Whether it's helping a startup establish its online presence or enabling a big business to grow, we're here to make your digital goals a reality. We believe that every business deserves a website that works as hard as they do.</p>
+                </div>
             </div>
-            <p class="text-center">Cutting-edge tools and frameworks for premium website development services.</p>
+            
+            <div class="bg-gradient-to-br from-blue-50 to-white p-8 lg:p-10 rounded-2xl shadow-xl wow fadeInUp" data-wow-delay="0.4s">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-eye text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Our Vision</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm text-gray-700 leading-relaxed">Our vision is to become the best web design agency in Nigeria, known for helping businesses thrive in the digital age. We aim to set the bar for creativity and quality, delivering websites and digital solutions that leave a lasting impact on our clients and their customers.</p>
+                    
+                    <p class="text-sm text-gray-700 leading-relaxed">We see a future where businesses of all sizes can compete on a global scale with the right digital tools and strategies. By staying ahead of trends and continually improving our skills, we want to help shape that future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <div class="swiper mySwiper">
+<!-- Call to Action Section -->
+<section class="py-16 lg:py-24 bg-gradient-to-r from-red-600 to-red-700">
+    <div class="max-w-4xl mx-auto px-6 text-center wow fadeInUp" data-wow-delay="0.2s">
+        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-handshake text-4xl text-red-600"></i>
+        </div>
+        <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Ready to Start Your Digital Journey?</h2>
+        <p class="text-base text-white/90 mb-8">Let's create something amazing together. Explore our website development services and see how we can help your business grow.</p>
+        <a href="{% url 'services' %}" class="inline-flex items-center space-x-2 bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+            <span>Explore Our Services</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Technologies Section -->
+<section class="py-16 lg:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold text-sm uppercase tracking-wider mb-2">Our Expertise</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Technologies We Use</h2>
+            <p class="text-sm text-gray-600">Cutting-edge tools and frameworks for premium website development services.</p>
+        </div>
+
+        <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <!-- Slides -->
                 <div class="swiper-slide">
-                <img src="{% static 'img/html5-logo.png' %}" alt="Web Design Agency in Nigeria"/>
+                    <img src="{% static 'img/html5-logo.png' %}" alt="Web Design Agency in Nigeria"/>
                 </div>
                 <div class="swiper-slide">
                     <img src="{% static 'img/css3-logo.png' %}" alt="Web Design Agency in Nigeria"/>
@@ -255,96 +255,109 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section py-5">
-        <div class="container-fluid">
-            <div class="section-header text-center mb-5 wow zoomIn" data-wow-delay="0.1s">
-                <p>Got Questions?</p>
-                <h2>Frequently Asked Questions</h2>
+<!-- FAQ Section -->
+<section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold text-sm uppercase tracking-wider mb-2">Got Questions?</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p class="text-sm text-gray-600">Everything you need to know about our services.</p>
+        </div>
+        
+        <div class="space-y-4">
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.1s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">How long does it take to develop a website?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">The timeline for your website depends on its complexity and features. A simple website with a few pages can be ready within 1 to 3 weeks, while a more advanced platform, such as an eCommerce store or a custom-built solution, may take 6 to 12 weeks. If you need a highly complex website with custom integrations, the process may extend up to several months. As the Best Web Design Agency in Nigeria, we prioritize quality, ensuring your site is built to perfection without unnecessary delays.</p>
+                    </div>
+                </div>
             </div>
-            <p class="text-center">Everything you need to know about our services.</p>
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="faq-accordion">
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="faq-question">
-                                <h3>How long does it take to develop a website?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>The timeline for your website depends on its complexity and features. A simple website with a few pages can be ready within 1 to 3 weeks, while a more advanced platform, such as an eCommerce store or a custom-built solution, may take 6 to 12 weeks. If you need a highly complex website with custom integrations, the process may extend up to several months. As the Best Web Design Agency in Nigeria, we prioritize quality, ensuring your site is built to perfection without unnecessary delays.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="faq-question">
-                                <h3>What is the pricing for your web development services?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                               <p>Our pricing is project-based and depends on factors such as the site's complexity, number of pages, and required features. We offer affordable packages to ensure we work with your budget. We've also got discounts running all year long. Please check out our <a href="{% url 'pricing' %}"><u>pricing page</u></a> or contact us for a customized quote!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="faq-question">
-                                <h3>What types of websites do you create?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>We develop all types of websites, including corporate business sites, real estate portals, fintech platforms, eCommerce stores, educational websites, classified ads sites, blogs, news websites, and more. Whether you're a startup, a growing business, or a large enterprise, our goal is to build a website that reflects your brand and helps you achieve your online goals.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="faq-question">
-                                <h3>What other services do you offer?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>As a leading Web Design Agency in Nigeria, we don't just build websites; we offer a full range of digital services to help your business grow. Our services include SEO (Search Engine Optimization), mobile app development, graphic design, social media management, content creation, and more. Whatever your digital needs, we've got you covered.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="faq-question">
-                                <h3>Do you provide post-launch maintenance?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Absolutely! We offer a free one-month maintenance period after your website goes live. This ensures everything runs smoothly, remains secure, and is optimized for performance. After that, you can choose a maintenance plan that fits your needs to keep your site up to date and running efficiently.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="faq-question">
-                                <h3>What do you need from me to get started?</h3>
-                                <span class="faq-icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>To kickstart your project, we'll need some details about your business, the type of website you want, and any specific features you'd like to include. We also require content such as text, images, and branding elements. If you already have a domain and hosting, that's great! If not, we can guide you through purchasing them. Once we have all the necessary information, our expert team will begin crafting your website right away!</p>
-                            </div>
-                        </div>
+            
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">What is the pricing for your web development services?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">Our pricing is project-based and depends on factors such as the site's complexity, number of pages, and required features. We offer affordable packages to ensure we work with your budget. We've also got discounts running all year long. Please check out our <a href="{% url 'pricing' %}" class="text-red-600 hover:text-red-700 underline">pricing page</a> or contact us for a customized quote!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.3s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">What types of websites do you create?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">We develop all types of websites, including corporate business sites, real estate portals, fintech platforms, eCommerce stores, educational websites, classified ads sites, blogs, news websites, and more. Whether you're a startup, a growing business, or a large enterprise, our goal is to build a website that reflects your brand and helps you achieve your online goals.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.4s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">What other services do you offer?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">As a leading Web Design Agency in Nigeria, we don't just build websites; we offer a full range of digital services to help your business grow. Our services include SEO (Search Engine Optimization), mobile app development, graphic design, social media management, content creation, and more. Whatever your digital needs, we've got you covered.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.5s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">Do you provide post-launch maintenance?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">Absolutely! We offer a free one-month maintenance period after your website goes live. This ensures everything runs smoothly, remains secure, and is optimized for performance. After that, you can choose a maintenance plan that fits your needs to keep your site up to date and running efficiently.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-xl overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-100 transition-colors">
+                    <h3 class="text-base font-semibold text-gray-900 pr-8">What do you need from me to get started?</h3>
+                    <span class="faq-icon flex-shrink-0 text-red-600">
+                        <i class="fas fa-plus text-xl"></i>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-5">
+                        <p class="text-sm text-gray-700 leading-relaxed">To kickstart your project, we'll need some details about your business, the type of website you want, and any specific features you'd like to include. We also require content such as text, images, and branding elements. If you already have a domain and hosting, that's great! If not, we can guide you through purchasing them. Once we have all the necessary information, our expert team will begin crafting your website right away!</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+{% endblock %}
+
+{% block extra_js %}
 <script>
 // FAQ Accordion Functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -355,79 +368,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const answer = item.querySelector('.faq-answer');
         const icon = item.querySelector('.faq-icon i');
         
-        // Set initial state - ensure proper initial styling
+        // Set initial state
         answer.style.maxHeight = '0px';
         answer.style.overflow = 'hidden';
         answer.style.transition = 'max-height 0.4s ease-in-out';
-        answer.style.padding = '0 20px';
         
         question.addEventListener('click', function() {
             const isActive = item.classList.contains('active');
             
-            // Close all other items first
+            // Close all other items
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
                     const otherAnswer = otherItem.querySelector('.faq-answer');
                     const otherIcon = otherItem.querySelector('.faq-icon i');
                     otherAnswer.style.maxHeight = '0px';
-                    otherAnswer.style.padding = '0 20px';
-                    otherIcon.className = 'fas fa-plus';
+                    otherIcon.className = 'fas fa-plus text-xl';
                 }
             });
             
             // Toggle current item
             if (isActive) {
-                // Close current item
                 item.classList.remove('active');
                 answer.style.maxHeight = '0px';
-                answer.style.padding = '0 20px';
-                icon.className = 'fas fa-plus';
+                icon.className = 'fas fa-plus text-xl';
             } else {
-                // Open current item
                 item.classList.add('active');
-                
-                // Calculate the full height including padding
-                answer.style.padding = '20px';
-                const fullHeight = answer.scrollHeight;
-                answer.style.maxHeight = fullHeight + 'px';
-                icon.className = 'fas fa-minus';
-                
-                // Small delay to ensure smooth animation
-                setTimeout(() => {
-                    if (item.classList.contains('active')) {
-                        answer.style.maxHeight = 'none';
-                    }
-                }, 400);
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.className = 'fas fa-minus text-xl';
             }
-        });
-    });
-    
-    // Smooth scroll for CTA button
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Add smooth transition effect
-            this.style.transform = 'translateY(-3px) scale(0.95)';
-            setTimeout(() => {
-                window.location.href = this.getAttribute('href');
-            }, 150);
-        });
-    }
-    
-    // Enhanced hover effects for tech items
-    const techItems = document.querySelectorAll('.tech-item');
-    techItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
         });
     });
 });
 </script>
-
 {% endblock %}

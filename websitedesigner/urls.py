@@ -45,6 +45,7 @@ urlpatterns = [
     path('tech-tips/', tech_tips, name="tech_tips"),
     path('tech-reviews/', reviews, name="tech_reviews"),
     path('advertise-with-us/', advertise, name="advertise"),
+    path('earn-money/', earn_money, name="earn_money"),
     path('consultation/', consultation, name="consultation"),
     path('book-consultation/', consultation_booking, name="consultation_booking"),
     path('web-development-pricing/', pricing, name="pricing"),

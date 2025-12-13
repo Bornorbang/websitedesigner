@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'master.html' %}
 {% load static %}
 
 {% block title %}Contact Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}
@@ -17,497 +17,208 @@
     display: none !important;
 }
 
-/* Modern Contact Section Styling */
-.contact-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    padding: 80px 0;
-    position: relative;
-    min-height: 100vh;
-}
-
-.contact-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(239, 35, 60, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(239, 35, 60, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.contact-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-/* Contact Header */
-.contact-heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.contact-heading::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: #EF233C;
-    border-radius: 2px;
-}
-
-.contact-text {
-    font-size: 1.1rem;
-    color: #636e72;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px;
-    line-height: 1.7;
-}
-
-/* Contact Form Card */
-.contact-form {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    margin-bottom: 30px;
-}
-
-.contact-form:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    border-color: rgba(239, 35, 60, 0.2);
-}
-
-/* Form Styling */
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    font-weight: 600;
-    color: #2d3436;
-    margin-bottom: 8px;
-    display: block;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.form-control {
-    border: 2px solid #e9ecef;
-    border-radius: 10px;
-    padding: 15px 20px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
-    color: #2d3436;
-}
-
-.form-control:focus {
-    border-color: #EF233C;
-    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
-    background: #ffffff;
-    outline: none;
-}
-
-.form-control::placeholder {
-    color: #6c757d;
-    opacity: 0.7;
-}
-
-textarea.form-control {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* Submit Button */
-.btn-submit {
-    background: linear-gradient(135deg, #EF233C 0%, #d63031 100%);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(239, 35, 60, 0.3);
-    width: 100%;
-    margin-top: 10px;
-}
-
-.btn-submit:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(239, 35, 60, 0.4);
-    color: white;
-}
-
-.btn-submit:active {
-    transform: translateY(-1px);
-}
-
-/* Contact Info Card */
-.contact-info {
-    background: #000;
-    color: white;
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.contact-info:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-}
-
-.contact-info h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: white;
-    position: relative;
-}
-
-.contact-info h3::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: #EF233C;
-    border-radius: 2px;
-}
-
-.contact-info p {
-    margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.6;
-    display: flex;
-    align-items: flex-start;
-}
-
-.contact-info i {
-    margin-right: 15px;
-    color: #EF233C;
-    font-size: 1.2rem;
-    margin-top: 2px;
-    min-width: 20px;
-}
-
-/* Map Styling */
 #map {
-    height: 300px;
+    height: 400px;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border: 3px solid white;
-    transition: all 0.3s ease;
-}
-
-#map:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Alert Styling */
-.alert {
-    border-radius: 10px;
-    border: none;
-    padding: 15px 20px;
-    font-weight: 500;
-}
-
-.alert-success {
-    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-    color: white;
-}
-
-.alert-error {
-    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
-    color: white;
-}
-
-.alert-dismissible .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    color: inherit;
-    opacity: 0.7;
-    background: none;
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    width: auto;
-    height: auto;
-    line-height: 1;
-}
-
-.alert-dismissible .btn-close:hover {
-    opacity: 1;
-    background: none;
-}
-
-.alert-dismissible .btn-close span {
-    font-size: 20px;
-    font-weight: normal;
-}
-
-/* Contact Method Cards */
-.contact-methods {
-    margin-top: 50px;
-}
-
-.contact-method-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    border: 2px solid transparent;
-}
-
-.contact-method-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    border-color: #EF233C;
-}
-
-.contact-method-card i {
-    font-size: 2.5rem;
-    color: #EF233C;
-    margin-bottom: 15px;
-}
-
-.contact-method-card h4 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2d3436;
-    margin-bottom: 10px;
-}
-
-.contact-method-card p {
-    color: #636e72;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-/* Button Styling - Remove blue borders */
-.btn-outline-primary {
-    border-color: #EF233C;
-    color: #ffffff;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus,
-.btn-outline-primary:active {
-    background-color: #EF233C;
-    border-color: #EF233C;
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* Responsive Design */
-@media (max-width: 991px) {
-    .contact-section {
-        padding: 60px 0;
-    }
-
-    .contact-heading {
-        font-size: 2rem;
-    }
-
-    .contact-form,
-    .contact-info {
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-
-    #map {
-        height: 250px;
-    }
-}
-
-@media (max-width: 576px) {
-    .contact-section {
-        padding: 50px 0;
-    }
-
-    .contact-heading {
-        font-size: 1.8rem;
-    }
-
-    .contact-form,
-    .contact-info {
-        padding: 25px;
-    }
-
-    .form-control {
-        padding: 12px 15px;
-    }
-
-    .btn-submit {
-        padding: 12px 30px;
-    }
-
-    .contact-method-card {
-        padding: 25px 15px;
-    }
-
-    #map {
-        height: 200px;
-    }
-}
-
-/* Animation Enhancement */
-.contact-form,
-.contact-info,
-.contact-method-card {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 </style>
-{% endblock %}
+{% endblock%}
 
-{% block maincontent %}
+{% block content %}
 
     <!-- Hero Banner Section -->
-    <section class="hero about-hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-8 col-12">
-                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="hero-text mt-lg-2">
-                            <h1 class="mb-2 mt-lg-2">CONTACT US</h1>
-                            <p class="mb-2 mt-lg-3">Get in touch with the best web designers in Nigeria.</p>
+    <section class="relative min-h-[65vh] md:min-h-[80vh] lg:min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="space-y-6">
+                        <h1 class="text-4xl lg:text-5xl font-bold leading-tight">
+                            <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">CONTACT </span>
+                            <span class="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">US</span>
+                        </h1>
+                        <p class="text-lg lg:text-xl text-gray-300 font-light max-w-2xl">
+                            Get in touch with the best web designers in Nigeria.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                            <a href="http://wa.me/+2349058991274" target="_blank" class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                                <i class="fab fa-whatsapp mr-2"></i>
+                                <span class="text-sm lg:text-base">WHATSAPP</span>
+                            </a>
+                            <a href="tel:+2348148882303" class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                                <i class="fas fa-phone mr-2"></i>
+                                <span class="text-sm lg:text-base">CALL US</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="relative">
+                        <!-- Floating Contact Elements -->
+                        <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 backdrop-blur-sm">
+                            <div class="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full animate-ping"></div>
+                            <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500 rounded-full animate-ping delay-300"></div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;contact</span>
+                                        <span class="text-blue-400">response=</span>
+                                        <span class="text-green-400">"24hrs"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;support</span>
+                                        <span class="text-blue-400">type=</span>
+                                        <span class="text-green-400">"dedicated"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="ml-8 text-white">We're Here to Help</div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;/support&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;/contact&gt;</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            </div>
         </div>
     </section>
 
-<section class="contact-section">
-    <div class="container">
-        <h2 class="contact-heading wow fadeInUp" data-wow-delay="0.2s">Get in Touch</h2>
-        <p class="contact-text wow fadeInUp" data-wow-delay="0.3s">Contact Website Designer Nigeria - best Web Designers in Nigeria via email, call or book a consultation. We typically reply within 24hrs.</p>
+<section class="py-16 lg:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow fadeInUp" data-wow-delay="0.2s">
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+            <p class="text-sm lg:text-base text-gray-600 max-w-3xl mx-auto">Contact Website Designer Nigeria - best Web Designers in Nigeria via email, call or book a consultation. We typically reply within 24hrs.</p>
+        </div>
         
-        <div class="row">
-            <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.4s">
-                <div class="contact-form">
-                    <form id="contactForm" method="post" action="{% url 'contact' %}">
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <div class="wow fadeInLeft" data-wow-delay="0.4s">
+                <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-10 transition-all duration-300 hover:shadow-2xl">
+                    <form id="contactForm" method="post" action="{% url 'contact' %}" class="space-y-6">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200" id="name" name="name" required>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200" id="email" name="email" required>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 resize-none" id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-submit">Send Message</button>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
                     </form>
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div class="mt-6 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-800 border border-green-200{% else %}bg-red-100 text-red-800 border border-red-200{% endif %}">
+                                <div class="flex items-center justify-between">
+                                    <span>{{ message }}</span>
+                                    <button type="button" class="text-current opacity-50 hover:opacity-100 transition-opacity" onclick="this.parentElement.parentElement.remove()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
                         {% endfor %}
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-6 wow fadeInRight" data-wow-delay="0.4s">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Jabi, Gwarinpa 900108, F.C.T Abuja | Otta road, Ijora Olopa, Lagos</p>
-                    <p><i class="fas fa-phone"></i> 08148882303</p>
-                    <p><i class="fas fa-envelope"></i> contact@websitedesigner.ng</p>
+            <div class="wow fadeInRight" data-wow-delay="0.4s">
+                <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-10 mb-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-red-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 text-sm leading-relaxed">Jabi, Gwarinpa 900108, F.C.T Abuja | Otta road, Ijora Olopa, Lagos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-red-600"></i>
+                            </div>
+                            <div>
+                                <a href="tel:+2348148882303" class="text-gray-700 hover:text-red-600 transition-colors">08148882303</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-red-600"></i>
+                            </div>
+                            <div>
+                                <a href="mailto:contact@websitedesigner.ng" class="text-gray-700 hover:text-red-600 transition-colors">contact@websitedesigner.ng</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="map" class="wow fadeIn" data-wow-delay="0.6s"></div>
             </div>
         </div>
         
         <!-- Contact Method Cards -->
-        <div class="contact-methods">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="contact-method-card">
-                        <i class="fab fa-whatsapp"></i>
-                        <h4>WhatsApp</h4>
-                        <p>Quick responses via WhatsApp</p>
-                        <a href="http://wa.me/+2349058991274" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
-                            Chat Now
-                        </a>
-                    </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-transparent hover:border-green-600 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fab fa-whatsapp text-4xl text-green-600"></i>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="contact-method-card">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h4>Schedule a Call</h4>
-                        <p>Book a consultation session</p>
-                        <a href="{% url 'consultation_booking' %}" class="btn btn-outline-primary btn-sm mt-2">
-                            Book Now
-                        </a>
-                    </div>
+                <h4 class="text-lg font-bold text-gray-900 mb-3">WhatsApp</h4>
+                <p class="text-sm text-gray-600 mb-6">Quick responses via WhatsApp</p>
+                <a href="http://wa.me/+2349058991274" target="_blank" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105">
+                    Chat Now
+                </a>
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-transparent hover:border-blue-600 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-calendar-alt text-4xl text-blue-600"></i>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="contact-method-card">
-                        <i class="fas fa-envelope-open"></i>
-                        <h4>Email Support</h4>
-                        <p>Get detailed responses via email</p>
-                        <a href="mailto:contact@websitedesigner.ng" class="btn btn-outline-primary btn-sm mt-2">
-                            Send Email
-                        </a>
-                    </div>
+                <h4 class="text-lg font-bold text-gray-900 mb-3">Schedule a Call</h4>
+                <p class="text-sm text-gray-600 mb-6">Book a consultation session</p>
+                <a href="{% url 'consultation_booking' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105">
+                    Book Now
+                </a>
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-transparent hover:border-red-600 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-envelope-open text-4xl text-red-600"></i>
                 </div>
+                <h4 class="text-lg font-bold text-gray-900 mb-3">Email Support</h4>
+                <p class="text-sm text-gray-600 mb-6">Get detailed responses via email</p>
+                <a href="mailto:contact@websitedesigner.ng" class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105">
+                    Send Email
+                </a>
             </div>
         </div>
     </div>
@@ -516,11 +227,7 @@ textarea.form-control {
 
 {% block extra_js %}
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script src="{% static 'lib/wow/wow.min.js' %}"></script>
 <script>
-    // Initialize WOW
-    new WOW().init();
-
     // Initialize map
     var map = L.map('map').setView([9.0765, 7.3986], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -529,6 +236,5 @@ textarea.form-control {
     L.marker([9.0765, 7.3986]).addTo(map)
         .bindPopup('Website Designer Nigeria<br>Jabi, Gwarinpa 900108, F.C.T Abuja')
         .openPopup();
-  
 </script>
 {% endblock %}

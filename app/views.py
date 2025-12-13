@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 import logging
 from django.db.models import Q
 from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponseRedirect, Http404
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -147,8 +148,11 @@ def pricing(request):
 def advertise(request):
     return render(request, 'advertise.html')
 
+def earn_money(request):
+    return render(request, 'earn_money.html')
+
 def courses(request):
-    # Get published courses from database
+    # Get published courses from database (exclude coming_soon)
     published_courses = Course.objects.filter(status='published').order_by('-created_at')
     
     context = {
@@ -157,9 +161,41 @@ def courses(request):
     return render(request, 'courses.html', context)
 
 def course_detail(request, slug):
-    course = get_object_or_404(Course, slug=slug, status='published')
+    # Try to get the course (allow coming_soon and published)
+    course = get_object_or_404(Course, slug=slug)
     
-    # Get related courses (same category)
+    # Handle coming_soon courses with PIN access
+    if course.status == 'coming_soon':
+        # Check if PIN is already verified in session
+        pin_verified = request.session.get(f'course_pin_verified_{course.id}', False)
+        
+        if not pin_verified:
+            # Handle PIN submission
+            if request.method == 'POST':
+                submitted_pin = request.POST.get('access_pin', '').strip()
+                
+                # Verify PIN against whitelist
+                from .models import CourseAccessPin
+                try:
+                    pin_obj = CourseAccessPin.objects.get(pin=submitted_pin, is_active=True)
+                    # PIN is valid, store in session and increment usage
+                    request.session[f'course_pin_verified_{course.id}'] = True
+                    pin_obj.increment_usage()
+                    messages.success(request, 'Access granted! Welcome to the course.')
+                    # Redirect to avoid form resubmission
+                    return HttpResponseRedirect(request.path)
+                except CourseAccessPin.DoesNotExist:
+                    messages.error(request, 'Invalid PIN. Please check and try again.')
+            
+            # Show PIN entry page
+            return render(request, 'course_pin_entry.html', {
+                'course': course,
+            })
+    elif course.status != 'published':
+        # Don't allow access to draft courses
+        raise Http404("Course not found")
+    
+    # Get related courses (same category, published only)
     related_courses = Course.objects.filter(
         category=course.category, 
         status='published'

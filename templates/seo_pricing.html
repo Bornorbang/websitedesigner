@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'master.html' %}
 {% load static %}
 
 {% block title %}Cost of SEO in Nigeria - SEO Pricing Packages{% endblock %}
@@ -11,7 +11,6 @@
 
 {% block extra_css %}
 <style>
-
     /* Modern Pricing Section Styling */
     .price {
         background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -48,6 +47,29 @@
         font-weight: 700;
         color: #000;
         margin-bottom: 15px;
+        position: relative;
+    }
+
+    .price .section-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: #EF233C;
+        border-radius: 2px;
+    }
+
+    .price .section-header p {
+        font-size: 1.1rem;
+        color: #636e72;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
         position: relative;
     }
 
@@ -355,135 +377,209 @@
         50% { background-position: 100% 50%; }
     }
 </style>
-{% endblock %}
+{% endblock%}
 
-{% block maincontent %}
+{% block content %}
 
     <!-- Hero Banner Section -->
-    <section class="hero about-hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-8 col-12">
-                    <div class="hero-content wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="hero-text mt-lg-2">
-                            <h1 class="mb-2 mt-lg-2">SEO PRICING IN NIGERIA</h1>
-                            <p class="mb-2 mt-lg-3">Affordable Monthly SEO Packages.</p>
+    <section class="relative min-h-[65vh] md:min-h-[80vh] lg:min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="space-y-6">
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">SEO </span>
+                            <span class="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">PRICING</span>
+                        </h1>
+                        <p class="text-xl lg:text-2xl text-gray-300 font-light max-w-2xl">
+                            Affordable Monthly SEO Packages in Nigeria.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                            <a href="{% url 'contact' %}" class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                                <i class="fas fa-phone mr-2"></i>
+                                <span class="text-sm lg:text-base">CONTACT US</span>
+                            </a>
+                            <a href="{% url 'pricing' %}" class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                                <i class="fas fa-code mr-2"></i>
+                                <span class="text-sm lg:text-base">WEB PRICING</span>
+                            </a>
                         </div>
-                        <div class="hero-btn mt-lg-4">
-                            <a class="btn" href="{% url 'contact' %}">
-                                <i class="fas fa-phone"></i> CONTACT US
-                            </a>
-                            <a class="btn" href="{% url 'pricing' %}">
-                                <i class="fas fa-globe"></i> WEB PRICING
-                            </a>
+                    </div>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="relative">
+                        <!-- Floating SEO Elements -->
+                        <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 backdrop-blur-sm">
+                            <div class="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full animate-ping"></div>
+                            <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500 rounded-full animate-ping delay-300"></div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;seo</span>
+                                        <span class="text-blue-400">strategy=</span>
+                                        <span class="text-green-400">"results-driven"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;ranking</span>
+                                        <span class="text-blue-400">position=</span>
+                                        <span class="text-green-400">"top"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="ml-8 text-white">Rank Higher on Google</div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;/ranking&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;/seo&gt;</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            </div>
         </div>
     </section>
 
 <!-- Price Start -->
- <div class="price" id="price">
-    <div class="container">
-        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-            <p>Cost of SEO in Nigeria</p>
-            <h2>SEO Pricing Packages</h2>
+ <div class="py-16 lg:py-24 bg-gray-50" id="price">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold text-xs uppercase tracking-wider mb-2">SEO Pricing Plan</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">SEO Pricing Packages</h2>
         </div>
-        <p class="text-center mb-4">How much does SEO cost in Nigeria? Find out our affordable monthly SEO pricing packages.</p>
+        <p class="text-center mb-8 text-base text-gray-600">How much does SEO cost in Nigeria? Find out our affordable monthly SEO pricing packages.</p>
         
-        <div class="row">
-            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="price-item">
-                    <div class="price-header">
-                        <div class="price-title">
-                            <h2>STARTER</h2>
+        <!-- Currency Switcher -->
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex rounded-lg border border-gray-300 bg-white p-1 shadow-sm">
+                <button onclick="switchCurrency('NGN')" id="btn-ngn" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 bg-red-600 text-white">NGN (₦)</button>
+                <button onclick="switchCurrency('USD')" id="btn-usd" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 hover:text-gray-900">USD ($)</button>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-red-600">
+                    <div class="p-8 border-b border-gray-100 bg-black">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">STARTER</h2>
                         </div>
-                        <div class="price-prices">
-                            <h3><small>₦</small>200,000</h3>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="200000" data-usd="170">200,000</span>
+                            </h3>
                         </div>
                     </div>
-                    <div class="price-body">
-                        <div class="price-description">
-                            <ul>
-                                <li>Website SEO Audit</li>
-                                <li>Keyword Research</li>
-                                <li>On-Page SEO (5 Pages)</li>
-                                <li>3 Blog Posts</li>
-                                <li>Titles, Images & Meta Tags</li>
-                                <li>Monthly Reports</li>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Website SEO Audit</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Keyword Research</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>On-Page SEO (5 Pages)</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>3 Blog Posts</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Titles, Images & Meta Tags</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Monthly Reports</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a class="btn" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
+                    <div class="p-6 bg-gray-50">
+                        <div>
+                            <a class="block w-full bg-black hover:bg-gray-800 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.0s">
-                <div class="price-item featured-item">
-                    <div class="price-header">
-                        <div class="price-title">
-                            <h2 class="text-white">GROWTH</h2>
+            <div class="wow fadeInUp" data-wow-delay="0.0s">
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-2 relative border-2 border-red-600">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-black text-xs font-bold px-4 py-1 rounded-full">POPULAR</div>
+                    <div class="p-8 border-b border-red-500 bg-gradient-to-br from-red-600 to-red-700">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">GROWTH</h2>
                         </div>
-                        <div class="price-prices">
-                            <h3><small>₦</small>350,000</h3>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="350000" data-usd="290">350,000</span>
+                            </h3>
                         </div>
                     </div>
-                    <div class="price-body">
-                        <div class="price-description">
-                            <ul>
-                                <li>Website SEO Audit</li>
-                                <li>Keyword Research</li>
-                                <li>On-Page SEO (10 Pages)</li>
-                                <li>5 Blog Posts</li>
-                                <li>Titles, Images & Meta Tags</li>
-                                <li>GSC & Google Analytics Setup</li>
-                                <li>Monthly Reports</li>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Website SEO Audit</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Keyword Research</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>On-Page SEO (10 Pages)</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>5 Blog Posts</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Titles, Images & Meta Tags</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>GSC & Google Analytics Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Monthly Reports</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="price-footer">
-                        <div class="price-action"> 
-                            <a class="btn" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
+                    <div class="p-6 bg-gray-50">
+                        <div> 
+                            <a class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="price-item">
-                    <div class="price-header">
-                        <div class="price-title">
-                            <h2>CUSTOM</h2>
+            <div class="wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-red-600">
+                    <div class="p-8 border-b border-gray-100 bg-black">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">CUSTOM</h2>
                         </div>
-                        <div class="price-prices">
-                            <h3><small>₦</small>XXX,XXX</h3>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="XXX" data-usd="XXX">XXX,XXX</span>
+                            </h3>
                         </div>
                     </div>
-                    <div class="price-body">
-                        <div class="price-description">
-                            <ul>
-                                <li>Website SEO Audit</li>
-                                <li>Keyword Research</li>
-                                <li>On-Page SEO (xx Pages)</li>
-                                <li>xx Blog Posts</li>
-                                <li>Titles, Images & Meta Tags</li>
-                                <li>GSC & Google Analytics Setup</li>
-                                <li>Off-Page SEO</li>
-                                <li>Backlinks Building</li>
-                                <li>Monthly Reports</li>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Website SEO Audit</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Keyword Research</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>On-Page SEO (xx Pages)</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>xx Blog Posts</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Titles, Images & Meta Tags</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>GSC & Google Analytics Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Off-Page SEO</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Backlinks Building</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Monthly Reports</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a class="btn" href="{% url 'contact' %}" target="_blank">Contact Us</a>
+                    <div class="p-6 bg-gray-50">
+                        <div>
+                            <a class="block w-full bg-black hover:bg-gray-800 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="{% url 'contact' %}" target="_blank">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -491,9 +587,9 @@
         </div>
         
         <!-- Terms Notice -->
-        <div class="text-center mt-4 mb-3">
-            <p class="text-muted">
-                <small><i class="fas fa-info-circle" style="margin-right: 4px; color: #EF233C;"></i> By ordering our services, you agree to our <a href="{% url 'terms' %}" target="_blank" style="color: #EF233C;">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" style="color: #EF233C;">Privacy Policy</a>.</small>
+        <div class="text-center mt-8">
+            <p class="text-gray-600 text-sm">
+                <i class="fas fa-info-circle mr-1 text-red-600"></i> By ordering our services, you agree to our <a href="{% url 'terms' %}" target="_blank" class="text-red-600 hover:underline">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" class="text-red-600 hover:underline">Privacy Policy</a>.
             </p>
         </div>
     </div>
@@ -502,6 +598,52 @@
 
 {% endblock %}
 {% block extra_js %}
-
-
+<script>
+function switchCurrency(currency) {
+    const ngnBtn = document.getElementById('btn-ngn');
+    const usdBtn = document.getElementById('btn-usd');
+    const priceElements = document.querySelectorAll('.price-value');
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
+    
+    if (currency === 'NGN') {
+        // Update button styles
+        ngnBtn.classList.add('bg-red-600', 'text-white');
+        ngnBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        usdBtn.classList.remove('bg-red-600', 'text-white');
+        usdBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '₦';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const ngnPrice = element.getAttribute('data-ngn');
+            if (ngnPrice && ngnPrice !== 'XXX') {
+                element.textContent = parseInt(ngnPrice).toLocaleString();
+            }
+        });
+    } else {
+        // Update button styles
+        usdBtn.classList.add('bg-red-600', 'text-white');
+        usdBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        ngnBtn.classList.remove('bg-red-600', 'text-white');
+        ngnBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '$';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const usdPrice = element.getAttribute('data-usd');
+            if (usdPrice && usdPrice !== 'XXX') {
+                element.textContent = parseInt(usdPrice).toLocaleString();
+            }
+        });
+    }
+}
+</script>
 {% endblock %}

@@ -272,6 +272,28 @@ class Instructor(models.Model):
         return total
 
 
+class CourseAccessPin(models.Model):
+    """Whitelisted PINs for accessing 'Coming Soon' courses"""
+    pin = models.CharField(max_length=50, unique=True, help_text="PIN code for early access")
+    is_active = models.BooleanField(default=True, help_text="Deactivate to revoke access")
+    created_at = models.DateTimeField(auto_now_add=True)
+    used_count = models.PositiveIntegerField(default=0, help_text="Number of times this PIN has been used")
+    
+    class Meta:
+        verbose_name = "Course Access PIN"
+        verbose_name_plural = "Course Access PINs"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        status = "Active" if self.is_active else "Inactive"
+        return f"{self.pin} - {status} (Used: {self.used_count})"
+    
+    def increment_usage(self):
+        """Increment the usage counter"""
+        self.used_count += 1
+        self.save()
+
+
 class Course(models.Model):
     LEVEL_CHOICES = [
         ('beginner', 'Beginner'),

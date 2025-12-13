@@ -220,27 +220,6 @@ CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
 ONESIGNAL_APP_ID = os.getenv('ONESIGNAL_APP_ID')
 ONESIGNAL_API_KEY = os.getenv('ONESIGNAL_API_KEY')
 
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#         'height': 300,
-#         'width': 'auto',
-#         'extraPlugins': ','.join([
-#             'htmlSupport'
-#         ]),
-#         'htmlSupport': {
-#             'allow': [
-#                 {
-#                     'name': 'iframe',
-#                     'attributes': True,
-#                     'classes': True,
-#                     'styles': True
-#                 }
-#             ]
-#         },
-#     },
-# }
-
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
@@ -251,8 +230,5 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# Payment Settings - Paystack
-PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY', 'sk_test_1b50a2bca611240a42e3bdb97990cf78cd7b3432')
-PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY', 'pk_test_7790209be7aee237ddf3d60019fda84d155141b3')
-PAYSTACK_BASE_URL = 'https://api.paystack.co'
+
 
