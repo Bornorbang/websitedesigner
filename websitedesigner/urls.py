@@ -50,6 +50,7 @@ urlpatterns = [
     path('book-consultation/', consultation_booking, name="consultation_booking"),
     path('web-development-pricing/', pricing, name="pricing"),
     path('tech-courses/', courses, name="courses"),
+    path('courses/<slug:slug>/', course_category, name="course_category"),
     path('seo-pricing/', seo_pricing, name="seo_pricing"),
     path('terms-of-service/', terms, name="terms"),
     path('privacy-policy/', privacy, name="privacy"),
@@ -89,6 +90,11 @@ urlpatterns = [
     path('course/<slug:course_slug>/lecture/<int:lecture_id>/', lecture_detail, name='lecture_detail'),
     path('lecture/<int:lecture_id>/download/', download_attachment, name='download_attachment'),
     path('lecture/<int:lecture_id>/resources/', lecture_resources, name='lecture_resources'),
+    
+    # Affiliate URLs
+    path('affiliate/dashboard/', affiliate_dashboard, name='affiliate_dashboard'),
+    path('affiliate/join/', become_affiliate, name='become_affiliate'),
+    path('affiliate/payout/', request_payout, name='request_payout'),
     
     # Blog URLs - MUST BE LAST because it's a catch-all pattern
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),

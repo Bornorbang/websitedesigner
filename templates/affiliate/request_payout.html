@@ -1,0 +1,457 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}Request Payout - Website Designer Nigeria{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-red-600 to-red-700 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full animate-pulse" viewBox="0 0 100 100">
+                <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                <circle cx="80" cy="80" r="2" fill="currentColor"/>
+                <circle cx="40" cy="60" r="1.5" fill="currentColor"/>
+                <circle cx="70" cy="30" r="1" fill="currentColor"/>
+                <circle cx="10" cy="70" r="1.2" fill="currentColor"/>
+            </svg>
+        </div>
+        
+        <div class="relative z-10 container mx-auto px-4 py-16">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4 text-white">Request Payout</h1>
+                <p class="text-xl text-white">Withdraw your affiliate earnings</p>
+                
+                <!-- Balance Display -->
+                <div class="mt-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-md mx-auto">
+                    <p class="text-white text-sm mb-2">Available Balance</p>
+                    <h2 class="text-3xl lg:text-2xl font-bold text-white">₦{{ available|floatformat:2 }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payout Form -->
+    <div class="container mx-auto px-4 py-12">
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-6 p-4 rounded-lg border-l-4 max-w-2xl mx-auto {% if message.tags == 'success' %}bg-green-50 border-green-400 text-green-700{% elif message.tags == 'error' %}bg-red-50 border-red-400 text-red-700{% elif message.tags == 'warning' %}bg-yellow-50 border-yellow-400 text-yellow-700{% else %}bg-blue-50 border-blue-400 text-blue-700{% endif %}">
+                    <div class="flex justify-between items-start">
+                        <span>{{ message }}</span>
+                        <button type="button" class="ml-2 text-gray-400 hover:text-gray-600 font-bold" onclick="this.parentElement.parentElement.remove()">×</button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="max-w-2xl mx-auto">
+            <!-- Account Info Card -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <i class="fas fa-university text-red-600 mr-3"></i>
+                    Bank Account Details
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Bank Name</p>
+                        <p class="font-semibold text-gray-900">{{ affiliate.bank_name }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Account Number</p>
+                        <p class="font-semibold text-gray-900">{{ affiliate.account_number }}</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-sm text-gray-600">Account Name</p>
+                        <p class="font-semibold text-gray-900">{{ affiliate.account_name }}</p>
+                    </div>
+                </div>
+                <div class="mt-4 text-right text-sm">
+                    <button onclick="openEditBankModal()" class="text-red-600 hover:underline">Edit bank details</button>
+                </div>
+            </div>
+
+            <!-- Payout Request Form -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <i class="fas fa-money-bill-wave text-red-600 mr-3"></i>
+                    Withdrawal Amount
+                </h2>
+
+                <form method="POST" class="space-y-6" onsubmit="return validateAmount()">
+                    {% csrf_token %}
+
+                    <!-- Balance Summary -->
+                    <div class="bg-green-50 rounded-lg p-4 border-2 border-green-200 text-center">
+                        <p class="text-sm text-green-700 mb-1">Available Balance</p>
+                        <p class="text-3xl lg:text-2xl font-bold text-green-700">₦{{ available|floatformat:2 }}</p>
+                        <p class="text-xs text-green-600 mt-1">Approved commissions ready for withdrawal</p>
+                    </div>
+
+                    <!-- Amount Input -->
+                    <div>
+                        <label for="amount" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Amount to Withdraw <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">₦</span>
+                            <input 
+                                type="number" 
+                                id="amount" 
+                                name="amount" 
+                                step="0.01"
+                                min="{{ min_payout }}"
+                                max="{{ available }}"
+                                required
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition text-lg"
+                                placeholder="0.00"
+                            >
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <p class="text-xs text-gray-500">Minimum: ₦30,000</p>
+                            <button type="button" onclick="maxWithdraw()" class="text-xs text-red-600 hover:underline">
+                                Withdraw Maximum
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Amount Buttons -->
+                    <div class="grid grid-cols-4 gap-2">
+                        {% if available >= 5000 %}
+                            <button type="button" onclick="setAmount(5000)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold transition">
+                                ₦5,000
+                            </button>
+                        {% endif %}
+                        {% if available >= 10000 %}
+                            <button type="button" onclick="setAmount(10000)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold transition">
+                                ₦10,000
+                            </button>
+                        {% endif %}
+                        {% if available >= 20000 %}
+                            <button type="button" onclick="setAmount(20000)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold transition">
+                                ₦20,000
+                            </button>
+                        {% endif %}
+                        {% if available >= 50000 %}
+                            <button type="button" onclick="setAmount(50000)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold transition">
+                                ₦50,000
+                            </button>
+                        {% endif %}
+                    </div>
+
+                    <!-- Important Notice -->
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-blue-600 mt-1 mr-3"></i>
+                            <div class="text-blue-700">
+                                <p class="font-semibold mb-1"><small>Processing Information</small></p>
+                                <div class="space-y-1">
+                                    <p><small>- Payouts are processed within 3-5 business days</small></p>
+                                    <p><small>- Payout requests are processed within 1-3 business days</small></p>
+                                    <p><small>- You'll receive email notification once completed</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transform hover:scale-[1.02] transition"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Submit Payout Request
+                        </button>
+                    </div>
+
+                    <!-- Back to Dashboard -->
+                    <div class="text-center">
+                        <a href="{% url 'affiliate_dashboard' %}" class="text-red-600 hover:underline text-sm">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back to Dashboard
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Toast Notification Styles */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 320px;
+    max-width: 400px;
+    animation: slideIn 0.3s ease-out;
+    border-left: 4px solid;
+}
+
+.toast.error {
+    border-left-color: #dc2626;
+}
+
+.toast.warning {
+    border-left-color: #f59e0b;
+}
+
+.toast.success {
+    border-left-color: #10b981;
+}
+
+.toast-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.toast.error .toast-icon {
+    color: #dc2626;
+}
+
+.toast.warning .toast-icon {
+    color: #f59e0b;
+}
+
+.toast.success .toast-icon {
+    color: #10b981;
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #1f2937;
+}
+
+.toast-message {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.toast-close:hover {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.toast.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+@media (max-width: 640px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
+    }
+}
+</style>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+const minPayout = {{ min_payout }};
+const maxPayout = {{ available }};
+
+// Toast Notification System
+function showToast(type, title, message, duration = 5000) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icons = {
+        error: 'fas fa-times-circle',
+        warning: 'fas fa-exclamation-triangle',
+        success: 'fas fa-check-circle'
+    };
+    
+    toast.innerHTML = `
+        <div class="toast-icon">
+            <i class="${icons[type]}"></i>
+        </div>
+        <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="removeToast(this.parentElement)">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    container.appendChild(toast);
+    
+    // Auto remove after duration
+    setTimeout(() => {
+        removeToast(toast);
+    }, duration);
+}
+
+function removeToast(toast) {
+    toast.classList.add('removing');
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.parentElement.removeChild(toast);
+        }
+    }, 300);
+}
+
+function setAmount(amount) {
+    document.getElementById('amount').value = amount;
+}
+
+function maxWithdraw() {
+    document.getElementById('amount').value = maxPayout.toFixed(2);
+}
+
+function validateAmount() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    
+    if (isNaN(amount)) {
+        showToast('error', 'Invalid Amount', 'Please enter a valid withdrawal amount');
+        return false;
+    }
+    
+    // Check minimum payout (30,000)
+    if (amount < minPayout) {
+        showToast(
+            'warning',
+            'Minimum Withdrawal Not Met',
+            `You must reach ₦${minPayout.toLocaleString()} before you can request a withdrawal. Current amount: ₦${amount.toLocaleString()}`
+        );
+        return false;
+    }
+    
+    // Check if amount exceeds available balance
+    if (amount > maxPayout) {
+        showToast(
+            'error',
+            'Insufficient Balance',
+            `You're trying to withdraw ₦${amount.toLocaleString()} but you only have ₦${maxPayout.toFixed(2)} available.`
+        );
+        return false;
+    }
+    
+    return confirm(`Confirm withdrawal of ₦${amount.toFixed(2)} to ${document.querySelector('[name="account_name"]') ? '{{ affiliate.account_name }}' : 'your account'}?`);
+}
+
+function openEditBankModal() {
+    document.getElementById('editBankModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEditBankModal() {
+    document.getElementById('editBankModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+</script>
+
+<!-- Edit Bank Details Modal -->
+<div id="editBankModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+        <button onclick="closeEditBankModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Edit Bank Details</h3>
+        
+        <form method="POST" action="{% url 'request_payout' %}" class="space-y-4">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_bank">
+            
+            <div>
+                <label for="modal_bank_name" class="block text-sm font-semibold text-gray-700 mb-2">Bank Name</label>
+                <input type="text" id="modal_bank_name" name="bank_name" value="{{ affiliate.bank_name }}" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+            </div>
+            
+            <div>
+                <label for="modal_account_number" class="block text-sm font-semibold text-gray-700 mb-2">Account Number</label>
+                <input type="text" id="modal_account_number" name="account_number" value="{{ affiliate.account_number }}" required
+                    pattern="[0-9]{10}" maxlength="10"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+            </div>
+            
+            <div>
+                <label for="modal_account_name" class="block text-sm font-semibold text-gray-700 mb-2">Account Name</label>
+                <input type="text" id="modal_account_name" name="account_name" value="{{ affiliate.account_name }}" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+            </div>
+            
+            <div class="flex gap-3 pt-4">
+                <button type="button" onclick="closeEditBankModal()" 
+                    class="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button type="submit" 
+                    class="flex-1 bg-gradient-to-r from-red-600 to-red-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -810,3 +810,172 @@ def update_course_rating_on_review_change(sender, instance, **kwargs):
         course.update_rating_from_reviews()
     except:
         pass  # Handle any potential errors gracefully
+
+
+# Affiliate System Models
+class AffiliateProfile(models.Model):
+    """Affiliate user profile for earning commissions"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending Approval'),
+        ('active', 'Active'),
+        ('suspended', 'Suspended'),
+        ('rejected', 'Rejected'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='affiliate_profile')
+    affiliate_code = models.CharField(max_length=20, unique=True, db_index=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    
+    # Commission settings
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=30.00, help_text="Commission percentage (e.g., 30.00 for 30%)")
+    total_earned = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    total_withdrawn = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    pending_balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    
+    # Bank details for payouts
+    bank_name = models.CharField(max_length=100, blank=True)
+    account_number = models.CharField(max_length=20, blank=True)
+    account_name = models.CharField(max_length=200, blank=True)
+    
+    # Stats
+    total_referrals = models.PositiveIntegerField(default=0)
+    successful_conversions = models.PositiveIntegerField(default=0)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    approved_at = models.DateTimeField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.affiliate_code}"
+    
+    @property
+    def available_balance(self):
+        """Balance available for withdrawal (approved commissions - withdrawn - pending payouts)"""
+        # Calculate from approved commissions
+        approved_commissions = self.commissions.filter(status='approved').aggregate(
+            total=models.Sum('commission_amount')
+        )['total'] or 0
+        
+        # Subtract total withdrawn
+        total_withdrawn = self.total_withdrawn
+        
+        # Subtract pending payouts
+        pending_payouts = AffiliatePayout.objects.filter(
+            affiliate=self,
+            status__in=['pending', 'processing']
+        ).aggregate(total=models.Sum('amount'))['total'] or 0
+        
+        return approved_commissions - total_withdrawn - pending_payouts
+
+
+class AffiliateReferral(models.Model):
+    """Track each referral click"""
+    affiliate = models.ForeignKey(AffiliateProfile, on_delete=models.CASCADE, related_name='referrals')
+    referred_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='referred_by')
+    
+    # Tracking
+    referral_code = models.CharField(max_length=20, db_index=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    
+    # Conversion tracking
+    converted = models.BooleanField(default=False)
+    converted_at = models.DateTimeField(null=True, blank=True)
+    
+    # Source tracking
+    landing_page = models.URLField(blank=True, help_text="Where they landed")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Referral by {self.affiliate.affiliate_code} - {'Converted' if self.converted else 'Pending'}"
+
+
+class AffiliateCommission(models.Model):
+    """Track commissions earned from sales"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('paid', 'Paid'),
+        ('cancelled', 'Cancelled'),
+    ]
+    
+    affiliate = models.ForeignKey(AffiliateProfile, on_delete=models.CASCADE, related_name='commissions')
+    referral = models.ForeignKey(AffiliateReferral, on_delete=models.CASCADE, related_name='commissions')
+    
+    # Purchase details
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_payment = models.OneToOneField(CoursePayment, on_delete=models.CASCADE, related_name='affiliate_commission')
+    
+    # Commission details
+    sale_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    commission_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    # Status
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    approved_at = models.DateTimeField(null=True, blank=True)
+    paid_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"₦{self.commission_amount} for {self.affiliate.affiliate_code} - {self.status}"
+    
+    def approve(self):
+        """Approve commission for payout"""
+        if self.status == 'pending':
+            self.status = 'approved'
+            self.approved_at = timezone.now()
+            self.affiliate.pending_balance += self.commission_amount
+            self.affiliate.total_earned += self.commission_amount
+            self.affiliate.save()
+            self.save()
+
+
+class AffiliatePayout(models.Model):
+    """Track affiliate withdrawals/payouts"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+        ('cancelled', 'Cancelled'),
+    ]
+    
+    affiliate = models.ForeignKey(AffiliateProfile, on_delete=models.CASCADE, related_name='payouts')
+    
+    # Payout details
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    bank_name = models.CharField(max_length=100)
+    account_number = models.CharField(max_length=20)
+    account_name = models.CharField(max_length=200)
+    
+    # Status
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    reference = models.CharField(max_length=100, unique=True, blank=True)
+    
+    # Notes
+    admin_notes = models.TextField(blank=True)
+    
+    # Timestamps
+    requested_at = models.DateTimeField(auto_now_add=True)
+    processed_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        ordering = ['-requested_at']
+    
+    def __str__(self):
+        return f"Payout ₦{self.amount} to {self.affiliate.affiliate_code} - {self.status}"
+    
+    def save(self, *args, **kwargs):
+        if not self.reference:
+            import uuid
+            self.reference = f"PAYOUT_{uuid.uuid4().hex[:10].upper()}"
+        super().save(*args, **kwargs)

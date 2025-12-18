@@ -1408,12 +1408,32 @@ function submitReview() {
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     
+    // Validate rating is selected
+    const ratingInput = document.querySelector('input[name="rating"]:checked');
+    if (!ratingInput) {
+        showNotification('Please select a rating', 'error');
+        return;
+    }
+    
+    // Validate review text
+    const reviewTextarea = form.querySelector('textarea[name="review_text"]');
+    if (!reviewTextarea || reviewTextarea.value.trim().length < 10) {
+        showNotification('Please write a review (at least 10 characters)', 'error');
+        return;
+    }
+    
     // Show loading state
     submitBtn.innerHTML = '<span class="spinner"></span>Submitting...';
     submitBtn.disabled = true;
     
     // Get form data
     const formData = new FormData(form);
+    
+    // Debug: Log what we're sending
+    console.log('Submitting review with data:');
+    console.log('Rating:', formData.get('rating'));
+    console.log('Review text:', formData.get('review_text'));
+    console.log('CSRF token:', formData.get('csrfmiddlewaretoken'));
     
     // Make AJAX request
     fetch(`/course/{{ course.id }}/review/`, {
@@ -1424,13 +1444,18 @@ function submitReview() {
         },
     })
     .then(response => {
+        console.log('Response status:', response.status);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            // Try to get error details
+            return response.text().then(text => {
+                console.error('Response text:', text);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            });
         }
         return response.json();
     })
     .then(data => {
-        console.log('Response data:', data); // Debug log
+        console.log('Response data:', data);
         if (data.success) {
             showNotification(data.message, 'success');
             // Reload page to show the new review

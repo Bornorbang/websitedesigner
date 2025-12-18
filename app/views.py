@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserProfileForm, CourseReviewForm
 from django.http import JsonResponse
+from django.utils import timezone
 # Create your views here.
 
 def home(request):
@@ -159,6 +160,20 @@ def courses(request):
         'published_courses': published_courses,
     }
     return render(request, 'courses.html', context)
+
+def course_category(request, slug):
+    """Display courses in a specific category"""
+    category = get_object_or_404(CourseCategory, slug=slug)
+    courses_in_category = Course.objects.filter(
+        category=category, 
+        status='published'
+    ).order_by('-created_at')
+    
+    context = {
+        'category': category,
+        'courses': courses_in_category,
+    }
+    return render(request, 'course_category.html', context)
 
 def course_detail(request, slug):
     # Try to get the course (allow coming_soon and published)
@@ -866,46 +881,67 @@ def remove_profile_image(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
-@login_required
 def submit_review(request, course_id):
     """Handle course review submission"""
-    course = get_object_or_404(Course, id=course_id, status='published')
-    
-    # Check if user can review this course
-    if not course.can_user_review(request.user):
+    # Check authentication
+    if not request.user.is_authenticated:
         return JsonResponse({
-            'success': False, 
-            'error': 'You must be enrolled in this course to leave a review and can only review once.'
+            'success': False,
+            'error': 'You must be logged in to leave a review.'
         })
     
-    if request.method == 'POST':
-        form = CourseReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.course = course
-            review.save()
-            
-            # Update course rating
-            course.update_rating_from_reviews()
-            
+    try:
+        course = get_object_or_404(Course, id=course_id)
+        
+        # Check if user can review this course
+        if not course.can_user_review(request.user):
             return JsonResponse({
-                'success': True,
-                'message': 'Thank you for your review!',
-                'review': {
-                    'rating': review.rating,
-                    'review_text': review.review_text,
-                    'student_name': review.student_name,
-                    'created_at': review.created_at.strftime('%b %d, %Y')
-                }
+                'success': False, 
+                'error': 'You must be enrolled in this course to leave a review and can only review once.'
             })
-        else:
-            return JsonResponse({
-                'success': False,
-                'errors': form.errors
-            })
-    
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        
+        if request.method == 'POST':
+            form = CourseReviewForm(request.POST)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.user = request.user
+                review.course = course
+                review.save()
+                
+                # Update course rating
+                course.update_rating_from_reviews()
+                
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Thank you for your review!',
+                    'review': {
+                        'rating': review.rating,
+                        'review_text': review.review_text,
+                        'student_name': review.student_name,
+                        'created_at': review.created_at.strftime('%b %d, %Y')
+                    }
+                })
+            else:
+                # Return form errors
+                error_messages = []
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        error_messages.append(f"{field}: {error}")
+                return JsonResponse({
+                    'success': False,
+                    'error': '; '.join(error_messages) if error_messages else 'Invalid form data'
+                })
+        
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})
+    except Exception as e:
+        # Log the error for debugging
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error submitting review: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': f'An error occurred: {str(e)}'
+        })
 
 
 @login_required
@@ -1400,6 +1436,70 @@ def verify_payment(request):
                         payment.payment_details.update(transaction_data)
                         payment.mark_as_completed()
                         
+                        # Process affiliate commission if applicable
+                        from .models import AffiliateReferral, AffiliateCommission, AffiliateProfile
+                        affiliate_ref = request.session.get('affiliate_ref')
+                        if affiliate_ref:
+                            try:
+                                # Find the most recent unconverted referral for this user
+                                referral = AffiliateReferral.objects.filter(
+                                    referral_code=affiliate_ref,
+                                    converted=False,
+                                    referred_user=payment.user
+                                ).order_by('-created_at').first()
+                                
+                                if not referral:
+                                    # If no referral with user link, find by code and link it
+                                    referral = AffiliateReferral.objects.filter(
+                                        referral_code=affiliate_ref,
+                                        converted=False,
+                                        referred_user__isnull=True
+                                    ).order_by('-created_at').first()
+                                    
+                                    if referral:
+                                        referral.referred_user = payment.user
+                                        referral.save()
+                                
+                                if referral:
+                                    affiliate = referral.affiliate
+                                    commission_rate = affiliate.commission_rate
+                                    commission_amount = (commission_rate / 100) * payment.amount
+                                    
+                                    # Create commission record (auto-approved)
+                                    commission = AffiliateCommission.objects.create(
+                                        affiliate=affiliate,
+                                        referral=referral,
+                                        course=payment.course,
+                                        course_payment=payment,
+                                        sale_amount=payment.amount,
+                                        commission_rate=commission_rate,
+                                        commission_amount=commission_amount,
+                                        status='approved'
+                                    )
+                                    commission.approved_at = timezone.now()
+                                    commission.save()
+                                    
+                                    # Update affiliate total_earned
+                                    affiliate.total_earned += commission_amount
+                                    affiliate.save()
+                                    
+                                    # Mark referral as converted
+                                    referral.converted = True
+                                    referral.converted_at = timezone.now()
+                                    referral.save()
+                                    
+                                    # Update affiliate stats
+                                    affiliate.successful_conversions += 1
+                                    affiliate.save()
+                                    
+                                    # Clear the session variable
+                                    del request.session['affiliate_ref']
+                            except Exception as e:
+                                # Log error but don't break payment flow
+                                import logging
+                                logger = logging.getLogger(__name__)
+                                logger.error(f'Affiliate commission processing error: {str(e)}')
+                        
                         # Check if this was a signup-checkout flow
                         metadata = transaction_data.get('metadata', {})
                         is_signup_checkout = metadata.get('signup_checkout') == 'true'
@@ -1735,3 +1835,196 @@ def lecture_resources(request, lecture_id):
         'success': True,
         'resources': resources
     })
+
+
+# ========== AFFILIATE VIEWS ==========
+
+@login_required
+def affiliate_dashboard(request):
+    """Affiliate dashboard showing earnings, referrals, and stats"""
+    try:
+        affiliate = AffiliateProfile.objects.get(user=request.user)
+    except AffiliateProfile.DoesNotExist:
+        messages.info(request, 'You are not registered as an affiliate. Apply to join our program!')
+        return redirect('become_affiliate')
+    
+    # Get querysets for stats
+    referrals_qs = AffiliateReferral.objects.filter(affiliate=affiliate)
+    commissions_qs = AffiliateCommission.objects.filter(affiliate=affiliate)
+    
+    # Calculate stats before slicing
+    total_clicks = referrals_qs.count()
+    total_conversions = referrals_qs.filter(converted=True).count()
+    conversion_rate = (total_conversions / total_clicks * 100) if total_clicks > 0 else 0
+    
+    approved_commissions = commissions_qs.filter(status='approved').count()
+    paid_commissions = commissions_qs.filter(status='paid').count()
+    
+    # Get sliced querysets for display
+    referrals = referrals_qs.order_by('-created_at')[:20]
+    commissions = commissions_qs.order_by('-created_at')[:20]
+    payouts = AffiliatePayout.objects.filter(affiliate=affiliate).order_by('-requested_at')[:10]
+    
+    context = {
+        'affiliate': affiliate,
+        'referrals': referrals,
+        'commissions': commissions,
+        'payouts': payouts,
+        'total_clicks': total_clicks,
+        'total_conversions': total_conversions,
+        'conversion_rate': round(conversion_rate, 1),
+        'approved_commissions': approved_commissions,
+        'paid_commissions': paid_commissions,
+        'referral_link': request.build_absolute_uri('/tech-courses/') + f'?ref={affiliate.affiliate_code}',
+    }
+    
+    return render(request, 'affiliate/dashboard.html', context)
+
+
+@login_required
+def become_affiliate(request):
+    """Application form to become an affiliate"""
+    # Check if already an affiliate
+    try:
+        affiliate = AffiliateProfile.objects.get(user=request.user)
+        if affiliate.status == 'active':
+            messages.info(request, 'You are already an active affiliate.')
+            return redirect('affiliate_dashboard')
+        elif affiliate.status == 'pending':
+            messages.info(request, 'Your affiliate application is pending approval.')
+            return redirect('affiliate_dashboard')
+        elif affiliate.status == 'rejected':
+            messages.warning(request, 'Your previous application was rejected. You can reapply.')
+        elif affiliate.status == 'suspended':
+            messages.error(request, 'Your affiliate account is suspended. Contact support.')
+            return redirect('home')
+    except AffiliateProfile.DoesNotExist:
+        affiliate = None
+    
+    if request.method == 'POST':
+        bank_name = request.POST.get('bank_name')
+        account_number = request.POST.get('account_number')
+        account_name = request.POST.get('account_name')
+        
+        if not all([bank_name, account_number, account_name]):
+            messages.error(request, 'All fields are required.')
+            return render(request, 'affiliate/become_affiliate.html')
+        
+        if affiliate and affiliate.status == 'rejected':
+            # Update existing rejected profile
+            affiliate.bank_name = bank_name
+            affiliate.account_number = account_number
+            affiliate.account_name = account_name
+            affiliate.status = 'active'
+            affiliate.save()
+            messages.success(request, 'Welcome back! Your affiliate account is now active.')
+        else:
+            # Create new affiliate profile
+            affiliate_code = request.user.username
+            
+            AffiliateProfile.objects.create(
+                user=request.user,
+                affiliate_code=affiliate_code,
+                bank_name=bank_name,
+                account_number=account_number,
+                account_name=account_name,
+                status='active'
+            )
+            messages.success(request, 'Welcome to our affiliate program! Your account is now active. Visit your dashboard to get your referral link.')
+        
+        return redirect('affiliate_dashboard')
+    
+    return render(request, 'affiliate/become_affiliate.html')
+
+
+@login_required
+def request_payout(request):
+    """Request a payout of accumulated commissions"""
+    try:
+        affiliate = AffiliateProfile.objects.get(user=request.user)
+    except AffiliateProfile.DoesNotExist:
+        messages.error(request, 'You must be an affiliate to request payouts.')
+        return redirect('become_affiliate')
+    
+    if affiliate.status != 'active':
+        messages.error(request, 'Your affiliate account is not active.')
+        return redirect('affiliate_dashboard')
+    
+    min_payout = 30000  # ₦30,000 minimum
+    available = affiliate.available_balance
+    
+    if request.method == 'POST':
+        # Check if this is a bank details update
+        if request.POST.get('action') == 'update_bank':
+            bank_name = request.POST.get('bank_name', '').strip()
+            account_number = request.POST.get('account_number', '').strip()
+            account_name = request.POST.get('account_name', '').strip()
+            
+            if not all([bank_name, account_number, account_name]):
+                messages.error(request, 'All bank details are required.')
+            elif len(account_number) != 10 or not account_number.isdigit():
+                messages.error(request, 'Account number must be 10 digits.')
+            else:
+                affiliate.bank_name = bank_name
+                affiliate.account_number = account_number
+                affiliate.account_name = account_name
+                affiliate.save()
+                messages.success(request, 'Bank details updated successfully!')
+            
+            return render(request, 'affiliate/request_payout.html', {
+                'affiliate': affiliate,
+                'min_payout': min_payout,
+                'available': available
+            })
+        
+        # Otherwise, handle payout request
+        amount = request.POST.get('amount')
+        
+        try:
+            amount = float(amount)
+        except (ValueError, TypeError):
+            messages.error(request, 'Invalid amount.')
+            return render(request, 'affiliate/request_payout.html', {
+                'affiliate': affiliate,
+                'min_payout': min_payout,
+                'available': available
+            })
+        
+        if amount < min_payout:
+            messages.error(request, f'Minimum payout amount is ₦{min_payout:,.0f}. You entered ₦{amount:,.0f}.')
+        elif amount > available:
+            messages.error(request, f'Insufficient balance! You have ₦{available:,.2f} available but tried to withdraw ₦{amount:,.2f}.')
+        else:
+            # Verify balance one more time
+            current_available = affiliate.available_balance
+            if amount > current_available:
+                messages.error(request, f'Balance changed. Available: ₦{current_available:,.2f}')
+                return render(request, 'affiliate/request_payout.html', {
+                    'affiliate': affiliate,
+                    'min_payout': min_payout,
+                    'available': current_available
+                })
+            
+            # Create payout request
+            import uuid
+            payout = AffiliatePayout.objects.create(
+                affiliate=affiliate,
+                amount=amount,
+                bank_name=affiliate.bank_name,
+                account_number=affiliate.account_number,
+                account_name=affiliate.account_name,
+                reference=f"PAYOUT_{uuid.uuid4().hex.upper()[:12]}",
+                status='pending'
+            )
+            
+            # Update balances (will be deducted when payout is completed)
+            messages.success(request, f'Payout request for ₦{amount:,.2f} submitted successfully!')
+            return redirect('affiliate_dashboard')
+    
+    context = {
+        'affiliate': affiliate,
+        'min_payout': min_payout,
+        'available': available,
+    }
+    
+    return render(request, 'affiliate/request_payout.html', context)

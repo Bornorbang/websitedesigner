@@ -50,6 +50,16 @@
                         <p class="text-xl lg:text-2xl text-gray-300 font-light max-w-2xl">
                            Start your tech career with our beginner-friendly online IT courses in Nigeria. Learn Web develpment, SEO, and more with expert-led training and earn certificates that boost your CV.
                         </p>
+                        <div class="flex flex-wrap gap-4 mt-8">
+                            <a href="#courses" class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                                <i class="fas fa-graduation-cap mr-2"></i>
+                                <span class="text-sm lg:text-base">BROWSE COURSES</span>
+                            </a>
+                            <a href="{% url 'become_affiliate' %}" class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                                <i class="fas fa-hand-holding-usd mr-2"></i>
+                                <span class="text-sm lg:text-base">BECOME AN AFFILIATE</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -194,6 +204,210 @@
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-green-100 rounded-full blur-3xl opacity-20"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-yellow-100 rounded-full blur-3xl opacity-20"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+                <p class="text-red-600 font-bold mb-4 text-base tracking-wider uppercase">Student Success Stories</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-8 rounded-full"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Hear from students who have transformed their careers through our courses</p>
+            </div>
+            
+            <!-- Testimonials Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 - Nigeria -->
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border border-gray-100 h-full">
+                        <!-- Rating -->
+                        <div class="flex items-center space-x-1 mb-4">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                        
+                        <!-- Review -->
+                        <p class="text-gray-700 lg:text-sm mb-6 leading-relaxed">
+                            "The web development course was exactly what I needed to start my freelancing career. The instructor explained everything clearly and the projects were practical. I'm now building websites for clients!"
+                        </p>
+                        
+                        <!-- Student Info -->
+                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                AO
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Adewale Ogunleye</h4>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-600 text-sm">Lagos, Nigeria</span>
+                                    <span class="text-xl">🇳🇬</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 - Nigeria -->
+                <div class="wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border border-gray-100 h-full">
+                        <!-- Rating -->
+                        <div class="flex items-center space-x-1 mb-4">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                        
+                        <!-- Review -->
+                        <p class="text-gray-700 lg:text-sm mb-6 leading-relaxed">
+                            "I had zero coding experience before enrolling. The course structure made it easy to follow and I loved the lifetime access. Now I'm confident enough to pursue a career in tech. Highly recommend!"
+                        </p>
+                        
+                        <!-- Student Info -->
+                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                CN
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Chioma Nwankwo</h4>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-600 text-sm">Abuja, Nigeria</span>
+                                    <span class="text-xl">🇳🇬</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 - Ghana -->
+                <div class="wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border border-gray-100 h-full">
+                        <!-- Rating -->
+                        <div class="flex items-center space-x-1 mb-4">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                        
+                        <!-- Review -->
+                        <p class="text-gray-700 lg:text-sm mb-6 leading-relaxed">
+                            "Outstanding course! The SEO training helped me understand how to rank websites on Google. I've already started seeing results for my business. The investment was worth every penny."
+                        </p>
+                        
+                        <!-- Student Info -->
+                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                KA
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Kwame Asante</h4>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-600 text-sm">Accra, Ghana</span>
+                                    <span class="text-xl">🇬🇭</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Become an Affiliate Section -->
+    <section class="py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-red-100 rounded-full blur-3xl opacity-30"></div>
+            <div class="absolute bottom-1/3 left-1/3 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+                <p class="text-red-600 font-bold mb-4 text-base tracking-wider uppercase">Affiliate Program</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Earn Money Promoting Our Courses</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-8 rounded-full"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Join our affiliate program and earn generous commissions for every course sale you refer. It's free to join and you get instant approval!</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 text-lg">Earn up to 30% commission on every sale</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 text-lg">30-day cookie tracking for your referrals</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 text-lg">Instant approval - start earning immediately</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 text-lg">Real-time tracking and detailed analytics</span>
+                        </li>
+                    </ul>
+                    <a href="{% url 'become_affiliate' %}" class="inline-block bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300">
+                        Join Affiliate Program
+                    </a>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-xl">
+                        <div class="space-y-6">
+                            <!-- Commission Stats -->
+                            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-gray-600 text-sm">Monthly Earnings</span>
+                                    <i class="fas fa-chart-line text-green-600"></i>
+                                </div>
+                                <div class="text-4xl font-bold text-gray-900 mb-2">₦150,000+</div>
+                                <div class="text-gray-600 text-sm">Top affiliates earning</div>
+                            </div>
+                            
+                            <!-- Quick Stats -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4">
+                                    <div class="text-2xl font-bold text-gray-900 mb-1">30%</div>
+                                    <div class="text-gray-600 text-xs">Commission Rate</div>
+                                </div>
+                                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
+                                    <div class="text-2xl font-bold text-gray-900 mb-1">30 Days</div>
+                                    <div class="text-gray-600 text-xs">Cookie Duration</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -1339,6 +1339,67 @@
             display: inline;
             margin-right: 0.6rem;
         }
+
+        /* Reviews mobile styles */
+        .reviews-section,
+        .reviews-header,
+        .overall-rating {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .rating-summary {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .rating-score {
+            min-width: unset;
+            width: 100%;
+        }
+
+        .rating-breakdown {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .rating-bar {
+            gap: 0.5rem;
+        }
+
+        .bar-label {
+            min-width: 50px;
+            font-size: 0.8rem;
+        }
+
+        .bar-percentage {
+            font-size: 0.8rem;
+        }
+
+        .review-item {
+            padding: 1rem;
+        }
+
+        .reviewer-name {
+            font-size: 0.9rem;
+        }
+
+        .review-actions {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        /* Review form mobile */
+        .review-form-section {
+            padding: 15px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .review-form textarea {
+            font-size: 14px;
+            padding: 12px;
+        }
     }
 
     @media (max-width: 576px) {
@@ -1363,12 +1424,25 @@
         padding: 20px;
         margin-top: 20px;
         border: 1px solid #e9ecef;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
 
     .review-form-section h4 {
         color: #EF233C;
         margin-bottom: 20px;
         font-weight: 600;
+    }
+
+    .review-form {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .review-form .mb-6 {
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .star-rating-input {
@@ -1412,6 +1486,9 @@
         transition: border-color 0.3s ease;
         resize: vertical;
         min-height: 120px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .review-form textarea:focus {

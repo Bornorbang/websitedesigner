@@ -1,0 +1,241 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}Become an Affiliate - Website Designer Nigeria{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-red-600 to-red-700 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full animate-pulse" viewBox="0 0 100 100">
+                <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                <circle cx="80" cy="80" r="2" fill="currentColor"/>
+                <circle cx="40" cy="60" r="1.5" fill="currentColor"/>
+                <circle cx="70" cy="30" r="1" fill="currentColor"/>
+                <circle cx="10" cy="70" r="1.2" fill="currentColor"/>
+            </svg>
+        </div>
+        
+        <div class="relative z-10 container mx-auto px-4 py-16">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-4xl font-bold mb-4 text-white">Join Our Affiliate Program</h1>
+                <p class="text-xl text-white">Earn 30% commission on every course sale you refer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Form -->
+    <div class="container mx-auto px-4 py-12">
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-6 p-4 rounded-lg border-l-4 max-w-2xl mx-auto {% if message.tags == 'success' %}bg-green-50 border-green-400 text-green-700{% elif message.tags == 'error' %}bg-red-50 border-red-400 text-red-700{% elif message.tags == 'warning' %}bg-yellow-50 border-yellow-400 text-yellow-700{% else %}bg-blue-50 border-blue-400 text-blue-700{% endif %}">
+                    <div class="flex justify-between items-start">
+                        <span>{{ message }}</span>
+                        <button type="button" class="ml-2 text-gray-400 hover:text-gray-600 font-bold" onclick="this.parentElement.parentElement.remove()">×</button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="max-w-2xl mx-auto">
+            <!-- Application Form Card -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <i class="fas fa-user-plus text-red-600 mr-3"></i>
+                    Application Form
+                </h2>
+
+                <form method="POST" class="space-y-6">
+                    {% csrf_token %}
+
+                    <!-- User Info Display -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Applicant</p>
+                                <p class="font-semibold text-gray-900">{{ user.get_full_name|default:user.username }}</p>
+                                <p class="text-sm text-gray-600">{{ user.email }}</p>
+                            </div>
+                            <i class="fas fa-user-circle text-4xl text-red-600"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bank Name -->
+                    <div>
+                        <label for="bank_name" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Bank Name <span class="text-red-600">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="bank_name" 
+                            name="bank_name" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
+                            placeholder="Enter your bank name"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Example: GTBank, First Bank, Access Bank, etc.</p>
+                    </div>
+
+                    <!-- Account Number -->
+                    <div>
+                        <label for="account_number" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Account Number <span class="text-red-600">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="account_number" 
+                            name="account_number" 
+                            required
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
+                            placeholder="10-digit account number"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Enter your 10-digit account number</p>
+                    </div>
+
+                    <!-- Account Name -->
+                    <div>
+                        <label for="account_name" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Account Name <span class="text-red-600">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="account_name" 
+                            name="account_name" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
+                            placeholder="Account holder name"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Name as it appears on your bank account</p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transform hover:scale-[1.02] transition"
+                        >
+                            <i class="fas fa-rocket mr-2"></i>
+                            Join Affiliate Program
+                        </button>
+                    </div>
+
+                    <!-- Help Text -->
+                    <div class="text-center">
+                        <p class="text-gray-500">
+                            <small>By joining, you agree to our <a href="{% url 'terms' %}" class="text-red-600 hover:underline">Affiliate Terms</a>.</small>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Benefits Card -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 mt-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Why Become an Affiliate?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-percentage text-2xl text-red-600"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">30% Commission</h3>
+                        <p class="text-sm text-gray-600">Earn generous commissions on all sales</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">30-Day Tracking</h3>
+                        <p class="text-sm text-gray-600">Earn credit for 30 days after click</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-check-circle text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Instant Approval</h3>
+                        <p class="text-sm text-gray-600">Start earning immediately</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section with Accordion -->
+            <div class="mt-8 bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-3">
+                    <!-- FAQ 1 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleAccordion(1)" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition">
+                            <span class="font-semibold text-gray-900 text-left">How does the 30-day cookie work?</span>
+                            <i id="icon-1" class="fas fa-chevron-down text-gray-500 transition-transform"></i>
+                        </button>
+                        <div id="content-1" class="hidden p-4 border-t border-gray-200">
+                            <p class="text-gray-600 text-sm">When someone clicks your referral link, we save a "cookie" (tracking code) in their browser for 30 days. If they purchase any course within those 30 days, you automatically earn commission—even if they leave and come back later!</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleAccordion(2)" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition">
+                            <span class="font-semibold text-gray-900 text-left">When can I request a payout?</span>
+                            <i id="icon-2" class="fas fa-chevron-down text-gray-500 transition-transform"></i>
+                        </button>
+                        <div id="content-2" class="hidden p-4 border-t border-gray-200">
+                            <p class="text-gray-600 text-sm">You can request a payout once your approved commissions reach ₦30,000. Payouts are processed within 3-5 business days and sent directly to your registered bank account.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleAccordion(3)" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition">
+                            <span class="font-semibold text-gray-900 text-left">How are commissions calculated?</span>
+                            <i id="icon-3" class="fas fa-chevron-down text-gray-500 transition-transform"></i>
+                        </button>
+                        <div id="content-3" class="hidden p-4 border-t border-gray-200">
+                            <p class="text-gray-600 text-sm">You earn 30% of the course price for every sale made through your referral link. For example, if a course costs ₦50,000, you earn ₦15,000. Commissions require admin approval before becoming available for withdrawal.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleAccordion(4)" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition">
+                            <span class="font-semibold text-gray-900 text-left">How do I promote courses?</span>
+                            <i id="icon-4" class="fas fa-chevron-down text-gray-500 transition-transform"></i>
+                        </button>
+                        <div id="content-4" class="hidden p-4 border-t border-gray-200">
+                            <p class="text-gray-600 text-sm">Share your unique referral link on social media, blogs, YouTube, email newsletters, or any platform where your audience hangs out. You can promote specific courses or our courses page in general.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleAccordion(5)" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition">
+                            <span class="font-semibold text-gray-900 text-left">Can I track my performance?</span>
+                            <i id="icon-5" class="fas fa-chevron-down text-gray-500 transition-transform"></i>
+                        </button>
+                        <div id="content-5" class="hidden p-4 border-t border-gray-200">
+                            <p class="text-gray-600 text-sm">Yes! Your affiliate dashboard shows total clicks, conversions, conversion rate, approved earnings, paid commissions, and payout history. Everything is tracked in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAccordion(id) {
+    const content = document.getElementById('content-' + id);
+    const icon = document.getElementById('icon-' + id);
+    
+    if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+    } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+    }
+}
+</script>
+{% endblock %}

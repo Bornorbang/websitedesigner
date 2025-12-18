@@ -117,6 +117,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.middleware.AffiliateTrackingMiddleware',
 ]
 
 ROOT_URLCONF = 'websitedesigner.urls'
@@ -212,23 +213,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
-CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
-
-ONESIGNAL_APP_ID = os.getenv('ONESIGNAL_APP_ID')
-ONESIGNAL_API_KEY = os.getenv('ONESIGNAL_API_KEY')
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': 'auto',
-        'extraAllowedContent': 'iframe[*]',
-        'allowedContent': True,
-    },
-}
-
 
 

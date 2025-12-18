@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 import requests
 
-from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, WorkshopRegistration, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment, CourseAccessPin
+from .models import Blog, Category, BlogSidebarBanner, BlogslistSidebarBanner, Comment, WorkshopRegistration, ConsultationBooking, ConsultationPayment, Course, CourseCategory, Instructor, CourseSection, Lecture, CourseReview, CourseEnrollment, CoursePayment, CourseAccessPin, AffiliateProfile, AffiliateReferral, AffiliateCommission, AffiliatePayout
 
 
 @admin.register(Blog)
@@ -619,3 +619,166 @@ class CourseAccessPinAdmin(admin.ModelAdmin):
         if obj:  # Editing existing object
             return self.readonly_fields + ('pin',)
         return self.readonly_fields
+
+
+# ========== AFFILIATE ADMIN ==========
+
+@admin.register(AffiliateProfile)
+class AffiliateProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'affiliate_code', 'status', 'total_earned', 'available_balance', 'total_referrals', 'successful_conversions', 'commission_rate', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('user__username', 'user__email', 'affiliate_code', 'account_name')
+    readonly_fields = ('affiliate_code', 'total_earned', 'total_withdrawn', 'pending_balance', 'total_referrals', 'successful_conversions', 'created_at', 'approved_at')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('user', 'affiliate_code', 'status', 'commission_rate')
+        }),
+        ('Statistics', {
+            'fields': ('total_earned', 'total_withdrawn', 'pending_balance', 'total_referrals', 'successful_conversions')
+        }),
+        ('Bank Details', {
+            'fields': ('bank_name', 'account_number', 'account_name')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'approved_at')
+        }),
+    )
+    
+    actions = ['approve_affiliates', 'suspend_affiliates', 'activate_affiliates']
+    
+    def approve_affiliates(self, request, queryset):
+        updated = queryset.filter(status='pending').update(status='active')
+        self.message_user(request, f'{updated} affiliate(s) approved.')
+    approve_affiliates.short_description = 'Approve selected affiliates'
+    
+    def suspend_affiliates(self, request, queryset):
+        updated = queryset.update(status='suspended')
+        self.message_user(request, f'{updated} affiliate(s) suspended.')
+    suspend_affiliates.short_description = 'Suspend selected affiliates'
+    
+    def activate_affiliates(self, request, queryset):
+        updated = queryset.update(status='active')
+        self.message_user(request, f'{updated} affiliate(s) activated.')
+    activate_affiliates.short_description = 'Activate selected affiliates'
+
+
+@admin.register(AffiliateReferral)
+class AffiliateReferralAdmin(admin.ModelAdmin):
+    list_display = ('affiliate', 'referral_code', 'referred_user', 'converted', 'ip_address', 'created_at', 'converted_at')
+    list_filter = ('converted', 'created_at', 'converted_at')
+    search_fields = ('affiliate__user__username', 'referral_code', 'referred_user__username', 'ip_address')
+    readonly_fields = ('affiliate', 'referral_code', 'referred_user', 'ip_address', 'landing_page', 'created_at', 'converted', 'converted_at')
+    
+    def has_add_permission(self, request):
+        return False  # Referrals are created automatically
+    
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser  # Only superusers can delete
+
+
+@admin.register(AffiliateCommission)
+class AffiliateCommissionAdmin(admin.ModelAdmin):
+    list_display = ('affiliate', 'course', 'sale_amount', 'commission_amount', 'status', 'created_at', 'approved_at', 'paid_at')
+    list_filter = ('status', 'created_at', 'approved_at', 'paid_at')
+    search_fields = ('affiliate__user__username', 'course__title', 'course_payment__reference')
+    readonly_fields = ('affiliate', 'referral', 'course', 'course_payment', 'sale_amount', 'commission_rate', 'commission_amount', 'created_at', 'approved_at', 'paid_at')
+    
+    fieldsets = (
+        ('Commission Details', {
+            'fields': ('affiliate', 'referral', 'course', 'course_payment')
+        }),
+        ('Financial Information', {
+            'fields': ('sale_amount', 'commission_rate', 'commission_amount', 'status')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'approved_at', 'paid_at')
+        }),
+    )
+    
+    actions = ['approve_commissions', 'mark_as_paid']
+    
+    def approve_commissions(self, request, queryset):
+        count = 0
+        for commission in queryset.filter(status='pending'):
+            commission.approve()
+            count += 1
+        self.message_user(request, f'{count} commission(s) approved.')
+    approve_commissions.short_description = 'Approve selected commissions'
+    
+    def mark_as_paid(self, request, queryset):
+        from django.utils import timezone
+        updated = queryset.filter(status='approved').update(status='paid', paid_at=timezone.now())
+        self.message_user(request, f'{updated} commission(s) marked as paid.')
+    mark_as_paid.short_description = 'Mark selected as paid'
+    
+    def has_add_permission(self, request):
+        return False  # Commissions are created automatically
+    
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
+@admin.register(AffiliatePayout)
+class AffiliatePayoutAdmin(admin.ModelAdmin):
+    list_display = ('affiliate', 'amount', 'reference', 'status', 'requested_at', 'processed_at')
+    list_filter = ('status', 'requested_at', 'processed_at')
+    search_fields = ('affiliate__user__username', 'reference', 'account_name')
+    readonly_fields = ('affiliate', 'reference', 'requested_at')
+    
+    fieldsets = (
+        ('Payout Information', {
+            'fields': ('affiliate', 'amount', 'reference', 'status')
+        }),
+        ('Bank Details', {
+            'fields': ('bank_name', 'account_number', 'account_name')
+        }),
+        ('Processing', {
+            'fields': ('admin_notes', 'requested_at', 'processed_at')
+        }),
+    )
+    
+    actions = ['mark_as_processing', 'mark_as_completed', 'mark_as_failed']
+    
+    def mark_as_processing(self, request, queryset):
+        updated = queryset.filter(status='pending').update(status='processing')
+        self.message_user(request, f'{updated} payout(s) marked as processing.')
+    mark_as_processing.short_description = 'Mark as processing'
+    
+    def mark_as_completed(self, request, queryset):
+        from django.utils import timezone
+        count = 0
+        for payout in queryset.filter(status='processing'):
+            payout.status = 'completed'
+            payout.processed_at = timezone.now()
+            payout.save()
+            
+            # Update affiliate balance
+            affiliate = payout.affiliate
+            affiliate.pending_balance -= payout.amount
+            affiliate.total_withdrawn += payout.amount
+            affiliate.save()
+            count += 1
+        
+        self.message_user(request, f'{count} payout(s) completed.')
+    mark_as_completed.short_description = 'Complete selected payouts'
+    
+    def mark_as_failed(self, request, queryset):
+        from django.utils import timezone
+        count = 0
+        for payout in queryset.filter(status__in=['pending', 'processing']):
+            payout.status = 'failed'
+            payout.processed_at = timezone.now()
+            payout.save()
+            
+            # Return amount to available balance
+            affiliate = payout.affiliate
+            affiliate.pending_balance -= payout.amount
+            affiliate.save()
+            count += 1
+        
+        self.message_user(request, f'{count} payout(s) marked as failed.')
+    mark_as_failed.short_description = 'Mark as failed'
+    
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
