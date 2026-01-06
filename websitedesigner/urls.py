@@ -49,6 +49,7 @@ urlpatterns = [
     path('consultation/', consultation, name="consultation"),
     path('book-consultation/', consultation_booking, name="consultation_booking"),
     path('web-development-pricing/', pricing, name="pricing"),
+    path('shopify-store-pricing/', shopify_pricing, name="shopify_pricing"),
     path('tech-courses/', courses, name="courses"),
     path('courses/<slug:slug>/', course_category, name="course_category"),
     path('seo-pricing/', seo_pricing, name="seo_pricing"),
@@ -91,10 +92,15 @@ urlpatterns = [
     path('lecture/<int:lecture_id>/download/', download_attachment, name='download_attachment'),
     path('lecture/<int:lecture_id>/resources/', lecture_resources, name='lecture_resources'),
     
-    # Affiliate URLs
+    # Affiliate URLs - MUST be before blog catch-all
     path('affiliate/dashboard/', affiliate_dashboard, name='affiliate_dashboard'),
     path('affiliate/join/', become_affiliate, name='become_affiliate'),
     path('affiliate/payout/', request_payout, name='request_payout'),
+    
+    # Authentication URLs - MUST be before blog catch-all
+    path('accounts/login/', login_view, name='account_login'),
+    path('accounts/signup/', signup_view, name='account_signup'),
+    path('accounts/logout/', logout_view, name='account_logout'),
     
     # Blog URLs - MUST BE LAST because it's a catch-all pattern
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),

@@ -1,0 +1,497 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}Shopify Store Design Pricing in Nigeria{% endblock %}
+
+{% block meta_description %}How much does a Shopify website design cost in Nigeria? Find out about our shopify store design pricing in Nigeria. {% endblock %}
+
+{% block og_title %}Shopify Store Design Pricing in Nigeria{% endblock %}
+
+{% block og_description %}How much does a Shopify website design cost in Nigeria? Find out about our shopify store design pricing in Nigeria. {% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modern Pricing Section Styling */
+    .price {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        padding: 80px 0;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .price::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(239, 35, 60, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(239, 35, 60, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .price .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Section Header */
+    .price .section-header {
+        margin-bottom: 60px;
+    }
+
+    .price .section-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .price .section-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: #EF233C;
+        border-radius: 2px;
+    }
+
+    .price .section-header p {
+        font-size: 1.1rem;
+        color: #636e72;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    /* Description Text */
+    .price > .container > p {
+        font-size: 1.1rem;
+        color: #636e72;
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto 50px;
+    }
+
+    /* Pricing Cards */
+    .price-item {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+        border: 2px solid transparent;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .price-item:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        border-color: rgba(239, 35, 60, 0.3);
+    }
+
+    /* Animation Enhancement */
+    .price-item {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock%}
+
+{% block content %}
+
+    <!-- Hero Banner Section -->
+    <section class="relative min-h-[65vh] md:min-h-[80vh] lg:min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-green-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-red-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="space-y-6">
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">SHOPIFY STORE</span>
+                            <span class="bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent">PRICING</span>
+                        </h1>
+                        <p class="text-xl lg:text-2xl text-gray-300 font-light max-w-2xl">
+                            Shopify Web Development in Nigeria
+.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                            <a href="{% url 'contact' %}" class="group bg-green-600 hover:bg-green-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-600/25">
+                                <i class="fas fa-phone mr-2"></i>
+                                <span class="text-sm lg:text-base">CONTACT US</span>
+                            </a>
+                            <a href="{% url 'pricing' %}" class="group bg-red-600 hover:bg-red-700 text-white hover:text-white px-6 py-3 lg:px-8 lg:py-4 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/25">
+                                <i class="fas fa-globe mr-2"></i>
+                                <span class="text-sm lg:text-base">WEB PRICING</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="relative">
+                        <!-- Floating Shopify Elements -->
+                        <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 backdrop-blur-sm">
+                            <div class="absolute -top-4 -right-4 w-8 h-8 bg-green-500 rounded-full animate-ping"></div>
+                            <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-ping delay-300"></div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;shopify</span>
+                                        <span class="text-blue-400">store=</span>
+                                        <span class="text-green-400">"professional"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;products</span>
+                                        <span class="text-blue-400">unlimited=</span>
+                                        <span class="text-green-400">"true"</span>
+                                        <span class="text-purple-400">/&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;payment</span>
+                                        <span class="text-blue-400">gateway=</span>
+                                        <span class="text-green-400">"integrated"</span>
+                                        <span class="text-purple-400">/&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;design</span>
+                                        <span class="text-blue-400">type=</span>
+                                        <span class="text-green-400">"custom"</span>
+                                        <span class="text-purple-400">&gt;</span>
+                                    </div>
+                                    <div class="ml-8 text-white">Built for Success</div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <span class="text-purple-400">&lt;/design&gt;</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="text-purple-400">&lt;/shopify&gt;</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+<!-- Price Start -->
+ <div class="py-16 lg:py-24 bg-gray-50" id="price">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 lg:mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-green-600 font-semibold text-xs uppercase tracking-wider mb-2">Shopify Store Design Pricing in Nigeria</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">Our Shopify Development Pricing Plans</h2>
+        </div>
+        <p class="text-center mb-8 text-base text-gray-600">How much does a Shopify website design cost in Nigeria? Find out about our shopify store design pricing in Nigeria. </p>
+        
+        <!-- Currency Switcher -->
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex rounded-lg border border-gray-300 bg-white p-1 shadow-sm">
+                <button onclick="switchCurrency('NGN')" id="btn-ngn" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 bg-green-600 text-white">NGN (₦)</button>
+                <button onclick="switchCurrency('USD')" id="btn-usd" class="px-6 py-2 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 hover:text-gray-900">USD ($)</button>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Starter Plan -->
+            <div class="wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-green-600">
+                    <div class="p-8 border-b border-gray-100 bg-black">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">STARTER</h2>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="400000" data-usd="330">400,000</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Custom Domain Integration</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Premium Theme Customization</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Up to 50 Products Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Payment Gateway Integration</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Mobile Responsive Design</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Basic SEO Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>1 Week Training & Support</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <div>
+                            <a class="block w-full bg-black hover:bg-gray-800 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Plan (Popular) -->
+            <div class="wow fadeInUp" data-wow-delay="0.0s">
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-2 relative border-2 border-green-600">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-black text-xs font-bold px-4 py-1 rounded-full">POPULAR</div>
+                    <div class="p-8 border-b border-green-500 bg-gradient-to-br from-green-600 to-green-700">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">PROFESSIONAL</h2>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="600000" data-usd="500">600,000</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Custom Domain & Business Email</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Custom Theme Development</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Up to 200 Products Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Multiple Payment Gateways</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Advanced SEO Optimization</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Social Media Integration</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Email Marketing Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Analytics & Tracking Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>1 Month Training & Support</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <div> 
+                            <a class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="http://wa.me/+2349058991274" target="_blank">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-green-600">
+                    <div class="p-8 border-b border-gray-100 bg-black">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold text-white">ENTERPRISE</h2>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="text-4xl font-bold text-white">
+                                <small class="text-2xl currency-symbol">₦</small>
+                                <span class="price-value" data-ngn="XXX" data-usd="XXX">XXX,XXX</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Fully Custom Store Design</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Unlimited Products Setup</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Custom App Development</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Advanced Marketing Automation</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Multi-Currency & Multi-Language</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Priority Support & Maintenance</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Dedicated Account Manager</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Custom Integrations</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i><span>Ongoing Training & Support</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <div>
+                            <a class="block w-full bg-black hover:bg-gray-800 text-white text-center py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:scale-105" href="{% url 'contact' %}" target="_blank">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terms Notice -->
+        <div class="text-center mt-12 mb-6">
+            <p class="text-gray-500">
+                <small><i class="fas fa-info-circle mr-2 text-green-600"></i> By ordering our services, you agree to our <a href="{% url 'terms' %}" target="_blank" class="text-green-600 hover:text-green-700 underline">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" class="text-green-600 hover:text-green-700 underline">Privacy Policy</a>.</small>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Price End -->
+
+<!-- FAQ Start -->
+<div class="faq section-margin py-16 bg-white" id="faq">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-green-600 font-semibold mb-4 text-base tracking-wider">FREQUENTLY ASKED QUESTIONS</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Shopify Store Design FAQs</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-green-600 mx-auto rounded-full"></div>
+        </div>
+        <div class="flex justify-center">
+            <div class="w-full max-w-4xl">
+                <div class="faq-list space-y-4">
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.1s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What about the Shopify subscription?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">The monthly Shopify subscription is not included in our packages and will be your responsibility. You'll need to choose and pay for your preferred Shopify plan directly with Shopify. We'll guide you through selecting the right plan for your needs and help with the setup process!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            Do I need technical knowledge to manage my Shopify store?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Not at all! Shopify is user-friendly and designed for non-technical users. We provide comprehensive training with each package to show you how to add products, manage orders, and update your store. Plus, our support team is always available via <a href="https://wa.me/2349058991274" target="_blank" class="text-green-600 underline hover:text-green-700">WhatsApp</a> to help!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.3s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            Can I add more products after my store is built?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Absolutely! The product limits in our packages refer to the initial setup we'll handle for you. Once your store is live, you can add unlimited products yourself at no additional cost. We'll train you on how to add and manage products effectively during our training sessions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.4s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What payment methods can customers use on my Shopify store?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">We'll integrate popular payment gateways including Shopify Payments, Stripe, PayPal, Paystack, and Flutterwave, enabling customers worldwide to pay via card, bank transfer, mobile money, or other local payment methods. For Professional and Enterprise plans, we can set up multiple payment options to give your customers maximum flexibility and boost conversions!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.5s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            How long does it take to build a Shopify store?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Development time varies by package: <strong>Starter</strong> takes 1-2 weeks, <strong>Professional</strong> takes 2-4 weeks, and <strong>Enterprise</strong> takes 4-6 weeks depending on customization complexity. We'll provide a detailed timeline during our initial consultation to ensure your store launches on schedule!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.6s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What support do you provide after the store goes live?
+                            <span class="faq-icon text-green-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">All packages include post-launch support ranging from 1 week to ongoing support for Enterprise clients. This covers technical issues, training, updates, and guidance. We're committed to your success! Reach out via <a href="https://wa.me/2349058991274" target="_blank" class="text-green-600 underline hover:text-green-700">WhatsApp</a> or <a href="{% url 'contact' %}" class="text-green-600 underline hover:text-green-700">email</a> anytime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ End -->
+
+{% endblock %}
+{% block extra_js %}
+<script>
+// FAQ toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.textContent = '-';
+            } else {
+                answer.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        });
+    });
+});
+
+function switchCurrency(currency) {
+    const ngnBtn = document.getElementById('btn-ngn');
+    const usdBtn = document.getElementById('btn-usd');
+    const priceElements = document.querySelectorAll('.price-value');
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
+    
+    if (currency === 'NGN') {
+        // Update button styles
+        ngnBtn.classList.add('bg-green-600', 'text-white');
+        ngnBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        usdBtn.classList.remove('bg-green-600', 'text-white');
+        usdBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '₦';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const ngnPrice = element.getAttribute('data-ngn');
+            if (ngnPrice && ngnPrice !== 'XXX') {
+                element.textContent = parseInt(ngnPrice).toLocaleString();
+            }
+        });
+    } else {
+        // Update button styles
+        usdBtn.classList.add('bg-green-600', 'text-white');
+        usdBtn.classList.remove('text-gray-700', 'hover:text-gray-900');
+        ngnBtn.classList.remove('bg-green-600', 'text-white');
+        ngnBtn.classList.add('text-gray-700', 'hover:text-gray-900');
+        
+        // Update currency symbols
+        currencySymbols.forEach(symbol => {
+            symbol.textContent = '$';
+        });
+        
+        // Update prices
+        priceElements.forEach(element => {
+            const usdPrice = element.getAttribute('data-usd');
+            if (usdPrice && usdPrice !== 'XXX') {
+                element.textContent = parseInt(usdPrice).toLocaleString();
+            }
+        });
+    }
+}
+</script>
+{% endblock %}

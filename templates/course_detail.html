@@ -4,6 +4,10 @@
 
 {% block title %}{{ course.title }} - {{ course.subtitle }}{% endblock %}
 
+{% block whatsapp_widget %}
+{# Hide WhatsApp widget on course detail page #}
+{% endblock %}
+
 {% block meta_description %}{{ course.meta_description|default:course.short_description }}{% endblock %}
 
 {% block og_title %}{{ course.title }} Course - {{ course.subtitle }}{% endblock %}
@@ -152,6 +156,27 @@
                         <i class="fas fa-signal"></i>
                         <span>{{ course.get_level_display }}</span>
                     </div>
+                </div>
+
+                <!-- Enroll Now Button in Hero -->
+                <div class="mt-6">
+                    {% if user.is_authenticated %}
+                        {% if user_enrolled %}
+                            <a href="{% url 'course_detail' course.slug %}" class="inline-block glass-button px-5 py-2.5 rounded-lg font-semibold text-base transition-all duration-300" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e;">
+                                <i class="fas fa-check mr-2"></i>Enrolled
+                            </a>
+                        {% else %}
+                            <!-- Hidden CSRF token for AJAX requests -->
+                            {% csrf_token %}
+                            <button type="button" onclick="processCoursePayment({{ course.id }})" class="inline-block glass-button px-5 py-2.5 rounded-lg font-semibold text-base transition-all duration-300 cursor-pointer" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(239, 35, 60, 0.3); color: #EF233C;">
+                                <i class="fas fa-user-plus mr-2"></i>Enroll Now
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'signup' %}?course_id={{ course.id }}&next={{ request.path }}" class="inline-block glass-button px-5 py-2.5 rounded-lg font-semibold text-base transition-all duration-300" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(239, 35, 60, 0.3); color: #EF233C;">
+                            <i class="fas fa-user-plus mr-2"></i>Enroll Now
+                        </a>
+                    {% endif %}
                 </div>
                 </div>
             </div>
@@ -691,6 +716,15 @@
                             </a>
                             <div class="text-center mt-1">
                                 <small>Already have an account? <a href="{% url 'login' %}?course_id={{ course.id }}&next={{ request.path }}" style="color: var(--primary-color); text-decoration: none;">Login here</a></small>
+                            </div>
+                        {% endif %}
+
+                        <!-- WhatsApp Community for Enrolled Users -->
+                        {% if user.is_authenticated and user_enrolled %}
+                            <div class="text-center mt-4">
+                                <a href="https://chat.whatsapp.com/HyabWwIy2eXFaWbpXwXLFu" target="_blank" class="inline-flex items-center justify-center w-full px-4 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-300">
+                                    <i class="fab fa-whatsapp mr-2" style="font-size: 1.2rem;"></i>Join WhatsApp Community
+                                </a>
                             </div>
                         {% endif %}
 
@@ -1252,11 +1286,8 @@ function enrollInCourse(courseId) {
 
 // Payment processing functionality
 function processCoursePayment(courseId) {
-    // Try to find the payment button (could be paymentBtn or pendingPaymentBtn)
-    let btn = document.getElementById('paymentBtn');
-    if (!btn) {
-        btn = document.getElementById('pendingPaymentBtn');
-    }
+    // Find the button that was clicked - use event.currentTarget
+    const btn = event ? event.currentTarget : null;
     
     if (!btn) {
         console.error('Payment button not found');

@@ -514,7 +514,7 @@
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Business Emails</span></li>
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Logo Design</span></li>
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>On Page SEO</span></li>
-                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Unlimited Pages</span></li>
+                                <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Up to 100 products</span></li>
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Payment Gateway</span></li>
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>1 Month Support</span></li>
                                 <li class="flex items-start text-gray-700 text-sm"><i class="fas fa-check-circle text-red-600 mr-3 mt-1"></i><span>Analytics Integration</span></li>
@@ -574,9 +574,108 @@
 </div>
 <!-- Price End -->
 
+<!-- FAQ Start -->
+<div class="faq section-margin py-16 bg-white" id="faq">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold mb-4 text-base tracking-wider">FREQUENTLY ASKED QUESTIONS</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Web Development Pricing FAQs</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
+        </div>
+        <div class="flex justify-center">
+            <div class="w-full max-w-4xl">
+                <div class="faq-list space-y-4">
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.1s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What's the best way to reach out to you?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">For the fastest response, reach us on <a href="https://wa.me/2349058991274" target="_blank" class="text-green-600 underline hover:text-green-700"><i class="fab fa-whatsapp"></i> WhatsApp: 09058991274</a>. We're also available via <a href="{% url 'contact' %}" class="text-red-600 underline hover:text-red-700">email</a> for detailed custom project inquiries. Our team is ready to discuss your web development needs and provide expert guidance!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.2s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            Can I see examples of your past work?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Absolutely! Visit our <a href="{% url 'portfolio' %}" class="text-red-600 underline hover:text-red-700">Portfolio page</a> to browse through our completed projects and see the quality of work we deliver. You can also request specific project examples via <a href="https://wa.me/2349058991274" target="_blank" class="text-green-600 underline hover:text-green-700">WhatsApp</a> that match your industry or requirements.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.3s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            Are your prices negotiable?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">We provide competitive and transparent pricing tailored to your specific requirements. Our packages are carefully structured to ensure successful project delivery while offering excellent value. We're committed to working within your budget to deliver a high-quality website that meets all your business needs.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.4s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What is included in the Custom Plan?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">The Custom Plan is designed for projects with unique or specialized requirements that go beyond our standard packages. This could include advanced integrations, complex functionality, or industry-specific features. To provide an accurate quote, we'll need comprehensive details about your project vision, required features, and business goals. <a href="{% url 'contact' %}" class="text-red-600 underline hover:text-red-700">Contact us</a> to discuss your custom project!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.5s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What post-launch support do you provide?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">We provide <strong>at least one month of extended support</strong> for all E-Commerce and Custom plan clients. This includes technical assistance, bug fixes, minor adjustments, and guidance to ensure your website runs smoothly. We're dedicated to your long-term success and remain available for ongoing maintenance services beyond the initial support period.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.6s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            How long does it take to build a website?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Development time varies by package: <strong>Corporate</strong> takes 1-2 weeks, <strong>E-Commerce</strong> takes 2-4 weeks, and <strong>Custom</strong> takes 4-6 weeks depending on complexity and specific requirements. We'll provide a detailed project timeline during our initial consultation to ensure your website launches on schedule!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.7s">
+                        <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                            What other digital services do you offer?
+                            <span class="faq-icon text-primary-600 text-2xl">+</span>
+                        </h3>
+                        <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                            <p class="text-sm">Beyond web development, we offer a comprehensive suite of digital services including <a href="{% url 'shopify_pricing' %}" class="text-red-600 underline hover:text-red-700">Shopify Store Design</a>, <a href="{% url 'seo_pricing' %}" class="text-red-600 underline hover:text-red-700">Search Engine Optimization (SEO)</a>, Social Media Management, and Mobile App Development. As a full-service digital agency, we're your one-stop solution for all online business needs. Reach out to us for expert digital marketing and development services!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ End -->
+
 {% endblock %}
 {% block extra_js %}
 <script>
+// FAQ toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.textContent = '-';
+            } else {
+                answer.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        });
+    });
+});
+
 function switchCurrency(currency) {
     const ngnBtn = document.getElementById('btn-ngn');
     const usdBtn = document.getElementById('btn-usd');

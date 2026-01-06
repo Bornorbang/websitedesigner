@@ -146,6 +146,9 @@ def consultation(request):
 def pricing(request):
     return render(request, 'pricing.html')
 
+def shopify_pricing(request):
+    return render(request, 'shopify_pricing.html')
+
 def advertise(request):
     return render(request, 'advertise.html')
 
@@ -155,6 +158,11 @@ def earn_money(request):
 def courses(request):
     # Get published courses from database (exclude coming_soon)
     published_courses = Course.objects.filter(status='published').order_by('-created_at')
+    
+    # Add enrollment status for authenticated users
+    if request.user.is_authenticated:
+        for course in published_courses:
+            course.user_is_enrolled = course.is_enrolled_by_user(request.user)
     
     context = {
         'published_courses': published_courses,

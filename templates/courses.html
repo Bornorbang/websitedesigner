@@ -196,9 +196,15 @@
                                         <span class="text-lg font-bold text-red-600">₦{{ course.price|floatformat:0|intcomma }}</span>
                                     {% endif %}
                                 </div>
-                                <a href="{{ course.get_absolute_url }}" class="bg-red-600 hover:bg-red-700 text-white hover:text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                                    Buy Now
-                                </a>
+                                {% if user.is_authenticated and course.user_is_enrolled %}
+                                    <a href="{{ course.get_absolute_url }}" class="bg-green-600 hover:bg-green-700 text-white hover:text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                                        Enrolled
+                                    </a>
+                                {% else %}
+                                    <a href="{{ course.get_absolute_url }}" class="bg-red-600 hover:bg-red-700 text-white hover:text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                                        Buy Now
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -412,6 +418,78 @@
         </div>
     </section>
 
+    <!-- FAQ Start -->
+    <div class="faq section-margin py-16 bg-white" id="faq">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+                <p class="text-red-600 font-semibold mb-4 text-base tracking-wider">FREQUENTLY ASKED QUESTIONS</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Tech Courses FAQs</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-full max-w-4xl">
+                    <div class="faq-list space-y-4">
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.1s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                Tell me more about these courses
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">Each course page contains detailed descriptions, learning objectives, and what to expect throughout your learning journey. Visit any course page and explore the <strong>Curriculum tab</strong> to view the complete course outline, including all sections and lectures. This helps you make an informed decision before enrolling.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.2s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                After payment, what happens next?
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">Once payment is confirmed, your course is automatically unlocked! You'll gain immediate access to all course materials in the <strong>Curriculum tab</strong>. Additionally, you'll be invited to join our exclusive course community where you can connect with fellow learners and receive support throughout your learning journey.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.3s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                I'm no longer enrolled in a course I paid for. What should I do?
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">All courses provide <strong>one year of full access</strong> from the date of enrollment. First, confirm that you're <a href="{% url 'login' %}" class="text-red-600 underline hover:text-red-700">logged into your account</a> and viewing the correct course. If you're still experiencing issues after verifying these details, please contact our support team for assistance.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.4s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                I see multiple courses on the same topic. Which one should I choose?
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">Each of our courses is comprehensively designed and well-detailed to ensure quality learning. While they may cover similar topics, each has its own unique teaching approach, depth, and focus areas. We recommend reviewing the course descriptions, checking the curriculum outlines, and reading student reviews to find the course that resonates most with your learning style and goals.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.5s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                I'm trying to enroll but payment isn't going through. Help!
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">We're here to help! If you're experiencing payment issues, please reach out to us directly on <a href="https://wa.me/2349058991274" target="_blank" class="text-green-600 underline hover:text-green-700"><i class="fab fa-whatsapp"></i> WhatsApp: 09058991274</a>. Our support team will quickly assist you in completing your enrollment and getting started with your course.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item bg-gray-50 border border-gray-200 rounded-lg fadeInUp" data-wow-delay="0.6s">
+                            <h3 class="faq-question p-6 font-bold text-lg text-gray-900 cursor-pointer flex justify-between items-center hover:text-primary-600">
+                                What support do you provide for course students?
+                                <span class="faq-icon text-primary-600 text-2xl">+</span>
+                            </h3>
+                            <div class="faq-answer hidden p-6 pt-0 text-gray-700 text-sm">
+                                <p class="text-sm">Every enrolled student receives <strong>one month of exclusive mentorship</strong> to guide you through your learning journey. You'll also gain access to our vibrant learning community where you can collaborate with fellow students, share knowledge, ask questions, and get support. We're committed to ensuring your success beyond just course content!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQ End -->
+
 {% endblock %}
 
 {% block extra_js %}
@@ -421,6 +499,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof WOW !== 'undefined') {
         new WOW().init();
     }
+    
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.textContent = '-';
+            } else {
+                answer.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        });
+    });
     
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

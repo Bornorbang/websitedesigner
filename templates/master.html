@@ -12,7 +12,7 @@
         <meta name="description" content="{% block meta_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
         
         <!-- Meta Keywords (SEO optimized) -->
-        <meta name="keywords" content="web designer in Lagos, web design company, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, web developers in nigeria, seo company in nigeria, website design agency, best web design company in nigeria, web developer in Nigeria">
+        <meta name="keywords" content="web designer in Lagos, web design company in Lagos, website development services, best web designers in Nigeria, web designers in nigeria, website designer nigeria, web developers in nigeria, seo company in nigeria, website design agency, best web design company in nigeria, web developer in Nigeria">
 
         <!-- Open Graph Meta Tags -->
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
@@ -438,6 +438,36 @@
                         <a href="/" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Home</a>
                         <a href="{% url 'about-website-designer-nigeria' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">About</a>
                         
+                        <!-- Our Services Dropdown -->
+                        <div class="relative group">
+                            <button class="text-gray-700 hover:text-primary-500 font-medium flex items-center transition-colors">
+                                Our Services
+                                <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <!-- Dropdown Menu -->
+                            <div class="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                                <div class="py-2">
+                                    <a href="{% url 'pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                        <i class="fas fa-laptop-code mr-2 text-sm"></i>Web Development
+                                    </a>
+                                    <a href="{% url 'shopify_pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                        <i class="fab fa-shopify mr-2 text-sm"></i>Shopify Design
+                                    </a>
+                                    <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                        <i class="fas fa-globe mr-2 text-sm"></i>SEO
+                                    </a>
+                                    <a href="https://wa.me/2349058991274" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                        <i class="fas fa-mobile-alt mr-2 text-sm"></i>SM Management
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="{% url 'courses' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Courses</a>
+                        <a href="{% url 'portfolio' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Portfolio</a>
+                        
                         <!-- Resources Dropdown -->
                         <div class="relative group">
                             <button class="text-gray-700 hover:text-primary-500 font-medium flex items-center transition-colors">
@@ -449,20 +479,17 @@
                             <!-- Dropdown Menu -->
                             <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
                                 <div class="py-2">
-                                    <a href="{% url 'pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
-                                        <i class="fas fa-tags mr-2 text-sm"></i>Web Pricing
-                                    </a>
-                                    <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
-                                        <i class="fas fa-search-dollar mr-2 text-sm"></i>SEO Pricing
-                                    </a>
                                     <a href="{% url 'earn_money' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
                                         <i class="fas fa-hand-holding-usd mr-2 text-sm"></i>Earn Money
                                     </a>
                                     <a href="https://www.hostingnigeria.com" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
-                                        <i class="fas fa-server mr-2 text-sm"></i>Hosting
+                                        <i class="fas fa-server mr-2 text-sm"></i>Buy Hosting
                                     </a>
                                     <a href="{% url 'blogs' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
                                         <i class="fas fa-blog mr-2 text-sm"></i>Blog
+                                    </a>
+                                    <a href="{% url 'consultation_booking' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                        <i class="fas fa-calendar-check mr-2 text-sm"></i>Consultation
                                     </a>
                                     <a href="{% url 'advertise' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
                                         <i class="fas fa-bullhorn mr-2 text-sm"></i>Advertise
@@ -471,9 +498,6 @@
                             </div>
                         </div>
                         
-                        <a href="{% url 'courses' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Courses</a>
-                        <a href="{% url 'portfolio' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Portfolio</a>
-                        <a href="{% url 'consultation_booking' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Consultation</a>
                         <a href="{% url 'contact' %}" class="text-gray-700 hover:text-primary-500 font-medium transition-colors">Contact</a>
                     </nav>
                     
@@ -524,6 +548,33 @@
                         <a href="/" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Home</a>
                         <a href="{% url 'about-website-designer-nigeria' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">About</a>
                         
+                        <!-- Mobile Our Services Dropdown -->
+                        <div class="border border-gray-200 rounded-md">
+                            <button class="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium" onclick="toggleMobileServicesDropdown()">
+                                Our Services
+                                <svg class="w-4 h-4 transform transition-transform" id="mobile-services-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="hidden px-4 pb-3 space-y-2" id="mobile-services-dropdown">
+                                <a href="{% url 'pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                    <i class="fas fa-laptop-code mr-2 text-sm"></i>Web Development
+                                </a>
+                                <a href="{% url 'shopify_pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                    <i class="fab fa-shopify mr-2 text-sm"></i>Shopify Design
+                                </a>
+                                <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                    <i class="fas fa-globe mr-2 text-sm"></i>SEO
+                                </a>
+                                <a href="https://wa.me/2349058991274" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                    <i class="fas fa-mobile-alt mr-2 text-sm"></i>SM Management
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <a href="{% url 'courses' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Courses</a>
+                        <a href="{% url 'portfolio' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Portfolio</a>
+                        
                         <!-- Mobile Resources Dropdown -->
                         <div class="border border-gray-200 rounded-md">
                             <button class="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium" onclick="toggleMobileDropdown()">
@@ -533,20 +584,17 @@
                                 </svg>
                             </button>
                             <div class="hidden px-4 pb-3 space-y-2" id="mobile-resources-dropdown">
-                                <a href="{% url 'pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
-                                    <i class="fas fa-tags mr-2 text-sm"></i>Web Pricing
-                                </a>
-                                <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
-                                    <i class="fas fa-search-dollar mr-2 text-sm"></i>SEO Pricing
-                                </a>
                                 <a href="{% url 'earn_money' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
                                     <i class="fas fa-hand-holding-usd mr-2 text-sm"></i>Earn Money
                                 </a>
                                 <a href="https://www.hostingnigeria.com" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
-                                    <i class="fas fa-server mr-2 text-sm"></i>Hosting
+                                    <i class="fas fa-server mr-2 text-sm"></i>Buy Hosting
                                 </a>
                                 <a href="{% url 'blogs' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
                                     <i class="fas fa-blog mr-2 text-sm"></i>Blog
+                                </a>
+                                <a href="{% url 'consultation_booking' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                    <i class="fas fa-calendar-check mr-2 text-sm"></i>Consultation
                                 </a>
                                 <a href="{% url 'advertise' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
                                     <i class="fas fa-bullhorn mr-2 text-sm"></i>Advertise
@@ -562,9 +610,6 @@
                             </div>
                         </div>
                         
-                        <a href="{% url 'courses' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Courses</a>
-                        <a href="{% url 'portfolio' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Portfolio</a>
-                        <a href="{% url 'consultation_booking' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Consultation</a>
                         <a href="{% url 'contact' %}" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-primary-500 rounded-md font-medium">Contact</a>
                         
                         <!-- Mobile Profile for Authenticated Users -->
@@ -624,12 +669,14 @@
         </main>
 
         <!-- WhatsApp Widget -->
+        {% block whatsapp_widget %}
         <div class="fixed bottom-6 left-6 z-50">
             <a href="https://wa.link/f2kd41" target="_blank" class="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110" title="Chat with us on WhatsApp">
                 <i class="fab fa-whatsapp text-2xl"></i>
                 <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
             </a>
         </div>
+        {% endblock %}
 
         <!-- Call to Action Banner -->
         <div class="bg-gradient-to-r from-primary-500 to-primary-600 py-16">
@@ -640,7 +687,8 @@
                         <p class="text-xl text-white/90">Contact Website Designer Nigeria - Top Web Design Company in Lagos. We develop the best web apps!</p>
                     </div>
                     <div class="lg:w-1/3 text-center">
-                        <a href="{% url 'contact' %}" class="inline-flex items-center px-8 py-4 bg-white text-primary-500 font-bold rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
+                        <a href="https://wa.me/2349058991274" target="_blank" class="inline-flex items-center px-8 py-4 bg-white text-primary-500 font-bold rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
+                            <i class="fab fa-whatsapp mr-2"></i>
                             Get Started Now 
                             <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -654,10 +702,10 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap">
                     <!-- Company Info - 37% width on mobile and up -->
-                    <div class="w-full md:w-[37%] pr-4 mb-6 md:mb-0">
+                    <div class="w-full md:w-[25%] pr-4 mb-6 md:mb-0">
                         <img src="{% static 'img/website designer nigeria - logo.png' %}" alt="Website Designer Nigeria" class="h-10 mb-3">
                         <p class="text-gray-300 mb-4 leading-relaxed text-sm">
-                            Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.
+                            Website Designer Nigeria (WDN) is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.
                         </p>
                         <div class="flex space-x-3">
                             <a href="https://x.com/webdesignerng" title="X (formerly Twitter)" class="text-gray-400 hover:text-primary-500 transition-colors">
@@ -678,20 +726,32 @@
                         </div>
                     </div>
                     
-                    <!-- Quick Links - 21% width on mobile and up -->
-                    <div class="w-full md:w-[21%] pr-4 mb-6 md:mb-0">
+                    <!-- Quick Links - 17.5% width on mobile and up -->
+                    <div class="w-full md:w-[17.5%] pr-4 mb-6 md:mb-0">
                         <h3 class="text-base font-semibold mb-3 text-white border-b-2 border-primary-500 pb-1 inline-block">Quick Links</h3>
                         <ul class="space-y-1">
                             <li><a href="{% url 'courses' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Courses</a></li>
-                            <li><a href="{% url 'pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Pricing</a></li>
                             <li><a href="{% url 'portfolio' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Portfolio</a></li>
                             <li><a href="{% url 'consultation_booking' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Consultation</a></li>
+                            <li><a href="{% url 'become_affiliate' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Affiliate Program</a></li>
+                            <li><a href="https://hostingnigeria.com" target="_blank" class="text-gray-300 hover:text-white transition-colors text-sm">Buy Hosting</a></li>
                             <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Contact Us</a></li>
                         </ul>
                     </div>
                     
-                    <!-- Contact Info - 21% width on mobile and up -->
-                    <div class="w-full md:w-[21%] pr-4 mb-6 md:mb-0">
+                    <!-- Our Services - 17.5% width on mobile and up -->
+                    <div class="w-full md:w-[17.5%] pr-4 mb-6 md:mb-0">
+                        <h3 class="text-base font-semibold mb-3 text-white border-b-2 border-primary-500 pb-1 inline-block">Our Services</h3>
+                        <ul class="space-y-1">
+                            <li><a href="{% url 'pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Web Development</a></li>
+                            <li><a href="{% url 'shopify_pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Shopify Design</a></li>
+                            <li><a href="{% url 'seo_pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">SEO</a></li>
+                            <li><a href="https://wa.me/2349058991274" target="_blank" class="text-gray-300 hover:text-white transition-colors text-sm">SM Management</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Contact Info - 20% width on mobile and up -->
+                    <div class="w-full md:w-[20%] pr-4 mb-6 md:mb-0">
                         <h3 class="text-base font-semibold mb-3 text-white border-b-2 border-primary-500 pb-1 inline-block">Contact Info</h3>
                         <ul class="space-y-2">
                             <li class="flex items-center">
@@ -705,8 +765,8 @@
                         </ul>
                     </div>
 
-                    <!-- Our Offices - 21% width on mobile and up -->
-                    <div class="w-full md:w-[21%]">
+                    <!-- Our Offices - 20% width on mobile and up -->
+                    <div class="w-full md:w-[20%]">
                         <h3 class="text-base font-semibold mb-3 text-white border-b-2 border-primary-500 pb-1 inline-block">Our Offices</h3>
                         <ul class="space-y-2">
                             <li class="flex items-start">
@@ -724,7 +784,7 @@
                 <!-- Bottom Bar -->
                 <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-400 text-xs mb-3 md:mb-0">
-                        &copy; 2025 <a href="/" class="text-primary-500 hover:text-primary-400">Website Designer Nigeria</a>. All Rights Reserved.
+                        &copy; 2026 <a href="/" class="text-primary-500 hover:text-primary-400">Website Designer Nigeria</a> by WDN Agency.
                     </p>
                     <div class="flex space-x-4">
                         <a href="{% url 'privacy' %}" class="text-gray-400 hover:text-white text-xs transition-colors">Privacy Policy</a>
@@ -905,6 +965,14 @@
             function toggleMobileDropdown() {
                 const dropdown = document.getElementById('mobile-resources-dropdown');
                 const arrow = document.getElementById('mobile-dropdown-arrow');
+                
+                dropdown.classList.toggle('hidden');
+                arrow.classList.toggle('rotate-180');
+            }
+
+            function toggleMobileServicesDropdown() {
+                const dropdown = document.getElementById('mobile-services-dropdown');
+                const arrow = document.getElementById('mobile-services-arrow');
                 
                 dropdown.classList.toggle('hidden');
                 arrow.classList.toggle('rotate-180');
