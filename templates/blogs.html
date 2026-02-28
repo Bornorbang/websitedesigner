@@ -31,7 +31,7 @@
                 {% for blog in page_obj %}
                 <article class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8 border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="h-[280px] overflow-hidden">
-                        <img src="{{ blog.image.url }}" alt="Top tech blog in Nigeria" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                        <img loading="lazy" src="{{ blog.image.url }}" alt="Top tech blog in Nigeria" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-4 hover:text-primary-600 transition-colors">
@@ -88,7 +88,7 @@
                         <div class="space-y-4">
                             {% for banner in banners %}
                                 <a href="{{ banner.link|default:'https://www.hostingnigeria.com' }}" target="_blank" class="block">
-                                    <img src="{{ banner.image.url }}" alt="Top tech blog in Nigeria" class="w-full rounded-xl hover:scale-105 transition-transform duration-300">
+                                    <img loading="lazy" src="{{ banner.image.url }}" alt="Top tech blog in Nigeria" class="w-full rounded-xl hover:scale-105 transition-transform duration-300">
                                 </a>
                             {% endfor %}
                         </div>

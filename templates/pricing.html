@@ -9,6 +9,140 @@
 
 {% block og_description %}How much does Website Designer Nigeria charge for web development? Find out our web development pricing packages.{% endblock %}
 
+{% block extra_head %}
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the best way to reach out to you?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For the fastest response, reach us on WhatsApp: 09058991274. We're also available via email for detailed custom project inquiries. Our team is ready to discuss your web development needs and provide expert guidance!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see examples of your past work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! Visit our Portfolio page to browse through our completed projects and see the quality of work we deliver. You can also request specific project examples via WhatsApp that match your industry or requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your prices negotiable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We provide competitive and transparent pricing tailored to your specific requirements. Our packages are carefully structured to ensure successful project delivery while offering excellent value. We're committed to working within your budget to deliver a high-quality website that meets all your business needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is included in the Custom Plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Custom Plan is designed for projects with unique or specialized requirements that go beyond our standard packages. This could include advanced integrations, complex functionality, or industry-specific features. To provide an accurate quote, we'll need comprehensive details about your project vision, required features, and business goals. Contact us to discuss your custom project!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What post-launch support do you provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We provide at least one month of extended support for all E-Commerce and Custom plan clients. This includes technical assistance, bug fixes, minor adjustments, and guidance to ensure your website runs smoothly. We're dedicated to your long-term success and remain available for ongoing maintenance services beyond the initial support period."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to build a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Development time varies by package: Corporate takes 1-2 weeks, E-Commerce takes 2-4 weeks, and Custom takes 4-6 weeks depending on complexity and specific requirements. We'll provide a detailed project timeline during our initial consultation to ensure your website launches on schedule!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What other digital services do you offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Beyond web development, we offer a comprehensive suite of digital services including Shopify Store Design, Search Engine Optimization (SEO), Social Media Management, and Mobile App Development. As a full-service digital agency, we're your one-stop solution for all online business needs. Reach out to us for expert digital marketing and development services!"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Website Design & Development",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Website Designer Nigeria",
+    "url": "https://www.websitedesigner.ng/",
+    "telephone": "+234-814-888-2303",
+    "email": "contact@websitedesigner.ng"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Corporate Website Package",
+          "description": "Professional corporate website with up to 5 pages, domain & hosting for 1 year, business emails, logo design, and on-page SEO. Perfect for small businesses and startups."
+        },
+        "price": "350000",
+        "priceCurrency": "NGN",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "350000",
+          "priceCurrency": "NGN"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "E-Commerce Website Package",
+          "description": "Complete e-commerce website with up to 100 products, payment gateway integration, domain & hosting for 1 year, business emails, logo design, on-page SEO, analytics integration, and 1 month support."
+        },
+        "price": "500000",
+        "priceCurrency": "NGN",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "500000",
+          "priceCurrency": "NGN"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Web Development",
+          "description": "Fully customized web development with user & admin dashboard, payment gateway integration, continuous support, and advanced functionality tailored to your specific business requirements."
+        },
+        "price": "Contact for Quote",
+        "priceCurrency": "NGN"
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}
+
 {% block extra_css %}
 <style>
     /* Modern Pricing Section Styling */

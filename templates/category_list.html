@@ -474,7 +474,7 @@
                 {% for post in page_obj %}
                 <article class="blog-post wow fadeInUp" data-wow-delay="0.3s">
                     <div class="blog-thumbnail">
-                        <img src="{{ post.image.url }}" alt="{{ category.name }} - Website Designer Nigeria">
+                        <img loading="lazy" src="{{ post.image.url }}" alt="{{ category.name }} - Website Designer Nigeria">
                     </div>
                     <div class="blog-content">
                         <h2>
@@ -559,7 +559,7 @@
                     {% for banner in banners %}
                     <div class="sidebar-banner">
                         <a href="{{ banner.link|default:'#' }}" target="_blank">
-                            <img src="{{ banner.image.url }}" alt="{{ category.name }} - Website Designer Nigeria" class="img-fluid">
+                            <img loading="lazy" src="{{ banner.image.url }}" alt="{{ category.name }} - Website Designer Nigeria" class="img-fluid">
                         </a>
                     </div>
                     {% endfor %}

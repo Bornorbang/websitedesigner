@@ -140,7 +140,7 @@
                         <!-- Course Image -->
                         <div class="relative overflow-hidden h-56">
                             {% if course.thumbnail %}
-                                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <img loading="lazy" src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
                             {% else %}
                                 <div class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
                                     <i class="fas fa-graduation-cap text-6xl text-white"></i>

@@ -9,6 +9,132 @@
 
 {% block og_description %}How much does a Shopify website design cost in Nigeria? Find out about our shopify store design pricing in Nigeria. {% endblock %}
 
+{% block extra_head %}
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What about the Shopify subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The monthly Shopify subscription is not included in our packages and will be your responsibility. You'll need to choose and pay for your preferred Shopify plan directly with Shopify. We'll guide you through selecting the right plan for your needs and help with the setup process!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need technical knowledge to manage my Shopify store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all! Shopify is user-friendly and designed for non-technical users. We provide comprehensive training with each package to show you how to add products, manage orders, and update your store. Plus, our support team is always available via WhatsApp to help!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add more products after my store is built?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! The product limits in our packages refer to the initial setup we'll handle for you. Once your store is live, you can add unlimited products yourself at no additional cost. We'll train you on how to add and manage products effectively during our training sessions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What payment methods can customers use on my Shopify store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We'll integrate popular payment gateways including Shopify Payments, Stripe, PayPal, Paystack, and Flutterwave, enabling customers worldwide to pay via card, bank transfer, mobile money, or other local payment methods. For Professional and Enterprise plans, we can set up multiple payment options to give your customers maximum flexibility and boost conversions!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to build a Shopify store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Development time varies by package: Starter takes 1-2 weeks, Professional takes 2-4 weeks, and Enterprise takes 4-6 weeks depending on customization complexity. We'll provide a detailed timeline during our initial consultation to ensure your store launches on schedule!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What support do you provide after the store goes live?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All packages include post-launch support ranging from 1 week to ongoing support for Enterprise clients. This covers technical issues, training, updates, and guidance. We're committed to your success! Reach out via WhatsApp or email anytime."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Shopify E-commerce Store Design & Development",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Website Designer Nigeria",
+    "url": "https://www.websitedesigner.ng/",
+    "telephone": "+234-814-888-2303",
+    "email": "contact@websitedesigner.ng"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Shopify Store Design Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Starter Shopify Package",
+          "description": "Custom domain integration, premium theme customization, up to 50 products setup, payment gateway integration, mobile responsive design, basic SEO setup, and 1 week training & support. Perfect for new online stores."
+        },
+        "price": "400000",
+        "priceCurrency": "NGN",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "400000",
+          "priceCurrency": "NGN"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Professional Shopify Package",
+          "description": "Custom domain & business email, custom theme development, up to 200 products setup, multiple payment gateways, advanced SEO optimization, social media integration, email marketing setup, analytics & tracking, and 1 month training & support."
+        },
+        "price": "600000",
+        "priceCurrency": "NGN",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "600000",
+          "priceCurrency": "NGN"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Enterprise Shopify Package",
+          "description": "Fully custom store design, unlimited products setup, custom app development, advanced marketing automation, multi-currency & multi-language support, and ongoing premium support. For large-scale e-commerce businesses."
+        },
+        "price": "Contact for Quote",
+        "priceCurrency": "NGN"
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}
+
 {% block extra_css %}
 <style>
     /* Modern Pricing Section Styling */

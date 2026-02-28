@@ -15,7 +15,7 @@
                 <!-- Course Thumbnail -->
                 <div class="relative h-64 bg-gradient-to-r from-primary-500 to-primary-600 overflow-hidden">
                     {% if course.thumbnail %}
-                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover opacity-30">
+                        <img loading="lazy" src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover opacity-30">
                     {% endif %}
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="text-center text-white">

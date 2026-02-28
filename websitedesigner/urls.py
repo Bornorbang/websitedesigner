@@ -20,6 +20,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 from .sitemaps import StaticSitemap, BlogSitemap, CategorySitemap
 from app.views import *
 
@@ -37,6 +38,7 @@ urlpatterns = [
     path('categories/<slug:category_slug>/', category_posts, name='category_posts'),
     path('contact-website-designer-nigeria/', contact, name= 'contact'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name='robots_txt'),
     path('course/<slug:slug>/', course_detail, name="course_detail"),
     path('tech-blog/', blog_list, name='blogs'),
     path('web-designer-in-lagos/', website_lagos, name="website_lagos"),
@@ -50,6 +52,7 @@ urlpatterns = [
     path('book-consultation/', consultation_booking, name="consultation_booking"),
     path('web-development-pricing/', pricing, name="pricing"),
     path('shopify-store-pricing/', shopify_pricing, name="shopify_pricing"),
+    path('social-media-management-pricing/', sm_pricing, name="sm_pricing"),
     path('tech-courses/', courses, name="courses"),
     path('courses/<slug:slug>/', course_category, name="course_category"),
     path('seo-pricing/', seo_pricing, name="seo_pricing"),

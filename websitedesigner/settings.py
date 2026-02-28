@@ -82,18 +82,16 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
 
 # Session settings
-SESSION_COOKIE_SECURE = not DEBUG  # Use secure cookies in production
+SESSION_COOKIE_SECURE = not DEBUG  
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_AGE = 7776000  # 90 days
+SESSION_COOKIE_AGE = 7776000  
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Security Settings
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -112,6 +110,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'app.middleware.WWWRedirectMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -186,7 +185,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -215,21 +213,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
-CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
-
-ONESIGNAL_APP_ID = os.getenv('ONESIGNAL_APP_ID')
-ONESIGNAL_API_KEY = os.getenv('ONESIGNAL_API_KEY')
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': 'auto',
-        'extraAllowedContent': 'iframe[*]',
-        'allowedContent': True,
-    },
-}
-
-
 

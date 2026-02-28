@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /profile/
+Disallow: /dashboard/
+
+Sitemap: https://www.websitedesigner.ng/sitemap.xml
+

@@ -149,6 +149,9 @@ def pricing(request):
 def shopify_pricing(request):
     return render(request, 'shopify_pricing.html')
 
+def sm_pricing(request):
+    return render(request, 'sm_pricing.html')
+
 def advertise(request):
     return render(request, 'advertise.html')
 

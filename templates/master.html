@@ -18,19 +18,145 @@
         <meta property="og:title" content="{% block og_title %}Website Designer Nigeria - Best Web Designers in Nigeria{% endblock %}">
         <meta property="og:description" content="{% block og_description %}Website Designer Nigeria is a web design company in Lagos & Abuja that offers website development services. We are the best web designers in Nigeria.{% endblock %}">
         <meta property="og:image" content="{% block og_image %}{% static 'img/favicon.png' %}{% endblock %}">
-        <meta property="og:url" content="{% block og_url %}https://websitedesigner.ng{% endblock %}">
+        <meta property="og:url" content="{% block og_url %}https://www.websitedesigner.ng{% endblock %}">
         <meta property="og:type" content="website">
         
         {% block extra_meta %}
         {% endblock %}
 
+        <!-- Organization Schema -->
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Website Designer Nigeria",
             "url": "https://www.websitedesigner.ng/",
-            "logo": "https://www.websitedesigner.ng/static/img/website-designer-nigeria-logo.png"
+            "logo": "https://www.websitedesigner.ng/static/img/website-designer-nigeria-logo.png",
+            "sameAs": [
+                "https://x.com/webdesignerng",
+                "https://www.tiktok.com/@websitedesigner.ng",
+                "https://www.instagram.com/websitedesigner_ng",
+                "https://www.youtube.com/@websitedesignerng",
+                "https://www.linkedin.com/company/website-designer-nigeria/"
+            ]
+        }
+        </script>
+
+        <!-- LocalBusiness Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Website Designer Nigeria",
+            "image": "https://www.websitedesigner.ng/static/img/website-designer-nigeria-logo.png",
+            "url": "https://www.websitedesigner.ng/",
+            "telephone": "+234-814-888-2303",
+            "email": "contact@websitedesigner.ng",
+            "priceRange": "₦350,000 -₦1,500,000",
+            "address": [
+                {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Otta road, Ijora Olopa",
+                    "addressLocality": "Lagos",
+                    "addressRegion": "Lagos State",
+                    "addressCountry": "NG"
+                },
+                {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Jabi, Gwarinpa",
+                    "postalCode": "900108",
+                    "addressLocality": "Abuja",
+                    "addressRegion": "Federal Capital Territory",
+                    "addressCountry": "NG"
+                }
+            ],
+            "geo": [
+                {
+                    "@type": "GeoCoordinates",
+                    "latitude": 6.4698,
+                    "longitude": 3.3852,
+                    "name": "Lagos Office"
+                },
+                {
+                    "@type": "GeoCoordinates",
+                    "latitude": 9.0579,
+                    "longitude": 7.4951,
+                    "name": "Abuja Office"
+                }
+            ],
+            "areaServed": [
+                {
+                    "@type": "City",
+                    "name": "Lagos"
+                },
+                {
+                    "@type": "City",
+                    "name": "Abuja"
+                },
+                {
+                    "@type": "Country",
+                    "name": "Nigeria"
+                }
+            ],
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00",
+                    "closes": "18:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": "Saturday",
+                    "opens": "10:00",
+                    "closes": "16:00"
+                }
+            ],
+            "sameAs": [
+                "https://x.com/webdesignerng",
+                "https://www.tiktok.com/@websitedesigner.ng",
+                "https://www.instagram.com/websitedesigner_ng",
+                "https://www.youtube.com/@websitedesignerng",
+                "https://www.linkedin.com/company/website-designer-nigeria/"
+            ],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Web Design and Digital Services",
+                "itemListElement": [
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Website Design & Development",
+                            "description": "Professional website design and development services in Nigeria"
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Shopify E-commerce Development",
+                            "description": "Custom Shopify store design and development"
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "SEO Services",
+                            "description": "Search Engine Optimization services for Nigerian businesses"
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Social Media Management",
+                            "description": "Professional social media management and marketing"
+                        }
+                    }
+                ]
+            }
         }
         </script>
         
@@ -45,49 +171,21 @@
         <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
         
         <!-- Canonical URL -->
-        <link rel="canonical" href="https://websitedesigner.ng{% block canonical_url %}/{% endblock %}">
+        <link rel="canonical" href="https://www.websitedesigner.ng{{ request.path }}">
 
         <!-- CSRF Token for AJAX requests -->
         <meta name="csrf-token" content="{{ csrf_token }}">
 
-        <!-- Google Fonts -->
+        <!-- Google Fonts - Inter only (preload for performance) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: {
-                                50: '#fef2f2',
-                                100: '#fee2e2',
-                                200: '#fecaca',
-                                300: '#fca5a5',
-                                400: '#f87171',
-                                500: '#ef233c',
-                                600: '#dc2626',
-                                700: '#b91c1c',
-                                800: '#991b1b',
-                                900: '#7f1d1d'
-                            }
-                        },
-                        fontFamily: {
-                            'inter': ['Inter', 'sans-serif'],
-                            'montserrat': ['Montserrat', 'sans-serif']
-                        }
-                    }
-                }
-            }
-        </script>
+        <!-- Tailwind CSS - Compiled -->
+        <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
 
         <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/955d8bdaab.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/955d8bdaab.js" crossorigin="anonymous" defer></script>
 
         <!-- CSS Libraries for animations and effects -->
         <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
@@ -95,15 +193,15 @@
         <link href="{% static 'lib/owlcarousel/assets/owl.theme.default.min.css' %}" rel="stylesheet">
         <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
 
-        <!-- Additional Animation Libraries -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <!-- Animation Library - Deferred -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" defer></script>
 
         <!-- SwiperJS CSS -->
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-        <!-- Template Stylesheet -->
+        <!-- Template Stylesheets -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/modern-styles.css' %}" rel="stylesheet">
 
         <!-- Custom Animations -->
         <style>
@@ -254,68 +352,30 @@
                 opacity: 0 !important;
             }
             
-            /* Technologies section improvements - Updated for new structure */
-            .tech-grid-container .tech-item img {
-                width: 80px !important;
-                height: 80px !important;
-                object-fit: contain !important;
-            }
-            
+            /* Technologies section - No cards, just images */
             .tech-item {
-                padding: 12px !important;
-            }
-            
-            .tech-item > div {
-                padding: 16px !important;
-                border: 1px solid #e5e7eb !important; /* Keep gray border always */
-            }
-            
-            /* Remove red hover effects from tech boxes */
-            .tech-item > div:hover {
-                border-color: #e5e7eb !important; /* Keep gray border on hover */
-                background: linear-gradient(135deg, #f9fafb, #f3f4f6) !important; /* Keep gray gradient */
+                padding: 0 !important;
             }
             
             .tech-item img {
-                width: 80px !important;
-                height: 80px !important;
+                width: 64px !important;
+                height: 64px !important;
                 object-fit: contain !important;
             }
             
-            /* Mobile technologies grid - 3 columns with better spacing */
+            /* Mobile technologies grid */
             @media (max-width: 768px) {
-                .tech-grid-container .grid {
-                    grid-template-columns: repeat(3, 1fr) !important;
-                    gap: 12px !important;
-                }
-                
-                .tech-item {
-                    padding: 8px !important;
-                }
-                
-                .tech-item > div {
-                    padding: 12px !important;
-                }
-                
                 .tech-item img {
-                    width: 70px !important;
-                    height: 70px !important;
+                    width: 56px !important;
+                    height: 56px !important;
                 }
             }
             
             /* Extra small mobile screens */
             @media (max-width: 480px) {
-                .tech-grid-container .grid {
-                    gap: 8px !important;
-                }
-                
-                .tech-item > div {
-                    padding: 10px !important;
-                }
-                
                 .tech-item img {
-                    width: 60px !important;
-                    height: 60px !important;
+                    width: 48px !important;
+                    height: 48px !important;
                 }
             }
             
@@ -365,7 +425,7 @@
                 object-fit: cover !important;
                 object-position: top !important;
                 transform: translateY(0%) !important;
-                transition: transform 4s ease-in-out !important;
+                transition: transform 2s ease-in-out !important;
                 display: block !important;
                 position: relative !important;
             }
@@ -376,12 +436,19 @@
             .group .portfolio-screenshot {
                 max-width: none !important;
                 transform: translateY(0%) !important;
-                transition: transform 3s ease-in-out !important;
+                transition: transform 2s ease-in-out !important;
             }
             
             /* Ensure no other transforms interfere */
             .portfolio-item:hover .portfolio-screenshot {
                 transform: translateY(0%) !important; /* Override any hover transforms */
+            }
+            
+            /* Override global li font-size for Tailwind text-sm class */
+            ul.text-sm li,
+            .text-sm li {
+                font-size: 0.875rem !important; /* Tailwind text-sm size */
+                line-height: 1.25rem !important;
             }
         </style>
 
@@ -407,9 +474,6 @@
         }(window, document, 'ttq');
         </script>
         <!-- TikTok Pixel Code End -->
-
-        <!-- Google AdSense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4756517876694191" crossorigin="anonymous"></script>
         
         <!-- Extra CSS Block for child templates -->
         {% block extra_css %}
@@ -458,7 +522,7 @@
                                     <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
                                         <i class="fas fa-globe mr-2 text-sm"></i>SEO
                                     </a>
-                                    <a href="https://wa.me/2349058991274" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
+                                    <a href="{% url 'sm_pricing' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors">
                                         <i class="fas fa-mobile-alt mr-2 text-sm"></i>SM Management
                                     </a>
                                 </div>
@@ -566,7 +630,7 @@
                                 <a href="{% url 'seo_pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
                                     <i class="fas fa-globe mr-2 text-sm"></i>SEO
                                 </a>
-                                <a href="https://wa.me/2349058991274" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
+                                <a href="{% url 'sm_pricing' %}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-primary-500 rounded-md">
                                     <i class="fas fa-mobile-alt mr-2 text-sm"></i>SM Management
                                 </a>
                             </div>
@@ -746,7 +810,7 @@
                             <li><a href="{% url 'pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Web Development</a></li>
                             <li><a href="{% url 'shopify_pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">Shopify Design</a></li>
                             <li><a href="{% url 'seo_pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">SEO</a></li>
-                            <li><a href="https://wa.me/2349058991274" target="_blank" class="text-gray-300 hover:text-white transition-colors text-sm">SM Management</a></li>
+                            <li><a href="{% url 'sm_pricing' %}" class="text-gray-300 hover:text-white transition-colors text-sm">SM Management</a></li>
                         </ul>
                     </div>
                     

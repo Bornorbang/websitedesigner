@@ -1,5 +1,25 @@
 from django.utils.deprecation import MiddlewareMixin
+from django.http import HttpResponsePermanentRedirect
 from .models import AffiliateReferral, AffiliateProfile
+
+
+class WWWRedirectMiddleware(MiddlewareMixin):
+    """Redirect non-www to www for SEO"""
+    
+    def process_request(self, request):
+        host = request.get_host().lower()
+        
+        # Skip localhost and 127.0.0.1
+        if host in ['localhost', '127.0.0.1', 'localhost:8000', '127.0.0.1:8000']:
+            return None
+        
+        # Redirect non-www to www
+        if host == 'websitedesigner.ng':
+            new_url = f"{request.scheme}://www.{host}{request.get_full_path()}"
+            return HttpResponsePermanentRedirect(new_url)
+        
+        return None
+
 
 class AffiliateTrackingMiddleware(MiddlewareMixin):
     """Track affiliate referrals via URL parameters"""

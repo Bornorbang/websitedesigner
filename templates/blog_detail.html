@@ -129,7 +129,7 @@
 <!-- Hero Section -->
 <section class="relative h-[50vh] min-h-[350px] flex items-center justify-center text-center text-white overflow-hidden">
     <div class="absolute inset-0 bg-black">
-        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-full object-cover opacity-40">
+        <img loading="lazy" src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-full object-cover opacity-40">
     </div>
     <div class="relative z-10 p-6">
         <a href="{% url 'category_posts' category_slug=blog.category.slug %}" class="bg-primary-600/80 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-primary-600 transition-colors">{{ blog.category }}</a>
@@ -231,7 +231,7 @@
                         <div class="p-5 space-y-5">
                             {% for post in recent_posts %}
                             <a href="{% url 'blog_detail' category_slug=post.category.slug slug=post.slug %}" class="flex items-center gap-4 group">
-                                <img src="{{ post.image.url }}" alt="{{ blog.title }}" class="w-20 h-20 object-cover rounded-lg flex-shrink-0 shadow-md group-hover:shadow-xl transition-shadow">
+                                <img loading="lazy" src="{{ post.image.url }}" alt="{{ blog.title }}" class="w-20 h-20 object-cover rounded-lg flex-shrink-0 shadow-md group-hover:shadow-xl transition-shadow">
                                 <div class="flex-1">
                                     <p class="text-sm font-semibold text-text-main leading-snug group-hover:text-primary-600 transition-colors line-clamp-3">{{ post.title }}</p>
                                 </div>
@@ -247,7 +247,7 @@
                         <div class="p-5 space-y-4">
                             {% for banner in banners %}
                             <a href="{{ banner.link|default:'https://www.hostingnigeria.com' }}" target="_blank" class="block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                                <img src="{{ banner.image.url }}" alt="{{ blog.title }}" class="w-full h-auto">
+                                <img loading="lazy" src="{{ banner.image.url }}" alt="{{ blog.title }}" class="w-full h-auto">
                             </a>
                             {% endfor %}
                         </div>

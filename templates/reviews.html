@@ -167,7 +167,7 @@
         <div class="col-lg-4 col-md-6">
             <div class="blog-post wow fadeInUp h-100" data-wow-delay="0.1s">
                 <div class="blog-thumbnail">
-                    <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="Tech Reviews in Nigeria" class="img-fluid"></a>
+                    <a href="{% url 'blog_detail' category_slug=blog.category.slug slug=blog.slug %}"><img loading="lazy" src="{{ blog.image.url }}" alt="Tech Reviews in Nigeria" class="img-fluid"></a>
                 </div>
                 <div class="blog-content">
                     <h2 class="h5 mt-3">

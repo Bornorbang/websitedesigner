@@ -1541,9 +1541,6 @@ a:focus {
     filter: brightness(1.05) saturate(1.1);
     will-change: transform;
     cursor: pointer;
-    user-select: none; /* Prevent text selection on mobile */
-    -webkit-user-select: none;
-    -webkit-touch-callout: none; /* Disable iOS callout */
 }
 
 /* Hover Effect - Simplified selector for better triggering */
@@ -1556,11 +1553,6 @@ a:focus {
 /* Click Effect - For mobile and desktop */
 .scrolling-images.scrolling {
     animation: scrollPartial 6s linear forwards;
-}
-
-/* Active state for mobile feedback */
-.scrolling-images:active {
-    filter: brightness(1.2) saturate(1.3) !important;
 }
 
 /* Scrolling Animation - Scroll to show full image */
@@ -1591,52 +1583,12 @@ a:focus {
 /* Responsive improvements for scrolling */
 @media (max-width: 768px) {
     .image-container {
-        height: 300px; /* Increased from 250px for better mobile experience */
-    }
-    
-    /* Disable hover animations on touch devices */
-    .portfolio-card:hover .scrolling-images,
-    .image-container:hover .scrolling-images {
-        animation: none !important;
-    }
-    
-    /* Enhanced click-based animation for mobile */
-    .scrolling-images.scrolling {
-        animation: scrollPartialMobile 5s ease-in-out forwards !important;
+        height: 250px;
     }
     
     .scrolling-images {
-        min-height: 180%; /* Increased from 120% for more scrollable content */
+        min-height: 120%;
         object-fit: cover;
-        cursor: pointer;
-        /* Add visual feedback for touch */
-        -webkit-tap-highlight-color: rgba(239, 35, 60, 0.3);
-    }
-    
-    /* Mobile-specific scrolling animation */
-    @keyframes scrollPartialMobile {
-        0% {
-            transform: translateY(0) scale(1);
-        }
-        100% {
-            transform: translateY(-50%) scale(1.02);
-        }
-    }
-}
-
-@media (max-width: 575.98px) {
-    .image-container {
-        height: 250px; /* Increased from 200px */
-    }
-    
-    .scrolling-images {
-        min-height: 200%; /* Even more content for smaller screens */
-    }
-}
-
-@media (max-width: 575.98px) {
-    .image-container {
-        height: 200px;
     }
 }
 
@@ -4212,72 +4164,15 @@ a:focus {
     justify-content: center;
 }
 
-/* Use existing service-item base styles with tech customizations */
+/* Tech items - clean, no cards or hover effects */
 .tech-item {
-    position: relative;
-    text-align: center;
-    padding: 30px 20px;
-    background: #ffffff;
-    border-radius: 15px;
-    margin: 10px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-    border: 1px solid rgba(239, 35, 60, 0.1);
-    width: 100%;
-    max-width: 200px;
-}
-
-.tech-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #EF233C, #d01f37);
-    transform: translateY(100%);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-}
-
-.tech-item:hover::before {
-    transform: translateY(0);
-}
-
-.tech-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(239, 35, 60, 0.2);
+    display: inline-block;
 }
 
 .tech-item img {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-}
-
-.tech-item:hover img {
-    filter: brightness(0) invert(1);
-    transform: scale(1.1);
-}
-
-.tech-item h4 {
-    position: relative;
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #2c3e50;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-}
-
-.tech-item:hover h4 {
-    color: white;
-    transform: translateY(-3px);
 }
 
 /* FAQ Section - Inherit from existing .faq-item styles */
@@ -4501,17 +4396,6 @@ a:focus {
         padding: 15px 0;
         font-size: 14px;
         line-height: 1.6;
-    }
-    
-    /* Tech items mobile */
-    .tech-item {
-        max-width: 150px;
-        padding: 20px 15px;
-    }
-    
-    .tech-item img {
-        width: 50px;
-        height: 50px;
     }
     
     /* Row spacing mobile */

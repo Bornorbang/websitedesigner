@@ -300,7 +300,7 @@
                             <div class="instructor-profile-layout">
                                 <div class="instructor-thumbnail">
                                     {% if course.instructor.profile_image %}
-                                        <img src="{{ course.instructor.profile_image.url }}" alt="{{ course.title }}" class="instructor-avatar-large">
+                                        <img loading="lazy" src="{{ course.instructor.profile_image.url }}" alt="{{ course.title }}" class="instructor-avatar-large">
                                     {% else %}
                                         <div class="instructor-avatar-large bg-red-600 flex items-center justify-center text-white font-bold" style="font-size: 2rem;">
                                             {{ course.instructor.name|first }}
@@ -519,7 +519,7 @@
                                             <div class="reviewer-info">
                                                 <div class="reviewer-avatar">
                                                     {% if review.user.userprofile.profile_image %}
-                                                        <img src="{{ review.user.userprofile.profile_image.url }}" alt="{{ course.title }}">
+                                                        <img loading="lazy" src="{{ review.user.userprofile.profile_image.url }}" alt="{{ course.title }}">
                                                     {% else %}
                                                         <div class="avatar-placeholder">
                                                             {{ review.user.first_name|first|upper }}{{ review.user.last_name|first|upper|default:review.user.username|first|upper }}
@@ -659,7 +659,7 @@
                     <!-- Preview Video -->
                     <div class="preview-video" onclick="playPreview()">
                         {% if course.thumbnail %}
-                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}">
+                            <img loading="lazy" src="{{ course.thumbnail.url }}" alt="{{ course.title }}">
                         {% else %}
                             <div class="bg-gray-900 w-full h-full flex items-center justify-center">
                                 <i class="fas fa-graduation-cap text-white" style="font-size: 3rem;"></i>
