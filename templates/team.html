@@ -1,0 +1,152 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}Our Team - Website Designer Nigeria{% endblock %}
+
+{% block meta_description %}Meet the talented team behind Website Designer Nigeria - expert web developers, designers, and digital strategists in Lagos and Abuja.{% endblock %}
+
+{% block og_title %}Our Team - Website Designer Nigeria{% endblock %}
+
+{% block og_description %}Meet the talented team behind Website Designer Nigeria - expert web developers, designers, and digital strategists in Lagos and Abuja.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative min-h-[50vh] bg-gradient-to-br from-gray-900 via-slate-800 to-black overflow-hidden flex items-center">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full text-center">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="text-red-500 font-semibold mb-4 text-base tracking-wider uppercase">MEET THE TEAM</p>
+            <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+                <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Our </span>
+                <span class="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">Team</span>
+            </h1>
+            <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-8 rounded-full"></div>
+            <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                The passionate experts behind Website Designer Nigeria's success. Our team brings together years of experience in web development, design, and digital strategy.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000" fill-opacity="0.1"%3E%3Cpath d="m20 20 20 20-20 20-20-20z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-6">
+        <!-- Team Grid -->
+        <div class="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            
+            <!-- Team Member 1 - Bornor Bang -->
+            <div class="group wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <!-- Image Container -->
+                    <div class="relative aspect-[4/5] bg-gradient-to-br from-red-50 to-red-100 overflow-hidden">
+                        <img loading="lazy" src="{% static 'img/bornor.jpg' %}" alt="Bornor Bang - Founder & CTO" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <!-- Overlay on hover -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Bornor Bang</h3>
+                        <p class="text-red-600 font-semibold mb-4 text-sm tracking-wider uppercase">Founder & CTO</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Visionary tech leader driving innovation and excellence in web development. With extensive expertise in full-stack development, Bornor leads our technical strategy and ensures world-class solutions for our clients.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 2 - Faith Eze -->
+            <div class="group wow fadeInUp" data-wow-delay="0.2s">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <!-- Image Container -->
+                    <div class="relative aspect-[4/5] bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden">
+                        <img loading="lazy" src="{% static 'img/faith.jpg' %}" alt="Faith Eze - Co-founder & CEO" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <!-- Overlay on hover -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Faith Eze</h3>
+                        <p class="text-red-600 font-semibold mb-4 text-sm tracking-wider uppercase">Co-founder & CEO</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Strategic business leader with a passion for digital transformation. Faith oversees operations, client relationships, and business growth, ensuring every project exceeds expectations and delivers measurable results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 3 - Emmy Gold -->
+            <div class="group wow fadeInUp" data-wow-delay="0.3s">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <!-- Image Container -->
+                    <div class="relative aspect-[4/5] bg-gradient-to-br from-green-50 to-green-100 overflow-hidden">
+                        <img loading="lazy" src="{% static 'img/emmy.jpg' %}" alt="Emmy Gold - IT Director" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <!-- Overlay on hover -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Emmy Gold</h3>
+                        <p class="text-red-600 font-semibold mb-4 text-sm tracking-wider uppercase">IT Director</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Tech expert managing infrastructure, security, and development processes. Emmy ensures our systems run smoothly, implementing cutting-edge technologies and maintaining the highest standards of quality and reliability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 wow zoomIn" data-wow-delay="0.1s">
+            <p class="text-red-600 font-semibold mb-4 text-base tracking-wider">OUR VALUES</p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">What Drives Us</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-lightbulb text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Innovation</h3>
+                <p class="text-gray-600 text-sm">We constantly push boundaries and embrace new technologies to deliver cutting-edge solutions.</p>
+            </div>
+            
+            <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-users text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Collaboration</h3>
+                <p class="text-gray-600 text-sm">We work closely with clients as partners, ensuring every project reflects their vision and goals.</p>
+            </div>
+            
+            <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-award text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Excellence</h3>
+                <p class="text-gray-600 text-sm">We maintain the highest standards in everything we do, from code quality to customer service.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

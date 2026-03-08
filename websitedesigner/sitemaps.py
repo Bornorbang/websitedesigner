@@ -9,7 +9,8 @@ class StaticSitemap(Sitemap):
     def items(self):
         return [
             'home', 
-            'about-website-designer-nigeria', 
+            'about-website-designer-nigeria',
+            'team',
             'services', 
             'contact', 
             'website_lagos', 
@@ -28,7 +29,7 @@ class StaticSitemap(Sitemap):
             'earn_money',
             'terms',
             'privacy',
-            '20_days_with_wdn',
+            'twenty_days_workshop',
             'ecommerce',
             'graphic_design',
             'consultation_booking'

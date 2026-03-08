@@ -34,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  
     path('about-website-designer-nigeria/', about, name= 'about-website-designer-nigeria'),
+    path('our-team/', team, name='team'),
     path('website-development-services/', services, name= 'services'),
     path('categories/<slug:category_slug>/', category_posts, name='category_posts'),
     path('contact-website-designer-nigeria/', contact, name= 'contact'),
