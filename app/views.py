@@ -623,7 +623,7 @@ WHAT HAPPENS NEXT:
 • We'll prepare a custom discussion agenda based on your requirements
 
 If you have any questions, please contact us at:
-• WhatsApp: https://wa.link/f2kd41
+• WhatsApp: https://wa.me/2347075876888
 • Email: info@websitedesigner.ng
 
 Thank you for choosing Website Designer Nigeria!

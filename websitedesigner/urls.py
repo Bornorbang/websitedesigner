@@ -31,7 +31,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('wdnadmin/', admin.site.urls),
     path('', home, name='home'),  
     path('about-website-designer-nigeria/', about, name= 'about-website-designer-nigeria'),
     path('our-team/', team, name='team'),
@@ -109,5 +109,14 @@ urlpatterns = [
     # Blog URLs - MUST BE LAST because it's a catch-all pattern
     path('<slug:category_slug>/<slug:slug>/', blog_detail, name='blog_detail'),
 ]
+
+# Test error pages (remove these in production)
+if settings.DEBUG:
+    urlpatterns += [
+        path('test-404/', TemplateView.as_view(template_name='404.html')),
+        path('test-500/', TemplateView.as_view(template_name='500.html')),
+        path('test-403/', TemplateView.as_view(template_name='403.html')),
+        path('test-400/', TemplateView.as_view(template_name='400.html')),
+    ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
