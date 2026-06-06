@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qxy$q(y(i#w+$%qwlk^&lm6vag0i6m$98ii+0(oy!w^!*1)2&z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Logging configuration for CSRF debugging
 LOGGING = {
@@ -82,10 +82,10 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
 
 # Session settings
-SESSION_COOKIE_SECURE = not DEBUG  
+SESSION_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_AGE = 7776000  
+SESSION_COOKIE_AGE = 7776000
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Security Settings
@@ -211,22 +211,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'Website Designer Nigeria <Nwabuezematthew6@gmail.com>'
-CONTACT_EMAIL = 'Nwabuezematthew6@gmail.com'
-
-ONESIGNAL_APP_ID = os.getenv('ONESIGNAL_APP_ID')
-ONESIGNAL_API_KEY = os.getenv('ONESIGNAL_API_KEY')
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': 'auto',
-        'extraAllowedContent': 'iframe[*]',
-        'allowedContent': True,
-    },
-}
-
